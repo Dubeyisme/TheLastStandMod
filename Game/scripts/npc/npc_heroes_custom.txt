@@ -1,0 +1,170 @@
+"DOTAHeroes"
+{
+  "npc_dota_hero_sniper"
+  {
+		"Ability1"					"sniper_shrapnel"					// Ability 1
+		"Ability2"					"rattletrap_rocket_flare"					// Ability 2
+		"Ability3"					"gyrocopter_flak_cannon"					// Ability 3
+		"Ability4"					"sniper_headshot"				// Ability 4
+		"Ability5"					"sniper_take_aim"				// Ability 5
+		"Ability6"					"sniper_assassinate"				// Ability 6
+		"Ability11"		"special_bonus_unique_clockwerk_2"
+		"Ability12"		"special_bonus_unique_gyrocopter_2"
+		
+  }
+  
+  "npc_dota_hero_riki"
+  {
+		"Ability1"		"riki_smoke_screen"
+		"Ability2"		"riki_blink_strike"
+		"Ability3"		"antimage_blink"
+		"Ability4"		"abaddon_frostmourne"
+		"Ability5"		"riki_permanent_invisibility"
+		"Ability6"		"riki_tricks_of_the_trade"
+		"Ability10"		"special_bonus_unique_abaddon_3"
+		"Ability11"		"special_bonus_unique_antimage"
+		"Ability12"		"special_bonus_unique_antimage_5"
+  }
+  
+  "npc_dota_hero_pangolier"
+	{
+		"Ability1"					"pangolier_swashbuckle"
+		"Ability2"					"pangolier_shield_crash"
+		"Ability3"					"phantom_assassin_stifling_dagger"
+		"Ability4"					"troll_warlord_fervor"
+		"Ability5"					"pangolier_heartpiercer"
+		"Ability6"					"pangolier_gyroshell"
+		"Ability7"					"pangolier_gyroshell_stop"
+		"Ability13"					"special_bonus_unique_troll_warlord_2"
+		"Ability15"					"special_bonus_unique_phantom_assassin"
+	}
+	
+	"npc_dota_hero_techies"
+	{
+		"Ability1"		"techies_land_mines"
+		"Ability2"		"techies_stasis_trap"
+		"Ability3"		"techies_suicide"
+		"Ability4"		"batrider_flamebreak"
+		"Ability5"		"jakiro_liquid_fire"
+		"Ability6"		"gyrocopter_call_down"
+		"Ability10"		"special_bonus_unique_batrider_3"
+		"Ability11"		"special_bonus_unique_techies_3"
+		"Ability12"		"special_bonus_unique_techies"
+		"Ability13"		"special_bonus_mp_regen_4"
+		"Ability14"		"special_bonus_unique_techies_4"
+		"Ability15"		"special_bonus_unique_jakiro_4"
+		"Ability16"		"special_bonus_unique_batrider_2"
+		"Ability17"		"special_bonus_unique_gyrocopter_5"
+	}
+	
+	"npc_dota_hero_lina"
+	{
+		"Ability1"		"lina_dragon_slave"
+		"Ability2"		"lina_light_strike_array"
+		"Ability3"		"phoenix_fire_spirits"
+		"Ability4"		"batrider_firefly"
+		"Ability5"		"lina_fiery_soul"
+		"Ability6"		"jakiro_macropyre"
+		"Ability7"		"phoenix_launch_fire_spirit"
+		"Ability10"		"special_bonus_unique_batrider_1"
+		"Ability11"		"special_bonus_cast_range_100"
+		"Ability12"		"special_bonus_unique_phoenix_3"
+		"Ability13"		"special_bonus_unique_lina_3"
+		"Ability14"		"special_bonus_spell_amplify_10"
+		"Ability15"		"special_bonus_unique_lina_2"
+		"Ability16"		"special_bonus_unique_lina_1"
+		"Ability17"		"special_bonus_unique_jakiro_3"
+	}
+	
+	"npc_dota_hero_furion"
+	{
+		"Ability1"		"furion_sprout"
+		"Ability2"		"treant_living_armor"
+		"Ability3"		"furion_force_of_nature"
+		"Ability4"		"furion_teleportation"
+		"Ability5"		"treant_natures_guise"
+		"Ability6"		"furion_wrath_of_nature"
+		"Ability10"		"special_bonus_attack_damage_30"
+		"Ability11"		"special_bonus_movement_speed_30"
+		"Ability12"		"special_bonus_unique_treant_4"
+		"Ability13"		"special_bonus_unique_furion_2"
+		"Ability14"		"special_bonus_unique_furion_3"
+		"Ability15"		"special_bonus_unique_furion_4"
+		"Ability16"		"special_bonus_unique_treant"
+		"Ability17"		"special_bonus_unique_furion"
+	}
+	
+	"npc_dota_hero_winter_wyvern"
+	{
+		"Ability1"		"winter_wyvern_arctic_burn"
+		"Ability2"		"winter_wyvern_splinter_blast"
+		"Ability3"		"winter_wyvern_cold_embrace"
+		"Ability4"		"lich_frost_armor"
+		"Ability5"		"crystal_maiden_brilliance_aura"
+		"Ability6"		"winter_wyvern_winters_curse"
+		"Ability10"		"special_bonus_unique_winter_wyvern_3"
+		"Ability11"		"special_bonus_unique_lich_1"
+		"Ability12"		"special_bonus_unique_crystal_maiden_4"
+		"Ability13"		"special_bonus_night_vision_500"
+		"Ability14"		"special_bonus_unique_winter_wyvern_1"
+		"Ability15"		"special_bonus_unique_winter_wyvern_2"
+		"Ability16"		"special_bonus_unique_lich_2"
+		"Ability17"		"special_bonus_unique_winter_wyvern_4"
+	}
+	
+	"npc_dota_hero_omniknight"
+	{
+		"Ability1"		"omniknight_purification"
+		"Ability2"		"omniknight_repel"
+		"Ability3"		"chen_test_of_faith"
+		"Ability4"		"keeper_of_the_light_chakra_magic"
+		"Ability5"		"omniknight_degen_aura"
+		"Ability6"		"omniknight_guardian_angel"
+		"Ability10"		"special_bonus_unique_omniknight_2"
+		"Ability11"		"special_bonus_unique_omniknight_4"
+		"Ability12"		"special_bonus_unique_chen_3"
+		"Ability13"		"special_bonus_attack_damage_90"
+		"Ability14"		"special_bonus_unique_keeper_of_the_light_2"
+		"Ability15"		"special_bonus_mp_regen_3"
+		"Ability16"		"special_bonus_unique_omniknight_1"
+		"Ability17"		"special_bonus_unique_omniknight_3"
+	}
+	
+	"npc_dota_hero_beastmaster"
+	{
+		"Ability1"		"beastmaster_wild_axes"
+		"Ability2"		"beastmaster_call_of_the_wild"
+		"Ability3"		"lycan_summon_wolves"
+		"Ability4"		"lycan_feral_impulse"
+		"Ability5"		"beastmaster_inner_beast"
+		"Ability6"		"visage_summon_familiars"
+		"Ability10"		"special_bonus_unique_beastmaster_3"
+		"Ability11"		"special_bonus_unique_lycan_4"
+		"Ability12"		"special_bonus_unique_lycan_3"
+		"Ability13"		"special_bonus_unique_beastmaster_2"
+		"Ability14"		"special_bonus_unique_beastmaster"
+		"Ability15"		"special_bonus_unique_beastmaster_4"
+		"Ability16"		"special_bonus_unique_visage_6"
+		"Ability17"		"special_bonus_unique_lycan_2"
+	}
+	
+	"npc_dota_hero_kunkka"
+	{
+		"Ability1"		"kunkka_torrent"
+		"Ability2"		"tidehunter_gush"
+		"Ability3"		"naga_siren_rip_tide"
+		"Ability4"		"kunkka_tidebringer"
+		"Ability5"		"kunkka_x_marks_the_spot"
+		"Ability6"		"naga_siren_song_of_the_siren"
+		"Ability7"		"kunkka_return"
+		"Ability8"		"naga_siren_song_of_the_siren_cancel"
+		"Ability10"		"special_bonus_unique_tidehunter_2"
+		"Ability11"		"special_bonus_armor_6"
+		"Ability12"		"special_bonus_hp_regen_10"
+		"Ability13"		"special_bonus_unique_kunkka_2"
+		"Ability14"		"special_bonus_unique_kunkka"
+		"Ability15"		"special_bonus_unique_tidehunter"
+		"Ability16"		"special_bonus_unique_naga_siren_3"
+		"Ability17"		"special_bonus_unique_kunkka_4"
+	}
+}
