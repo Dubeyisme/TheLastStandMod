@@ -4,227 +4,227 @@
 -- Rikimaru
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/riki/riki_thanks_01.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/riki/riki_thanks_02.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/riki/riki_thanks_01.vsnd", context) -- riki_riki_thanks_01
+PrecacheResource("soundfile", "sounds/vo/riki/riki_thanks_02.vsnd", context) -- riki_riki_thanks_02
 
 -- Kill Necrophos
-PrecacheResource("soundfile", "sounds/vo/riki/riki_kill_12.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/riki/riki_kill_12.vsnd", context) -- riki_riki_kill_12
 
 -- Kill Undying
-PrecacheResource("soundfile", "sounds/vo/riki/riki_kill_14.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/riki/riki_kill_14.vsnd", context) -- riki_riki_kill_14
 --------------------------------------------------------------------------------------------------------------------------
 -- Pangolier
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_respawn_05.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_thanks_01.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_respawn_05.vsnd", context) -- pangolin_pangolin_respawn_05
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_thanks_01.vsnd", context) -- pangolin_pangolin_thanks_01
 
 -- Kill Skywrath
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_222.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_222.vsnd", context) -- pangolin_pangolin_rival_222
 
 -- Kill Earth Spirit
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_55.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_55.vsnd", context) -- pangolin_pangolin_rival_55
 
 -- Kill Elder Titan
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_59.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_59.vsnd", context) -- pangolin_pangolin_rival_59
 
 -- Kill Doom
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_150.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_150.vsnd", context) -- pangolin_pangolin_rival_150
 
 -- Kill Jakiro
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_51.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_51.vsnd", context) -- pangolin_pangolin_rival_51
 
 -- Kill Dark Willow
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_40.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_40.vsnd", context) -- pangolin_pangolin_rival_40
 
 -- Kill Centaur
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_29.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_29.vsnd", context) -- pangolin_pangolin_rival_29
 
 -- Kill Huskar
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_74.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_74.vsnd", context) -- pangolin_pangolin_rival_74
 
 -- Kill Lone Druid
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_99.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_99.vsnd", context) -- pangolin_pangolin_rival_99
 
 -- Kill Necrophos
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_210.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_210.vsnd", context) -- pangolin_pangolin_rival_210
 
 -- Kill Meepo
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_110.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_110.vsnd", context) -- pangolin_pangolin_rival_110
 
 -- Kill Shadow Fiend
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_202.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_202.vsnd", context) -- pangolin_pangolin_rival_202
 
 -- Kill Shadow Demon
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_139.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_139.vsnd", context) -- pangolin_pangolin_rival_139
 
 -- Kill Treant
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_196.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_196.vsnd", context) -- pangolin_pangolin_rival_196
 
 -- Kill Underlord
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_201.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_201.vsnd", context) -- pangolin_pangolin_rival_201
 
 -- Kill Undying
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_204.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_204.vsnd", context) -- pangolin_pangolin_rival_204
 
 -- Kill Ursa
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_205.vsnd", context) --
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_205.vsnd", context) --pangolin_pangolin_rival_205
 
 -- Kill Witchdoctor
-PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_197.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_197.vsnd", context) -- pangolin_pangolin_rival_197
 --------------------------------------------------------------------------------------------------------------------------
 -- Sniper
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/sniper/snip_thanks_01.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/sniper/snip_thanks_02.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/sniper/snip_thanks_01.vsnd", context) -- sniper_snip_thanks_01
+PrecacheResource("soundfile", "sounds/vo/sniper/snip_thanks_02.vsnd", context) -- sniper_snip_thanks_02
 
 -- Kill Centaur
-PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_blade_03.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_blade_03.vsnd", context) -- sniper_snip_kill_blade_03
 
 -- Kill Huskar
-PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_arrow_06.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_arrow_06.vsnd", context) -- sniper_snip_kill_arrow_06
 
 -- Kill Dark Willow
-PrecacheResource("soundfile", "sounds/vo/sniper/snip_ability_assass_05.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/sniper/snip_ability_assass_05.vsnd", context) -- sniper_snip_ability_assass_05
 
 -- Kill Earth Spirit
-PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_06.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_06.vsnd", context) -- sniper_snip_kill_06
 
 -- Kill Shadow Fiend
-PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_01.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_01.vsnd", context) -- sniper_snip_kill_01
 
 -- Kill Ursa
-PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_08.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_08.vsnd", context) -- sniper_snip_kill_08
 --------------------------------------------------------------------------------------------------------------------------
 -- Lina
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/lina/lina_respawn_02.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/lina/lina_thanks_03.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/lina/lina_respawn_02.vsnd", context) -- lina_lina_respawn_02
+PrecacheResource("soundfile", "sounds/vo/lina/lina_thanks_03.vsnd", context) -- lina_lina_thanks_03
 
 -- Kill treant
-PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_01.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_01.vsnd", context) -- lina_lina_rival_01
 
 -- Kill Jakiro
-PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_04.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_04.vsnd", context) -- lina_lina_rival_04
 
 -- Kill Doom
-PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_16.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_16.vsnd", context) -- lina_lina_rival_16
 
 -- Kill Skywrath
-PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_20.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_20.vsnd", context) -- lina_lina_rival_20
 
 -- Kill Witchdoctor
-PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_12.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_12.vsnd", context) -- lina_lina_rival_12
 
 -- Kill Elder Titan
-PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_18.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_18.vsnd", context) -- lina_lina_rival_18
 --------------------------------------------------------------------------------------------------------------------------
 -- Furion
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/furion/furi_thanks_01.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/furion/furi_thanks_02.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/furion/furi_thanks_01.vsnd", context) -- furion_furi_thanks_01
+PrecacheResource("soundfile", "sounds/vo/furion/furi_thanks_02.vsnd", context) -- furion_furi_thanks_02
 
 -- Kill treant
-PrecacheResource("soundfile", "sounds/vo/furion/furi_rival_01.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/furion/furi_rival_01.vsnd", context) -- furion_furi_rival_01
 
 -- Kill Necrophos
-PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_08.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_08.vsnd", context) -- furion_furi_kill_08
 
 -- Kill Lone Druid
-PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_10.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_10.vsnd", context) -- furion_furi_kill_10
 
 -- Kill Elder Titan
-PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_11.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_11.vsnd", context) -- furion_furi_kill_11
 
 -- Kill Underlord
-PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_12.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_12.vsnd", context) -- furion_furi_kill_12
 --------------------------------------------------------------------------------------------------------------------------
 -- Techies
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/techies/tech_respawn_11.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/techies/tech_thanks_03.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/techies/tech_respawn_11.vsnd", context) -- techies_tech_respawn_11
+PrecacheResource("soundfile", "sounds/vo/techies/tech_thanks_03.vsnd", context) -- techies_noba_tech_thanks_03
 
 -- Kill Doom
-PrecacheResource("soundfile", "sounds/vo/techies/tech_rival_11.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/techies/tech_rival_11.vsnd", context) -- techies_tech_rival_11
 
 -- Kill Darkwillow
-PrecacheResource("soundfile", "sounds/vo/techies/tech_rival_13.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/techies/tech_rival_13.vsnd", context) -- techies_tech_rival_13
 
 -- Kill Meepo
-PrecacheResource("soundfile", "sounds/vo/techies/tech_kill_02.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/techies/tech_kill_02.vsnd", context) -- techies_tech_kill_02
 
 -- Kill Skywrath
-PrecacheResource("soundfile", "sounds/vo/techies/tech_kill_03.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/techies/tech_kill_03.vsnd", context) -- techies_tech_kill_03
 --------------------------------------------------------------------------------------------------------------------------
 -- Winter Wyvern
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_thanks_03.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_thanks_02.vsnd", context) --
+PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_thanks_03.vsnd", context) -- winter_wyvern_winwyv_thanks_03
+PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_thanks_02.vsnd", context) --winter_wyvern_winwyv_thanks_02
 
 -- Kill Lone Druid
-PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_17.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_17.vsnd", context) -- winter_wyvern_winwyv_rival_17
 
 -- Kill Jakiro
-PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_10.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_10.vsnd", context) -- winter_wyvern_winwyv_rival_10
 
 -- Kill Meepo
-PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_kill_10.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_kill_10.vsnd", context) -- winter_wyvern_winwyv_kill_10
 --------------------------------------------------------------------------------------------------------------------------
 -- Kunkka
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_respawn_01.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_thanks_03.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_respawn_01.vsnd", context) -- kunkka_kunk_respawn_01
+PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_thanks_03.vsnd", context) -- kunkka_kunk_thanks_03
 
 -- Kill Doom
-PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_30.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_30.vsnd", context) -- kunkka_kunk_rival_30
 
 -- Kill Shadow Fiend
-PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_31.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_31.vsnd", context) -- kunkka_kunk_rival_31
 
 -- Kill Shadow Demon
-PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_32.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_32.vsnd", context) -- kunkka_kunk_rival_32
 
 -- Kill Skywrath
-PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_kill_06.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_kill_06.vsnd", context) -- kunkka_kunk_kill_06
 
 -- Kill Undying
-PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_kill_01.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_kill_01.vsnd", context) -- kunkka_kunk_kill_01
 --------------------------------------------------------------------------------------------------------------------------
 -- Omniknight
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/omniknight/omni_thanks_02.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/omniknight/omni_respawn_04.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/omniknight/omni_thanks_02.vsnd", context) -- omniknight_omni_thanks_02
+PrecacheResource("soundfile", "sounds/vo/omniknight/omni_respawn_04.vsnd", context) -- omniknight_omni_respawn_04
 
 -- Kill Doom
-PrecacheResource("soundfile", "sounds/vo/omniknight/omni_rival_03.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/omniknight/omni_rival_03.vsnd", context) -- omniknight_omni_rival_03
 
 -- Kill Shadow Fiend
-PrecacheResource("soundfile", "sounds/vo/omniknight/omni_rival_11.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/omniknight/omni_rival_11.vsnd", context) -- omniknight_omni_rival_11
 
 -- Kill Underlord
-PrecacheResource("soundfile", "sounds/vo/omniknight/omni_kill_10.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/omniknight/omni_kill_10.vsnd", context) -- omniknight_omni_kill_10
 
 -- Kill Necrophos
-PrecacheResource("soundfile", "sounds/vo/omniknight/omni_kill_02.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/omniknight/omni_kill_02.vsnd", context) -- omniknight_omni_kill_02
 --------------------------------------------------------------------------------------------------------------------------
 -- Beastmaster
 --------------------------------------------------------------------------------------------------------------------------
 -- Revived
-PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_thanks_02.vsnd", context) -- 
-PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_thanks_01.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_thanks_02.vsnd", context) -- beastmaster_beas_thanks_02
+PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_thanks_01.vsnd", context) -- beastmaster_beas_thanks_01
 
 -- Kill Ursa
-PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_kill_03.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_kill_03.vsnd", context) -- beastmaster_beas_kill_03
 
 -- Kill Undying
-PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_kill_07.vsnd", context) -- 
+PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_kill_07.vsnd", context) -- beastmaster_beas_kill_07
 
 
 -- Boss Responses
@@ -622,384 +622,384 @@ PrecacheResource("soundfile", "sounds/vo/earth_spirit/earthspi_kill_14.vsnd", co
 --------------------------------------------------------------------------------------------------------------------------
 
 -- Start of battle
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_attack_07.vsnd", context) -- The shadow is cast
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_attack_06.vsnd", context) -- Face your fate
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_attack_07.vsnd", context) -- elder_titan_elder_attack_07
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_attack_06.vsnd", context) -- elder_titan_elder_attack_06
 
 -- Astral Spirit
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_ancestralspirit_01.vsnd", context) -- A soul divided
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_ancestralspirit_06.vsnd", context) -- Come twin spirit
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_ancestralspirit_03.vsnd", context) -- Soul of the broken world
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_ancestralspirit_01.vsnd", context) -- elder_titan_elder_ancestralspirit_01
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_ancestralspirit_06.vsnd", context) --elder_titan_elder_ancestralspirit_06
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_ancestralspirit_03.vsnd", context) -- elder_titan_elder_ancestralspirit_03
 
 -- Earth Splitter
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_earthsplitter_02.vsnd", context) -- The earth is sundered
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_earthsplitter_03.vsnd", context) -- Sunderstrike
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_earthsplitter_05.vsnd", context) -- The titan strikes
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_earthsplitter_02.vsnd", context) -- elder_titan_elder_earthsplitter_02
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_earthsplitter_03.vsnd", context) -- elder_titan_elder_earthsplitter_03
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_earthsplitter_05.vsnd", context) -- elder_titan_elder_earthsplitter_05
 
 -- Echo Stomp
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_echostomp_01.vsnd", context) -- Echo stomp
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_echostomp_02.vsnd", context) -- Be stilled
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_echostomp_08.vsnd", context) -- Stop
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_echostomp_01.vsnd", context) -- elder_titan_elder_echostomp_01
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_echostomp_02.vsnd", context) -- elder_titan_elder_echostomp_02
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_echostomp_08.vsnd", context) -- elder_titan_elder_echostomp_08
 
 -- Hero dies
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_kill_05.vsnd", context) -- Death shatters us all
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_kill_10.vsnd", context) -- Your spirit torn from your flesh
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_kill_09.vsnd", context) -- You die on my forge
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_earthsplitter_06.vsnd", context) -- Your unmaking
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_kill_02.vsnd", context) -- I broke the world, did you think I could not break you
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_kill_05.vsnd", context) --elder_titan_elder_kill_05
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_kill_10.vsnd", context) -- elder_titan_elder_kill_10
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_kill_09.vsnd", context) -- elder_titan_elder_kill_09
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_earthsplitter_06.vsnd", context) -- elder_titan_elder_earthsplitter_06
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_kill_02.vsnd", context) -- elder_titan_elder_kill_02
 
 -- 75% HP
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_deny_09.vsnd", context) -- Better you run and hide
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_deny_09.vsnd", context) -- elder_titan_elder_deny_09
 
 -- 25% HP
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_death_15.vsnd", context) -- The shaper weeps
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_death_15.vsnd", context) -- elder_titan_elder_death_15
 
 -- Defeat
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_death_11.vsnd", context) -- My works are undone
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_death_14.vsnd", context) -- The titan falls
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_death_11.vsnd", context) -- elder_titan_elder_death_11
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_death_14.vsnd", context) -- elder_titan_elder_death_14
 
 -- All heroes dead
-PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_failure_02.vsnd", context) -- A pitiable attempt
+PrecacheResource("soundfile", "sounds/vo/elder_titan/elder_failure_02.vsnd", context) -- elder_titan_elder_failure_02
 
 --------------------------------------------------------------------------------------------------------------------------
 --Shadow Fiend
 --------------------------------------------------------------------------------------------------------------------------
 
 -- Start of battle
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_ability_presence_01.vsnd", context) -- I am here
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_ability_presence_02.vsnd", context) -- Fear my presence
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_ability_presence_01.vsnd", context) -- nevermore_nev_ability_presence_01
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_ability_presence_02.vsnd", context) -- nevermore_nev_ability_presence_02
 
 -- Requiem
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_ability_requiem_01.vsnd", context) -- Requiem
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_ability_requiem_08.vsnd", context) -- Requiem
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_attack_01.vsnd", context) -- Need more souls
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_ability_requiem_01.vsnd", context) -- nevermore_nev_ability_requiem_01
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_ability_requiem_08.vsnd", context) -- nevermore_nev_ability_requiem_08
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_attack_01.vsnd", context) -- nevermore_nev_attack_01
 
 -- Take control
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_04.vsnd", context) -- You're mine now
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_05.vsnd", context) -- You're coming with me
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_13.vsnd", context) -- Join me
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_04.vsnd", context) -- nevermore_nev_kill_04
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_05.vsnd", context) -- nevermore_nev_kill_05
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_13.vsnd", context) -- nevermore_nev_kill_13
 
 -- 
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_cast_01.vsnd", context) -- Nevermore is now
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_cast_02.vsnd", context) -- Thought you'd never ask
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_cast_03.vsnd", context) -- It's now or nevermore
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_cast_01.vsnd", context) -- nevermore_nev_cast_01
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_cast_02.vsnd", context) -- nevermore_nev_cast_02
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_cast_03.vsnd", context) -- nevermore_nev_cast_03
 
 -- Hero dies
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_01.vsnd", context) -- I'll take that soul if you're not using it
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_lasthit_01.vsnd", context) -- Yes
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_07.vsnd", context) -- Soul taken
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_lasthit_06.vsnd", context) -- These souls belong to me
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_09.vsnd", context) -- Never you mind
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_01.vsnd", context) -- nevermore_nev_kill_01
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_lasthit_01.vsnd", context) -- nevermore_nev_lasthit_01
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_07.vsnd", context) -- nevermore_nev_kill_07
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_lasthit_06.vsnd", context) -- nevermore_nev_lasthit_06
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_kill_09.vsnd", context) -- nevermore_nev_kill_09
 
 -- 75% HP
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_respawn_02.vsnd", context) -- The abyssm cannot hold me
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_respawn_02.vsnd", context) -- nevermore_nev_respawn_02
 
 -- 25% HP
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_respawn_08.vsnd", context) -- I'll not fail again
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_respawn_08.vsnd", context) -- nevermore_nev_respawn_08
 
 -- Defeat
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_death_15.vsnd", context) -- No master, no
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_death_12.vsnd", context) -- No, master noooo
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_death_15.vsnd", context) -- nevermore_nev_death_15
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_death_12.vsnd", context) -- nevermore_nev_death_12
 
 -- All heroes dead
-PrecacheResource("soundfile", "sounds/vo/nevermore/nev_rare_03.vsnd", context) -- Never, never, never, nevermore
+PrecacheResource("soundfile", "sounds/vo/nevermore/nev_rare_03.vsnd", context) -- nevermore_nev_rare_03
 
 --------------------------------------------------------------------------------------------------------------------------
 -- Shadow Demon
 --------------------------------------------------------------------------------------------------------------------------
 
 -- Start of battle
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_spawn_02.vsnd", context) -- Your old master has returned
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_battlebegins_01.vsnd", context) -- I will scatter all who gather here today
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_spawn_02.vsnd", context) -- shadow_demon_shadow_demon_spawn_02
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_battlebegins_01.vsnd", context) -- shadow_demon_shadow_demon_battlebegins_01
 
 -- Creating Illusions of Heroes
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_disruption_05.vsnd", context) -- You brought me new minions
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_disruption_06.vsnd", context) -- New followers
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_disruption_14.vsnd", context) -- You're a fine acolyte
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_disruption_05.vsnd", context) -- shadow_demon_shadow_demon_ability_disruption_05
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_disruption_06.vsnd", context) -- shadow_demon_shadow_demon_ability_disruption_06
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_disruption_14.vsnd", context) -- shadow_demon_shadow_demon_ability_disruption_14
 
 -- Soul catcher
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_soul_catcher_01.vsnd", context) -- Just your bad luck
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_soul_catcher_02.vsnd", context) -- Caught your soul
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_soul_catcher_03.vsnd", context) -- Your soul ensnared
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_soul_catcher_01.vsnd", context) -- shadow_demon_shadow_demon_ability_soul_catcher_01
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_soul_catcher_02.vsnd", context) -- shadow_demon_shadow_demon_ability_soul_catcher_02
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_soul_catcher_03.vsnd", context) -- shadow_demon_shadow_demon_ability_soul_catcher_03
 
 -- Purged and split apart
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_demonic_purge_03.vsnd", context) -- Your friends can't help you now
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_demonic_purge_04.vsnd", context) -- That's me you feel
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_demonic_purge_05.vsnd", context) -- You wear my shadow now
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_demonic_purge_03.vsnd", context) -- shadow_demon_shadow_demon_ability_demonic_purge_03
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_demonic_purge_04.vsnd", context) -- shadow_demon_shadow_demon_ability_demonic_purge_04
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_ability_demonic_purge_05.vsnd", context) -- shadow_demon_shadow_demon_ability_demonic_purge_05
 
 -- Hero dies
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_lasthit_07.vsnd", context) -- Bow down
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_lasthit_09.vsnd", context) -- Bow to me
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_lasthit_10.vsnd", context) -- Bow down
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_laugh_01.vsnd", context) -- *Laughter*
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_laugh_03.vsnd", context) -- *Laughter*
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_lasthit_07.vsnd", context) -- shadow_demon_shadow_demon_lasthit_07
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_lasthit_09.vsnd", context) -- shadow_demon_shadow_demon_lasthit_09
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_lasthit_10.vsnd", context) -- shadow_demon_shadow_demon_lasthit_10
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_laugh_01.vsnd", context) -- shadow_demon_shadow_demon_laugh_01
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_laugh_03.vsnd", context) -- shadow_demon_shadow_demon_laugh_03
 
 -- 75% HP
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_kill_10.vsnd", context) -- You conspired against me
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_kill_10.vsnd", context) -- shadow_demon_shadow_demon_kill_10
 
 -- 25% HP
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_kill_06.vsnd", context) -- My shadow sweeps over you
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_kill_06.vsnd", context) -- shadow_demon_shadow_demon_kill_06
 
 -- Defeat
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_death_08.vsnd", context) -- Undaunted I die
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_death_03.vsnd", context) -- Torn apart, again
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_death_08.vsnd", context) -- shadow_demon_shadow_demon_death_08
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_death_03.vsnd", context) -- shadow_demon_shadow_demon_death_03
 
 -- All heroes dead
-PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_immort_02.vsnd", context) -- Here is to a reign unending
+PrecacheResource("soundfile", "sounds/vo/shadow_demon/shadow_demon_immort_02.vsnd", context) -- shadow_demon_shadow_demon_immort_02
 
 --------------------------------------------------------------------------------------------------------------------------
---Treant Protector
+--Centaur
 --------------------------------------------------------------------------------------------------------------------------
 
 -- Start of battle
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_battlebegins_01.vsnd", context) -- These proving grounds shall be litered with the dead
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_respawn_10.vsnd", context) -- I will stomp them to dust
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_battlebegins_01.vsnd", context) -- centaur_cent_battlebegins_01
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_respawn_10.vsnd", context) -- centaur_cent_respawn_10
 
 -- Double Edge
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_doub_edge_05.vsnd", context) -- Hurts you more than it hurts me
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_doub_edge_06.vsnd", context) -- I forgot about the kick on that one
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_doub_edge_07.vsnd", context) -- What a recoil
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_doub_edge_05.vsnd", context) -- centaur_cent_doub_edge_05
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_doub_edge_06.vsnd", context) -- centaur_cent_doub_edge_06
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_doub_edge_07.vsnd", context) -- centaur_cent_doub_edge_07
 
 -- Hoof Stomp
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_hoof_stomp_01.vsnd", context) -- Kneel
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_hoof_stomp_04.vsnd", context) -- Stomp you down
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_hoof_stomp_02.vsnd", context) -- Halt
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_hoof_stomp_01.vsnd", context) -- centaur_cent_hoof_stomp_01
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_hoof_stomp_04.vsnd", context) -- centaur_cent_hoof_stomp_04
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_hoof_stomp_02.vsnd", context) -- centaur_cent_hoof_stomp_02
 
 -- Charge
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_move_08.vsnd", context) -- Bones to crush
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_move_10.vsnd", context) -- By horn and hoof
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_move_18.vsnd", context) -- Galloping
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_move_08.vsnd", context) -- centaur_cent_move_08
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_move_10.vsnd", context) -- centaur_cent_move_10
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_move_18.vsnd", context) -- centaur_cent_move_18
 
 -- Hero dies
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_lasthit_09.vsnd", context) -- Quick death
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_03.vsnd", context) -- An artful death
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_04.vsnd", context) -- You had no chance
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_01.vsnd", context) -- I live, you die
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_12.vsnd", context) -- Each death, a master work
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_lasthit_09.vsnd", context) -- centaur_cent_lasthit_09
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_03.vsnd", context) -- centaur_cent_kill_03
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_04.vsnd", context) -- centaur_cent_kill_04
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_01.vsnd", context) -- centaur_cent_kill_01
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_12.vsnd", context) -- centaur_cent_kill_12
 
 -- 75% HP
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_underattack_01.vsnd", context) -- Was that supposed to hurt?
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_underattack_01.vsnd", context) -- centaur_cent_underattack_01
 
 -- 25% HP
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_death_12.vsnd", context) -- Curse only peaceful death
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_death_12.vsnd", context) -- centaur_cent_death_12
 
 -- Defeat
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_death_09.vsnd", context) -- I die untamed
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_death_10.vsnd", context) -- My name shall live on
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_death_09.vsnd", context) -- centaur_cent_death_09
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_death_10.vsnd", context) -- centaur_cent_death_10
 
 -- All heroes dead
-PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_08.vsnd", context) -- My path is paved with bones
+PrecacheResource("soundfile", "sounds/vo/centaur/cent_kill_08.vsnd", context) -- centaur_cent_kill_08
 
 --------------------------------------------------------------------------------------------------------------------------
 --Underlord
 --------------------------------------------------------------------------------------------------------------------------
 
 -- Start of battle
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_move_15.vsnd", context) -- I come to conquer
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_move_14.vsnd", context) -- I bring darkness
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_move_15.vsnd", context) -- abyssal_underlord_abys_move_15
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_move_14.vsnd", context) -- abyssal_underlord_abys_move_14
 
 -- Firestorm
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_firestrorm_01.vsnd", context) -- Firestorm
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_firestrorm_04.vsnd", context) -- Burn
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_firestrorm_06.vsnd", context) -- All will burn
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_firestrorm_01.vsnd", context) -- abyssal_underlord_abys_firestrorm_01
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_firestrorm_04.vsnd", context) -- abyssal_underlord_abys_firestrorm_04
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_firestrorm_06.vsnd", context) -- abyssal_underlord_abys_firestrorm_06
 
 -- Pit of Malice
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_pitofmalice_03.vsnd", context) -- No escape
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_pitofmalice_04.vsnd", context) -- The earth opens
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_pitofmalice_06.vsnd", context) -- The abyss yawns wide
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_pitofmalice_03.vsnd", context) -- abyssal_underlord_abys_pitofmalice_03
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_pitofmalice_04.vsnd", context) -- abyssal_underlord_abys_pitofmalice_04
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_pitofmalice_06.vsnd", context) -- abyssal_underlord_abys_pitofmalice_06
 
 -- Teleport
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_darkrift_05.vsnd", context) -- My presence is required
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_move_10.vsnd", context) -- To the dark
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_darkrift_04.vsnd", context) -- We are needed
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_darkrift_05.vsnd", context) -- abyssal_underlord_abys_darkrift_05
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_move_10.vsnd", context) -- abyssal_underlord_abys_move_10
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_darkrift_04.vsnd", context) -- abyssal_underlord_abys_darkrift_04
 
 -- Hero dies
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_01.vsnd", context) -- Pathetic
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_04.vsnd", context) -- Are you afraid?
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_23.vsnd", context) -- Down you go
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_10.vsnd", context) -- Rot and die
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_lasthit_06.vsnd", context) -- Another falls
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_01.vsnd", context) -- abyssal_underlord_abys_kill_01
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_04.vsnd", context) -- abyssal_underlord_abys_kill_04
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_23.vsnd", context) -- abyssal_underlord_abys_kill_23
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_10.vsnd", context) -- abyssal_underlord_abys_kill_10
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_lasthit_06.vsnd", context) -- abyssal_underlord_abys_lasthit_06
 
 -- 75% HP
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_13.vsnd", context) -- Insignificant 
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_kill_13.vsnd", context) -- abyssal_underlord_abys_kill_13
 
 -- 25% HP
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_death_08.vsnd", context) -- This changes nothing
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_death_08.vsnd", context) -- abyssal_underlord_abys_death_08
 
 -- Defeat
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_death_10.vsnd", context) -- But how
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_death_03.vsnd", context) -- How can this be
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_death_10.vsnd", context) -- abyssal_underlord_abys_death_10
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_death_03.vsnd", context) -- abyssal_underlord_abys_death_03
 
 -- All heroes dead
-PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_firstblood_02.vsnd", context) -- My reign begins
+PrecacheResource("soundfile", "sounds/vo/abyssal_underlord/abys_firstblood_02.vsnd", context) -- abyssal_underlord_abys_firstblood_02
 
 --------------------------------------------------------------------------------------------------------------------------
 --Skywrath Mage
 --------------------------------------------------------------------------------------------------------------------------
 
 -- Start of battle
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_move_05.vsnd", context) -- My power is summoned
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_cast_02.vsnd", context) -- The skies are dark with SKywrath power
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_move_05.vsnd", context) -- skywrath_mage_drag_move_05
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_cast_02.vsnd", context) -- skywrath_mage_drag_cast_02
 
 -- Arcane bolt
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_arcanebolt_01.vsnd", context) -- Attack sound
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_arcanebolt_02.vsnd", context) -- Attack sound
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_arcanebolt_03.vsnd", context) -- Attack sound
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_arcanebolt_01.vsnd", context) -- skywrath_mage_drag_arcanebolt_01
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_arcanebolt_02.vsnd", context) -- skywrath_mage_drag_arcanebolt_02
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_arcanebolt_03.vsnd", context) -- skywrath_mage_drag_arcanebolt_03
 
 -- Ancient seal
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_ancient_seal_01.vsnd", context) -- By the ancient seal
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_ancient_seal_02.vsnd", context) -- This seal of avilava upon you
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_ancient_seal_03.vsnd", context) -- Kaiyarosh
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_ancient_seal_01.vsnd", context) -- skywrath_mage_drag_ancient_seal_01
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_ancient_seal_02.vsnd", context) -- skywrath_mage_drag_ancient_seal_02
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_ancient_seal_03.vsnd", context) -- skywrath_mage_drag_ancient_seal_03
 
 -- Mystic flare
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_mystic_flare_01.vsnd", context) -- Mystic Flare
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_mystic_flare_02.vsnd", context) -- The light of pain upon you
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_mystic_flare_03.vsnd", context) -- Share the light of agony
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_mystic_flare_01.vsnd", context) -- skywrath_mage_drag_mystic_flare_01
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_mystic_flare_02.vsnd", context) -- skywrath_mage_drag_mystic_flare_02
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_mystic_flare_03.vsnd", context) -- skywrath_mage_drag_mystic_flare_03
 
 -- Hero dies
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_lasthit_02.vsnd", context) -- Let it fall
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_lasthit_06.vsnd", context) -- This gladdens me
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_kill_11.vsnd", context) -- Hahahahahahaha
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_kill_09.vsnd", context) -- I do not kill you lightly, but still you are dead
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_laugh_01.vsnd", context) -- Hahahaha
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_lasthit_02.vsnd", context) -- skywrath_mage_drag_lasthit_02
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_lasthit_06.vsnd", context) -- skywrath_mage_drag_lasthit_06
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_kill_11.vsnd", context) -- skywrath_mage_drag_kill_11
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_kill_09.vsnd", context) -- skywrath_mage_drag_kill_09
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_laugh_01.vsnd", context) -- skywrath_mage_drag_laugh_01
 
 -- 75% HP
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_respawn_01.vsnd", context) -- I am undaunted
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_respawn_01.vsnd", context) -- skywrath_mage_drag_respawn_01
 
 -- 25% HP
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_cast_01.vsnd", context) -- Prepare for a reckoning
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_cast_01.vsnd", context) -- skywrath_mage_drag_cast_01
 
 -- Defeat
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_death_10.vsnd", context) -- To fall from such a height
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_death_02.vsnd", context) -- Drat
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_death_10.vsnd", context) -- skywrath_mage_drag_death_10
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_death_02.vsnd", context) -- skywrath_mage_drag_death_02
 
 -- All heroes dead
-PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_kill_07.vsnd", context) -- Think of it as a new beginning
+PrecacheResource("soundfile", "sounds/vo/skywrath_mage/drag_kill_07.vsnd", context) -- skywrath_mage_drag_kill_07
 
 --------------------------------------------------------------------------------------------------------------------------
 --Jakiro
 --------------------------------------------------------------------------------------------------------------------------
 
 -- Start of battle
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_battlebegins_01.vsnd", context) -- This is a game that two can play
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_battlebegins_02.vsnd", context) -- Our war starts now
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_battlebegins_01.vsnd", context) -- jakiro_jak_battlebegins_01
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_battlebegins_02.vsnd", context) -- jakiro_jak_battlebegins_02
 
 -- Dual breath
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_dual_01.vsnd", context) -- Ice and fire
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_dual_02.vsnd", context) -- So cold it burns
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_dual_03.vsnd", context) -- Freeze and burn
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_dual_01.vsnd", context) -- jakiro_jak_ability_dual_01
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_dual_02.vsnd", context) -- jakiro_jak_ability_dual_02
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_dual_03.vsnd", context) -- jakiro_jak_ability_dual_03
 
 -- Ice Path
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_icepath_01.vsnd", context) -- An icy path
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_icepath_02.vsnd", context) -- Watch for ice
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_icepath_03.vsnd", context) -- Play on the ice
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_icepath_01.vsnd", context) -- jakiro_jak_ability_icepath_01
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_icepath_02.vsnd", context) -- jakiro_jak_ability_icepath_02
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_icepath_03.vsnd", context) -- jakiro_jak_ability_icepath_03
 
 -- Macropyre
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_macro_01.vsnd", context) -- Flame pulse
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_macro_02.vsnd", context) -- Fire storm
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_macro_04.vsnd", context) -- Molton path
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_macro_01.vsnd", context) -- jakiro_jak_ability_macro_01
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_macro_02.vsnd", context) -- jakiro_jak_ability_macro_02
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_macro_04.vsnd", context) -- jakiro_jak_ability_macro_04
 
 -- Hero dies
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_kill_01.vsnd", context) -- Burned Alive
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_kill_04.vsnd", context) -- We strike you down
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_laugh_01.vsnd", context) -- Laugh
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_kill_15.vsnd", context) -- Death by dragon
-PrecacheResource("soundfile", "", context) -- 
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_kill_01.vsnd", context) -- jakiro_jak_kill_01
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_kill_04.vsnd", context) -- jakiro_jak_kill_04
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_laugh_01.vsnd", context) -- jakiro_jak_laugh_01
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_kill_15.vsnd", context) -- jakiro_jak_kill_15
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_brother_02.vsnd", context) -- jakiro_jak_brother_02
 
 -- 75% HP
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_failure_07.vsnd", context) -- We are not amused
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_ability_failure_07.vsnd", context) -- jakiro_jak_ability_failure_07
 
 -- 25% HP
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_kill_08.vsnd", context) -- You shouldn't play with fire
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_kill_08.vsnd", context) -- jakiro_jak_kill_08
 
 -- Defeat
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_death_02.vsnd", context) -- Dragon slayer
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_death_08.vsnd", context) -- Even dragons die
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_death_02.vsnd", context) -- jakiro_jak_death_02
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_death_08.vsnd", context) -- jakiro_jak_death_08
 
 -- All heroes dead
-PrecacheResource("soundfile", "sounds/vo/jakiro/jak_win_03.vsnd", context) -- This victory is doubly deserved, but mostly thanks to me
+PrecacheResource("soundfile", "sounds/vo/jakiro/jak_win_03.vsnd", context) -- jakiro_jak_win_03
 
 --------------------------------------------------------------------------------------------------------------------------
 -- Undying
 --------------------------------------------------------------------------------------------------------------------------
 
 -- Start of battle
-PrecacheResource("soundfile", "sounds/vo/undying/undying_spawn_04.vsnd", context) -- I bring the song of death
-PrecacheResource("soundfile", "sounds/vo/undying/undying_spawn_02.vsnd", context) -- Who disturbs the dead
+PrecacheResource("soundfile", "sounds/vo/undying/undying_spawn_04.vsnd", context) -- undying_undying_spawn_04
+PrecacheResource("soundfile", "sounds/vo/undying/undying_spawn_02.vsnd", context) -- undying_undying_spawn_02
 
 -- Summon zombies
-PrecacheResource("soundfile", "sounds/vo/undying/undying_tombstone_01.vsnd", context) -- Beware the restless dead
-PrecacheResource("soundfile", "sounds/vo/undying/undying_tombstone_02.vsnd", context) -- The dead hunger
-PrecacheResource("soundfile", "sounds/vo/undying/undying_tombstone_06.vsnd", context) -- Rise from your grave
+PrecacheResource("soundfile", "sounds/vo/undying/undying_tombstone_01.vsnd", context) -- undying_undying_tombstone_01
+PrecacheResource("soundfile", "sounds/vo/undying/undying_tombstone_02.vsnd", context) -- undying_undying_tombstone_02
+PrecacheResource("soundfile", "sounds/vo/undying/undying_tombstone_06.vsnd", context) -- undying_undying_tombstone_06
 
 -- Decay
-PrecacheResource("soundfile", "sounds/vo/undying/undying_decay_01.vsnd", context) -- You rot
-PrecacheResource("soundfile", "sounds/vo/undying/undying_decay_03.vsnd", context) -- Decay
-PrecacheResource("soundfile", "sounds/vo/undying/undying_decay_05.vsnd", context) -- Blight
+PrecacheResource("soundfile", "sounds/vo/undying/undying_decay_01.vsnd", context) -- undying_undying_decay_01
+PrecacheResource("soundfile", "sounds/vo/undying/undying_decay_03.vsnd", context) -- undying_undying_decay_03
+PrecacheResource("soundfile", "sounds/vo/undying/undying_decay_05.vsnd", context) -- undying_undying_decay_05
 
 -- Soul rip
-PrecacheResource("soundfile", "sounds/vo/undying/undying_soulrip_01.vsnd", context) -- Life transfers
-PrecacheResource("soundfile", "sounds/vo/undying/undying_soulrip_03.vsnd", context) -- Soul rip
-PrecacheResource("soundfile", "sounds/vo/undying/undying_soulrip_02.vsnd", context) -- From many
+PrecacheResource("soundfile", "sounds/vo/undying/undying_soulrip_01.vsnd", context) -- undying_undying_soulrip_01
+PrecacheResource("soundfile", "sounds/vo/undying/undying_soulrip_03.vsnd", context) -- undying_undying_soulrip_03
+PrecacheResource("soundfile", "sounds/vo/undying/undying_soulrip_02.vsnd", context) -- undying_undying_soulrip_02
 
 -- Hero dies
-PrecacheResource("soundfile", "sounds/vo/undying/undying_lasthit_02.vsnd", context) -- Dead
-PrecacheResource("soundfile", "sounds/vo/undying/undying_lasthit_03.vsnd", context) -- No life left
-PrecacheResource("soundfile", "sounds/vo/undying/undying_lasthit_04.vsnd", context) -- Another corpse
-PrecacheResource("soundfile", "sounds/vo/undying/undying_kill_03.vsnd", context) -- Death takes its toll
-PrecacheResource("soundfile", "sounds/vo/undying/undying_kill_10.vsnd", context) -- Join us
+PrecacheResource("soundfile", "sounds/vo/undying/undying_lasthit_02.vsnd", context) -- undying_undying_lasthit_02
+PrecacheResource("soundfile", "sounds/vo/undying/undying_lasthit_03.vsnd", context) -- undying_undying_lasthit_03
+PrecacheResource("soundfile", "sounds/vo/undying/undying_lasthit_04.vsnd", context) -- undying_undying_lasthit_04
+PrecacheResource("soundfile", "sounds/vo/undying/undying_kill_03.vsnd", context) -- undying_undying_kill_03
+PrecacheResource("soundfile", "sounds/vo/undying/undying_kill_10.vsnd", context) -- undying_undying_kill_10
 
 -- 75% HP
-PrecacheResource("soundfile", "sounds/vo/undying/undying_levelup_05.vsnd", context) -- All will succomb
+PrecacheResource("soundfile", "sounds/vo/undying/undying_levelup_05.vsnd", context) -- undying_undying_levelup_05
 
 -- 25% HP
-PrecacheResource("soundfile", "sounds/vo/undying/undying_levelup_07.vsnd", context) -- My body curdles
+PrecacheResource("soundfile", "sounds/vo/undying/undying_levelup_07.vsnd", context) -- undying_undying_levelup_07
 
 -- Defeat
-PrecacheResource("soundfile", "sounds/vo/undying/undying_death_08.vsnd", context) -- Again?
-PrecacheResource("soundfile", "sounds/vo/undying/undying_death_11.vsnd", context) -- Finally
+PrecacheResource("soundfile", "sounds/vo/undying/undying_death_08.vsnd", context) -- undying_undying_death_08
+PrecacheResource("soundfile", "sounds/vo/undying/undying_death_11.vsnd", context) -- undying_undying_death_11
 
 -- All heroes dead
-PrecacheResource("soundfile", "sounds/vo/undying/undying_win_05.vsnd", context) -- Blight will spread, more will join
+PrecacheResource("soundfile", "sounds/vo/undying/undying_win_05.vsnd", context) -- undying_undying_win_05
 
 --------------------------------------------------------------------------------------------------------------------------
 --Necrophos
 --------------------------------------------------------------------------------------------------------------------------
 
 -- Start of battle
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_spawn_02.vsnd", context) -- I am the plague mage
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_respawn_14.vsnd", context) -- Kill or cure, it matters not
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_spawn_02.vsnd", context) -- necrolyte_necr_spawn_02
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_respawn_14.vsnd", context) -- necrolyte_necr_respawn_14
 
 -- Death pulse
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_tox_01.vsnd", context) -- Toxic shock
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_tox_02.vsnd", context) -- A pox upon you
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_tox_03.vsnd", context) -- Pox marks the spot
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_tox_01.vsnd", context) -- necrolyte_necr_ability_tox_01
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_tox_02.vsnd", context) -- necrolyte_necr_ability_tox_02
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_tox_03.vsnd", context) -- necrolyte_necr_ability_tox_03
 
 -- Ghost Shroud
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_deny_08.vsnd", context) -- What ails you
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_deny_05.vsnd", context) -- Stopped dead
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_deny_03.vsnd", context) -- Uh Uh
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_deny_08.vsnd", context) -- necrolyte_necr_deny_08
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_deny_05.vsnd", context) -- necrolyte_necr_deny_05
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_deny_03.vsnd", context) -- necrolyte_necr_deny_03
 
 -- Reaper's Scythe
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_reap_01.vsnd", context) -- Greet the reaper
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_reap_02.vsnd", context) -- I reap your life
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_reap_03.vsnd", context) -- You reap what you so
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_reap_01.vsnd", context) -- necrolyte_necr_ability_reap_01
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_reap_02.vsnd", context) -- necrolyte_necr_ability_reap_02
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_ability_reap_03.vsnd", context) -- necrolyte_necr_ability_reap_03
 
 -- Hero dies
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_lasthit_03.vsnd", context) -- Rot where you drop
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_kill_01.vsnd", context) -- You wither on the vine
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_kill_04.vsnd", context) -- Rancid death
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_kill_05.vsnd", context) -- Your flesh spoils
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_lasthit_02.vsnd", context) -- Quick decay
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_lasthit_03.vsnd", context) -- necrolyte_necr_lasthit_03
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_kill_01.vsnd", context) -- necrolyte_necr_kill_01
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_kill_04.vsnd", context) -- necrolyte_necr_kill_04
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_kill_05.vsnd", context) -- necrolyte_necr_kill_05
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_lasthit_02.vsnd", context) -- necrolyte_necr_lasthit_02
 
 -- 75% HP
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_breath_01.vsnd", context) -- Take a deep breath
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_breath_01.vsnd", context) -- necrolyte_necr_breath_01
 
 -- 25% HP
 PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_immort_02.vsnd", context) -- Death is for the living
 
 -- Defeat
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_death_02.vsnd", context) -- Kill is the cure
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_death_06.vsnd", context) -- A pox upon you
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_death_02.vsnd", context) -- necrolyte_necr_death_02
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_death_06.vsnd", context) -- necrolyte_necr_death_06
 
 -- All heroes dead
-PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_kill_10.vsnd", context) -- You plagued me long enough
+PrecacheResource("soundfile", "sounds/vo/necrolyte/necr_kill_10.vsnd", context) -- necrolyte_necr_kill_10
