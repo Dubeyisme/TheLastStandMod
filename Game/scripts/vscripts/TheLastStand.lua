@@ -9,7 +9,6 @@ end
 DebugPrint( '[TLS] Initialising Mode' )
 SPAWN_POINT = {}
 SPAWN_COUNT = 0
-ATTACK_ENTITY = {}
 ATTACK_POINT = {}
 FINAL_POINT = nil
 HERO_POINT = nil
@@ -39,7 +38,7 @@ CURRENT_ROUND = 0
 NEXT_ROUND = 1
 CURRENT_WAVE = 0
 NEXT_WAVE = 1
-MULTIPLIER = 1
+MULTIPLIER = 0.65 -- Will be 1 at game start
 WAVE_CONTENTS = {}
 WAVE_CONTENTS_ATTACKING = {}
 HERO_TARGETS = {}
@@ -60,12 +59,12 @@ DebugPrint( '[TLS] Setting up WOODLAND' )
 if GetMapName() == "woodland" then
 
   -- Initial Spawn Point for Waves
-  SPAWN_POINT[1] = Vector(-8061, 8080, 0)
-  SPAWN_POINT[2] = Vector(-1352, 7999, 0)
-  SPAWN_POINT[3] = Vector(7545, 7891, 0)
-  SPAWN_POINT[4] = Vector(8011, 2011, 0)
-  SPAWN_POINT[5] = Vector(8064, -2880, 0)
-  SPAWN_POINT[6] = Vector(8060, -8058, 0)
+  SPAWN_POINT[1] = Vector(-7744, 7744, 0)
+  SPAWN_POINT[2] = Vector(-1920, 7616, 0)
+  SPAWN_POINT[3] = Vector(6080, 7552, 0)
+  SPAWN_POINT[4] = Vector(7808, 1856, 0)
+  SPAWN_POINT[5] = Vector(7680, -3456, 0)
+  SPAWN_POINT[6] = Vector(7808, -7616, 0)
   SPAWN_COUNT = 6
 
   -- Initial Attack Objective Entity and Points
@@ -75,12 +74,6 @@ if GetMapName() == "woodland" then
   ATTACK_POINT[4] = Vector(1294, 91, 128)
   ATTACK_POINT[5] = Vector(176, -5755, 128)
   ATTACK_POINT[6] = Vector(1238, -4045, 128)
-  ATTACK_ENTITY[1] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[1], false, nil, nil, DOTA_TEAM_BADGUYS)
-  ATTACK_ENTITY[2] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[2], false, nil, nil, DOTA_TEAM_BADGUYS)
-  ATTACK_ENTITY[3] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[3], false, nil, nil, DOTA_TEAM_BADGUYS)
-  ATTACK_ENTITY[4] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[4], false, nil, nil, DOTA_TEAM_BADGUYS)
-  ATTACK_ENTITY[5] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[5], false, nil, nil, DOTA_TEAM_BADGUYS)
-  ATTACK_ENTITY[6] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[6], false, nil, nil, DOTA_TEAM_BADGUYS)
 
   -- Attack move to this point via the initial objective
   FINAL_POINT = Vector(-1600, -2176, 128)
@@ -95,46 +88,49 @@ if GetMapName() == "woodland" then
 end
 DebugPrint( '[TLS] Done setting up WOODLAND' )
 
--- Collect Wave Information for the start of each new round.
-function TheLastStand:CreepSpawnerRoundSetup()
-  DebugPrint("[TLS] Creep Spawner Round Setup")
-
-  -- Decide which round we are spawning 
-  --local ttype = CURRENT_WAVE_TYPE
-  local ttype = WAVE_TYPES[1]
-  DebugPrint(ttype)
-  local round = CURRENT_ROUND -- Should be 1 or 2
-  -- Build the list of what to spawn for each of the three waves and the Boss wave
-  DebugPrint("[TLS] COMPILE LIST OF WAVES")
-  local UnitList1 = TheLastStand:ReturnList(ttype, round, 1) -- List of valid types for wave 1
-  local UnitCount1 = TheLastStand:ReturnUnitCount(ttype, round, 1) -- List of the amount per type for wave 1
-  local UnitList2 = TheLastStand:ReturnList(ttype, round, 2) -- List of valid types for wave 2
-  local UnitCount2 = TheLastStand:ReturnUnitCount(ttype, round, 2) -- List of the amount per type for wave 2
-  local UnitList3 = TheLastStand:ReturnList(ttype, round, 3) -- List of valid types for wave 3
-  local UnitCount3 = TheLastStand:ReturnUnitCount(ttype, round, 3) -- List of the amount per type for wave 3
-  --local UnitList4 = TheLastStand:ReturnList(ttype, round, 4) -- List of valid types for boss wave
-  --local UnitCount4 = TheLastStand:ReturnUnitCount(ttype, round, 4) -- List of the amount per type for boss wave
-  local 
-
+-- This is where we catch and prep for everything after each wave
+function TheLastStand:WaveEnded()
+  -- Increment wave number
+  TheLastStand:IncrementWaveType()
+  if(CURRENT_WAVE == 1) then
+    -- Round must have ended, prep the next round
+    TheLastStand:RoundEnded()
+  end
   -- Clear the old wave contents if anything left by mistake
   WAVE_CONTENTS = {}
   WAVE_CONTENTS_ATTACKING = {}
+  -- Set timer for next wave
 
-  -- Control the round, calling the spawn wave function three times, and the spawn boss wave function once
-  TheLastStand:CreateWave(UnitList1, UnitCount1)
-
-  -- WAVE_CONTENTS <- going to fill this with all the current entities
-  -- SPAWN_POINT <- where we might be spawning monsters
-  -- ATTACK_POINT <- The first point they must attack move to
-  -- FINAL_POINT <- The final point they must attack move to
-
-
-  -- Compile the numbers and initiate the round control
+    Timers:CreateTimer({
+        endTime = 10,
+      callback = function()
+        TheLastStand:WaveStart()
+      end
+    })
 end
 
+function TheLastStand:WaveStart()
+  -- Generate a new wave
+  DebugPrint("[TLS] Current Multiplier : "..tostring(MULTIPLIER))
+  if(CURRENT_WAVE~=4) then
+    -- Generate a non-boss wave for waves 1, 2, and 3
+    local UnitList = TheLastStand:ReturnList(CURRENT_WAVE_TYPE, CURRENT_WAVE, CURRENT_ROUND) -- List of valid types for wave 2
+    local UnitCount = TheLastStand:ReturnUnitCount(CURRENT_WAVE_TYPE, CURRENT_WAVE, CURRENT_ROUND) -- List of the amount per type for wave 2
+    TheLastStand:CreateWave(UnitList, UnitCount)
+  else
+    -- Generate a boss wave
+  end
+end
+
+-- This is where we catch and prep for everything after each round
+function TheLastStand:RoundEnded()
+  -- Increment Round number
+  TheLastStand:IncrementRound()
+end
 
 function TheLastStand:IncrementRound()
   CURRENT_ROUND = NEXT_ROUND
+  MULTIPLIER=MULTIPLIER+0.1
   NEXT_ROUND=NEXT_ROUND+1
   if(NEXT_ROUND==3)then
     NEXT_ROUND = 1
@@ -175,22 +171,19 @@ function TheLastStand:IncrementRound()
       end
     end
     WAVE_NUMBER = 1
-
   else
     -- Increment the previosly completed wave type
-    WAVES_COMPLETE[WAVE_TYPES[CURRENT_WAVE_TYPE]]=WAVES_COMPLETE[WAVE_TYPES[CURRENT_WAVE_TYPE]]+1
     WAVE_NUMBER=WAVE_NUMBER+1
   end
-  -- Mark what our current wave type is and prepare it
-  CURRENT_WAVE_TYPE = WAVES_TO_COMPLETE[WAVE_NUMBER]
-  TheLastStand:CreepSpawnerRoundSetup()
+    -- Mark what our current wave type is
+    CURRENT_WAVE_TYPE = WAVES_TO_COMPLETE[WAVE_NUMBER]
 end
 
-function TheLastStand:IncrementWave()
+function TheLastStand:IncrementWaveType()
   CURRENT_WAVE = NEXT_WAVE
-  MULTIPLIER=MULTIPLIER+0.1
+  MULTIPLIER=MULTIPLIER+0.05
   NEXT_WAVE=NEXT_WAVE+1
-  if(NEXT_WAVE==5)then
+  if(NEXT_WAVE==4)then -- Should be 5 for bosses, skipping atm
     NEXT_WAVE = 1
   end
 end
@@ -253,6 +246,7 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
   local unit = nil
   local point = {}
   local random_array = {}
+  DebugPrint("[TLS] Creating a "..CURRENT_WAVE_TYPE.." wave #"..tostring(CURRENT_WAVE))
   -- Randomise the spawn points to be used
   for h = 1, SPAWN_COUNT do
     point[h] = h
@@ -274,15 +268,45 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
   for h = 1, PLAYER_COUNT do
     for i,j in pairs(UnitTypesListed)do
       for k=1, UnitCountsListed[i] do
-        unit = CreateUnitByName(UnitTypesListed[i], SPAWN_POINT[point[h]], true, nil, nil, DOTA_TEAM_BADGUYS)
+        if(UnitTypesListed[i] ~= "mark_illusions") then
+          unit = CreateUnitByName(UnitTypesListed[i], SPAWN_POINT[point[h]], true, nil, nil, DOTA_TEAM_BADGUYS)
+          TheLastStand:UpgradeCreep(unit)
+        else
+          -- Create illusion and modify it to match a hero
+          local target = HERO_TARGETS[h]
+          local ability_slot
+          unit = CreateUnitByName(target:GetName(), SPAWN_POINT[point[h]], true, nil, nil, DOTA_TEAM_BADGUYS)
+          for i = 1, target:GetLevel() - 1 do
+            unit:HeroLevelUp(false)
+          end
+          -- Set abilities to look the same
+          unit:SetAbilityPoints(0) 
+          for ability_slot = 0, 15 do
+            local target_ability = target:GetAbilityByIndex(ability_slot) 
+            if target_ability then
+              local target_ability_level = target_ability:GetLevel() 
+              local target_ability_name = target_ability:GetAbilityName() 
+              local illusion_ability = unit:FindAbilityByName(target_ability_name) 
+              illusion_ability:SetLevel(target_ability_level) 
+            end
+          end
+          -- Set items to be the same
+          for item_slot = 0, 5 do
+            local item = target:GetItemInSlot(item_slot) 
+            if item then
+              local item_name = item:GetName() 
+              local new_item = CreateItem(item_name, unit, unit) 
+              unit:AddItem(new_item) 
+            end
+          end
+          unit:AddNewModifier(nil, nil, "modifier_illusion", {duration = -1, outgoing_damage = 0.5, incoming_damage = 1.5})
+          unit:MakeIllusion()
+          unit:SetRenderColor(0,0,255)
+        end
         -- Upgrade the creep to match the heroes based on multiplier
-        TheLastStand:UpgradeCreep(unit)
         unit.disable_autoattack = 0
-        DebugPrint(GetTeamName(unit:GetTeamNumber()))
         ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = ATTACK_POINT[point[h]], Queue = true})
         ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = true})
-        --ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET, TargetIndex = HERO_TARGETS[1]:entindex(), Queue = true})
-        --unit:SetInitialGoalEntity (ATTACK_ENTITY[point[h]])
         table.insert(WAVE_CONTENTS,unit)
         table.insert(WAVE_CONTENTS_ATTACKING,false)
         UNITS_LEFT=UNITS_LEFT+1
@@ -301,7 +325,13 @@ function TheLastStand:RemoveFromWaveContent(unit)
       table.remove(WAVE_CONTENTS,i)
       table.remove(WAVE_CONTENTS_ATTACKING,i)
       UNITS_LEFT=UNITS_LEFT-1
-      DebugPrint("[TLS] Unit removed from wave")
+      DebugPrint("[TLS] Unit removed from wave - Left:"..tostring(UNITS_LEFT))
+      if(UNITS_LEFT==0) then
+        -- The round must be over
+      DebugPrint("[TLS] Wave ended")
+      TheLastStand:WaveEnded()
+
+      end
       return true
     end
   end
@@ -319,8 +349,8 @@ function TheLastStand:UpgradeCreep(unit)
   local mag = unit:GetBaseMagicalResistanceValue()
   local admin = unit:GetBaseDamageMin()
   local admax = unit:GetBaseDamageMax()
-  local bxp = unit:GetDeathXP()
-  local bg = unit:GetMaximumGoldBounty()
+  local bxp = unit:GetDeathXP()*1.5
+  local bg = unit:GetDeathXP()*2
   -- Change unit values based on level multiplier
   hp=hp*MULTIPLIER
   hr=hr*MULTIPLIER
@@ -332,7 +362,8 @@ function TheLastStand:UpgradeCreep(unit)
   bxp=bxp*MULTIPLIER
   bg=bg*MULTIPLIER
   -- Set unit details
-  unit:SetBaseMaxHealth(hp)
+  unit:SetMaxHealth(hp)
+  unit:SetHealth(hp)
   unit:SetBaseHealthRegen(hr)
   unit:SetBaseManaRegen(mr)
   unit:SetPhysicalArmorBaseValue(arm)
@@ -484,8 +515,8 @@ function TheLastStand:ReturnList(ttype, wave, round)
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_neutral_dark_troll",
-        "npc_dota_neutral_fores4_berserker",
-        "npc_dota_neutral_fores4_high_priest"}
+        "npc_dota_neutral_forest_berserker",
+        "npc_dota_neutral_forest_high_priest"}
     elseif(wave == 2) then
       list = {"npc_dota_neutral_dark_troll", 
         "npc_dota_neutral_fores4_berserker",
@@ -493,8 +524,8 @@ function TheLastStand:ReturnList(ttype, wave, round)
         "npc_dota_neutral_ogre_mauler"}
     elseif(wave == 3) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_fores4_berserker",
-        "npc_dota_neutral_fores4_high_priest", 
+        "npc_dota_neutral_forest_berserker",
+        "npc_dota_neutral_forest_high_priest", 
         "npc_dota_neutral_ogre_mauler", 
         "npc_dota_neutral_ogre_magi"}
     elseif(wave == 4) then
@@ -505,16 +536,16 @@ function TheLastStand:ReturnList(ttype, wave, round)
   elseif (round==2) then
     if(wave == 1) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_fores4_high_priest",
+        "npc_dota_neutral_forest_high_priest",
         "npc_dota_neutral_ogre_mauler"}
     elseif(wave == 2) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_fores4_high_priest", 
+        "npc_dota_neutral_forest_high_priest", 
         "npc_dota_neutral_ogre_mauler", 
         "npc_dota_neutral_ogre_magi"}
     elseif(wave == 3) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_fores4_high_priest", 
+        "npc_dota_neutral_forest_high_priest", 
         "npc_dota_neutral_ogre_mauler",
         "npc_dota_neutral_ogre_magi", 
         "npc_dota_neutral_dark_troll_warlord"}
@@ -743,7 +774,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
 
  -- WAVE_TYPES = {"Radiant" = 1,"Dire" = 2,"Kobold" = 3,"Troll" = 4,"Golem" = 5,"Satyr" = 6,"Centaur" = 7,"Dragon" = 8,"Zombie" = 9"}
 
- if(ttype==WAVE_TYPES[1] or ttype==WAVE_TYPES[2])then
+ if(ttype==WAVE_TYPES[1] or ttype==WAVE_TYPES[2])then -- Radiant/Dire
   if(round==1) then
     if(wave == 1) then
       list = {8,
@@ -784,7 +815,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[3])then
+ if(ttype==WAVE_TYPES[3])then -- Kobold
   if(round==1) then
     if(wave == 1) then
       list = {15,
@@ -828,7 +859,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[4])then
+ if(ttype==WAVE_TYPES[4])then -- Troll
   if(round==1) then
     if(wave == 1) then
       list = {3,
@@ -875,7 +906,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[5])then
+ if(ttype==WAVE_TYPES[5])then -- Golem
   if(round==1) then
     if(wave == 1) then
       list = {4}
@@ -913,7 +944,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[6])then
+ if(ttype==WAVE_TYPES[6])then -- Satyr
   if(round==1) then
     if(wave == 1) then
       list = {6}
@@ -951,7 +982,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[7])then
+ if(ttype==WAVE_TYPES[7])then -- Centaur
   if(round==1) then
     if(wave == 1) then
       list = {4}
@@ -989,19 +1020,19 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[8])then
+ if(ttype==WAVE_TYPES[8])then -- Dragon
   if(round==1) then
     if(wave == 1) then
-      list = {4, 
+      list = {2, 
         1}
     elseif(wave == 2) then
-      list = {4, 
+      list = {2, 
         1, 
         1}
     elseif(wave == 3) then
-      list = {4, 
-        1, 
+      list = {3, 
         2, 
+        1, 
         1}
     elseif(wave == 4) then
       list = {1}
@@ -1033,7 +1064,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[9])then
+ if(ttype==WAVE_TYPES[9])then -- Zombie
   if(round==1) then
     if(wave == 1) then
       list = {8, 

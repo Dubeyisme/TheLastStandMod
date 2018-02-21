@@ -69,7 +69,7 @@ function GameMode:ParseText(text,pid)
   end
   -- Control game play elements
   if(ParsedText[1]=="spawn") then
-    TheLastStand:IncrementRound()
+    TheLastStand:WaveEnded()
   end
   -- Fix up your hero
   if(ParsedText[1]=="hp") then hero:SetHealth(hero:GetMaxHealth()) end
@@ -168,12 +168,6 @@ end
 ]]
 function GameMode:OnGameInProgress()
   DebugPrint("[TLS] The game has officially begun")
-
-  Timers:CreateTimer(30, -- Start this timer 30 game-time seconds later
-    function()
-      DebugPrint("This function is called 30 seconds after the game begins, and every 30 seconds thereafter")
-      return 30.0 -- Rerun this timer every 30 game-time seconds 
-    end)
 end
 
 
@@ -182,10 +176,10 @@ end
 -- It can be used to pre-initialize any values/tables that will be needed later
 function GameMode:InitGameMode()
   GameMode = self
-  DebugPrint('[TLS] Starting to load Barebones gamemode...')
+  --DebugPrint('[TLS] Starting to load The Last Stand gamemode...')
 
   -- Commands can be registered for debugging purposes or as functions that can be called by the custom Scaleform UI
-  Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
+  --Convars:RegisterCommand( "command_example", Dynamic_Wrap(GameMode, 'ExampleConsoleCommand'), "A console command example", FCVAR_CHEAT )
 
-  DebugPrint('[TLS] Done loading Barebones gamemode!\n\n')
+  --DebugPrint('[TLS] Done loading The Last Stand gamemode!\n\n')
 end
