@@ -1,7 +1,15 @@
 
+-- Create an instance of this class
+if TheLastStand == nil then
+    DebugPrint( '[TLS] creating The Last Stand' )
+    _G.TheLastStand = class({})
+end
+
 -- Points hardcoded into Woodland initialisation
+DebugPrint( '[TLS] Initialising Mode' )
 SPAWN_POINT = {}
 SPAWN_COUNT = 0
+ATTACK_ENTITY = {}
 ATTACK_POINT = {}
 FINAL_POINT = nil
 HERO_POINT = nil
@@ -10,15 +18,15 @@ BOSS_RADIUS = 0
 
 TOTAL_WAVE_TYPES = 9
 WAVE_TYPES = {
-  T_Radiant = 1,
-  T_Dire = 2,
-  T_Kobold = 3,
-  T_Troll = 4,
-  T_Golem = 5,
-  T_Satyr = 6,
-  T_Centaur = 7,
-  T_Dragon = 8,
-  T_Zombie = 9
+  "Radiant",  -- 1
+  "Dire",     -- 2
+  "Kobold",   -- 3
+  "Troll",    -- 4
+  "Golem",    -- 5
+  "Satyr",    -- 6
+  "Centaur",  -- 7
+  "Dragon",   -- 8
+  "Zombie"    -- 9
 }
 
 WAVES_COMPLETE = {}
@@ -33,22 +41,21 @@ CURRENT_WAVE = 0
 NEXT_WAVE = 1
 MULTIPLIER = 1
 WAVE_CONTENTS = {}
+WAVE_CONTENTS_ATTACKING = {}
 HERO_TARGETS = {}
 PLAYER_COUNT = 0
 UNITS_LEFT = 0
+FINAL_ENTITY = nil
+--FOW_BADGUYS = nil
 
 MELEE_ABILITIES = {}
 RANGED_ABILITIES = {}
 DEFENCE_ABILITIES = {}
-
--- Create an instance of this class
-if TheLastStand == nil then
-    DebugPrint( '[TLS] creating The Last Stand' )
-    _G.TheLastStand = class({})
-end
+DebugPrint( '[TLS] Done initialising Mode' )
 
 
 
+DebugPrint( '[TLS] Setting up WOODLAND' )
 -- Map specific point initialisation
 if GetMapName() == "woodland" then
 
@@ -61,16 +68,23 @@ if GetMapName() == "woodland" then
   SPAWN_POINT[6] = Vector(8060, -8058, 0)
   SPAWN_COUNT = 6
 
-  -- Initial Attack Objective
+  -- Initial Attack Objective Entity and Points
   ATTACK_POINT[1] = Vector(-6720, -1280, 128)
   ATTACK_POINT[2] = Vector(-3764, 464, 128)
   ATTACK_POINT[3] = Vector(-468, 1763, 128)
   ATTACK_POINT[4] = Vector(1294, 91, 128)
   ATTACK_POINT[5] = Vector(176, -5755, 128)
   ATTACK_POINT[6] = Vector(1238, -4045, 128)
+  ATTACK_ENTITY[1] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[1], false, nil, nil, DOTA_TEAM_BADGUYS)
+  ATTACK_ENTITY[2] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[2], false, nil, nil, DOTA_TEAM_BADGUYS)
+  ATTACK_ENTITY[3] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[3], false, nil, nil, DOTA_TEAM_BADGUYS)
+  ATTACK_ENTITY[4] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[4], false, nil, nil, DOTA_TEAM_BADGUYS)
+  ATTACK_ENTITY[5] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[5], false, nil, nil, DOTA_TEAM_BADGUYS)
+  ATTACK_ENTITY[6] = CreateUnitByName("npc_dummy_unit", ATTACK_POINT[6], false, nil, nil, DOTA_TEAM_BADGUYS)
 
   -- Attack move to this point via the initial objective
   FINAL_POINT = Vector(-1600, -2176, 128)
+  --FOW_BADGUYS = AddFOWViewer(DOTA_TEAM_GOODGUYS,FINAL_POINT,72000,360,false)
 
   -- Hero convene point for special events
   HERO_POINT = Vector(-2432, -4160,  256)
@@ -79,31 +93,35 @@ if GetMapName() == "woodland" then
   BOSS_POINT = Vector(-1344, -2368, 128)
   BOSS_RADIUS = 2112
 end
-
+DebugPrint( '[TLS] Done setting up WOODLAND' )
 
 -- Collect Wave Information for the start of each new round.
 function TheLastStand:CreepSpawnerRoundSetup()
   DebugPrint("[TLS] Creep Spawner Round Setup")
 
   -- Decide which round we are spawning 
-  local ttype = CURRENT_WAVE_TYPE
+  --local ttype = CURRENT_WAVE_TYPE
+  local ttype = WAVE_TYPES[1]
+  DebugPrint(ttype)
   local round = CURRENT_ROUND -- Should be 1 or 2
   -- Build the list of what to spawn for each of the three waves and the Boss wave
-  local UnitList1 = GameMode:ReturnList(ttype, round, 1) -- List of valid types for wave 1
-  local UnitCount1 = GameMode:ReturnUnitCount(ttype, round, 1) -- List of the amount per type for wave 1
-  local UnitList2 = GameMode:ReturnList(ttype, round, 2) -- List of valid types for wave 2
-  local UnitCount2 = GameMode:ReturnUnitCount(ttype, round, 2) -- List of the amount per type for wave 2
-  local UnitList3 = GameMode:ReturnList(ttype, round, 3) -- List of valid types for wave 3
-  local UnitCount3 = GameMode:ReturnUnitCount(ttype, round, 3) -- List of the amount per type for wave 3
-  --local UnitList4 = GameMode:ReturnList(ttype, round, 4) -- List of valid types for boss wave
-  --local UnitCount4 = GameMode:ReturnUnitCount(ttype, round, 4) -- List of the amount per type for boss wave
+  DebugPrint("[TLS] COMPILE LIST OF WAVES")
+  local UnitList1 = TheLastStand:ReturnList(ttype, round, 1) -- List of valid types for wave 1
+  local UnitCount1 = TheLastStand:ReturnUnitCount(ttype, round, 1) -- List of the amount per type for wave 1
+  local UnitList2 = TheLastStand:ReturnList(ttype, round, 2) -- List of valid types for wave 2
+  local UnitCount2 = TheLastStand:ReturnUnitCount(ttype, round, 2) -- List of the amount per type for wave 2
+  local UnitList3 = TheLastStand:ReturnList(ttype, round, 3) -- List of valid types for wave 3
+  local UnitCount3 = TheLastStand:ReturnUnitCount(ttype, round, 3) -- List of the amount per type for wave 3
+  --local UnitList4 = TheLastStand:ReturnList(ttype, round, 4) -- List of valid types for boss wave
+  --local UnitCount4 = TheLastStand:ReturnUnitCount(ttype, round, 4) -- List of the amount per type for boss wave
   local 
 
-  -- Clear the old wave contents
+  -- Clear the old wave contents if anything left by mistake
   WAVE_CONTENTS = {}
+  WAVE_CONTENTS_ATTACKING = {}
 
   -- Control the round, calling the spawn wave function three times, and the spawn boss wave function once
-
+  TheLastStand:CreateWave(UnitList1, UnitCount1)
 
   -- WAVE_CONTENTS <- going to fill this with all the current entities
   -- SPAWN_POINT <- where we might be spawning monsters
@@ -137,10 +155,10 @@ function TheLastStand:IncrementRound()
     end
     -- Fill Waves_To_Complete twice with each wave type and a random array
     for i=1, TOTAL_WAVE_TYPES do
-      table.insert(WAVES_TO_COMPLETE[i], WAVE_TYPES[i])
-      table.insert(WAVES_TO_COMPLETE[TOTAL_WAVE_TYPES+i], WAVE_TYPES[i])
-      table.insert(random_array[i],RandomInt(1,100))
-      table.insert(random_array[i+TOTAL_WAVE_TYPES],RandomInt(1,100))
+      table.insert(WAVES_TO_COMPLETE, WAVE_TYPES[i])
+      table.insert(WAVES_TO_COMPLETE, WAVE_TYPES[i])
+      table.insert(random_array,RandomInt(1,100))
+      table.insert(random_array,RandomInt(1,100))
     end
     -- Randomise the order of waves to be completed
     local temp = 0
@@ -165,7 +183,7 @@ function TheLastStand:IncrementRound()
   end
   -- Mark what our current wave type is and prepare it
   CURRENT_WAVE_TYPE = WAVES_TO_COMPLETE[WAVE_NUMBER]
-  GameMode:CreepSpawnerRoundSetup()
+  TheLastStand:CreepSpawnerRoundSetup()
 end
 
 function TheLastStand:IncrementWave()
@@ -180,25 +198,25 @@ end
 function TheLastStand:TypeToText(ttype)
   local text = ""
   if(CURRENT_ROUND==1) then
-    if(ttype == T_Radiant) then text = "Radiant" end
-    if(ttype == T_Dire) then text = "Dire" end
-    if(ttype == T_Kobold) then text = "Kobold" end
-    if(ttype == T_Troll) then text = "Troll" end
-    if(ttype == T_Golem) then text = "Golem" end
-    if(ttype == T_Satyr) then text = "Satyr" end
-    if(ttype == T_Centaur) then text = "Centaur" end
-    if(ttype == T_Dragon) then text = "Dragon" end
-    if(ttype == T_Zombie) then text = "Zombie" end
+    if(ttype == "Radiant") then text = "Radiant" end
+    if(ttype == "Dire") then text = "Dire" end
+    if(ttype == "Kobold") then text = "Kobold" end
+    if(ttype == "Troll") then text = "Troll" end
+    if(ttype == "Golem") then text = "Golem" end
+    if(ttype == "Satyr") then text = "Satyr" end
+    if(ttype == "Centaur") then text = "Centaur" end
+    if(ttype == "Dragon") then text = "Dragon" end
+    if(ttype == "Zombie") then text = "Zombie" end
   elseif(CURRENT_ROUND==2) then
-    if(ttype == T_Radiant) then text = "Radiant" end
-    if(ttype == T_Dire) then text = "Dire" end
-    if(ttype == T_Kobold) then text = "Kobold" end
-    if(ttype == T_Troll) then text = "Troll" end
-    if(ttype == T_Golem) then text = "Golem" end
-    if(ttype == T_Satyr) then text = "Satyr" end
-    if(ttype == T_Centaur) then text = "Centaur" end
-    if(ttype == T_Dragon) then text = "Dragon" end
-    if(ttype == T_Zombie) then text = "Zombie" end
+    if(ttype == "Radiant") then text = "Radiant" end
+    if(ttype == "Dire") then text = "Dire" end
+    if(ttype == "Kobold") then text = "Kobold" end
+    if(ttype == "Troll") then text = "Troll" end
+    if(ttype == "Golem") then text = "Golem" end
+    if(ttype == "Satyr") then text = "Satyr" end
+    if(ttype == "Centaur") then text = "Centaur" end
+    if(ttype == "Dragon") then text = "Dragon" end
+    if(ttype == "Zombie") then text = "Zombie" end
   end    
   return text
 end
@@ -206,25 +224,25 @@ end
 function TheLastStand:BossIntro(ttype)
   local text = ""
   if(CURRENT_ROUND==1) then
-    if(ttype == T_Radiant) then text = "Treant Protector" end
-    if(ttype == T_Dire) then text = "Dark Willow" end
-    if(ttype == T_Kobold) then text = "Meepo" end
-    if(ttype == T_Troll) then text = "Huskar" end
-    if(ttype == T_Golem) then text = "Earth Spirit" end
-    if(ttype == T_Satyr) then text = "Shadow Fiend" end
-    if(ttype == T_Centaur) then text = "Centaur" end
-    if(ttype == T_Dragon) then text = "Skywrath" end
-    if(ttype == T_Zombie) then text = "Undying" end
+    if(ttype == "Radiant") then text = "Treant Protector" end
+    if(ttype == "Dire") then text = "Dark Willow" end
+    if(ttype == "Kobold") then text = "Meepo" end
+    if(ttype == "Troll") then text = "Huskar" end
+    if(ttype == "Golem") then text = "Earth Spirit" end
+    if(ttype == "Satyr") then text = "Shadow Fiend" end
+    if(ttype == "Centaur") then text = "Centaur" end
+    if(ttype == "Dragon") then text = "Skywrath" end
+    if(ttype == "Zombie") then text = "Undying" end
   elseif(CURRENT_ROUND==2) then
-    if(ttype == T_Radiant) then text = "Lone Druid" end
-    if(ttype == T_Dire) then text = "Doom" end
-    if(ttype == T_Kobold) then text = "Ursa" end
-    if(ttype == T_Troll) then text = "Witch Doctor" end
-    if(ttype == T_Golem) then text = "Elder Titan" end
-    if(ttype == T_Satyr) then text = "Shadow Demon" end
-    if(ttype == T_Centaur) then text = "Underlord" end
-    if(ttype == T_Dragon) then text = "Jakiro" end
-    if(ttype == T_Zombie) then text = "Necrophos" end
+    if(ttype == "Radiant") then text = "Lone Druid" end
+    if(ttype == "Dire") then text = "Doom" end
+    if(ttype == "Kobold") then text = "Ursa" end
+    if(ttype == "Troll") then text = "Witch Doctor" end
+    if(ttype == "Golem") then text = "Elder Titan" end
+    if(ttype == "Satyr") then text = "Shadow Demon" end
+    if(ttype == "Centaur") then text = "Underlord" end
+    if(ttype == "Dragon") then text = "Jakiro" end
+    if(ttype == "Zombie") then text = "Necrophos" end
   end    
   return text
 end
@@ -256,27 +274,42 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
   for h = 1, PLAYER_COUNT do
     for i,j in pairs(UnitTypesListed)do
       for k=1, UnitCountsListed[i] do
-        unit = CreateUnit(UnitTypesListed[i], SPAWN_POINT[point[h]], true, nil, nil, DOTA_TEAM_BADGUYS)
-        GameMode:UpgradeCreep(unit)
-        unit:MoveToPositionAggressive(ATTACK_POINT[point[h]])
+        unit = CreateUnitByName(UnitTypesListed[i], SPAWN_POINT[point[h]], true, nil, nil, DOTA_TEAM_BADGUYS)
+        -- Upgrade the creep to match the heroes based on multiplier
+        TheLastStand:UpgradeCreep(unit)
+        unit.disable_autoattack = 0
+        DebugPrint(GetTeamName(unit:GetTeamNumber()))
+        ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = ATTACK_POINT[point[h]], Queue = true})
+        ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = true})
+        --ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET, TargetIndex = HERO_TARGETS[1]:entindex(), Queue = true})
+        --unit:SetInitialGoalEntity (ATTACK_ENTITY[point[h]])
         table.insert(WAVE_CONTENTS,unit)
+        table.insert(WAVE_CONTENTS_ATTACKING,false)
         UNITS_LEFT=UNITS_LEFT+1
       end
     end
   end
+  -- Call the AI timer to take control
+  --BossAI:SleepAttackPrioritySimple()
 end
 
+-- Takes a unit and removes it from the wave. If it was not in the wave, returns false.
 function TheLastStand:RemoveFromWaveContent(unit)
   local i,j = 0
   for i,j in pairs(WAVE_CONTENTS) do
     if(j==unit)then
       table.remove(WAVE_CONTENTS,i)
+      table.remove(WAVE_CONTENTS_ATTACKING,i)
       UNITS_LEFT=UNITS_LEFT-1
-      break
+      DebugPrint("[TLS] Unit removed from wave")
+      return true
     end
   end
+  DebugPrint("[TLS] No unit to remove from wave")
+  return false
 end
 
+-- Upgrade a single creep based on the multiplier
 function TheLastStand:UpgradeCreep(unit)
   -- Get unit details
   local hp = unit:GetMaxHealth()
@@ -286,6 +319,8 @@ function TheLastStand:UpgradeCreep(unit)
   local mag = unit:GetBaseMagicalResistanceValue()
   local admin = unit:GetBaseDamageMin()
   local admax = unit:GetBaseDamageMax()
+  local bxp = unit:GetDeathXP()
+  local bg = unit:GetMaximumGoldBounty()
   -- Change unit values based on level multiplier
   hp=hp*MULTIPLIER
   hr=hr*MULTIPLIER
@@ -294,6 +329,8 @@ function TheLastStand:UpgradeCreep(unit)
   mag=mag*MULTIPLIER
   admin=admin*MULTIPLIER
   admax=admax*MULTIPLIER
+  bxp=bxp*MULTIPLIER
+  bg=bg*MULTIPLIER
   -- Set unit details
   unit:SetBaseMaxHealth(hp)
   unit:SetBaseHealthRegen(hr)
@@ -302,6 +339,9 @@ function TheLastStand:UpgradeCreep(unit)
   unit:SetBaseMagicalResistanceValue(mag)
   unit:SetBaseDamageMin(math.floor(admin))
   unit:SetBaseDamageMax(math.floor(admax))
+  unit:SetDeathXP(math.floor(bxp))
+  unit:SetMaximumGoldBounty(math.floor(bg))
+  unit:SetMinimumGoldBounty(math.floor(bg))
 end
 
 -- Fetch the list of valid units that can be spawned
@@ -309,8 +349,9 @@ function TheLastStand:ReturnList(ttype, wave, round)
   local list = {}
 
  -- WAVE_TYPES = {"Radiant" = 1,"Dire" = 2,"Kobold" = 3,"Troll" = 4,"Golem" = 5,"Satyr" = 6,"Centaur" = 7,"Dragon" = 8,"Zombie" = 9"}
-
- if(ttype==WAVE_TYPES[T_Radiant])then
+ DebugPrint("[TLS] TTYPE - "..ttype)
+ if(ttype==WAVE_TYPES[1])then
+  DebugPrint("[TLS] Radiant Wave Type: "..WAVE_TYPES[1])
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_creep_goodguys_melee",
@@ -351,7 +392,8 @@ function TheLastStand:ReturnList(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Dire])then
+ if(ttype==WAVE_TYPES[2])then
+  DebugPrint("[TLS] Dire Wave Type: "..WAVE_TYPES[2])
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_creep_badguys_melee",
@@ -392,7 +434,8 @@ function TheLastStand:ReturnList(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Kobold])then
+ if(ttype==WAVE_TYPES[3])then
+  DebugPrint("[TLS] Kobold Wave Type: "..WAVE_TYPES[3])
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_neutral_kobold",
@@ -436,21 +479,22 @@ function TheLastStand:ReturnList(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Troll])then
+ if(ttype==WAVE_TYPES[4])then
+  DebugPrint("[TLS] Troll Wave Type: "..WAVE_TYPES[4])
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_neutral_dark_troll",
-        "npc_dota_neutral_forest_troll_berserker",
-        "npc_dota_neutral_forest_troll_high_priest"}
+        "npc_dota_neutral_fores4_berserker",
+        "npc_dota_neutral_fores4_high_priest"}
     elseif(wave == 2) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_berserker",
-        "npc_dota_neutral_forest_troll_high_priest", 
+        "npc_dota_neutral_fores4_berserker",
+        "npc_dota_neutral_fores4_high_priest", 
         "npc_dota_neutral_ogre_mauler"}
     elseif(wave == 3) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_berserker",
-        "npc_dota_neutral_forest_troll_high_priest", 
+        "npc_dota_neutral_fores4_berserker",
+        "npc_dota_neutral_fores4_high_priest", 
         "npc_dota_neutral_ogre_mauler", 
         "npc_dota_neutral_ogre_magi"}
     elseif(wave == 4) then
@@ -461,16 +505,16 @@ function TheLastStand:ReturnList(ttype, wave, round)
   elseif (round==2) then
     if(wave == 1) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_high_priest",
+        "npc_dota_neutral_fores4_high_priest",
         "npc_dota_neutral_ogre_mauler"}
     elseif(wave == 2) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_high_priest", 
+        "npc_dota_neutral_fores4_high_priest", 
         "npc_dota_neutral_ogre_mauler", 
         "npc_dota_neutral_ogre_magi"}
     elseif(wave == 3) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_high_priest", 
+        "npc_dota_neutral_fores4_high_priest", 
         "npc_dota_neutral_ogre_mauler",
         "npc_dota_neutral_ogre_magi", 
         "npc_dota_neutral_dark_troll_warlord"}
@@ -483,7 +527,8 @@ function TheLastStand:ReturnList(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Golem])then
+ if(ttype==WAVE_TYPES[5])then
+  DebugPrint("[TLS] Golem Wave Type: "..WAVE_TYPES[5])
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_neutral_mud_golem_split"}
@@ -521,7 +566,8 @@ function TheLastStand:ReturnList(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Satyr])then
+ if(ttype==WAVE_TYPES[6])then
+  DebugPrint("[TLS] Satyr Wave Type: "..WAVE_TYPES[6])
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_neutral_satyr_trickster"}
@@ -559,7 +605,8 @@ function TheLastStand:ReturnList(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Centaur])then
+ if(ttype==WAVE_TYPES[7])then
+  DebugPrint("[TLS] Centaur Wave Type: "..WAVE_TYPES[7])
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_neutral_centaur_outrunner"}
@@ -597,7 +644,8 @@ function TheLastStand:ReturnList(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Dragon])then
+ if(ttype==WAVE_TYPES[8])then
+  DebugPrint("[TLS] Dragon Wave Type: "..WAVE_TYPES[8])
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_neutral_harpy_scout", 
@@ -641,7 +689,8 @@ function TheLastStand:ReturnList(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Zombie])then
+ if(ttype==WAVE_TYPES[9])then
+  DebugPrint("[TLS] Zombie Wave Type: "..WAVE_TYPES[9])
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_unit_undying_zombie", 
@@ -694,7 +743,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
 
  -- WAVE_TYPES = {"Radiant" = 1,"Dire" = 2,"Kobold" = 3,"Troll" = 4,"Golem" = 5,"Satyr" = 6,"Centaur" = 7,"Dragon" = 8,"Zombie" = 9"}
 
- if(ttype==WAVE_TYPES[T_Radiant] or ttype==WAVE_TYPES[T_Dire])then
+ if(ttype==WAVE_TYPES[1] or ttype==WAVE_TYPES[2])then
   if(round==1) then
     if(wave == 1) then
       list = {8,
@@ -735,7 +784,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Kobold])then
+ if(ttype==WAVE_TYPES[3])then
   if(round==1) then
     if(wave == 1) then
       list = {15,
@@ -779,7 +828,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Troll])then
+ if(ttype==WAVE_TYPES[4])then
   if(round==1) then
     if(wave == 1) then
       list = {3,
@@ -826,7 +875,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Golem])then
+ if(ttype==WAVE_TYPES[5])then
   if(round==1) then
     if(wave == 1) then
       list = {4}
@@ -864,7 +913,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Satyr])then
+ if(ttype==WAVE_TYPES[6])then
   if(round==1) then
     if(wave == 1) then
       list = {6}
@@ -902,7 +951,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Centaur])then
+ if(ttype==WAVE_TYPES[7])then
   if(round==1) then
     if(wave == 1) then
       list = {4}
@@ -940,7 +989,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Dragon])then
+ if(ttype==WAVE_TYPES[8])then
   if(round==1) then
     if(wave == 1) then
       list = {4, 
@@ -984,7 +1033,7 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     -- Something went wrong
   end
  end
- if(ttype==WAVE_TYPES[T_Zombie])then
+ if(ttype==WAVE_TYPES[9])then
   if(round==1) then
     if(wave == 1) then
       list = {8, 

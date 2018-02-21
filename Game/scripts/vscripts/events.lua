@@ -44,6 +44,9 @@ function GameMode:OnEntityHurt(keys)
     if keys.entindex_inflictor ~= nil then
       damagingAbility = EntIndexToHScript( keys.entindex_inflictor )
     end
+
+    -- Might put boss code stuff here
+
   end
 end
 
@@ -239,7 +242,16 @@ function GameMode:OnEntityKilled( keys )
 
   local damagebits = keys.damagebits -- This might always be 0 and therefore useless
 
-  -- Put code here to handle when an entity gets killed
+  -- Call a check to see if we need to remove it from the wave count
+  if(TheLastStand:RemoveFromWaveContent(killedUnit) == false) then
+    -- This unit was not part of the wave, is there more we need to do?
+  else
+    -- This unit was part of the wave and has been removed from the table, is there more we need to do?
+  end
+
+  if killedUnit:GetUnitName() == "npc_dota_goodguys_fort" then
+      -- The enemies win, you are defeated
+    end
 end
 
 
@@ -326,6 +338,8 @@ function GameMode:OnNPCGoalReached(keys)
   local goalEntity = EntIndexToHScript(keys.goal_entindex)
   local nextGoalEntity = EntIndexToHScript(keys.next_goal_entindex)
   local npc = EntIndexToHScript(keys.npc_entindex)
+  npc:MoveToPositionAggressive(FINAL_POINT)
+  print(npc:GetUnitName().." moving to",FINAL_POINT)
 end
 
 -- This function is called whenever any player sends a chat message to team or All
@@ -335,10 +349,10 @@ function GameMode:OnPlayerChat(keys)
   local playerID = self.vUserIds[userID]:GetPlayerID()
 
   local text = keys.text
-
-  -- Test
-  if(text == "Test")then
-    
+    DebugPrint("Raw: "..text)
+  if(text:sub(0,1)==".") then
+    if(CHEATS) then
+      GameMode:ParseText(text:sub(2),playerID)
+    end
   end
-
 end

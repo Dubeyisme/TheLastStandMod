@@ -29,6 +29,69 @@ end
 -- require('special_boss_ai/Necrophos')
 
 -----------------------------------------------------------------------------------------
+-- Attack AI Functions
+-----------------------------------------------------------------------------------------
+
+-- Have a look at https://github.com/MNoya/DotaCraft/blob/master/game/dota_addons/dotacraft/scripts/vscripts/units/aggro_filter.lua
+-- from MNoya for inspiration for writing controls
+
+-- Timer that controls aggro for simple creeps
+function BossAI:SleepAttackPrioritySimple()
+		-- Set timer to next recall
+		Timers:CreateTimer({
+    		endTime = 5,
+			callback = function()
+				BossAI:WakeCheckAttackPrioritySimple()
+			end
+		})
+end
+--
+function BossAI:WakeCheckAttackPrioritySimple()
+	local i
+	if(#WAVE_CONTENTS~=0)then
+		-- Continue, we have units to work with
+		for i=1,#WAVE_CONTENTS do
+    		ExecuteOrderFromTable({ UnitIndex = WAVE_CONTENTS[i]:entindex(), OrderType = DOTA_UNIT_ORDER_STOP, Queue = false})
+			--DebugPrint("[AI] Fetch closest enemy unit")
+			-- First check if anything is in range, if it is - attack it
+			WAVE_CONTENTS_ATTACKING[i] = BossAI:AssessAggroSimple(WAVE_CONTENTS[i])
+			-- Check to see if we lost track
+			if(WAVE_CONTENTS_ATTACKING[i] == false)then
+				-- Reassign attack vector
+        		ExecuteOrderFromTable({ UnitIndex = WAVE_CONTENTS[i]:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = false})
+			end
+		end
+		-- Set timer to next recall
+		--DebugPrint("Check again in 5")
+		Timers:CreateTimer({
+    		endTime = 2.5,
+			callback = function()
+				BossAI:WakeCheckAttackPrioritySimple()
+			end
+		})
+	end
+	-- Do not recall SleepAttackPrioritySimple
+end
+
+-- Checks if there are any enemies in range and attacks them if there are, returns false if none found
+function BossAI:AssessAggroSimple(unit)
+	--DebugPrint("[AI] Fetching....")
+	local enemies = FindUnitsInRadius(DOTA_TEAM_BADGUYS,unit:GetOrigin(),nil,unit:GetAcquisitionRange(),DOTA_UNIT_TARGET_TEAM_ENEMY,DOTA_UNIT_TARGET_ALL,DOTA_UNIT_TARGET_FLAG_NONE,FIND_CLOSEST,false)
+	local target = nil
+	PrintTable(enemies)
+	if(#enemies>0)then
+		target = enemies[1]
+	end
+	if(target ~= nil)then
+    	ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET, TargetIndex = target:entindex(), Queue = false})
+    	return true
+    else
+    	return false
+    end
+end
+	
+
+-----------------------------------------------------------------------------------------
 -- Distance Calculators
 -----------------------------------------------------------------------------------------
 
@@ -41,7 +104,7 @@ end
 		local pointi = -1
 		-- Fetch the positions of each enemy hero
 		for i=0,#HERO_TARGETS do
-			table.insert(targetposlist,HERO_TARGETS[i]:GetOrigin()
+			table.insert(targetposlist,HERO_TARGETS[i]:GetOrigin())
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistance(targetposlist,boss_unit_point)
@@ -64,7 +127,7 @@ end
 		local pointi = -1
 		-- Fetch the positions of each enemy hero
 		for i=0,#HERO_TARGETS do
-			table.insert(targetposlist,HERO_TARGETS[i]:GetOrigin()
+			table.insert(targetposlist,HERO_TARGETS[i]:GetOrigin())
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistance(targetposlist,boss_unit_point)
@@ -86,7 +149,7 @@ end
 		local returnlist = {}
 		-- Fetch the positions of each enemy hero
 		for i=0,#HERO_TARGETS do
-			table.insert(targetposlist,HERO_TARGETS[i]:GetOrigin()
+			table.insert(targetposlist,HERO_TARGETS[i]:GetOrigin())
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistance(targetposlist,boss_unit_point)
@@ -107,7 +170,7 @@ end
 		local returnlist = {}
 		-- Fetch the positions of each enemy hero
 		for i=0,#HERO_TARGETS do
-			table.insert(targetposlist,HERO_TARGETS[i]:GetOrigin()
+			table.insert(targetposlist,HERO_TARGETS[i]:GetOrigin())
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistance(targetposlist,boss_unit_point)

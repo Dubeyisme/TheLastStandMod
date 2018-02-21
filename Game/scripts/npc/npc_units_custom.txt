@@ -94,6 +94,96 @@
     "AttackDesire"        "1.5"   // How much bots want to attack them vs other non-hero things
   } 
   
+  "npc_dummy_unit_vision"
+  {
+    // General
+    //
+    "BaseClass"         "npc_dota_base_additive"  // Class of entity of link to.
+    "Model"           "models/development/invisiblebox.vmdl"  // Model.
+    "SoundSet"          "Creep_Good_Range"          // Name of sound set.
+    "Level"           "0"
+    "UnitLabel"         "healing_ward"
+    
+    // Abilities
+    //----------------------------------------------------------------
+    
+    "Ability1"          "dummy_unit"     // Ability 1.
+    "Ability2"          ""      // Ability 2.
+    "Ability3"          ""      // Ability 3.
+    "Ability4"          ""      // Ability 4.
+    "Ability5"          ""      // Ability 5.
+    "Ability6"          ""      // Ability 6 - Extra.
+    "Ability7"          ""      // Ability 7 - Extra.
+    "Ability8"          ""      // Ability 8 - Extra.
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"       "0"     // Physical protection.
+    "MagicalResistance"       "0"     // Magical protection.
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"    "DOTA_UNIT_CAP_NO_ATTACK"     // Type of attack - melee, ranged, etc.
+    "AttackDamageMin"     "0"     // Damage range min.
+    "AttackDamageMax"     "0"     // Damage range max.
+    "AttackDamageType"      "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"        "1"     // Speed of attack.
+    "AttackAnimationPoint"    "0.5"   // Normalized time in animation cycle to attack.
+    "AttackAcquisitionRange"  "800"   // Range within a target can be acquired.
+    "AttackRange"       "500"   // Range within a target can be attacked.
+    "ProjectileModel"     "" // Particle system model for projectile.
+    "ProjectileSpeed"     "900"   // Speed of projectile.
+
+    // Attributes
+    //----------------------------------------------------------------
+    "AttributePrimary"      "DOTA_ATTRIBUTE_STRENGTH"
+    "AttributeBaseStrength"   "0"     // Base strength
+    "AttributeStrengthGain"   "0"     // Strength bonus per level.
+    "AttributeBaseIntelligence" "0"     // Base intelligence
+    "AttributeIntelligenceGain" "0"     // Intelligence bonus per level.
+    "AttributeBaseAgility"    "0"     // Base agility
+    "AttributeAgilityGain"    "0"     // Agility bonus per level.
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"          "0"     // Experience earn.
+    "BountyGoldMin"       "0"     // Gold earned min.
+    "BountyGoldMax"       "0"     // Gold earned max.
+
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"      "DOTA_HULL_SIZE_SMALL"      // Hull type used for navigation/locomotion.
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"    "DOTA_UNIT_CAP_MOVE_FLY"     // Type of locomotion - ground, air
+    "MovementSpeed"       "450"   // Speed
+    "MovementTurnRate"      "1.0"   // Turning rate.
+    "FollowRange"       "250"   // Distance to keep when following
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"        "1"     // Base health.
+    "StatusHealthRegen"     "0"     // Health regeneration rate.
+    "StatusMana"        "0"     // Base mana.
+    "StatusManaRegen"     "0"     // Mana regeneration rate.
+
+    // Team
+    //----------------------------------------------------------------
+    "TeamName"          "DOTA_TEAM_GOODGUYS"      // Team name.
+    "CombatClassAttack"     "DOTA_COMBAT_CLASS_ATTACK_PIERCE"
+    "CombatClassDefend"     "DOTA_COMBAT_CLASS_DEFEND_SOFT"
+    "UnitRelationshipClass"   "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_WARD"
+    
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"    "18000"   // Range of vision during day light.
+    "VisionNighttimeRange"    "18000"   // Range of vision at night time.
+
+    // Bots
+    //----------------------------------------------------------------
+    "AttackDesire"        "1.5"   // How much bots want to attack them vs other non-hero things
+  } 
   //-------------------------------------------------------------------------------------------
   //-------------------------------------------------------------------------------------------
   // UNITS FOR WAVES
@@ -105,6 +195,9 @@
   "npc_dota_creep_badguys_ranged"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/lane_creeps/creep_bad_ranged/lane_dire_ranged.vmdl"	// Model.
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -113,12 +206,12 @@
 		"Ability5"					""			// Ability 5.
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"			// Physical protection.
+		"ArmorPhysical"				"1"			// Physical protection.
 		"MagicalResistance"			"0"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
-		"AttackDamageMin"			"21"		// Damage range min.
-		"AttackDamageMax"			"26"		// Damage range max.
+		"AttackDamageMin"			"11"		// Damage range min.
+		"AttackDamageMax"			"16"		// Damage range max.
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
@@ -131,19 +224,27 @@
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"300"		// Base health.
+		"StatusHealth"				"100"		// Base health.
 		"StatusHealthRegen"			"2"			// Health regeneration rate.
 		"StatusMana"				"500"		// Base mana.
 		"StatusManaRegen"			"0.75"		// Mana regeneration rate.
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
   
   
   "npc_dota_creep_badguys_ranged_upgraded"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/lane_creeps/creep_bad_ranged/lane_dire_ranged_mega.vmdl"	// Model.
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -156,8 +257,8 @@
 		"MagicalResistance"			"0"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
-		"AttackDamageMin"			"41"		// Damage range min.
-		"AttackDamageMax"			"46"		// Damage range max.
+		"AttackDamageMin"			"21"		// Damage range min.
+		"AttackDamageMax"			"26"		// Damage range max.
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
@@ -170,18 +271,26 @@
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"475"		// Base health.
+		"StatusHealth"				"125"		// Base health.
 		"StatusHealthRegen"			"2"			// Health regeneration rate.
 		"StatusMana"				"500"		// Base mana.
 		"StatusManaRegen"			"0.75"		// Mana regeneration rate.
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
   "npc_dota_creep_goodguys_ranged"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged.vmdl"	// Model.
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -190,7 +299,54 @@
 		"Ability5"					""			// Ability 5.
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"0"			// Physical protection.
+		"ArmorPhysical"				"1"			// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+		// Attack
+		//----------------------------------------------------------------
+		"AttackDamageMin"			"10"		// Damage range min.
+		"AttackDamageMax"			"15"		// Damage range max.
+		"AttackRate"				"1"			// Speed of attack.
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"69"		// Experience earn.
+		"BountyGoldMin"				"60"		// Gold earned min.
+		"BountyGoldMax"				"60"		// Gold earned max.
+		// Movement
+		//----------------------------------------------------------------
+		"MovementSpeed"				"325"		// Speed
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"100"		// Base health.
+		"StatusHealthRegen"			"2"			// Health regeneration rate.
+		"StatusMana"				"500"		// Base mana.
+		"StatusManaRegen"			"0.75"		// Mana regeneration rate.
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
+	}
+  
+  
+  "npc_dota_creep_goodguys_ranged_upgraded"
+	{
+		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
+		"Model"						"models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged_mega.vmdl"	// Model.
+		"Ability1"					""			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"1"			// Physical protection.
 		"MagicalResistance"			"0"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
@@ -208,57 +364,26 @@
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"300"		// Base health.
+		"StatusHealth"				"125"		// Base health.
 		"StatusHealthRegen"			"2"			// Health regeneration rate.
 		"StatusMana"				"500"		// Base mana.
 		"StatusManaRegen"			"0.75"		// Mana regeneration rate.
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
-	}
-  
-  
-  "npc_dota_creep_goodguys_ranged_upgraded"
-	{
-		"Level"						"2"
-		"Model"						"models/creeps/lane_creeps/creep_radiant_ranged/radiant_ranged_mega.vmdl"	// Model.
-		"Ability1"					""			// Ability 1.
-		"Ability2"					""			// Ability 2.
-		"Ability3"					""			// Ability 3.
-		"Ability4"					""			// Ability 4.
-		"Ability5"					""			// Ability 5.
-		// Armor
+		
+		// Vision
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"1"			// Physical protection.
-		"MagicalResistance"			"0"			// Magical protection.
-		// Attack
-		//----------------------------------------------------------------
-		"AttackDamageMin"			"41"		// Damage range min.
-		"AttackDamageMax"			"46"		// Damage range max.
-		"AttackRate"				"1"			// Speed of attack.
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyXP"					"69"		// Experience earn.
-		"BountyGoldMin"				"60"		// Gold earned min.
-		"BountyGoldMax"				"60"		// Gold earned max.
-		// Movement
-		//----------------------------------------------------------------
-		"MovementSpeed"				"325"		// Speed
-		"MovementTurnRate"			"0.5"		// Turning rate.
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"475"		// Base health.
-		"StatusHealthRegen"			"2"			// Health regeneration rate.
-		"StatusMana"				"500"		// Base mana.
-		"StatusManaRegen"			"0.75"		// Mana regeneration rate.
-		// Team
-		//----------------------------------------------------------------
-		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
   
   "npc_dota_creep_badguys_melee"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/lane_creeps/creep_bad_melee/creep_bad_melee.vmdl"	// Model.
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -267,7 +392,7 @@
 		"Ability5"					""			// Ability 5.
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"2"			// Physical protection.
+		"ArmorPhysical"				"1"			// Physical protection.
 		"MagicalResistance"			"0"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
@@ -285,18 +410,26 @@
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"550"		// Base health.
+		"StatusHealth"				"50"		// Base health.
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0"			// Mana regeneration rate.
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	"npc_dota_creep_badguys_melee_upgraded"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/lane_creeps/creep_bad_melee/creep_bad_melee_mega.vmdl"	// Model.
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -323,18 +456,26 @@
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"700"		// Base health.
+		"StatusHealth"				"150"		// Base health.
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0"			// Mana regeneration rate.
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
   
 	"npc_dota_creep_badguys_melee_upgraded_mega"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/lane_creeps/creep_dire_hulk/creep_dire_ancient_hulk.vmdl"	// Model.
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -343,7 +484,7 @@
 		"Ability5"					""			// Ability 5.
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
+		"ArmorPhysical"				"5"			// Physical protection.
 		"MagicalResistance"			"0"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
@@ -368,11 +509,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
   
   "npc_dota_creep_goodguys_melee"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/lane_creeps/creep_radiant_melee/radiant_melee.vmdl"	// Model.
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -381,7 +530,7 @@
 		"Ability5"					""			// Ability 5.
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"2"			// Physical protection.
+		"ArmorPhysical"				"1"			// Physical protection.
 		"MagicalResistance"			"0"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
@@ -399,18 +548,26 @@
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"550"		// Base health.
+		"StatusHealth"				"50"		// Base health.
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0"			// Mana regeneration rate.
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	"npc_dota_creep_goodguys_melee_upgraded"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/lane_creeps/creep_radiant_melee/radiant_melee_mega.vmdl"	// Model.
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -437,18 +594,26 @@
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
-		"StatusHealth"				"700"		// Base health.
+		"StatusHealth"				"150"		// Base health.
 		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
 		"StatusMana"				"0"			// Base mana.
 		"StatusManaRegen"			"0"			// Mana regeneration rate.
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
   
 	"npc_dota_creep_goodguys_melee_upgraded_mega"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/lane_creeps/creep_radiant_hulk/creep_radiant_ancient_hulk.vmdl"	// Model.
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -457,7 +622,7 @@
 		"Ability5"					""			// Ability 5.
 		// Armor
 		//----------------------------------------------------------------
-		"ArmorPhysical"				"3"			// Physical protection.
+		"ArmorPhysical"				"5"			// Physical protection.
 		"MagicalResistance"			"0"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
@@ -482,12 +647,20 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	
 	"npc_dota_goodguys_siege"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -520,12 +693,20 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	
 	"npc_dota_badguys_siege"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -558,6 +739,11 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}			
 	
 	// ------------------------------------------------------------------------------- KOBOLD WAVE ------------------------------------
@@ -566,6 +752,9 @@
 	"npc_dota_neutral_kobold"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -598,12 +787,20 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	
 	"npc_dota_neutral_kobold_tunneler"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -636,11 +833,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 	
 	"npc_dota_neutral_kobold_taskmaster"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"kobold_taskmaster_speed_aura"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -673,11 +878,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}			
 	
 	"npc_dota_neutral_gnoll_assassin"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"gnoll_assassin_envenomed_weapon"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -710,11 +923,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 	
 	"npc_dota_neutral_polar_furbolg_champion"
 	{		
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -747,11 +968,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 	
 	"npc_dota_neutral_polar_furbolg_ursa_warrior"
 	{		
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					"centaur_khan_endurance_aura"			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -784,6 +1013,11 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}				
 					
 	
@@ -792,6 +1026,9 @@
 	"npc_dota_neutral_centaur_outrunner"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -824,11 +1061,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}			
 	
 	"npc_dota_neutral_centaur_khan"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"centaur_khan_war_stomp"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -861,11 +1106,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 		
 	"npc_dota_neutral_prowler_acolyte"
 	{		
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"spawnlord_aura"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -898,11 +1151,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}				
 	
 	"npc_dota_neutral_prowler_shaman"
 	{			
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"spawnlord_master_stomp"			// Ability 1.
 		"Ability2"					"spawnlord_master_freeze"			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -935,6 +1196,11 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}			
 	
 	// ------------------------------------------------------------------------------- ZOMBIE WAVE ------------------------------------
@@ -942,6 +1208,9 @@
 	"npc_dota_unit_undying_zombie"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"undying_tombstone_zombie_deathstrike"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -974,11 +1243,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	"npc_dota_unit_undying_zombie_torso"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"undying_tombstone_zombie_deathstrike"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1011,12 +1288,20 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}		
 	
 	
 	"npc_dota_dark_troll_warlord_skeleton_warrior"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1049,6 +1334,11 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 	
 	
@@ -1056,6 +1346,9 @@
 	"npc_dota_neutral_fel_beast" // Ghost Little
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1088,11 +1381,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}		
 	
 	"npc_dota_neutral_ghost"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"ghost_frost_attack"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1125,6 +1426,11 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 		
 	
@@ -1134,6 +1440,9 @@
 	"npc_dota_neutral_mud_golem"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"mud_golem_rock_destroy"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1166,12 +1475,20 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}		
 
 
 	"npc_dota_neutral_mud_golem_split"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1204,11 +1521,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 
 	"npc_dota_neutral_rock_golem"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"mud_golem_rock_destroy"			// Ability 1.
 		"Ability2"					"mud_golem_hurl_boulder"			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1241,11 +1566,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 	
 	"npc_dota_neutral_granite_golem"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"mud_golem_rock_destroy"			// Ability 1.
 		"Ability2"					"granite_golem_hp_aura"			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1278,6 +1611,11 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}				
 	
 	// ------------------------------------------------------------------------------- TROLL WAVE ------------------------------------
@@ -1286,6 +1624,9 @@
 	"npc_dota_neutral_dark_troll"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1318,11 +1659,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 	
 	"npc_dota_neutral_forest_troll_berserker"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1355,12 +1704,20 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 	
 	
 	"npc_dota_neutral_forest_troll_high_priest"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"forest_troll_high_priest_heal"			// Ability 1.
 		"Ability2"					"forest_troll_high_priest_mana_aura"			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1393,11 +1750,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 	
 	"npc_dota_neutral_dark_troll_warlord"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"dark_troll_warlord_ensnare"			// Ability 1.
 		"Ability2"					"dark_troll_warlord_raise_dead"			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1430,11 +1795,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 
 	"npc_dota_neutral_ogre_mauler"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1467,11 +1840,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}			
 	
 	"npc_dota_neutral_ogre_magi"
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"ogre_magi_frost_armor"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1504,6 +1885,11 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}					
 	
 	// ------------------------------------------------------------------------------- SATYR WAVE ------------------------------------
@@ -1512,6 +1898,9 @@
 	"npc_dota_neutral_satyr_trickster"	
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"satyr_trickster_purge"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1544,12 +1933,20 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	
 	"npc_dota_neutral_satyr_soulstealer"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"satyr_soulstealer_mana_burn"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1582,12 +1979,20 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}				
 	
 	
 	"npc_dota_neutral_satyr_hellcaller"
 	{	
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"satyr_hellcaller_shockwave"			// Ability 1.
 		"Ability2"					"satyr_hellcaller_unholy_aura"			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1620,6 +2025,11 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}					
 	
 	// ------------------------------------------------------------------------------- DRAGON WAVE ------------------------------------			
@@ -1628,6 +2038,9 @@
 	"npc_dota_neutral_harpy_scout"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1661,11 +2074,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}	
 		
 	"npc_dota_neutral_harpy_storm"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"harpy_storm_chain_lightning"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1699,11 +2120,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 		
 	"npc_dota_neutral_jungle_stalker"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/neutral_creeps/n_creep_gargoyle/n_creep_gargoyle.vmdl"	// Model.
 		"Ability1"					"harpy_storm_chain_lightning"			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -1738,11 +2167,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 		
 	"npc_dota_neutral_elder_jungle_stalker"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Model"						"models/creeps/neutral_creeps/n_creep_jungle_stalker/n_creep_gargoyle_jungle_stalker.vmdl"	// Model.
 		"Ability1"					"harpy_storm_chain_lightning"			// Ability 1.
 		"Ability2"					""			// Ability 2.
@@ -1777,11 +2214,19 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	"npc_dota_neutral_black_drake"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"Ability1"					"black_dragon_splash_attack"			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
@@ -1815,12 +2260,20 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	
 	"npc_dota_neutral_black_dragon"	
 	{
 		"Level"						"2"
+		"BaseClass"					"npc_dota_creep_lane"
+		"IsNeutralUnitType"			"0"
+		"AttackAcquisitionRange"	"900"
 		"IsAncient"					"1"
 		"Ability1"					"black_dragon_fireball"			// Ability 1.
 		"Ability2"					"black_dragon_splash_attack"			// Ability 2.
@@ -1855,6 +2308,11 @@
 		// Team
 		//----------------------------------------------------------------
 		"TeamName"					"DOTA_TEAM_BADGUYS"			// Team name.
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1800"
+		"VisionNighttimeRange"		"1800"
 	}
 	
 	

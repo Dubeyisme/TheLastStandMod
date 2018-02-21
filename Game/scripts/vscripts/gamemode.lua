@@ -5,11 +5,16 @@ TLS_VERSION = "1.00"
 -- Set this to true if you want to see a complete debug output of all events/processes done by barebones
 -- You can also change the cvar 'barebones_spew' at any time to 1 or 0 for output/no output
 BAREBONES_DEBUG_SPEW = true 
+-- This is only for testing, disable before release
+CHEATS = true
+if(CHEATS) then DebugPrint( '[TLS] CHEATS ARE ACTIVE' ) end
 
 if GameMode == nil then
     DebugPrint( '[TLS] creating game mode' )
     _G.GameMode = class({})
 end
+
+
 
 -- This library allow for easily delayed/timed actions
 require('libraries/timers')
@@ -21,14 +26,10 @@ require('libraries/projectiles')
 require('libraries/notifications')
 -- This library can be used for starting customized animations on units from lua
 require('libraries/animations')
--- This library can be used for performing "Frankenstein" attachments on units
-require('libraries/attachments')
 -- This library can be used to synchronize client-server data via player/client-specific nettables
 require('libraries/playertables')
 -- This library can be used to create container inventories or container shops
 require('libraries/containers')
--- This library provides a searchable, automatically updating lua API in the tools-mode via "modmaker_api" console command
-require('libraries/modmaker')
 -- This library provides an automatic graph construction of path_corner entities within the map
 require('libraries/pathgraph')
 -- This library (by Noya) provides player selection inspection and management from server lua
@@ -47,6 +48,50 @@ require('BossAI')
 require('settings')
 -- events.lua is where you can specify the actions to be taken when any event occurs and is one of the core barebones files.
 require('events')
+
+
+-- Parse text and implement test code
+function GameMode:ParseText(text,pid)
+  local i
+  local ParsedText = {}
+  local temp
+  local player = PlayerResource:GetPlayer(pid)
+  local hero = player:GetAssignedHero()
+  DebugPrint("Processed:-: ")
+  for i in string.gmatch(text, "%S+") do
+    table.insert(ParsedText,i)
+    DebugPrint(i)
+  end
+  -- Test for one of the following functions
+
+  if(ParsedText[1]=="attackmove") then
+    ExecuteOrderFromTable({ UnitIndex = hero:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = false})
+  end
+  -- Control game play elements
+  if(ParsedText[1]=="spawn") then
+    TheLastStand:IncrementRound()
+  end
+  -- Fix up your hero
+  if(ParsedText[1]=="hp") then hero:SetHealth(hero:GetMaxHealth()) end
+  if(ParsedText[1]=="mp") then hero:SetMana(hero:GetMaxMana()) end
+  if(ParsedText[1]=="gold") then PlayerResource:SetGold(pid,PlayerResource:GetGold(pid)+(ParsedText[2]),true) end
+  if(ParsedText[1]=="lvl") then 
+    local lvl = hero:GetLevel()
+    if(lvl<ParsedText[2]+0) then
+      for i=lvl,ParsedText[2]-1 do
+        hero:HeroLevelUp(false)
+      end
+      hero:HeroLevelUp(true)
+    end
+  end
+  if(ParsedText[1]=="refresh") then
+    local ability = nil
+    for i=0,hero:GetAbilityCount()-1 do
+      ability = hero:GetAbilityByIndex(i)
+      if(ability ~= nil) then ability:EndCooldown() end
+    end
+  end
+end
 
 
 --[[
@@ -100,6 +145,7 @@ function GameMode:OnHeroInGame(hero)
   DebugPrint("[TLS] Hero spawned in game for first time -- " .. hero:GetUnitName())
   -- Add this player's hero to the list of possible boss targets
   table.insert(HERO_TARGETS,hero)
+  DebugPrint(GetTeamName(hero:GetTeamNumber()))
   PLAYER_COUNT = PLAYER_COUNT+1
 
   -- This line for example will set the starting gold of every hero to 500 unreliable gold
