@@ -2,6 +2,8 @@
 
 require('internal/util')
 require('gamemode')
+-- Main game sound file
+require('sound')
 
 function Precache( context )
 --[[
@@ -13,6 +15,8 @@ function Precache( context )
 
   See GameMode:PostLoadPrecache() in gamemode.lua for more information
   ]]
+
+  SoundController:PrecacheSounds(context)
 
   DebugPrint("[TLS] Performing pre-load precache")
 

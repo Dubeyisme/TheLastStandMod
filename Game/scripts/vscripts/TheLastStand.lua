@@ -143,6 +143,7 @@ function TheLastStand:WaveEnded()
   if(CURRENT_LEVEL~=0) then
     -- Here we put things we do every round
     Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text="Wave Cleared", duration=WAVE_OUTRO_DURATION, style=STYLE_WAVE_OUTRO})
+    -- PLAY A SOUND OUTSIDE SOUND CONTROLLER
     EmitAnnouncerSoundForTeam("ui.npe_objective_complete", DOTA_TEAM_GOODGUYS)
   else
     -- Here we put first round only things
@@ -164,7 +165,7 @@ function TheLastStand:WaveEnded()
         TheLastStand:WaveStart()
       end
     })
-end
+end 
 
 function TheLastStand:WaveStart()
   -- Generate a new wave
@@ -173,7 +174,10 @@ function TheLastStand:WaveStart()
   local text_array = TheLastStand:AnnounceWaveText(CURRENT_WAVE, CURRENT_ROUND, CURRENT_LEVEL, CURRENT_WAVE_TYPE) -- [1] is the wave number, [2] is the type
   Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text=text_array[1], duration=WAVE_INTRO_DURATION, style=STYLE_WAVE_NUM_INTRO})
   Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text=text_array[2], duration=WAVE_INTRO_DURATION, style=STYLE_WAVE_TYPE_INTRO})
+    -- PLAY A SOUND OUTSIDE SOUND CONTROLLER
   EmitAnnouncerSoundForTeam("ui.npe_objective_given", DOTA_TEAM_GOODGUYS)
+  -- Launch Hero Speaker
+  SoundController:Hero_WaveStart(HERO_TARGETS)
   -- Generate wave
   if(CURRENT_WAVE~=4) then
     -- Generate a non-boss wave for waves 1, 2, and 3
@@ -427,7 +431,7 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
           end
           unit:AddNewModifier(nil, nil, "modifier_illusion", {duration = -1, outgoing_damage = 0.5, incoming_damage = 1.5})
           unit:MakeIllusion()
-          unit:SetRenderColor(0,0,255)=
+          unit:SetRenderColor(0,0,255)
         end
         -- Upgrade the creep to match the heroes based on multiplier
         unit.disable_autoattack = 0
@@ -640,17 +644,17 @@ function TheLastStand:ReturnList(ttype, wave, round)
   if(round==1) then
     if(wave == 1) then
       list = {"npc_dota_neutral_dark_troll",
-        "npc_dota_neutral_forest_berserker",
-        "npc_dota_neutral_forest_high_priest"}
+        "npc_dota_neutral_forest_troll_berserker",
+        "npc_dota_neutral_forest_troll_high_priest"}
     elseif(wave == 2) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_fores4_berserker",
-        "npc_dota_neutral_fores4_high_priest", 
+        "npc_dota_neutral_forest_troll_berserker",
+        "npc_dota_neutral_forest_troll_high_priest", 
         "npc_dota_neutral_ogre_mauler"}
     elseif(wave == 3) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_berserker",
-        "npc_dota_neutral_forest_high_priest", 
+        "npc_dota_neutral_forest_troll_berserker",
+        "npc_dota_neutral_forest_troll_high_priest", 
         "npc_dota_neutral_ogre_mauler", 
         "npc_dota_neutral_ogre_magi"}
     elseif(wave == 4) then
@@ -661,16 +665,16 @@ function TheLastStand:ReturnList(ttype, wave, round)
   elseif (round==2) then
     if(wave == 1) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_high_priest",
+        "npc_dota_neutral_forest_troll_high_priest",
         "npc_dota_neutral_ogre_mauler"}
     elseif(wave == 2) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_high_priest", 
+        "npc_dota_neutral_forest_troll_high_priest", 
         "npc_dota_neutral_ogre_mauler", 
         "npc_dota_neutral_ogre_magi"}
     elseif(wave == 3) then
       list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_high_priest", 
+        "npc_dota_neutral_forest_troll_high_priest", 
         "npc_dota_neutral_ogre_mauler",
         "npc_dota_neutral_ogre_magi", 
         "npc_dota_neutral_dark_troll_warlord"}
@@ -1241,39 +1245,4 @@ function TheLastStand:HeroCallStartBattle()
 
 end
 
--- Takes a variable and a hero and parses which item was needed from the variable
-function TheLastStand:ParseHeroVar(var, hero)
-  if(hero:GetName() == "npc_dota_hero_riki") then return var.OMN end
-  if(hero:GetName() == "npc_dota_hero_pangolier") then return var.PNG end
-  if(hero:GetName() == "npc_dota_hero_sniper") then return var.SNI end
-  if(hero:GetName() == "npc_dota_hero_techies") then return var.TEC end
-  if(hero:GetName() == "npc_dota_hero_lina") then return var.LIN end
-  if(hero:GetName() == "npc_dota_hero_furion") then return var.FUR end
-  if(hero:GetName() == "npc_dota_hero_winter_wyvern") then return var.WWY end
-  if(hero:GetName() == "npc_dota_hero_kunkka") then return var.KUN end
-  if(hero:GetName() == "npc_dota_hero_beastmaster") then return var.BMA end
-  if(hero:GetName() == "npc_dota_hero_omniknight") then return var.OMN end
-end
-
--- Takes a variable and a villain and parses which item was needed from the variable
-function TheLastStand:ParseVillainVar(var, villain)
-  if(villain:GetName() == "npc_dota_hero_treant") then return var.TRN end
-  if(villain:GetName() == "npc_dota_hero_lone_druid") then return var.LON end
-  if(villain:GetName() == "npc_dota_hero_dark_willow") then return var.DKW end
-  if(villain:GetName() == "npc_dota_hero_doom_bringer") then return var.DOM end
-  if(villain:GetName() == "npc_dota_hero_earth_spirit") then return var.EAS end
-  if(villain:GetName() == "npc_dota_hero_elder_titan") then return var.ELT end
-  if(villain:GetName() == "npc_dota_hero_nevermore") then return var.NEV end
-  if(villain:GetName() == "npc_dota_hero_shadow_demon") then return var.SHD end
-  if(villain:GetName() == "npc_dota_hero_huskar") then return var.HUS end
-  if(villain:GetName() == "npc_dota_hero_witch_doctor") then return var.WDO end
-  if(villain:GetName() == "npc_dota_hero_meepo") then return var.MEE end
-  if(villain:GetName() == "npc_dota_hero_ursa") then return var.URS end
-  if(villain:GetName() == "npc_dota_hero_centaur") then return var.CEN end
-  if(villain:GetName() == "npc_dota_hero_abyssal_underlord") then return var.ABY end
-  if(villain:GetName() == "npc_dota_hero_skywrath_mage") then return var.SKY end
-  if(villain:GetName() == "npc_dota_hero_jakiro") then return var.JAK end
-  if(villain:GetName() == "npc_dota_hero_undying") then return var.UND end
-  if(villain:GetName() == "npc_dota_hero_necrolyte") then return var.NEC end
-end
 DebugPrint('[---------------------------------------------------------------------] the last stand!\n\n')

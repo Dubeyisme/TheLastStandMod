@@ -43,6 +43,9 @@ require('internal/events')
 require('TheLastStand')
 -- Main game controller for the bosses, all other bosses share this AI package
 require('BossAI')
+-- Main game sound file
+require('sound')
+
 
 -- settings.lua is where you can specify many different properties for your game mode and is one of the core barebones files.
 require('settings')
