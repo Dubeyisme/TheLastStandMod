@@ -2,7 +2,7 @@
 
 -- Cleanup a player when they leave
 function GameMode:OnDisconnect(keys)
-  --DebugPrint('[TLS] Player Disconnected ' .. tostring(keys.userid))
+  DebugPrint('[TLS] Player Disconnected ' .. tostring(keys.userid))
   --DebugPrintTable(keys)
 
   local name = keys.name
@@ -13,7 +13,7 @@ function GameMode:OnDisconnect(keys)
 end
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
-  --DebugPrint("[TLS] GameRules State Changed")
+  DebugPrint("[TLS] GameRules State Changed")
   --DebugPrintTable(keys)
 
   local newState = GameRules:State_Get()
@@ -21,7 +21,7 @@ end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
 function GameMode:OnNPCSpawned(keys)
-  --DebugPrint("[TLS] NPC Spawned")
+  DebugPrint("[TLS] NPC Spawned")
   --DebugPrintTable(keys)
 
   local npc = EntIndexToHScript(keys.entindex)
@@ -30,7 +30,7 @@ end
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive
 -- operations here
 function GameMode:OnEntityHurt(keys)
-  --DebugPrint("[TLS] Entity Hurt")
+  DebugPrint("[TLS] Entity Hurt")
   --DebugPrintTable(keys)
 
   local damagebits = keys.damagebits -- This might always be 0 and therefore useless
@@ -52,7 +52,7 @@ end
 
 -- An item was picked up off the ground
 function GameMode:OnItemPickedUp(keys)
-  --DebugPrint( '[TLS] OnItemPickedUp' )
+  DebugPrint( '[TLS] OnItemPickedUp' )
   --DebugPrintTable(keys)
 
   local unitEntity = nil
@@ -70,13 +70,13 @@ end
 -- A player has reconnected to the game.  This function can be used to repaint Player-based particles or change
 -- state as necessary
 function GameMode:OnPlayerReconnect(keys)
-  --DebugPrint( '[TLS] OnPlayerReconnect' )
+  DebugPrint( '[TLS] OnPlayerReconnect' )
   --DebugPrintTable(keys) 
 end
 
 -- An item was purchased by a player
 function GameMode:OnItemPurchased( keys )
-  --DebugPrint( '[TLS] OnItemPurchased' )
+  DebugPrint( '[TLS] OnItemPurchased' )
   --DebugPrintTable(keys)
 
   -- The playerID of the hero who is buying something
@@ -93,7 +93,7 @@ end
 
 -- An ability was used by a player
 function GameMode:OnAbilityUsed(keys)
-  --DebugPrint('[TLS] AbilityUsed')
+  DebugPrint('[TLS] AbilityUsed')
   --DebugPrintTable(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
@@ -102,7 +102,7 @@ end
 
 -- A non-player entity (necro-book, chen creep, etc) used an ability
 function GameMode:OnNonPlayerUsedAbility(keys)
-  --DebugPrint('[TLS] OnNonPlayerUsedAbility')
+  DebugPrint('[TLS] OnNonPlayerUsedAbility')
   --DebugPrintTable(keys)
 
   local abilityname=  keys.abilityname
@@ -110,7 +110,7 @@ end
 
 -- A player changed their name
 function GameMode:OnPlayerChangedName(keys)
- -- DebugPrint('[TLS] OnPlayerChangedName')
+ DebugPrint('[TLS] OnPlayerChangedName')
   --DebugPrintTable(keys)
 
   local newName = keys.newname
@@ -119,7 +119,7 @@ end
 
 -- A player leveled up an ability
 function GameMode:OnPlayerLearnedAbility( keys)
-  --DebugPrint('[TLS] OnPlayerLearnedAbility')
+  DebugPrint('[TLS] OnPlayerLearnedAbility')
   --DebugPrintTable(keys)
 
   local player = EntIndexToHScript(keys.player)
@@ -128,7 +128,7 @@ end
 
 -- A channelled ability finished by either completing or being interrupted
 function GameMode:OnAbilityChannelFinished(keys)
-  --DebugPrint('[TLS] OnAbilityChannelFinished')
+  DebugPrint('[TLS] OnAbilityChannelFinished')
   --DebugPrintTable(keys)
 
   local abilityname = keys.abilityname
@@ -137,7 +137,7 @@ end
 
 -- A player leveled up
 function GameMode:OnPlayerLevelUp(keys)
-  --DebugPrint('[TLS] OnPlayerLevelUp')
+  DebugPrint('[TLS] OnPlayerLevelUp')
   --DebugPrintTable(keys)
 
   local player = EntIndexToHScript(keys.player)
@@ -146,7 +146,7 @@ end
 
 -- A player last hit a creep, a tower, or a hero
 function GameMode:OnLastHit(keys)
-  --DebugPrint('[TLS] OnLastHit')
+  DebugPrint('[TLS] OnLastHit')
   --DebugPrintTable(keys)
 
   local isFirstBlood = keys.FirstBlood == 1
@@ -158,7 +158,7 @@ end
 
 -- A tree was cut down by tango, quelling blade, etc
 function GameMode:OnTreeCut(keys)
-  --DebugPrint('[TLS] OnTreeCut')
+  DebugPrint('[TLS] OnTreeCut')
   --DebugPrintTable(keys)
 
   local treeX = keys.tree_x
@@ -167,7 +167,7 @@ end
 
 -- A rune was activated by a player
 function GameMode:OnRuneActivated (keys)
-  --DebugPrint('[TLS] OnRuneActivated')
+  DebugPrint('[TLS] OnRuneActivated')
   --DebugPrintTable(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
@@ -190,7 +190,7 @@ end
 
 -- A player took damage from a tower
 function GameMode:OnPlayerTakeTowerDamage(keys)
-  --DebugPrint('[TLS] OnPlayerTakeTowerDamage')
+  DebugPrint('[TLS] OnPlayerTakeTowerDamage')
   --DebugPrintTable(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
@@ -199,7 +199,7 @@ end
 
 -- A player picked a hero
 function GameMode:OnPlayerPickHero(keys)
-  --DebugPrint('[TLS] OnPlayerPickHero')
+  DebugPrint('[TLS] OnPlayerPickHero')
   --DebugPrintTable(keys)
 
   local heroClass = keys.hero
@@ -209,7 +209,7 @@ end
 
 -- A player killed another player in a multi-team context
 function GameMode:OnTeamKillCredit(keys)
-  --DebugPrint('[TLS] OnTeamKillCredit')
+  DebugPrint('[TLS] OnTeamKillCredit')
   --DebugPrintTable(keys)
 
   local killerPlayer = PlayerResource:GetPlayer(keys.killer_userid)
@@ -220,7 +220,7 @@ end
 
 -- An entity died
 function GameMode:OnEntityKilled( keys )
-  --DebugPrint( '[TLS] OnEntityKilled Called' )
+  DebugPrint( '[TLS] OnEntityKilled Called' )
   --DebugPrintTable( keys )
   
 
@@ -259,13 +259,13 @@ end
 -- This function is called 1 to 2 times as the player connects initially but before they 
 -- have completely connected
 function GameMode:PlayerConnect(keys)
-  --DebugPrint('[TLS] PlayerConnect')
+  DebugPrint('[TLS] PlayerConnect')
   --DebugPrintTable(keys)
 end
 
 -- This function is called once when the player fully connects and becomes "Ready" during Loading
 function GameMode:OnConnectFull(keys)
-  --DebugPrint('[TLS] OnConnectFull')
+  DebugPrint('[TLS] OnConnectFull')
   --DebugPrintTable(keys)
   
   local entIndex = keys.index+1
@@ -278,7 +278,7 @@ end
 
 -- This function is called whenever illusions are created and tells you which was/is the original entity
 function GameMode:OnIllusionsCreated(keys)
-  --DebugPrint('[TLS] OnIllusionsCreated')
+  DebugPrint('[TLS] OnIllusionsCreated')
   --DebugPrintTable(keys)
 
   local originalEntity = EntIndexToHScript(keys.original_entindex)
@@ -286,7 +286,7 @@ end
 
 -- This function is called whenever an item is combined to create a new item
 function GameMode:OnItemCombined(keys)
-  --DebugPrint('[TLS] OnItemCombined')
+  DebugPrint('[TLS] OnItemCombined')
   --DebugPrintTable(keys)
 
   -- The playerID of the hero who is buying something
@@ -303,7 +303,7 @@ end
 
 -- This function is called whenever an ability begins its PhaseStart phase (but before it is actually cast)
 function GameMode:OnAbilityCastBegins(keys)
-  --DebugPrint('[TLS] OnAbilityCastBegins')
+  DebugPrint('[TLS] OnAbilityCastBegins')
   --DebugPrintTable(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
@@ -312,7 +312,7 @@ end
 
 -- This function is called whenever a tower is killed
 function GameMode:OnTowerKill(keys)
-  --DebugPrint('[TLS] OnTowerKill')
+  DebugPrint('[TLS] OnTowerKill')
   --DebugPrintTable(keys)
 
   local gold = keys.gold
@@ -322,7 +322,7 @@ end
 
 -- This function is called whenever a player changes there custom team selection during Game Setup 
 function GameMode:OnPlayerSelectedCustomTeam(keys)
- -- DebugPrint('[TLS] OnPlayerSelectedCustomTeam')
+ DebugPrint('[TLS] OnPlayerSelectedCustomTeam')
   --DebugPrintTable(keys)
 
   local player = PlayerResource:GetPlayer(keys.player_id)
@@ -332,7 +332,7 @@ end
 
 -- This function is called whenever an NPC reaches its goal position/target
 function GameMode:OnNPCGoalReached(keys)
-  --DebugPrint('[TLS] OnNPCGoalReached')
+  DebugPrint('[TLS] OnNPCGoalReached')
   --DebugPrintTable(keys)
 
   local goalEntity = EntIndexToHScript(keys.goal_entindex)
@@ -356,3 +356,4 @@ function GameMode:OnPlayerChat(keys)
     end
   end
 end
+DebugPrint('[---------------------------------------------------------------------] events!\n\n')

@@ -5,6 +5,44 @@ if TheLastStand == nil then
     _G.TheLastStand = class({})
 end
 
+NUM_WORD_DIGITS = {
+  "One",
+  "Two",
+  "Three",
+  "Four",
+  "Five",
+  "Six",
+  "Seven",
+  "Eight",
+  "Nine"
+}
+
+NUM_WORD_TEENS = {
+  "Ten",
+  "Eleven",
+  "Twelve",
+  "Thirteen",
+  "Fourteen",
+  "Fifteen",
+  "Sixteen",
+  "Seventeen",
+  "Eighteen",
+  "Nineteen"
+}
+
+NUM_WORD_TENS = {
+  "Twenty",
+  "Thirty",
+  "Forty",
+  "Fifty",
+  "Sixty",
+  "Seventy",
+  "Eighty",
+  "Ninety"
+}
+
+
+
 -- Points hardcoded into Woodland initialisation
 DebugPrint( '[TLS] Initialising Mode' )
 SPAWN_POINT = {}
@@ -33,12 +71,15 @@ WAVES_TO_COMPLETE = {}
 CURRENT_WAVE_TYPE = nil
 WAVE_NUMBER = 0
 
-CURRENT_LEVEL = 0
-CURRENT_ROUND = 0
-NEXT_ROUND = 1
-CURRENT_WAVE = 0
-NEXT_WAVE = 1
+CURRENT_LEVEL = 0 -- Used only for calculating the wave number
+CURRENT_ROUND = 0 -- Stores the current round number
+NEXT_ROUND = 1 -- Stores the next round number
+CURRENT_WAVE = 0 -- Stores the current wave number [Boss waves are 4]
+NEXT_WAVE = 1  -- Stores the next wave number [Boss waves are 4]
 MULTIPLIER = 0.65 -- Will be 1 at game start
+WAVE_DEFAULT_BOUNTY = 150 -- This is how much gold each wave should be worth from level 1
+WAVE_BOUNTY_INCREASE = 50 -- This is how much it should increase per wave in a round before multipliers
+WAVE_BOUNTY = 0 -- This is how much the wave will be worth
 WAVE_CONTENTS = {}
 WAVE_CONTENTS_ATTACKING = {}
 HERO_TARGETS = {}
@@ -46,6 +87,14 @@ PLAYER_COUNT = 0
 UNITS_LEFT = 0
 FINAL_ENTITY = nil
 --FOW_BADGUYS = nil
+
+-- Formatting for text
+WAVE_OUTRO_DURATION = 5
+WAVE_INTRO_DURATION = 10
+STYLE_WAVE_OUTRO = {color="white", ["font-size"]="80px"}
+STYLE_WAVE_NUM_INTRO = {color="white", ["font-size"]="80px"}
+STYLE_WAVE_TYPE_INTRO = {color="red", ["font-size"]="110px"}
+
 
 MELEE_ABILITIES = {}
 RANGED_ABILITIES = {}
@@ -90,6 +139,14 @@ DebugPrint( '[TLS] Done setting up WOODLAND' )
 
 -- This is where we catch and prep for everything after each wave
 function TheLastStand:WaveEnded()
+  -- Announce the wave has been cleared
+  if(CURRENT_LEVEL~=0) then
+    -- Here we put things we do every round
+    Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text="Wave Cleared", duration=WAVE_OUTRO_DURATION, style=STYLE_WAVE_OUTRO})
+    EmitAnnouncerSoundForTeam("ui.npe_objective_complete", DOTA_TEAM_GOODGUYS)
+  else
+    -- Here we put first round only things
+  end
   -- Increment wave number
   TheLastStand:IncrementWaveType()
   if(CURRENT_WAVE == 1) then
@@ -112,14 +169,35 @@ end
 function TheLastStand:WaveStart()
   -- Generate a new wave
   DebugPrint("[TLS] Current Multiplier : "..tostring(MULTIPLIER))
+  -- Announce that a wave has begun through text
+  local text_array = TheLastStand:AnnounceWaveText(CURRENT_WAVE, CURRENT_ROUND, CURRENT_LEVEL, CURRENT_WAVE_TYPE) -- [1] is the wave number, [2] is the type
+  Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text=text_array[1], duration=WAVE_INTRO_DURATION, style=STYLE_WAVE_NUM_INTRO})
+  Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text=text_array[2], duration=WAVE_INTRO_DURATION, style=STYLE_WAVE_TYPE_INTRO})
+  EmitAnnouncerSoundForTeam("ui.npe_objective_given", DOTA_TEAM_GOODGUYS)
+  -- Generate wave
   if(CURRENT_WAVE~=4) then
     -- Generate a non-boss wave for waves 1, 2, and 3
     local UnitList = TheLastStand:ReturnList(CURRENT_WAVE_TYPE, CURRENT_WAVE, CURRENT_ROUND) -- List of valid types for wave 2
     local UnitCount = TheLastStand:ReturnUnitCount(CURRENT_WAVE_TYPE, CURRENT_WAVE, CURRENT_ROUND) -- List of the amount per type for wave 2
+    -- Work out the bounty and XP for the waves using the default bounty and increase per wave
+    TheLastStand:CalculateWaveBounty(UnitCount,(WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE))
+    -- Create wave
     TheLastStand:CreateWave(UnitList, UnitCount)
   else
     -- Generate a boss wave
   end
+end
+
+-- This calculates how much each creep should be worth in the wave based on the goal per round
+function TheLastStand:CalculateWaveBounty(UnitCount,goal)
+  local bounty = 0
+  local num = 0
+  local i
+  for i=1,#UnitCount do
+    num = num + UnitCount[i]
+  end
+  WAVE_BOUNTY = math.floor(goal/num)
+  DebugPrint("Difference: "..tostring((WAVE_BOUNTY*num)-goal))
 end
 
 -- This is where we catch and prep for everything after each round
@@ -188,56 +266,103 @@ function TheLastStand:IncrementWaveType()
   end
 end
 
-function TheLastStand:TypeToText(ttype)
+-- Creates the text to be displayed on screen and returns the text and intro in a table
+function TheLastStand:AnnounceWaveText(wave, round, level, ttype)
   local text = ""
-  if(CURRENT_ROUND==1) then
-    if(ttype == "Radiant") then text = "Radiant" end
-    if(ttype == "Dire") then text = "Dire" end
-    if(ttype == "Kobold") then text = "Kobold" end
-    if(ttype == "Troll") then text = "Troll" end
-    if(ttype == "Golem") then text = "Golem" end
-    if(ttype == "Satyr") then text = "Satyr" end
-    if(ttype == "Centaur") then text = "Centaur" end
-    if(ttype == "Dragon") then text = "Dragon" end
-    if(ttype == "Zombie") then text = "Zombie" end
-  elseif(CURRENT_ROUND==2) then
-    if(ttype == "Radiant") then text = "Radiant" end
-    if(ttype == "Dire") then text = "Dire" end
-    if(ttype == "Kobold") then text = "Kobold" end
-    if(ttype == "Troll") then text = "Troll" end
-    if(ttype == "Golem") then text = "Golem" end
-    if(ttype == "Satyr") then text = "Satyr" end
-    if(ttype == "Centaur") then text = "Centaur" end
-    if(ttype == "Dragon") then text = "Dragon" end
-    if(ttype == "Zombie") then text = "Zombie" end
-  end    
-  return text
+  local actual_number = 0
+  local wave_type_text = ""
+  local wave_intro_text = ""
+  if(wave==4)then
+     -- This is a boss wave, record boss number
+    actual_number = ((A21-1)*2)+round
+    wave_type_text = "Boss Round "..TheLastStand:NumToText(actual_number).."."
+    wave_intro_text = TheLastStand:BossIntro(ttype,round)
+  else
+     -- This is a nonboss wave, record wave number
+     DebugPrint(tostring(level)..":"..tostring(round)..":"..tostring(wave))
+     actual_number = ((level-1)*2)*3+wave + (round-1)*3
+    wave_type_text = "Wave "..TheLastStand:NumToText(actual_number).."."
+    wave_intro_text = TheLastStand:TypeToText(ttype,round)
+  end
+  return {wave_type_text,wave_intro_text}
 end
 
-function TheLastStand:BossIntro(ttype)
-  local text = ""
-  if(CURRENT_ROUND==1) then
-    if(ttype == "Radiant") then text = "Treant Protector" end
-    if(ttype == "Dire") then text = "Dark Willow" end
-    if(ttype == "Kobold") then text = "Meepo" end
-    if(ttype == "Troll") then text = "Huskar" end
-    if(ttype == "Golem") then text = "Earth Spirit" end
-    if(ttype == "Satyr") then text = "Shadow Fiend" end
-    if(ttype == "Centaur") then text = "Centaur" end
-    if(ttype == "Dragon") then text = "Skywrath" end
-    if(ttype == "Zombie") then text = "Undying" end
-  elseif(CURRENT_ROUND==2) then
-    if(ttype == "Radiant") then text = "Lone Druid" end
-    if(ttype == "Dire") then text = "Doom" end
-    if(ttype == "Kobold") then text = "Ursa" end
-    if(ttype == "Troll") then text = "Witch Doctor" end
-    if(ttype == "Golem") then text = "Elder Titan" end
-    if(ttype == "Satyr") then text = "Shadow Demon" end
-    if(ttype == "Centaur") then text = "Underlord" end
-    if(ttype == "Dragon") then text = "Jakiro" end
-    if(ttype == "Zombie") then text = "Necrophos" end
+-- Takes an integer and returns the actual word: Cannot handle integers higher than 99. Current game max is 54
+function TheLastStand:NumToText(num)
+  if(num<10) then
+    -- This is only a single number, easy
+    return NUM_WORD_DIGITS[num]
+  else
+    -- This isn't a single number, a bit trickier
+    if(num<20) then
+      -- Still simple, return a teen
+      return NUM_WORD_TEENS[num-9]
+    else
+        -- number is higher than 19 so composite number time
+      if(num<100) then
+        local tens = tonumber(tostring(num):sub(0,1))-1
+        local digit = tonumber(tostring(num):sub(2))
+        DebugPrint("Ten: "..tens.." Unit:"..digit)
+        if(digit == 0) then
+          return NUM_WORD_TENS[tens] -- number ends in 0
+        else
+          return NUM_WORD_TENS[tens].." "..NUM_WORD_DIGITS[digit] -- number ends in digit
+        end
+      end
+    end
+  end
+end
+
+-- For announcing the waves
+function TheLastStand:TypeToText(ttype,round)
+  if(round==1) then
+    if(ttype == "Radiant") then return "Radiant" end
+    if(ttype == "Dire") then return "Dire" end
+    if(ttype == "Kobold") then return "Kobold" end
+    if(ttype == "Troll") then return "Troll" end
+    if(ttype == "Golem") then return "Golem" end
+    if(ttype == "Satyr") then return "Satyr" end
+    if(ttype == "Centaur") then return "Centaur" end
+    if(ttype == "Dragon") then return "Dragon" end
+    if(ttype == "Zombie") then return "Zombie" end
+  elseif(round==2) then
+    if(ttype == "Radiant") then return "Radiant" end
+    if(ttype == "Dire") then return "Dire" end
+    if(ttype == "Kobold") then return "Kobold" end
+    if(ttype == "Troll") then return "Troll" end
+    if(ttype == "Golem") then return "Golem" end
+    if(ttype == "Satyr") then return "Satyr" end
+    if(ttype == "Centaur") then return "Centaur" end
+    if(ttype == "Dragon") then return "Dragon" end
+    if(ttype == "Zombie") then return "Zombie" end
   end    
-  return text
+  return ""
+end
+
+-- For announcing the boss battles
+function TheLastStand:BossIntro(ttype,round)
+  if(round==1) then
+    if(ttype == "Radiant") then return "Treant Protector" end
+    if(ttype == "Dire") then return "Dark Willow" end
+    if(ttype == "Kobold") then return "Meepo" end
+    if(ttype == "Troll") then return "Huskar" end
+    if(ttype == "Golem") then return "Earth Spirit" end
+    if(ttype == "Satyr") then return "Shadow Fiend" end
+    if(ttype == "Centaur") then return "Centaur" end
+    if(ttype == "Dragon") then return "Skywrath" end
+    if(ttype == "Zombie") then return "Undying" end
+  elseif(round==2) then
+    if(ttype == "Radiant") then return "Lone Druid" end
+    if(ttype == "Dire") then return "Doom" end
+    if(ttype == "Kobold") then return "Ursa" end
+    if(ttype == "Troll") then return "Witch Doctor" end
+    if(ttype == "Golem") then return "Elder Titan" end
+    if(ttype == "Satyr") then return "Shadow Demon" end
+    if(ttype == "Centaur") then return "Underlord" end
+    if(ttype == "Dragon") then return "Jakiro" end
+    if(ttype == "Zombie") then return "Necrophos" end
+  end    
+  return ""
 end
 
 -- Creates a wave based on Unit Types Listed and Unit Counts Listed per unit type, then orders them to move to the attack point
@@ -271,6 +396,7 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
         if(UnitTypesListed[i] ~= "mark_illusions") then
           unit = CreateUnitByName(UnitTypesListed[i], SPAWN_POINT[point[h]], true, nil, nil, DOTA_TEAM_BADGUYS)
           TheLastStand:UpgradeCreep(unit)
+          UNITS_LEFT=UNITS_LEFT+1 -- Illusions do not count
         else
           -- Create illusion and modify it to match a hero
           local target = HERO_TARGETS[h]
@@ -301,7 +427,7 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
           end
           unit:AddNewModifier(nil, nil, "modifier_illusion", {duration = -1, outgoing_damage = 0.5, incoming_damage = 1.5})
           unit:MakeIllusion()
-          unit:SetRenderColor(0,0,255)
+          unit:SetRenderColor(0,0,255)=
         end
         -- Upgrade the creep to match the heroes based on multiplier
         unit.disable_autoattack = 0
@@ -309,7 +435,6 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
         ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = true})
         table.insert(WAVE_CONTENTS,unit)
         table.insert(WAVE_CONTENTS_ATTACKING,false)
-        UNITS_LEFT=UNITS_LEFT+1
       end
     end
   end
@@ -349,8 +474,8 @@ function TheLastStand:UpgradeCreep(unit)
   local mag = unit:GetBaseMagicalResistanceValue()
   local admin = unit:GetBaseDamageMin()
   local admax = unit:GetBaseDamageMax()
-  local bxp = unit:GetDeathXP()*1.5
-  local bg = unit:GetDeathXP()*2
+  local bxp = WAVE_BOUNTY*1.45  -- This controls gold and xp per wave
+  local bg = WAVE_BOUNTY -- This controls gold and xp per wave
   -- Change unit values based on level multiplier
   hp=hp*MULTIPLIER
   hr=hr*MULTIPLIER
@@ -818,14 +943,14 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
  if(ttype==WAVE_TYPES[3])then -- Kobold
   if(round==1) then
     if(wave == 1) then
-      list = {15,
+      list = {7,
         3}
     elseif(wave == 2) then
-      list = {20,
+      list = {14,
         4, 
         1}
     elseif(wave == 3) then
-      list = {25,
+      list = {18,
         5, 
         1, 
         2}
@@ -1111,3 +1236,44 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
   return list
 end
 
+-- One of the heroes announces the game has begun
+function TheLastStand:HeroCallStartBattle()
+
+end
+
+-- Takes a variable and a hero and parses which item was needed from the variable
+function TheLastStand:ParseHeroVar(var, hero)
+  if(hero:GetName() == "npc_dota_hero_riki") then return var.OMN end
+  if(hero:GetName() == "npc_dota_hero_pangolier") then return var.PNG end
+  if(hero:GetName() == "npc_dota_hero_sniper") then return var.SNI end
+  if(hero:GetName() == "npc_dota_hero_techies") then return var.TEC end
+  if(hero:GetName() == "npc_dota_hero_lina") then return var.LIN end
+  if(hero:GetName() == "npc_dota_hero_furion") then return var.FUR end
+  if(hero:GetName() == "npc_dota_hero_winter_wyvern") then return var.WWY end
+  if(hero:GetName() == "npc_dota_hero_kunkka") then return var.KUN end
+  if(hero:GetName() == "npc_dota_hero_beastmaster") then return var.BMA end
+  if(hero:GetName() == "npc_dota_hero_omniknight") then return var.OMN end
+end
+
+-- Takes a variable and a villain and parses which item was needed from the variable
+function TheLastStand:ParseVillainVar(var, villain)
+  if(villain:GetName() == "npc_dota_hero_treant") then return var.TRN end
+  if(villain:GetName() == "npc_dota_hero_lone_druid") then return var.LON end
+  if(villain:GetName() == "npc_dota_hero_dark_willow") then return var.DKW end
+  if(villain:GetName() == "npc_dota_hero_doom_bringer") then return var.DOM end
+  if(villain:GetName() == "npc_dota_hero_earth_spirit") then return var.EAS end
+  if(villain:GetName() == "npc_dota_hero_elder_titan") then return var.ELT end
+  if(villain:GetName() == "npc_dota_hero_nevermore") then return var.NEV end
+  if(villain:GetName() == "npc_dota_hero_shadow_demon") then return var.SHD end
+  if(villain:GetName() == "npc_dota_hero_huskar") then return var.HUS end
+  if(villain:GetName() == "npc_dota_hero_witch_doctor") then return var.WDO end
+  if(villain:GetName() == "npc_dota_hero_meepo") then return var.MEE end
+  if(villain:GetName() == "npc_dota_hero_ursa") then return var.URS end
+  if(villain:GetName() == "npc_dota_hero_centaur") then return var.CEN end
+  if(villain:GetName() == "npc_dota_hero_abyssal_underlord") then return var.ABY end
+  if(villain:GetName() == "npc_dota_hero_skywrath_mage") then return var.SKY end
+  if(villain:GetName() == "npc_dota_hero_jakiro") then return var.JAK end
+  if(villain:GetName() == "npc_dota_hero_undying") then return var.UND end
+  if(villain:GetName() == "npc_dota_hero_necrolyte") then return var.NEC end
+end
+DebugPrint('[---------------------------------------------------------------------] the last stand!\n\n')

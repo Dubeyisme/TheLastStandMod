@@ -1,5 +1,6 @@
 -- The overall game state has changed
 function GameMode:_OnGameRulesStateChange(keys)
+  DebugPrint('[TLS] Rules change!\n\n')
   if GameMode._reentrantCheck then
     return
   end
@@ -32,6 +33,7 @@ end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
 function GameMode:_OnNPCSpawned(keys)
+  DebugPrint('[TLS] NPC Spawn\n\n')
   if GameMode._reentrantCheck then
     return
   end
@@ -50,6 +52,7 @@ end
 
 -- An entity died
 function GameMode:_OnEntityKilled( keys )
+  DebugPrint('[TLS] Entity killed\n\n')
   if GameMode._reentrantCheck then
     return
   end
@@ -84,6 +87,7 @@ end
 
 -- This function is called once when the player fully connects and becomes "Ready" during Loading
 function GameMode:_OnConnectFull(keys)
+  DebugPrint('[TLS] On connect full\n\n')
   if GameMode._reentrantCheck then
     return
   end
@@ -103,3 +107,4 @@ function GameMode:_OnConnectFull(keys)
   GameMode:OnConnectFull( keys )
   GameMode._reentrantCheck = false
 end
+DebugPrint('[---------------------------------------------------------------------] internal events!\n\n')

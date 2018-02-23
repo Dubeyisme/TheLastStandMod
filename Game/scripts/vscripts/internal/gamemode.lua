@@ -1,6 +1,7 @@
 -- This function initializes the game mode and is called before anyone loads into the game
 -- It can be used to pre-initialize any values/tables that will be needed later
 function GameMode:_InitGameMode()
+  DebugPrint('[TLS] Init game mode!\n\n')
   if GameMode._reentrantCheck then
     return
   end
@@ -139,16 +140,18 @@ function GameMode:_InitGameMode()
   self.bSeenWaitForPlayers = false
   self.vUserIds = {}
 
-  DebugPrint('[TLS] Done loading Barebones gamemode!\n\n')
+  DebugPrint('[TLS] Almost done loading TLS gamemode!\n\n')
   GameMode._reentrantCheck = true
   GameMode:InitGameMode()
   GameMode._reentrantCheck = false
+  DebugPrint('[TLS] Done loading TLS gamemode!\n\n')
 end
 
 mode = nil
 
 -- This function is called as the first player loads and sets up the GameMode parameters
 function GameMode:_CaptureGameMode()
+  DebugPrint('[TLS] Capture game mode!\n\n')
   if mode == nil then
     -- Set GameMode parameters
     mode = GameRules:GetGameModeEntity()        
@@ -197,3 +200,5 @@ function GameMode:_CaptureGameMode()
     self:OnFirstPlayerLoaded()
   end 
 end
+
+DebugPrint('[---------------------------------------------------------------------] internal game mode!\n\n')

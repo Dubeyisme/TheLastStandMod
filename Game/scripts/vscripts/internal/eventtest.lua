@@ -1897,3 +1897,5 @@ function GameMode:On_dota_player_selected_custom_team(data)
   print("[BAREBONES] dota_player_selected_custom_team")
   PrintTable(data)
 end
+
+DebugPrint('[---------------------------------------------------------------------] internal event test!\n\n')

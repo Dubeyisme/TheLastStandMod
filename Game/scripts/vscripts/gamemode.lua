@@ -67,10 +67,6 @@ function GameMode:ParseText(text,pid)
   if(ParsedText[1]=="attackmove") then
     ExecuteOrderFromTable({ UnitIndex = hero:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = false})
   end
-  -- Control game play elements
-  if(ParsedText[1]=="spawn") then
-    TheLastStand:WaveEnded()
-  end
   -- Fix up your hero
   if(ParsedText[1]=="hp") then hero:SetHealth(hero:GetMaxHealth()) end
   if(ParsedText[1]=="mp") then hero:SetMana(hero:GetMaxMana()) end
@@ -168,6 +164,8 @@ end
 ]]
 function GameMode:OnGameInProgress()
   DebugPrint("[TLS] The game has officially begun")
+  -- Calls Wave Ended which starts the game
+    TheLastStand:WaveEnded()
 end
 
 
@@ -183,3 +181,4 @@ function GameMode:InitGameMode()
 
   --DebugPrint('[TLS] Done loading The Last Stand gamemode!\n\n')
 end
+DebugPrint('[---------------------------------------------------------------------] game mode!\n\n')
