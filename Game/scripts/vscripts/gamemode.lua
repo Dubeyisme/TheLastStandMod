@@ -142,10 +142,20 @@ end
 ]]
 function GameMode:OnHeroInGame(hero)
   DebugPrint("[TLS] Hero spawned in game for first time -- " .. hero:GetUnitName())
+  local i = 0
+  local ability = nil
   -- Add this player's hero to the list of possible boss targets
   table.insert(HERO_TARGETS,hero)
   DebugPrint(GetTeamName(hero:GetTeamNumber()))
   PLAYER_COUNT = PLAYER_COUNT+1
+
+  -- Some heros spawn with abilities levelled incorrectly, fix this
+  for i=0,6 do
+    ability = hero:GetAbilityByIndex(i)
+    if(ability~=nil)then
+      ability:SetLevel(0)
+    end
+  end
 
   -- This line for example will set the starting gold of every hero to 500 unreliable gold
   --hero:SetGold(500, false)

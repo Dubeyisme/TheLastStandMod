@@ -371,9 +371,10 @@ end
 
 -- Creates a wave based on Unit Types Listed and Unit Counts Listed per unit type, then orders them to move to the attack point
 function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
-  local g,h,i,j,k = nil
+  local g,h,i,j,k,l = nil
   local unit = nil
   local point = {}
+  local ability = nil
   local random_array = {}
   DebugPrint("[TLS] Creating a "..CURRENT_WAVE_TYPE.." wave #"..tostring(CURRENT_WAVE))
   -- Randomise the spawn points to be used
@@ -382,6 +383,7 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
     random_array[h] = RandomInt(1,100)
   end
   local temp = 0
+  -- Order the spawn points randomly so that you do not know the direction they will spawn
   for g = 1, SPAWN_COUNT-1 do
     for h = 2, SPAWN_COUNT do
       if(random_array[g]<random_array[h])then
@@ -394,12 +396,20 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
       end
     end
   end
+  -- Spawn a wave for each player
   for h = 1, PLAYER_COUNT do
     for i,j in pairs(UnitTypesListed)do
       for k=1, UnitCountsListed[i] do
         if(UnitTypesListed[i] ~= "mark_illusions") then
           unit = CreateUnitByName(UnitTypesListed[i], SPAWN_POINT[point[h]], true, nil, nil, DOTA_TEAM_BADGUYS)
           TheLastStand:UpgradeCreep(unit)
+          -- Fix abilities
+          for l=0,6 do
+            ability = unit:GetAbilityByIndex(l)
+            if(ability~=nil)then
+              ability:SetLevel(1)
+            end
+          end
           UNITS_LEFT=UNITS_LEFT+1 -- Illusions do not count
         else
           -- Create illusion and modify it to match a hero

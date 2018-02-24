@@ -27,23 +27,7 @@ function Precache( context )
 
 
 
-  -- Heroes -----------------------------------------
-
-  -- These are loaded Synchronously as they may be picked instantly
-
-  -- Strength
-  PrecacheUnitByNameSync("npc_dota_hero_omniknight", context)
-  PrecacheUnitByNameSync("npc_dota_hero_kunkka", context)
-  PrecacheUnitByNameSync("npc_dota_hero_beastmaster", context)
-  -- Agility
-  PrecacheUnitByNameSync("npc_dota_hero_riki", context)
-  PrecacheUnitByNameSync("npc_dota_hero_sniper", context)
-  PrecacheUnitByNameSync("npc_dota_hero_pangolier", context)
-  -- Intelligence
-  PrecacheUnitByNameSync("npc_dota_hero_lina", context)
-  PrecacheUnitByNameSync("npc_dota_hero_techies", context)
-  PrecacheUnitByNameSync("npc_dota_hero_furion", context)
-  PrecacheUnitByNameSync("npc_dota_hero_winter_wyvern", context)
+  -- Heroes are precache automatically by the game
 
   -- Villains -----------------------------------------
 
@@ -97,7 +81,76 @@ function Precache( context )
   PrecacheUnitByNameAsync("npc_dota_hero_phoenix", context)
   PrecacheUnitByNameAsync("npc_dota_hero_lycan", context)
   PrecacheUnitByNameAsync("npc_dota_hero_gyrocopter", context)
+
+-- Precache the creeps
+
+-- Radiant
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_melee", context)
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_ranged", context)
+PrecacheUnitByNameAsync("npc_dota_goodguys_siege", context)
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_melee_upgraded", context)
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_ranged_upgraded", context)
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_melee_upgraded_mega", context)
+
+-- Dire
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_melee", context)
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_ranged", context)
+PrecacheUnitByNameAsync("npc_dota_badguys_siege", context)
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_melee_upgraded", context)
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_ranged_upgraded", context)
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_melee_upgraded_mega", context)
+
+-- Kobold
+PrecacheUnitByNameAsync("npc_dota_neutral_kobold", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_kobold_tunneler", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_kobold_taskmaster", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_gnoll_assassin", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_polar_furbolg_champion", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_polar_furbolg_ursa_warrior", context)
+
+-- Troll
+PrecacheUnitByNameAsync("npc_dota_neutral_dark_troll", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_forest_troll_berserker", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_forest_troll_high_priest", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_ogre_mauler", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_ogre_magi", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_dark_troll_warlord", context)
+
+-- Golem
+PrecacheUnitByNameAsync("npc_dota_neutral_mud_golem_split", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_mud_golem", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_rock_golem", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_granite_golem", context)
+
+-- Satyr
+PrecacheUnitByNameAsync("npc_dota_neutral_satyr_trickster", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_satyr_soulstealer", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_satyr_hellcaller", context)
+
+-- Centaur
+PrecacheUnitByNameAsync("npc_dota_neutral_centaur_outrunner", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_centaur_khan", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_prowler_acolyte", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_prowler_shaman", context)
+
+-- Dragon
+PrecacheUnitByNameAsync("npc_dota_neutral_harpy_scout", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_harpy_storm", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_jungle_stalker", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_elder_jungle_stalker", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_black_drake", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_black_dragon", context)
+
+-- Zombie
+PrecacheUnitByNameAsync("npc_dota_unit_undying_zombie", context)
+PrecacheUnitByNameAsync("npc_dota_unit_undying_zombie_torso", context)
+PrecacheUnitByNameAsync("npc_dota_dark_troll_warlord_skeleton_warrior", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_fel_beast", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_ghost", context)
+
+
 end
+
 
 -- Create the game mode when we activate
 function Activate()
