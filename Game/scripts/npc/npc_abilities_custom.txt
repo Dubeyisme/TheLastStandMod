@@ -269,6 +269,26 @@
   // Override Abilities
   //-----------
   
+  // Regular abilities
+  
+  "riki_tricks_of_the_trade"
+	{
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_ALL"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NO_INVIS"
+	}
+  
+  "sniper_assassinate"
+	{
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL | DOTA_UNIT_TARGET_BASIC"
+	}
+	
+	"sniper_shrapnel"
+	{
+	
+	}
+  
+  // Talents
   "special_bonus_unique_clockwerk_2"// Rocket Flare
 	{
 	"AbilitySpecial"

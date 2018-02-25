@@ -1,5 +1,8 @@
 "DOTAHeroes"
 {
+
+	// ------------------------------------------------------------------------------ Heroes -------------------------------------------
+	
   "npc_dota_hero_sniper"
   {
 		"Ability1"					"sniper_shrapnel"					// Ability 1
@@ -166,5 +169,80 @@
 		"Ability15"		"special_bonus_unique_tidehunter"
 		"Ability16"		"special_bonus_unique_naga_siren_3"
 		"Ability17"		"special_bonus_unique_kunkka_4"
+	}
+	
+	
+	// ------------------------------------------------------------------------------ Villains -------------------------------------------
+	
+	"npc_dota_hero_treant"
+	{
+	}
+	
+	"npc_dota_hero_lone_druid"
+	{
+	}
+	
+	"npc_dota_hero_dark_willow"
+	{
+	}
+	
+	"npc_dota_hero_doom_bringer"
+	{
+	}
+	
+	"npc_dota_hero_elder_titan"
+	{
+	}
+	
+	"npc_dota_hero_earth_spirit"
+	{
+	}
+	
+	"npc_dota_hero_huskar"
+	{
+	}
+	
+	"npc_dota_hero_witch_doctor"
+	{
+	}
+	
+	"npc_dota_hero_meepo"
+	{
+	}
+	
+	"npc_dota_hero_ursa"
+	{
+	}
+	
+	"npc_dota_hero_nevermore"
+	{
+	}
+	
+	"npc_dota_hero_shadow_demon"
+	{
+	}
+	
+	"npc_dota_hero_centaur"
+	{
+	}
+	
+	"npc_dota_hero_abyssal_underlord"
+	{
+	}
+	
+	"npc_dota_hero_skywrath_mage"
+	{
+	}
+	
+	"npc_dota_hero_jakiro"
+	{
+	}
+	
+	"npc_dota_hero_undying"
+	{
+	}
+	
+	"npc_dota_hero_necrolyte"
+	{
 	}
 }

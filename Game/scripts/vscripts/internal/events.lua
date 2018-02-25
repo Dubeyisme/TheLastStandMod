@@ -33,7 +33,7 @@ end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
 function GameMode:_OnNPCSpawned(keys)
-  DebugPrint('[TLS] NPC Spawn\n\n')
+  DebugPrint('[TLS] NPC Spawn')
   if GameMode._reentrantCheck then
     return
   end
@@ -52,7 +52,7 @@ end
 
 -- An entity died
 function GameMode:_OnEntityKilled( keys )
-  DebugPrint('[TLS] Entity killed\n\n')
+  DebugPrint('[TLS] Entity killed')
   if GameMode._reentrantCheck then
     return
   end

@@ -2,9 +2,6 @@
 TLS_VERSION = "1.00"
 
 
--- Set this to true if you want to see a complete debug output of all events/processes done by barebones
--- You can also change the cvar 'barebones_spew' at any time to 1 or 0 for output/no output
-BAREBONES_DEBUG_SPEW = true 
 -- This is only for testing, disable before release
 CHEATS = true
 if(CHEATS) then DebugPrint( '[TLS] CHEATS ARE ACTIVE' ) end
@@ -45,7 +42,8 @@ require('TheLastStand')
 require('BossAI')
 -- Main game sound file
 require('sound')
-
+-- Controls unit abilities
+require("unit_abilities")
 
 -- settings.lua is where you can specify many different properties for your game mode and is one of the core barebones files.
 require('settings')
@@ -150,10 +148,18 @@ function GameMode:OnHeroInGame(hero)
   PLAYER_COUNT = PLAYER_COUNT+1
 
   -- Some heros spawn with abilities levelled incorrectly, fix this
-  for i=0,6 do
+  for i=0,23 do
     ability = hero:GetAbilityByIndex(i)
     if(ability~=nil)then
       ability:SetLevel(0)
+    end
+  end
+
+  if(hero:GetUnitName()=="npc_dota_hero_riki") then
+    for i=0,hero:GetModifierCount() do
+      local s = hero:GetModifierNameByIndex(i)
+      DebugPrint("Modifier "..s.." removed")
+      hero:RemoveModifierByName(s)  
     end
   end
 
@@ -177,8 +183,7 @@ end
 ]]
 function GameMode:OnGameInProgress()
   DebugPrint("[TLS] The game has officially begun")
-  -- Calls Wave Ended which starts the game
-    TheLastStand:WaveEnded()
+    TheLastStand:GameStart()
 end
 
 

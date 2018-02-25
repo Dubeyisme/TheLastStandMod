@@ -35,6 +35,13 @@ end
 -- Have a look at https://github.com/MNoya/DotaCraft/blob/master/game/dota_addons/dotacraft/scripts/vscripts/units/aggro_filter.lua
 -- from MNoya for inspiration for writing controls
 
+-- Triggered when an enemy hero starts to cast a spell
+function BossAI:EnemyHeroStartCast(hero)
+	-- Calls any BossAI functions that might react to this
+end
+
+
+
 -- Timer that controls aggro for simple creeps
 function BossAI:SleepAttackPrioritySimple()
 		-- Set timer to next recall

@@ -50,6 +50,17 @@ function GameMode:OnEntityHurt(keys)
   end
 end
 
+-- Revive function caller
+function GameMode:OnPlayerKilled(keys)
+  DebugPrint("[TLS] OnPlayerKilled")
+  DebugPrintTable(keys)
+  local unitEntity = nil
+  if keys.HeroEntityIndex then
+    unitEntity = EntIndexToHScript(keys.HeroEntityIndex)
+  end
+
+end
+
 -- An item was picked up off the ground
 function GameMode:OnItemPickedUp(keys)
   DebugPrint( '[TLS] OnItemPickedUp' )
@@ -98,6 +109,9 @@ function GameMode:OnAbilityUsed(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local abilityname = keys.abilityname
+
+  BossAI:EnemyHeroStartCast(player:GetAssignedHero())
+  -- All custom spells must go under the above function
 end
 
 -- A non-player entity (necro-book, chen creep, etc) used an ability
@@ -123,7 +137,17 @@ function GameMode:OnPlayerLearnedAbility( keys)
   --DebugPrintTable(keys)
 
   local player = EntIndexToHScript(keys.player)
+  local hero = player:GetAssignedHero()
   local abilityname = keys.abilityname
+
+  if(abilityname=="sniper_shrapnel")then
+    hero:AddNewModifier(nil,nil,"modifier_sniper_shrapnel_charge_counter",nil)
+  end
+  if(abilityname=="treant_natures_guise")then
+    DebugPrint("Adding modifier")
+    hero:AddNewModifier(nil,nil,"modifier_treant_natures_guise",{attribute = MODIFIER_ATTRIBUTE_PERMANENT}})
+    DebugPrint("Done adding")
+  end
 end
 
 -- A channelled ability finished by either completing or being interrupted
@@ -163,29 +187,6 @@ function GameMode:OnTreeCut(keys)
 
   local treeX = keys.tree_x
   local treeY = keys.tree_y
-end
-
--- A rune was activated by a player
-function GameMode:OnRuneActivated (keys)
-  DebugPrint('[TLS] OnRuneActivated')
-  --DebugPrintTable(keys)
-
-  local player = PlayerResource:GetPlayer(keys.PlayerID)
-  local rune = keys.rune
-
-  --[[ Rune Can be one of the following types
-  DOTA_RUNE_DOUBLEDAMAGE
-  DOTA_RUNE_HASTE
-  DOTA_RUNE_HAUNTED
-  DOTA_RUNE_ILLUSION
-  DOTA_RUNE_INVISIBILITY
-  DOTA_RUNE_BOUNTY
-  DOTA_RUNE_MYSTERY
-  DOTA_RUNE_RAPIER
-  DOTA_RUNE_REGENERATION
-  DOTA_RUNE_SPOOKY
-  DOTA_RUNE_TURBO
-  ]]
 end
 
 -- A player took damage from a tower
@@ -242,16 +243,7 @@ function GameMode:OnEntityKilled( keys )
 
   local damagebits = keys.damagebits -- This might always be 0 and therefore useless
 
-  -- Call a check to see if we need to remove it from the wave count
-  if(TheLastStand:RemoveFromWaveContent(killedUnit) == false) then
-    -- This unit was not part of the wave, is there more we need to do?
-  else
-    -- This unit was part of the wave and has been removed from the table, is there more we need to do?
-  end
-
-  if killedUnit:GetUnitName() == "npc_dota_goodguys_fort" then
-      -- The enemies win, you are defeated
-    end
+  UnitAbilities:CheckActionOnDeath(killedUnit)
 end
 
 
@@ -308,38 +300,6 @@ function GameMode:OnAbilityCastBegins(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local abilityName = keys.abilityname
-end
-
--- This function is called whenever a tower is killed
-function GameMode:OnTowerKill(keys)
-  DebugPrint('[TLS] OnTowerKill')
-  --DebugPrintTable(keys)
-
-  local gold = keys.gold
-  local killerPlayer = PlayerResource:GetPlayer(keys.killer_userid)
-  local team = keys.teamnumber
-end
-
--- This function is called whenever a player changes there custom team selection during Game Setup 
-function GameMode:OnPlayerSelectedCustomTeam(keys)
- DebugPrint('[TLS] OnPlayerSelectedCustomTeam')
-  --DebugPrintTable(keys)
-
-  local player = PlayerResource:GetPlayer(keys.player_id)
-  local success = (keys.success == 1)
-  local team = keys.team_id
-end
-
--- This function is called whenever an NPC reaches its goal position/target
-function GameMode:OnNPCGoalReached(keys)
-  DebugPrint('[TLS] OnNPCGoalReached')
-  --DebugPrintTable(keys)
-
-  local goalEntity = EntIndexToHScript(keys.goal_entindex)
-  local nextGoalEntity = EntIndexToHScript(keys.next_goal_entindex)
-  local npc = EntIndexToHScript(keys.npc_entindex)
-  npc:MoveToPositionAggressive(FINAL_POINT)
-  print(npc:GetUnitName().." moving to",FINAL_POINT)
 end
 
 -- This function is called whenever any player sends a chat message to team or All

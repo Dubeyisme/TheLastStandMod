@@ -53,7 +53,6 @@ HERO_POINT = nil
 BOSS_POINT = nil
 BOSS_RADIUS = 0
 
-TOTAL_WAVE_TYPES = 9
 WAVE_TYPES = {
   "Radiant",  -- 1
   "Dire",     -- 2
@@ -65,20 +64,23 @@ WAVE_TYPES = {
   "Dragon",   -- 8
   "Zombie"    -- 9
 }
+TOTAL_WAVE_TYPES = #WAVE_TYPES
 
-WAVES_COMPLETE = {}
 WAVES_TO_COMPLETE = {}
 CURRENT_WAVE_TYPE = nil
 WAVE_NUMBER = 0
+NORMAL_WAVE_COUNTER = 0
+BOSS_WAVE_COUNTER = 0
+GAME_HAS_STARTED = false
 
-CURRENT_LEVEL = 0 -- Used only for calculating the wave number
+CURRENT_LEVEL = -1 -- Used only for calculating the wave number
 CURRENT_ROUND = 0 -- Stores the current round number
 NEXT_ROUND = 1 -- Stores the next round number
 CURRENT_WAVE = 0 -- Stores the current wave number [Boss waves are 4]
 NEXT_WAVE = 1  -- Stores the next wave number [Boss waves are 4]
-MULTIPLIER = 0.65 -- Will be 1 at game start
-WAVE_DEFAULT_BOUNTY = 150 -- This is how much gold each wave should be worth from level 1
-WAVE_BOUNTY_INCREASE = 50 -- This is how much it should increase per wave in a round before multipliers
+MULTIPLIER = -0.6 -- Will be 1 at game start
+WAVE_DEFAULT_BOUNTY = 300 -- This is how much gold each wave should be worth from level 1
+WAVE_BOUNTY_INCREASE = 150 -- This is how much it should increase per wave in a round before multipliers
 WAVE_BOUNTY = 0 -- This is how much the wave will be worth
 WAVE_CONTENTS = {}
 WAVE_CONTENTS_ATTACKING = {}
@@ -137,10 +139,17 @@ if GetMapName() == "woodland" then
 end
 DebugPrint( '[TLS] Done setting up WOODLAND' )
 
+function TheLastStand:GameStart()
+  TheLastStand:IncrementRound()
+  TheLastStand:WaveEnded()
+  GAME_HAS_STARTED = true
+end
+
+
 -- This is where we catch and prep for everything after each wave
 function TheLastStand:WaveEnded()
   -- Announce the wave has been cleared
-  if(CURRENT_LEVEL~=0) then
+  if(GAME_HAS_STARTED) then
     -- Here we put things we do every round
     Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text="Wave Cleared", duration=WAVE_OUTRO_DURATION, style=STYLE_WAVE_OUTRO})
     -- PLAY A SOUND OUTSIDE SOUND CONTROLLER
@@ -150,15 +159,10 @@ function TheLastStand:WaveEnded()
   end
   -- Increment wave number
   TheLastStand:IncrementWaveType()
-  if(CURRENT_WAVE == 1) then
-    -- Round must have ended, prep the next round
-    TheLastStand:RoundEnded()
-  end
   -- Clear the old wave contents if anything left by mistake
   WAVE_CONTENTS = {}
   WAVE_CONTENTS_ATTACKING = {}
   -- Set timer for next wave
-
     Timers:CreateTimer({
         endTime = 10,
       callback = function()
@@ -204,88 +208,82 @@ function TheLastStand:CalculateWaveBounty(UnitCount,goal)
   DebugPrint("Difference: "..tostring((WAVE_BOUNTY*num)-goal))
 end
 
--- This is where we catch and prep for everything after each round
-function TheLastStand:RoundEnded()
-  -- Increment Round number
-  TheLastStand:IncrementRound()
-end
-
+-- Sort out the next set of waves
 function TheLastStand:IncrementRound()
   CURRENT_ROUND = NEXT_ROUND
-  MULTIPLIER=MULTIPLIER+0.1
+  MULTIPLIER=MULTIPLIER+0.5
   NEXT_ROUND=NEXT_ROUND+1
+  -- If they survive through all available rounds, loop back around to 1
   if(NEXT_ROUND==3)then
     NEXT_ROUND = 1
   end
   -- We just incremented to Round 1, increment level
-  if(NEXT_ROUND==2)then
-    CURRENT_LEVEL=CURRENT_LEVEL+1
-    MULTIPLIER=MULTIPLIER+0.2
+  if(CURRENT_ROUND==1)then
+    CURRENT_LEVEL=CURRENT_LEVEL+1 -- Mark how many times they've survived through the set - this is a multiplier for score
+    MULTIPLIER=MULTIPLIER+1.0
   end
-  -- Mark the previous round's completion for type
-  if(CURRENT_WAVE_TYPE==nil)then
-    -- This is the very first round, set up the wave types
-    local g, h, i = 0
-    local random_array = {}
-    -- Initialise the tracker
-    for i=1, TOTAL_WAVE_TYPES do
-      table.insert(WAVES_COMPLETE, 0)
-    end
-    -- Fill Waves_To_Complete twice with each wave type and a random array
-    for i=1, TOTAL_WAVE_TYPES do
-      table.insert(WAVES_TO_COMPLETE, WAVE_TYPES[i])
-      table.insert(WAVES_TO_COMPLETE, WAVE_TYPES[i])
-      table.insert(random_array,RandomInt(1,100))
-      table.insert(random_array,RandomInt(1,100))
-    end
-    -- Randomise the order of waves to be completed
-    local temp = 0
-    for g = 1, TOTAL_WAVE_TYPES*2-1 do
-      for h = 2, TOTAL_WAVE_TYPES*2 do
-        if(random_array[g]<random_array[h])then
-          temp = random_array[g]
-          random_array[g] = random_array[h]
-          random_array[h] = temp
-          temp = WAVES_TO_COMPLETE[g]
-          WAVES_TO_COMPLETE[g] = WAVES_TO_COMPLETE[h]
-          WAVES_TO_COMPLETE[h] = temp
-        end
+  -- Sort out the waves to complete
+  WAVES_TO_COMPLETE = {}
+ -- Set up wave types
+  local g, h, i = 0
+  local random_array = {}
+  -- Fill Waves_To_Complete twice with each wave type and a random array
+  for i=1, TOTAL_WAVE_TYPES do
+    table.insert(WAVES_TO_COMPLETE, WAVE_TYPES[i])
+    table.insert(random_array,RandomInt(1,100))
+  end
+  -- Randomise the order of waves to be completed
+  local temp = 0
+  for g = 1, TOTAL_WAVE_TYPES-1 do
+    for h = 2, TOTAL_WAVE_TYPES do
+      if(random_array[g]<random_array[h])then
+        temp = random_array[g]
+        random_array[g] = random_array[h]
+        random_array[h] = temp
+        temp = WAVES_TO_COMPLETE[g]
+        WAVES_TO_COMPLETE[g] = WAVES_TO_COMPLETE[h]
+        WAVES_TO_COMPLETE[h] = temp
       end
     end
-    WAVE_NUMBER = 1
-  else
-    -- Increment the previosly completed wave type
-    WAVE_NUMBER=WAVE_NUMBER+1
   end
-    -- Mark what our current wave type is
-    CURRENT_WAVE_TYPE = WAVES_TO_COMPLETE[WAVE_NUMBER]
+  WAVE_NUMBER=1
+  CURRENT_WAVE_TYPE = WAVES_TO_COMPLETE[WAVE_NUMBER]
 end
 
 function TheLastStand:IncrementWaveType()
   CURRENT_WAVE = NEXT_WAVE
-  MULTIPLIER=MULTIPLIER+0.05
+  MULTIPLIER=MULTIPLIER+0.1
   NEXT_WAVE=NEXT_WAVE+1
   if(NEXT_WAVE==4)then -- Should be 5 for bosses, skipping atm
     NEXT_WAVE = 1
+  end
+  -- If we've reached the end of a wave, better select the next wave
+  if(CURRENT_WAVE == 1) then
+    if(WAVE_NUMBER < TOTAL_WAVE_TYPES) then
+      WAVE_NUMBER=WAVE_NUMBER+1
+      CURRENT_WAVE_TYPE = WAVES_TO_COMPLETE[WAVE_NUMBER]
+    else
+      -- We have gone through every wave, move to the next round
+      TheLastStand:IncrementRound()
+    end
   end
 end
 
 -- Creates the text to be displayed on screen and returns the text and intro in a table
 function TheLastStand:AnnounceWaveText(wave, round, level, ttype)
   local text = ""
-  local actual_number = 0
   local wave_type_text = ""
   local wave_intro_text = ""
   if(wave==4)then
      -- This is a boss wave, record boss number
-    actual_number = ((A21-1)*2)+round
-    wave_type_text = "Boss Round "..TheLastStand:NumToText(actual_number).."."
+     BOSS_WAVE_COUNTER = BOSS_WAVE_COUNTER + 1
+    wave_type_text = "Boss Round "..TheLastStand:NumToText(BOSS_WAVE_COUNTER).."."
     wave_intro_text = TheLastStand:BossIntro(ttype,round)
   else
      -- This is a nonboss wave, record wave number
+    NORMAL_WAVE_COUNTER = NORMAL_WAVE_COUNTER + 1
      DebugPrint(tostring(level)..":"..tostring(round)..":"..tostring(wave))
-     actual_number = ((level-1)*2)*3+wave + (round-1)*3
-    wave_type_text = "Wave "..TheLastStand:NumToText(actual_number).."."
+    wave_type_text = "Wave "..TheLastStand:NumToText(NORMAL_WAVE_COUNTER).."."
     wave_intro_text = TheLastStand:TypeToText(ttype,round)
   end
   return {wave_type_text,wave_intro_text}
@@ -401,16 +399,7 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
     for i,j in pairs(UnitTypesListed)do
       for k=1, UnitCountsListed[i] do
         if(UnitTypesListed[i] ~= "mark_illusions") then
-          unit = CreateUnitByName(UnitTypesListed[i], SPAWN_POINT[point[h]], true, nil, nil, DOTA_TEAM_BADGUYS)
-          TheLastStand:UpgradeCreep(unit)
-          -- Fix abilities
-          for l=0,6 do
-            ability = unit:GetAbilityByIndex(l)
-            if(ability~=nil)then
-              ability:SetLevel(1)
-            end
-          end
-          UNITS_LEFT=UNITS_LEFT+1 -- Illusions do not count
+          unit = TheLastStand:CreateWaveUnitAtPlace(UnitTypesListed[i], SPAWN_POINT[point[h]], nil, DOTA_TEAM_BADGUYS, false, true)
         else
           -- Create illusion and modify it to match a hero
           local target = HERO_TARGETS[h]
@@ -444,11 +433,8 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
           unit:SetRenderColor(0,0,255)
         end
         -- Upgrade the creep to match the heroes based on multiplier
-        unit.disable_autoattack = 0
         ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = ATTACK_POINT[point[h]], Queue = true})
         ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = true})
-        table.insert(WAVE_CONTENTS,unit)
-        table.insert(WAVE_CONTENTS_ATTACKING,false)
       end
     end
   end
@@ -478,9 +464,27 @@ function TheLastStand:RemoveFromWaveContent(unit)
   return false
 end
 
--- Upgrade a single creep based on the multiplier
-function TheLastStand:UpgradeCreep(unit)
+-- Creates a unit for the wave and may give it attack orders or a bounty if desired
+function TheLastStand:CreateWaveUnitAtPlace(unit_name, position, owner, team, issue_orders, give_bounty)
+  local unit = nil
+  unit = CreateUnitByName(unit_name, position, true, owner, owner, team)
+  unit.disable_autoattack = 0
+  if(issue_orders)then
+    ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = true})
+  end
+  UNITS_LEFT=UNITS_LEFT+1
+  TheLastStand:UpgradeCreep(unit, give_bounty)
+  table.insert(WAVE_CONTENTS,unit)
+  table.insert(WAVE_CONTENTS_ATTACKING,false)
+  return unit
+end
+
+-- Upgrade a single creep based on the multiplier and fixes their abilities
+function TheLastStand:UpgradeCreep(unit, give_bounty)
+  DebugPrint("[TLS] Upgrading creep")
   -- Get unit details
+  local ability = nil
+  local i = 0
   local hp = unit:GetMaxHealth()
   local hr = unit:GetHealthRegen()
   local mr = unit:GetManaRegen()
@@ -488,30 +492,89 @@ function TheLastStand:UpgradeCreep(unit)
   local mag = unit:GetBaseMagicalResistanceValue()
   local admin = unit:GetBaseDamageMin()
   local admax = unit:GetBaseDamageMax()
-  local bxp = WAVE_BOUNTY*1.45  -- This controls gold and xp per wave
-  local bg = WAVE_BOUNTY -- This controls gold and xp per wave
+  local bxp = 0
+  local bg = 0
+  if(give_bounty)then
+    bxp = (WAVE_BOUNTY*1.45)/2  -- This controls gold and xp per wave
+    bg = (WAVE_BOUNTY)/2 -- This controls gold and xp per wave
+  end
   -- Change unit values based on level multiplier
-  hp=hp*MULTIPLIER
-  hr=hr*MULTIPLIER
-  mr=mr*MULTIPLIER
-  arm=arm*MULTIPLIER
-  mag=mag*MULTIPLIER
-  admin=admin*MULTIPLIER
-  admax=admax*MULTIPLIER
-  bxp=bxp*MULTIPLIER
-  bg=bg*MULTIPLIER
+  hp=math.floor(hp*MULTIPLIER)
+  hr=(hr*MULTIPLIER)
+  mr=(mr*MULTIPLIER)
+  arm=(arm*MULTIPLIER)
+  mag=math.floor(mag*MULTIPLIER)
+  admin=math.floor(admin*MULTIPLIER)
+  admax=math.floor(admax*MULTIPLIER)
+  bxp=math.floor(bxp*MULTIPLIER)
+  bg=math.floor(bg*MULTIPLIER)
   -- Set unit details
+  if(unit:HasFlyMovementCapability())then
+    local ms = unit:GetBaseMoveSpeed()
+    ms=RandomInt(ms-10,ms+10)
+    unit:SetBaseMoveSpeed(ms)
+  end
   unit:SetMaxHealth(hp)
   unit:SetHealth(hp)
   unit:SetBaseHealthRegen(hr)
   unit:SetBaseManaRegen(mr)
   unit:SetPhysicalArmorBaseValue(arm)
   unit:SetBaseMagicalResistanceValue(mag)
-  unit:SetBaseDamageMin(math.floor(admin))
-  unit:SetBaseDamageMax(math.floor(admax))
-  unit:SetDeathXP(math.floor(bxp))
-  unit:SetMaximumGoldBounty(math.floor(bg))
-  unit:SetMinimumGoldBounty(math.floor(bg))
+  unit:SetBaseDamageMin(admin)
+  unit:SetBaseDamageMax(admax)
+  unit:SetDeathXP(bxp)
+  unit:SetMaximumGoldBounty(bg)
+  unit:SetMinimumGoldBounty(bg)
+  -- Fix abilities
+  for i=0,6 do
+    ability = unit:GetAbilityByIndex(i)
+    if(ability~=nil)then
+      ability:SetLevel(1)
+    end
+  end
+end
+
+-- Upgrades the boss
+function TheLastStand:UpgradeBoss(boss, give_bounty)
+  -- Get the values
+  local modelscale = boss:GetModeScale()
+  local acquisitionrange = 1800
+  local range = boss:GetAttackRange(boss)
+  local str = boss:GetStrength()
+  local agi = boss:GetAgility()
+  local int = boss:GetIntellect()
+  local bxp = 0
+  local bg = 0
+  if(give_bounty)then
+    bxp = (WAVE_BOUNTY*1.45)/2  -- This controls gold and xp per wave
+    bg = (WAVE_BOUNTY)/2 -- This controls gold and xp per wave
+  end
+  -- Affect the values
+  modelscale = modelscale*2
+  range=range*2
+  bxp=bxp*MULTIPLIER
+  bg=bg*MULTIPLIER
+  int=int*MULTIPLIER
+  int=int*MULTIPLIER
+  agi=agi*MULTIPLIER
+  str=str*MULTIPLIER
+  -- Set unit details
+  if(unit:HasFlyMovementCapability())then
+    local ms = unit:GetBaseMoveSpeed()
+    ms=RandomInt(ms-5,ms+5)
+    unit:SetBaseMoveSpeed(ms)
+  end
+  boss:SetModelScale(modelscale)
+  boss:SetAcquisitionRange(acquisitionrange)
+  boss:SetAttackRange(range)
+  boss:SetDeathXP(math.floor(bxp))
+  boss:SetMaximumGoldBounty(math.floor(bg))
+  boss:SetMinimumGoldBounty(math.floor(bg))
+  boss:SetStrength(str)
+  boss:SetAgility(agi)
+  boss:SetIntellect(int)
+  -- Recalculate health, armour, etc based on gains
+  boss:CalculateStatBonus()
 end
 
 -- Fetch the list of valid units that can be spawned
@@ -701,13 +764,11 @@ function TheLastStand:ReturnList(ttype, wave, round)
   DebugPrint("[TLS] Golem Wave Type: "..WAVE_TYPES[5])
   if(round==1) then
     if(wave == 1) then
-      list = {"npc_dota_neutral_mud_golem_split"}
+      list = {"npc_dota_neutral_mud_golem"}
     elseif(wave == 2) then
-      list = {"npc_dota_neutral_mud_golem_split", 
-        "npc_dota_neutral_mud_golem"}
+      list = {"npc_dota_neutral_mud_golem"}
     elseif(wave == 3) then
-      list = {"npc_dota_neutral_mud_golem_split", 
-        "npc_dota_neutral_mud_golem", 
+      list = {"npc_dota_neutral_mud_golem",
         "npc_dota_neutral_rock_golem"}
     elseif(wave == 4) then
       -- list = boss 1
@@ -716,15 +777,12 @@ function TheLastStand:ReturnList(ttype, wave, round)
     end
   elseif (round==2) then
     if(wave == 1) then
-      list = {"npc_dota_neutral_mud_golem_split", 
-        "npc_dota_neutral_mud_golem"}
+      list = {"npc_dota_neutral_mud_golem"}
     elseif(wave == 2) then
-      list = {"npc_dota_neutral_mud_golem_split", 
-        "npc_dota_neutral_mud_golem", 
+      list = {"npc_dota_neutral_mud_golem",
         "npc_dota_neutral_rock_golem"}
     elseif(wave == 3) then
-      list = {"npc_dota_neutral_mud_golem_split", 
-        "npc_dota_neutral_mud_golem", 
+      list = {"npc_dota_neutral_mud_golem",
         "npc_dota_neutral_rock_golem", 
         "npc_dota_neutral_granite_golem"}
     elseif(wave == 4) then
@@ -1048,13 +1106,11 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
  if(ttype==WAVE_TYPES[5])then -- Golem
   if(round==1) then
     if(wave == 1) then
-      list = {4}
+      list = {2}
     elseif(wave == 2) then
-      list = {4, 
-        4}
+      list = {4}
     elseif(wave == 3) then
       list = {4, 
-        4, 
         1}
     elseif(wave == 4) then
       list = {1}
@@ -1063,15 +1119,12 @@ function TheLastStand:ReturnUnitCount(ttype, wave, round)
     end
   elseif (round==2) then
     if(wave == 1) then
-      list = {4, 
-        4}
+      list = {4}
     elseif(wave == 2) then
       list = {4, 
-        4, 
         1}
     elseif(wave == 3) then
       list = {4, 
-        4, 
         2, 
         1}
     elseif(wave == 4) then

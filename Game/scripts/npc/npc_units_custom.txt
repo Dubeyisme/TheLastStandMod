@@ -222,7 +222,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"15"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -267,7 +267,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -311,7 +311,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"15"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -356,7 +356,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -400,7 +400,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"10"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -444,7 +444,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -488,7 +488,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"75"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -532,7 +532,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"10"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -576,7 +576,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -620,7 +620,7 @@
 		"AttackRate"				"1"			// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"75"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -664,7 +664,7 @@
 		"AttackRate"				"2.7"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -708,7 +708,7 @@
 		"AttackRate"				"2.7"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"325"		// Speed
@@ -754,7 +754,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"5"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -798,7 +798,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"20"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -841,7 +841,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"30"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"330"		// Speed.
@@ -884,7 +884,7 @@
 		"AttackRate"				"1.6"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.	
@@ -927,7 +927,7 @@
 		"AttackRate"				"1.5"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"35"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"320"		// Speed.
@@ -970,7 +970,7 @@
 		"AttackRate"				"1.55"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"50"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"320"		// Speed.
@@ -1016,7 +1016,7 @@
 		"AttackRate"				"1.3"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"15"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"320"		// Speed.
@@ -1059,7 +1059,7 @@
 		"AttackRate"				"1.5"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"35"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"320"		// Speed.
@@ -1102,7 +1102,7 @@
 		"AttackRate"				"1.5"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"45"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -1145,7 +1145,7 @@
 		"AttackRate"				"1.5"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"55"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"300"		// Speed.
@@ -1190,7 +1190,7 @@
 		"AttackRate"				"1.6"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"2"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"375"		// Speed
@@ -1233,7 +1233,7 @@
 		"AttackRate"				"1.6"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"2"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"350"		// Speed
@@ -1277,7 +1277,7 @@
 		"AttackRate"				"1.0"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"15"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed
@@ -1322,7 +1322,7 @@
 		"AttackRate"				"1.5"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"350"		// Speed.
@@ -1365,7 +1365,7 @@
 		"AttackRate"				"1.0"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"50"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"320"		// Speed.	
@@ -1396,7 +1396,7 @@
 		"BaseClass"					"npc_dota_creep_lane"
 		"IsNeutralUnitType"			"0"
 		"AttackAcquisitionRange"	"900"
-		"Ability1"					"mud_golem_rock_destroy"			// Ability 1.
+		"Ability1"					""			// Ability 1.
 		"Ability2"					""			// Ability 2.
 		"Ability3"					""			// Ability 3.
 		"Ability4"					""			// Ability 4.
@@ -1412,7 +1412,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"20"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"310"		// Speed.
@@ -1456,7 +1456,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"5"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"310"		// Speed.
@@ -1483,7 +1483,7 @@
 		"BaseClass"					"npc_dota_creep_lane"
 		"IsNeutralUnitType"			"0"
 		"AttackAcquisitionRange"	"900"
-		"Ability1"					"mud_golem_rock_destroy"			// Ability 1.
+		"Ability1"					""			// Ability 1.
 		"Ability2"					"mud_golem_hurl_boulder"			// Ability 2.
 		"Ability3"					""			// Ability 3.
 		"Ability4"					""			// Ability 4.
@@ -1499,7 +1499,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"40"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -1526,7 +1526,7 @@
 		"BaseClass"					"npc_dota_creep_lane"
 		"IsNeutralUnitType"			"0"
 		"AttackAcquisitionRange"	"900"
-		"Ability1"					"mud_golem_rock_destroy"			// Ability 1.
+		"Ability1"					""			// Ability 1.
 		"Ability2"					"granite_golem_hp_aura"			// Ability 2.
 		"Ability3"					""			// Ability 3.
 		"Ability4"					""			// Ability 4.
@@ -1542,7 +1542,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"80"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -1588,7 +1588,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"15"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -1631,7 +1631,7 @@
 		"AttackRate"				"1.6"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"15"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -1675,7 +1675,7 @@
 		"AttackRate"				"1.8"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"15"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"290"		// Speed.
@@ -1718,7 +1718,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"50"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"300"		// Speed.	
@@ -1761,7 +1761,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"30"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -1804,7 +1804,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -1850,7 +1850,7 @@
 		"AttackRate"				"1.7"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"10"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"300"		// Speed.	
@@ -1894,7 +1894,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"20"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"270"		// Speed.
@@ -1938,7 +1938,7 @@
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"50"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementSpeed"				"290"		// Speed.
@@ -1979,16 +1979,16 @@
 		"MagicalResistance"			"10"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
-		"AttackDamageMin"			"28"		// Damage range min.
-		"AttackDamageMax"			"37"		// Damage range max.
+		"AttackDamageMin"			"15"		// Damage range min.
+		"AttackDamageMax"			"25"		// Damage range max.
 		"AttackRate"				"1.6"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"15"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"280"		// Speed.	
+		"MovementSpeed"				"300"		// Speed.	
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
@@ -2023,16 +2023,16 @@
 		"MagicalResistance"			"10"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
-		"AttackDamageMin"			"30"		// Damage range min.
-		"AttackDamageMax"			"37"		// Damage range max.
+		"AttackDamageMin"			"25"		// Damage range min.
+		"AttackDamageMax"			"35"		// Damage range max.
 		"AttackRate"				"1.6"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"20"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"310"		// Speed.
+		"MovementSpeed"				"300"		// Speed.
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
@@ -2068,16 +2068,16 @@
 		"MagicalResistance"			"10"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
-		"AttackDamageMin"			"46"		// Damage range min.
-		"AttackDamageMax"			"64"		// Damage range max.	
+		"AttackDamageMin"			"32"		// Damage range min.
+		"AttackDamageMax"			"42"		// Damage range max.	
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"25"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"310"		// Speed.
+		"MovementSpeed"				"300"		// Speed.
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
@@ -2113,16 +2113,16 @@
 		"MagicalResistance"			"10"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
-		"AttackDamageMin"			"56"		// Damage range min.
-		"AttackDamageMax"			"78"		// Damage range max.	
+		"AttackDamageMin"			"46"		// Damage range min.
+		"AttackDamageMax"			"56"		// Damage range max.	
 		"AttackRate"				"1.35"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"30"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"310"		// Speed.
+		"MovementSpeed"				"300"		// Speed.
 		"MovementTurnRate"			"0.5"		// Turning rate.
 		// Status
 		//----------------------------------------------------------------
@@ -2162,7 +2162,7 @@
 		"AttackRate"				"1.8"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"40"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
@@ -2208,7 +2208,7 @@
 		"AttackRate"				"1.5"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"75"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		// Movement
 		//----------------------------------------------------------------
 		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
@@ -2229,7 +2229,6 @@
 		"VisionDaytimeRange"		"1800"
 		"VisionNighttimeRange"		"1800"
 	}
-	
 	
 	
 	
@@ -2255,7 +2254,7 @@
 		"AttackRate"				"1.75"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"30"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"18"		// Gold earned min.
 		"BountyGoldMax"				"24"		// Gold earned max.
 		// Movement
@@ -2292,7 +2291,7 @@
 		"AttackRate"				"1.0"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"30"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"18"		// Gold earned min.
 		"BountyGoldMax"				"24"		// Gold earned max.
 		// Movement
@@ -2330,7 +2329,7 @@
 		//----------------------------------------------------------------
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"77"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"30"		// Gold earned min.
 		"BountyGoldMax"				"30"		// Gold earned max.
 		// Movement
@@ -2363,7 +2362,7 @@
 		//----------------------------------------------------------------
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"77"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"30"		// Gold earned min.
 		"BountyGoldMax"				"30"		// Gold earned max.
 		// Movement
@@ -2396,7 +2395,7 @@
 		//----------------------------------------------------------------
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"77"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"40"		// Gold earned min.
 		"BountyGoldMax"				"40"		// Gold earned max.
 		// Movement
@@ -2429,7 +2428,7 @@
 		//----------------------------------------------------------------
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"77"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"50"		// Gold earned min.
 		"BountyGoldMax"				"50"		// Gold earned max.
 		// Movement
@@ -2462,7 +2461,7 @@
 		//----------------------------------------------------------------
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"77"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"60"		// Gold earned min.
 		"BountyGoldMax"				"60"		// Gold earned max.
 		// Movement
@@ -2498,7 +2497,7 @@
 		"AttackRate"				"1.25"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"60"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"26"		// Gold earned min.
 		"BountyGoldMax"				"38"		// Gold earned max.
 		// Movement
@@ -2533,7 +2532,7 @@
 		"AttackRate"				"1.25"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"70"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"26"		// Gold earned min.
 		"BountyGoldMax"				"38"		// Gold earned max.
 		// Movement
@@ -2568,7 +2567,7 @@
 		"AttackRate"				"1.25"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"80"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"26"		// Gold earned min.
 		"BountyGoldMax"				"38"		// Gold earned max.
 		// Movement
@@ -2603,7 +2602,7 @@
 		"AttackRate"				"1.25"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"90"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"26"		// Gold earned min.
 		"BountyGoldMax"				"38"		// Gold earned max.
 		// Movement
@@ -2638,7 +2637,7 @@
 		"AttackRate"				"1.2"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"20"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"21"		// Gold earned min.
 		"BountyGoldMax"				"21"		// Gold earned max.
 		// Movement
@@ -2675,7 +2674,7 @@
 		"AttackRate"				"1.1"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"20"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"26"		// Gold earned min.
 		"BountyGoldMax"				"26"		// Gold earned max.
 		// Movement
@@ -2712,7 +2711,7 @@
 		"AttackRate"				"1.0"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"20"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"36"		// Gold earned min.
 		"BountyGoldMax"				"36"		// Gold earned max.
 		// Movement
@@ -2749,7 +2748,7 @@
 		"AttackRate"				"0.9"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"20"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"41"		// Gold earned min.
 		"BountyGoldMax"				"41"		// Gold earned max.
 		// Movement
@@ -2787,7 +2786,7 @@
 		"AttackRate"				"0.4"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"41"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"100"		// Gold earned min.
 		"BountyGoldMax"				"100"		// Gold earned max.
 		// Movement
@@ -2825,7 +2824,7 @@
 		"AttackRate"				"0.4"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"41"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"100"		// Gold earned min.
 		"BountyGoldMax"				"100"		// Gold earned max.
 		// Movement
@@ -2863,7 +2862,7 @@
 		"AttackRate"				"0.4"		// Speed of attack.
 		// Bounty
 		//----------------------------------------------------------------
-		"BountyXP"					"41"		// Experience earn.
+		"BountyXP"					"0"		// Experience earn.
 		"BountyGoldMin"				"100"		// Gold earned min.
 		"BountyGoldMax"				"100"		// Gold earned max.
 		// Movement
