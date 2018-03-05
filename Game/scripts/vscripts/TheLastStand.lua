@@ -79,12 +79,13 @@ NEXT_ROUND = 1 -- Stores the next round number
 CURRENT_WAVE = 0 -- Stores the current wave number [Boss waves are 4]
 NEXT_WAVE = 1  -- Stores the next wave number [Boss waves are 4]
 MULTIPLIER = -0.6 -- Will be 1 at game start
-WAVE_DEFAULT_BOUNTY = 300 -- This is how much gold each wave should be worth from level 1
-WAVE_BOUNTY_INCREASE = 150 -- This is how much it should increase per wave in a round before multipliers
+WAVE_DEFAULT_BOUNTY = 150 -- This is half as much gold as each wave should be worth from level 1
+WAVE_BOUNTY_INCREASE = 75 -- This is half as much XP it should increase per wave in a round before multipliers
 WAVE_BOUNTY = 0 -- This is how much the wave will be worth
 WAVE_CONTENTS = {}
 WAVE_CONTENTS_ATTACKING = {}
 HERO_TARGETS = {}
+PLAYERS = {}
 PLAYER_COUNT = 0
 UNITS_LEFT = 0
 FINAL_ENTITY = nil
@@ -139,11 +140,64 @@ if GetMapName() == "woodland" then
 end
 DebugPrint( '[TLS] Done setting up WOODLAND' )
 
+-- Starts the game
 function TheLastStand:GameStart()
   TheLastStand:IncrementRound()
   TheLastStand:WaveEnded()
   GAME_HAS_STARTED = true
 end
+
+-- End the game
+function TheLastStand:GameEnd()
+
+end
+
+-- If not everyone has picked their heroes, pick heroes for them
+function TheLastStand:ForcePickHeroes()
+  if(#PLAYERS ~= #HERO_TARGETS) then
+    for i=1,#PLAYERS do
+      if(PlayerResource:HasSelectedHero(PLAYERS[i])==false)then
+        PlayerResource:GetPlayer(PLAYERS[i]):MakeRandomHeroSelection()
+      end
+    end
+  end
+end
+
+-- Game Lost
+function TheLastStand:GameLost()
+  GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+  TheLastStand:GameEnd()
+end
+
+-- Game Won
+function TheLastStand:GameWon()
+  GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+  TheLastStand:GameEnd()
+end
+
+-- Getters
+function TheLastStand:GetCurrentWave() return CURRENT_WAVE end
+function TheLastStand:GetCurrentRound() return CURRENT_ROUND end
+function TheLastStand:GetCurrentLevel() return CURRENT_LEVEL end
+function TheLastStand:GetWaveContents() return WAVE_CONTENTS end
+function TheLastStand:GetWaveContentsAttacking() return WAVE_CONTENTS_ATTACKING end
+function TheLastStand:GetMultiplier() return MULTIPLIER end
+function TheLastStand:GetPlayerCount() return PLAYER_COUNT end
+function TheLastStand:GetHeroTargets() return HERO_TARGETS end
+function TheLastStand:GetPlayerTargets() return PLAYERS end
+function TheLastStand:GetUnitsLeft() return UNITS_LEFT end
+function TheLastStand:GetGameHasStarded() return GAME_HAST_STARTED end
+function TheLastStand:GetWaveTypes() return WAVE_TYPES end
+function TheLastStand:GetTotalWaveTypes() return TOTAL_WAVE_TYPES end
+function TheLastStand:GetFinalPoint() return FINAL_POINT end
+function TheLastStand:GetBossPoint() return BOSS_POINT end
+function TheLastStand:GetBossRadius() return BOSS_RADIUS end
+
+-- Setters
+function TheLastStand:SetPlayerCount(count) PLAYER_COUNT = count end
+function TheLastStand:AddHeroTargets(hero) table.insert(HERO_TARGETS,hero) end
+function TheLastStand:AddPlayerTargets(playerID) table.insert(PLAYERS,playerID) end
+function TheLastStand:SetWaveContentsAttacking(content, i) WAVE_CONTENTS_ATTACKING[i] = content end
 
 
 -- This is where we catch and prep for everything after each wave
@@ -154,6 +208,15 @@ function TheLastStand:WaveEnded()
     Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text="Wave Cleared", duration=WAVE_OUTRO_DURATION, style=STYLE_WAVE_OUTRO})
     -- PLAY A SOUND OUTSIDE SOUND CONTROLLER
     EmitAnnouncerSoundForTeam("ui.npe_objective_complete", DOTA_TEAM_GOODGUYS)
+
+    -- Pay out the heroes
+    local i=0
+    local xp = (((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE)*1.45)/2)*MULTIPLIER
+    local bounty = ((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE)/2)*MULTIPLIER
+    for i=1,#HERO_TARGETS do
+      HERO_TARGETS[i]:AddExperience(xp, DOTA_ModifyGold_Unspecified, false, true)
+      HERO_TARGETS[i]:SetGold(HERO_TARGETS[i]:GetGold()+bounty, true)
+    end
   else
     -- Here we put first round only things
   end

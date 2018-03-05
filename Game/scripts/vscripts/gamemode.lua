@@ -44,6 +44,8 @@ require('BossAI')
 require('sound')
 -- Controls unit abilities
 require("unit_abilities")
+-- Hero calls and respawn handled here
+require("herostuff")
 
 -- settings.lua is where you can specify many different properties for your game mode and is one of the core barebones files.
 require('settings')
@@ -69,9 +71,17 @@ function GameMode:ParseText(text,pid)
     ExecuteOrderFromTable({ UnitIndex = hero:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = false})
   end
   -- Fix up your hero
+  if(ParsedText[1]=="kill") then
+    if(tonumber(ParsedText[2])~=nil)then
+      PlayerResource:GetPlayer(tonumber(ParsedText[2])):GetAssignedHero():Kill(nil,hero)
+    else
+     hero:Kill(nil, hero)
+    end
+  end
   if(ParsedText[1]=="hp") then hero:SetHealth(hero:GetMaxHealth()) end
   if(ParsedText[1]=="mp") then hero:SetMana(hero:GetMaxMana()) end
   if(ParsedText[1]=="gold") then PlayerResource:SetGold(pid,PlayerResource:GetGold(pid)+(ParsedText[2]),true) end
+  if(ParsedText[1]=="bots") then TheLastStand:SetPlayerCount(5) end
   if(ParsedText[1]=="lvl") then 
     local lvl = hero:GetLevel()
     if(lvl<ParsedText[2]+0) then
@@ -129,6 +139,15 @@ end
 ]]
 function GameMode:OnAllPlayersLoaded()
   DebugPrint("[TLS] All Players have loaded into the game")
+  -- My own event to control when strategy time ends
+  DebugPrint('[TLS] MY TIMER START')
+  Timers:CreateTimer({
+      endTime = 60,
+    callback = function()
+      DebugPrint('[TLS] MY TIMER END')
+      TheLastStand:ForcePickHeroes()
+    end
+  })  
 end
 
 --[[
@@ -143,9 +162,9 @@ function GameMode:OnHeroInGame(hero)
   local i = 0
   local ability = nil
   -- Add this player's hero to the list of possible boss targets
-  table.insert(HERO_TARGETS,hero)
+  TheLastStand:AddHeroTargets(hero)
   DebugPrint(GetTeamName(hero:GetTeamNumber()))
-  PLAYER_COUNT = PLAYER_COUNT+1
+  DebugPrint("[UPDATE] Added a player and hero")
 
   -- Some heros spawn with abilities levelled incorrectly, fix this
   for i=0,23 do

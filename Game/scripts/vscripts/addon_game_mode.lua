@@ -21,8 +21,9 @@ function Precache( context )
   DebugPrint("[TLS] Performing pre-load precache")
 
   -- Ressurrection Resources
+  PrecacheResource("particle","particles/econ/events/fall_major_2016/teleport_start_fm06_outerring.vpcf",context) -- Circle
+
   PrecacheResource("particle", "particles/items_fx/aegis_respawn.vpcf", context) -- Respawn
-  PrecacheResource("particle", "particles/items_fx/aegis_respawn_spotlight.vpcf", context) -- Final Revival
   PrecacheResource("soundfile","sounds/music/dsadowski_01/stingers/respawn.vsnd",context) -- dsadowski_01.stinger.respawn
 
 

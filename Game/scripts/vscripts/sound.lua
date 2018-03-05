@@ -419,6 +419,11 @@ function SoundController:Villain_Defeated(villain)
   EmitAnnouncerSoundForTeam(response[voiceline], DOTA_TEAM_GOODGUYS)
 end
 
+function SoundController:RespawnStinger(hero)
+
+  EmitAnnouncerSoundForPlayer("dsadowski_01.stinger.respawn", hero:GetOwner():GetPlayerID())
+end
+
 -- Takes a variable and a hero or villain and parses which item was needed from the variable
 function SoundController:ParseVar(var, unit)
   -- Heroes

@@ -9,8 +9,8 @@ function GameMode:OnDisconnect(keys)
   local networkid = keys.networkid
   local reason = keys.reason
   local userid = keys.userid
-
 end
+
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
   DebugPrint("[TLS] GameRules State Changed")
@@ -30,7 +30,7 @@ end
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive
 -- operations here
 function GameMode:OnEntityHurt(keys)
-  DebugPrint("[TLS] Entity Hurt")
+  -- DebugPrint("[TLS] Entity Hurt")
   --DebugPrintTable(keys)
 
   local damagebits = keys.damagebits -- This might always be 0 and therefore useless
@@ -54,11 +54,20 @@ end
 function GameMode:OnPlayerKilled(keys)
   DebugPrint("[TLS] OnPlayerKilled")
   DebugPrintTable(keys)
-  local unitEntity = nil
-  if keys.HeroEntityIndex then
-    unitEntity = EntIndexToHScript(keys.HeroEntityIndex)
-  end
+  local plyID = keys.PlayerID
+  local hero = nil
+  if plyID ~= nil then
+    hero = PlayerResource:GetPlayer(plyID):GetAssignedHero()
+    -- Send the function off to the hero handlers
+    HeroStuff:InitiateReviveCircle(hero)
+    -- If this is a boss round, check if the boss needs to mention this
+    if(false) then
 
+    end
+  else
+    -- Something went wrong
+    DebugPrint("[ERROR] - No hero died")
+  end
 end
 
 -- An item was picked up off the ground
@@ -145,7 +154,7 @@ function GameMode:OnPlayerLearnedAbility( keys)
   end
   if(abilityname=="treant_natures_guise")then
     DebugPrint("Adding modifier")
-    hero:AddNewModifier(nil,nil,"modifier_treant_natures_guise",{attribute = MODIFIER_ATTRIBUTE_PERMANENT}})
+    hero:AddNewModifier(nil,nil,"modifier_treant_natures_guise",{attribute = MODIFIER_ATTRIBUTE_PERMANENT})
     DebugPrint("Done adding")
   end
 end
@@ -252,20 +261,42 @@ end
 -- have completely connected
 function GameMode:PlayerConnect(keys)
   DebugPrint('[TLS] PlayerConnect')
-  --DebugPrintTable(keys)
+  DebugPrintTable(keys)
+  local playerID = keys.index+1
+  if(GameMode:CheckPlayers(playerID)) then
+    DebugPrint("Adding Player")
+    TheLastStand:AddPlayerTargets(playerID)
+    TheLastStand:SetPlayerCount(TheLastStand:GetPlayerCount()+1)
+  end
+end
+
+-- Check if the player has already been added
+function GameMode:CheckPlayers(pid)
+  local players = TheLastStand:GetPlayerTargets()
+  local i = 0
+  for i=1,#players do
+    if(players[i]==pid) then
+      return false
+    end
+  end
+  return true
 end
 
 -- This function is called once when the player fully connects and becomes "Ready" during Loading
 function GameMode:OnConnectFull(keys)
   DebugPrint('[TLS] OnConnectFull')
   --DebugPrintTable(keys)
-  
   local entIndex = keys.index+1
   -- The Player entity of the joining user
   local ply = EntIndexToHScript(entIndex)
   
   -- The Player ID of the joining player
   local playerID = ply:GetPlayerID()
+  if(GameMode:CheckPlayers(playerID)) then
+    DebugPrint("Adding Player")
+    TheLastStand:AddPlayerTargets(playerID)
+    TheLastStand:SetPlayerCount(TheLastStand:GetPlayerCount()+1)
+  end
 end
 
 -- This function is called whenever illusions are created and tells you which was/is the original entity
