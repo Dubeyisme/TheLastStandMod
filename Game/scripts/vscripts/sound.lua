@@ -6,7 +6,7 @@ if SoundController == nil then
 end
 
 -- Responses after being revived
-HERO_REVIVED_RESPONSE = {
+SOUND_HERO_REVIVED_RESPONSE = {
 	RIK = {"riki_riki_thanks_01","riki_riki_thanks_02"},
 	PNG = {"pangolin_pangolin_respawn_05","pangolin_pangolin_thanks_01"},
 	SNI = {"sniper_snip_thanks_01","sniper_snip_thanks_02"},
@@ -20,7 +20,7 @@ HERO_REVIVED_RESPONSE = {
  }
 
 -- Hero might say at the start of round
-HERO_WAVE_START_RESPONSE = {
+SOUND_HERO_WAVE_START_RESPONSE = {
     RIK = {"riki_riki_cast_01", "riki_riki_cast_02", "riki_riki_cast_04"},
     PNG = {"pangolin_pangolin_cast_02", "pangolin_pangolin_cast_03", "pangolin_pangolin_rival_144"},
     SNI = {"sniper_snip_cast_01", "sniper_snip_cast_02", "sniper_snip_respawn_04"},
@@ -34,7 +34,7 @@ HERO_WAVE_START_RESPONSE = {
 }
 
 -- Responses after killing a villain
-HERO_KILLED_BOSS_RESPONSE = {
+SOUND_HERO_KILLED_BOSS_RESPONSE = {
   TRN = {
   	PNG = "pangolin_pangolin_rival_196",
   	LIN = "lina_lina_rival_01",
@@ -144,7 +144,7 @@ HERO_KILLED_BOSS_RESPONSE = {
 }
 
 -- Villain response to being killed
-BOSS_FALLEN_RESPONSE = {
+SOUND_BOSS_FALLEN_RESPONSE = {
   TRN = {"treant_treant_death_15", "treant_treant_death_16"},
   LON = {"lone_druid_lone_druid_death_07", "lone_druid_lone_druid_death_10"},
   DKW = {"dark_willow_sylph_death_01", "dark_willow_sylph_death_03"},
@@ -166,7 +166,7 @@ BOSS_FALLEN_RESPONSE = {
 }
 
 -- Villain response to hitting 75% and 25% HP
-BOSS_HP_REDUCED_RESPONSE = {
+SOUND_BOSS_HP_REDUCED_RESPONSE = {
   TRN = {"treant_treant_cast_01", "treant_treant_cast_03"},
   LON = {"lone_druid_lone_druid_level_09", "lone_druid_lone_druid_death_12"},
   DKW = {"dark_willow_sylph_taunt_01", "dark_willow_sylph_respawn_06"},
@@ -188,7 +188,7 @@ BOSS_HP_REDUCED_RESPONSE = {
 }
 
 -- Villain response to killing a hero
-BOSS_HERO_KILLED_RESPONSE = {
+SOUND_BOSS_HERO_KILLED_RESPONSE = {
   TRN = {"treant_treant_deny_14", "treant_treant_tango_01", "treant_treant_tango_03", "treant_treant_tango_02", "treant_treant_attack_11"},
   LON = {"lone_druid_lone_druid_laugh_04", "lone_druid_lone_druid_laugh_06", "lone_druid_lone_druid_lasthit_01", "lone_druid_lone_druid_deny_06", "lone_druid_lone_druid_deny_10"},
   DKW = {"dark_willow_sylph_ability2_06", "dark_willow_sylph_ability3_02", "dark_willow_sylph_kill_02", "dark_willow_sylph_ability3_07", "dark_willow_sylph_laugh_02"},
@@ -210,7 +210,7 @@ BOSS_HERO_KILLED_RESPONSE = {
 }
 
 -- Villain response to using an ability
-BOSS_ABILITY_RESPONSE = {
+SOUND_BOSS_ABILITY_RESPONSE = {
   TRN = {
 	  {"treant_treant_deny_07", "treant_treant_deny_04", "treant_treant_deny_03"}, 
 	  {"treant_treant_ability_leechseed_02", "treant_treant_ability_leechseed_04", "treant_treant_ability_leechseed_05"}, 
@@ -305,7 +305,7 @@ BOSS_ABILITY_RESPONSE = {
 
 
 -- Villain response to the start of the round
-BOSS_START_RESPONSE = {
+SOUND_BOSS_START_RESPONSE = {
   TRN = {"treant_treant_ability_leechseed_03", "treant_treant_respawn_12"},
   LON = {"lone_druid_lone_druid_ability_battlecry_01", "lone_druid_lone_druid_attack_10"},
   DKW = {"dark_willow_sylph_hero_intro_02", "dark_willow_sylph_illus_03"},
@@ -327,7 +327,7 @@ BOSS_START_RESPONSE = {
 }
 
 -- Villain response to defeating the heroes
-BOSS_VICTORY_RESPONSE = {
+SOUND_BOSS_VICTORY_RESPONSE = {
   TRN = {"treant_treant_win_04"},
   LON = {"lone_druid_lone_druid_deny_09"},
   DKW = {"dark_willow_sylph_win_05"},
@@ -356,7 +356,7 @@ function SoundController:Hero_WaveStart(herolist)
   local herochoice = RandomInt(1,#herolist)
   local voiceline = RandomInt(1,3)
   for i=1, #herolist do
-    table.insert(available_list,SoundController:ParseVar(HERO_WAVE_START_RESPONSE, herolist[i]))
+    table.insert(available_list,SoundController:ParseVar(SOUND_HERO_WAVE_START_RESPONSE, herolist[i]))
   end
   if(chance==5)then
     EmitAnnouncerSoundForTeam(available_list[herochoice][voiceline], DOTA_TEAM_GOODGUYS)
@@ -365,7 +365,7 @@ end
 
 -- Make this hero announce he killed the villain if he has a specific line for doing so
 function SoundController:Hero_VillainKilled(hero,villain)
-  local villain_repose = SoundController:ParseVar(HERO_KILLED_BOSS_RESPONSE, villain)
+  local villain_repose = SoundController:ParseVar(SOUND_HERO_KILLED_BOSS_RESPONSE, villain)
   local response = SoundController:ParseVar(villain_repose, hero)
   if(response~=nil)then
     EmitAnnouncerSoundForTeam(response[1], DOTA_TEAM_GOODGUYS)
@@ -375,47 +375,47 @@ end
 -- Make this hero say thanks for being revived
 function SoundController:Hero_Revived(hero)
   local voiceline = RandomInt(1,2)
-  local response = SoundController:ParseVar(HERO_REVIVED_RESPONSE, hero)
+  local response = SoundController:ParseVar(SOUND_HERO_REVIVED_RESPONSE, hero)
   EmitAnnouncerSoundForTeam(response[voiceline], DOTA_TEAM_GOODGUYS)
 end
 
 -- Make this villain announce he is using an ability
 function SoundController:Villain_AbilityUsed(villain, ability_number)
   local voiceline = RandomInt(1,3)
-  local response = SoundController:ParseVar(BOSS_ABILITY_RESPONSE, villain)
+  local response = SoundController:ParseVar(SOUND_BOSS_ABILITY_RESPONSE, villain)
   EmitAnnouncerSoundForTeam(response[ability_number][voiceline], DOTA_TEAM_GOODGUYS)
 end
 
 -- Make this villain announce he is hurt at 75% or 25% hp
 function SoundController:Villain_Hurt(villain, one_or_two)
-  local response = SoundController:ParseVar(BOSS_HP_REDUCED_RESPONSE, villain)
+  local response = SoundController:ParseVar(SOUND_BOSS_HP_REDUCED_RESPONSE, villain)
   EmitAnnouncerSoundForTeam(response[one_or_two], DOTA_TEAM_GOODGUYS)
 end
 
 -- Make this villain announce he has won
 function SoundController:Villain_Victory(villain)
-  local response = SoundController:ParseVar(BOSS_VICTORY_RESPONSE, villain)
+  local response = SoundController:ParseVar(SOUND_BOSS_VICTORY_RESPONSE, villain)
   EmitAnnouncerSoundForTeam(response[1], DOTA_TEAM_GOODGUYS)
 end
 
 -- Make this villain announce he killed a hero
 function SoundController:Villain_HeroKilled(villain)
   local voiceline = RandomInt(1,5)
-  local response = SoundController:ParseVar(BOSS_HERO_KILLED_RESPONSE, villain)
+  local response = SoundController:ParseVar(SOUND_BOSS_HERO_KILLED_RESPONSE, villain)
   EmitAnnouncerSoundForTeam(response[voiceline], DOTA_TEAM_GOODGUYS)
 end
 
 -- Make this villain the start of battle
 function SoundController:Villain_BattleStart(villain)
   local voiceline = RandomInt(1,2)
-  local response = SoundController:ParseVar(BOSS_START_RESPONSE, villain)
+  local response = SoundController:ParseVar(SOUND_BOSS_START_RESPONSE, villain)
   EmitAnnouncerSoundForTeam(response[voiceline], DOTA_TEAM_GOODGUYS)
 end
 
 -- Make this villain announce his demise
 function SoundController:Villain_Defeated(villain)
   local voiceline = RandomInt(1,2)
-  local response = SoundController:ParseVar(BOSS_FALLEN_RESPONSE, villain)
+  local response = SoundController:ParseVar(SOUND_BOSS_FALLEN_RESPONSE, villain)
   EmitAnnouncerSoundForTeam(response[voiceline], DOTA_TEAM_GOODGUYS)
 end
 
@@ -461,6 +461,7 @@ end
 -- Precache all the sounds, called from addon_game_mode during precache
 function SoundController:PrecacheSounds( context )
 
+  DebugPrint("[TLS] Performing pre-load sound precache")
   -- Wave Start/Finish Stingers
 
   -- Generic Wave Finish Sounds

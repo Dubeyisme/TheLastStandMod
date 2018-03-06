@@ -66,6 +66,246 @@ WAVE_TYPES = {
 }
 TOTAL_WAVE_TYPES = #WAVE_TYPES
 
+SPECIFIC_WAVE_TYPE = {
+  RADIANT = {
+      {
+        {"npc_dota_creep_goodguys_melee","npc_dota_creep_goodguys_ranged"},
+        {"npc_dota_creep_goodguys_melee", "npc_dota_creep_goodguys_ranged","npc_dota_goodguys_siege"},
+        {"npc_dota_creep_goodguys_melee", "npc_dota_creep_goodguys_ranged","npc_dota_goodguys_siege",  "npc_dota_creep_goodguys_melee_upgraded"},
+        {"npc_dota_hero_treant"}
+     },{
+        {"npc_dota_creep_goodguys_melee_upgraded", "npc_dota_creep_goodguys_ranged_upgraded"},
+        {"npc_dota_creep_goodguys_melee_upgraded", "npc_dota_creep_goodguys_ranged_upgraded", "npc_dota_goodguys_siege"},
+        {"npc_dota_creep_goodguys_melee_upgraded", "npc_dota_creep_goodguys_ranged_upgraded", "npc_dota_goodguys_siege","npc_dota_creep_goodguys_melee_upgraded_mega"},
+        {"npc_dota_hero_lone_druid"}
+     }
+   }
+    ,DIRE = {
+      {
+        {"npc_dota_creep_badguys_melee","npc_dota_creep_badguys_ranged"},
+        {"npc_dota_creep_badguys_melee", "npc_dota_creep_badguys_ranged","npc_dota_badguys_siege"},
+        {"npc_dota_creep_badguys_melee", "npc_dota_creep_badguys_ranged","npc_dota_badguys_siege",  "npc_dota_creep_badguys_melee_upgraded"},
+        {"npc_dota_hero_dark_willow"}
+     },{
+        {"npc_dota_creep_badguys_melee_upgraded", "npc_dota_creep_badguys_ranged_upgraded"},
+        {"npc_dota_creep_badguys_melee_upgraded", "npc_dota_creep_badguys_ranged_upgraded", "npc_dota_badguys_siege"},
+        {"npc_dota_creep_badguys_melee_upgraded", "npc_dota_creep_badguys_ranged_upgraded", "npc_dota_badguys_siege","npc_dota_creep_badguys_melee_upgraded_mega"},
+        {"npc_dota_hero_doom_bringer"}
+     }
+   }
+    ,KOBOLD = {
+      {
+        {"npc_dota_neutral_kobold","npc_dota_neutral_kobold_tunneler"},
+        {"npc_dota_neutral_kobold","npc_dota_neutral_kobold_tunneler", "npc_dota_neutral_kobold_taskmaster"},
+        {"npc_dota_neutral_kobold","npc_dota_neutral_kobold_tunneler", "npc_dota_neutral_kobold_taskmaster", "npc_dota_neutral_gnoll_assassin"},
+        {"npc_dota_hero_meepo"}
+     },{
+        {"npc_dota_neutral_kobold_tunneler", "npc_dota_neutral_kobold_taskmaster","npc_dota_neutral_gnoll_assassin"},
+        {"npc_dota_neutral_kobold_tunneler", "npc_dota_neutral_kobold_taskmaster", "npc_dota_neutral_gnoll_assassin", "npc_dota_neutral_polar_furbolg_champion"},
+        {"npc_dota_neutral_kobold_tunneler", "npc_dota_neutral_kobold_taskmaster", "npc_dota_neutral_gnoll_assassin","npc_dota_neutral_polar_furbolg_champion", "npc_dota_neutral_polar_furbolg_ursa_warrior"},
+        {"npc_dota_hero_ursa"}
+     }
+   }
+    ,TROLL = {
+      {
+        {"npc_dota_neutral_dark_troll","npc_dota_neutral_forest_troll_berserker","npc_dota_neutral_forest_troll_high_priest"},
+        {"npc_dota_neutral_dark_troll", "npc_dota_neutral_forest_troll_berserker","npc_dota_neutral_forest_troll_high_priest", "npc_dota_neutral_ogre_mauler"},
+        {"npc_dota_neutral_dark_troll", "npc_dota_neutral_forest_troll_berserker","npc_dota_neutral_forest_troll_high_priest", "npc_dota_neutral_ogre_mauler", "npc_dota_neutral_ogre_magi"},
+        {"npc_dota_hero_huskar"}
+     },{
+        {"npc_dota_neutral_dark_troll", "npc_dota_neutral_forest_troll_high_priest","npc_dota_neutral_ogre_mauler"},
+        {"npc_dota_neutral_dark_troll", "npc_dota_neutral_forest_troll_high_priest", "npc_dota_neutral_ogre_mauler", "npc_dota_neutral_ogre_magi"},
+        {"npc_dota_neutral_dark_troll", "npc_dota_neutral_forest_troll_high_priest", "npc_dota_neutral_ogre_mauler","npc_dota_neutral_ogre_magi", "npc_dota_neutral_dark_troll_warlord"},
+        {"npc_dota_hero_witch_doctor"}
+     }
+   }
+    ,GOLEM = {
+      {
+        {"npc_dota_neutral_mud_golem"},
+        {"npc_dota_neutral_mud_golem"},
+        {"npc_dota_neutral_mud_golem","npc_dota_neutral_rock_golem"},
+        {"npc_dota_hero_earth_spirit"}
+     },{
+        {"npc_dota_neutral_mud_golem"},
+        {"npc_dota_neutral_mud_golem","npc_dota_neutral_rock_golem"},
+        {"npc_dota_neutral_mud_golem","npc_dota_neutral_rock_golem", "npc_dota_neutral_granite_golem"},
+        {"npc_dota_hero_elder_titan"}
+     }
+   }
+    ,SATYR = {
+      {
+        {"npc_dota_neutral_satyr_trickster"},
+        {"npc_dota_neutral_satyr_trickster", "npc_dota_neutral_satyr_soulstealer"},
+        {"npc_dota_neutral_satyr_trickster", "npc_dota_neutral_satyr_soulstealer", "npc_dota_neutral_satyr_hellcaller"},
+        {"npc_dota_hero_nevermore"}
+     },{
+        {"npc_dota_neutral_satyr_trickster", "npc_dota_neutral_satyr_soulstealer"},
+        {"npc_dota_neutral_satyr_trickster", "npc_dota_neutral_satyr_soulstealer", "npc_dota_neutral_satyr_hellcaller"},
+        {"npc_dota_neutral_satyr_trickster", "npc_dota_neutral_satyr_soulstealer", "npc_dota_neutral_satyr_hellcaller", "mark_illusions"},
+        {"npc_dota_hero_witch_doctor"}
+     }
+   }
+    ,CENTAUR = {
+      {
+        {"npc_dota_neutral_centaur_outrunner"},
+        {"npc_dota_neutral_centaur_outrunner", "npc_dota_neutral_centaur_khan"},
+        {"npc_dota_neutral_centaur_outrunner", "npc_dota_neutral_centaur_khan", "npc_dota_neutral_prowler_acolyte"},
+        {"npc_dota_hero_centaur"}
+     },{
+        {"npc_dota_neutral_centaur_outrunner", "npc_dota_neutral_centaur_khan"},
+        {"npc_dota_neutral_centaur_outrunner", "npc_dota_neutral_centaur_khan", "npc_dota_neutral_prowler_acolyte"},
+        {"npc_dota_neutral_centaur_outrunner", "npc_dota_neutral_centaur_khan", "npc_dota_neutral_prowler_acolyte","npc_dota_neutral_prowler_shaman"},
+        {"npc_dota_hero_abyssal_underlord"}
+     }
+   }
+    ,DRAGON = {
+      {
+        {"npc_dota_neutral_harpy_scout", "npc_dota_neutral_harpy_storm"},
+        {"npc_dota_neutral_harpy_scout", "npc_dota_neutral_harpy_storm", "npc_dota_neutral_jungle_stalker"},
+        {"npc_dota_neutral_harpy_scout", "npc_dota_neutral_harpy_storm", "npc_dota_neutral_jungle_stalker", "npc_dota_neutral_elder_jungle_stalker"},
+        {"npc_dota_hero_skywrath_mage"}
+     },{
+        {"npc_dota_neutral_harpy_storm", "npc_dota_neutral_jungle_stalker", "npc_dota_neutral_elder_jungle_stalker"},
+        {"npc_dota_neutral_harpy_storm", "npc_dota_neutral_jungle_stalker", "npc_dota_neutral_elder_jungle_stalker", "npc_dota_neutral_black_drake"},
+        {"npc_dota_neutral_harpy_storm", "npc_dota_neutral_jungle_stalker", "npc_dota_neutral_elder_jungle_stalker", "npc_dota_neutral_black_drake","npc_dota_neutral_black_dragon"},
+        {"npc_dota_hero_jakiro"}
+     }
+   }
+    ,ZOMBIE = {
+      {
+        {"npc_dota_unit_undying_zombie", "npc_dota_unit_undying_zombie_torso"},
+        {"npc_dota_unit_undying_zombie", "npc_dota_unit_undying_zombie_torso", "npc_dota_dark_troll_warlord_skeleton_warrior"},
+        {"npc_dota_unit_undying_zombie", "npc_dota_unit_undying_zombie_torso", "npc_dota_dark_troll_warlord_skeleton_warrior", "npc_dota_neutral_fel_beast"},
+        {"npc_dota_hero_undying"}
+     },{
+        {"npc_dota_unit_undying_zombie", "npc_dota_unit_undying_zombie_torso", "npc_dota_dark_troll_warlord_skeleton_warrior"},
+        {"npc_dota_unit_undying_zombie", "npc_dota_unit_undying_zombie_torso", "npc_dota_dark_troll_warlord_skeleton_warrior", "npc_dota_neutral_fel_beast"},
+        {"npc_dota_unit_undying_zombie", "npc_dota_unit_undying_zombie_torso", "npc_dota_dark_troll_warlord_skeleton_warrior", "npc_dota_neutral_fel_beast","npc_dota_neutral_ghost"},
+        {"npc_dota_hero_necrolyte"}
+     }
+   }
+}
+
+SPECIFIC_WAVE_COUNT = {
+  RADIANT = {
+      {
+        {8,2},
+        {8,3,1},
+        {8,3,1,1},
+        {1}
+     },{
+        {4,2},
+        {5,3,1},
+        {5,3,1,1},
+        {1}
+     }
+   }
+    ,DIRE = {
+      {
+        {8,2},
+        {8,3,1},
+        {8,3,1,1},
+        {1}
+     },{
+        {4,2},
+        {5,3,1},
+        {5,3,1,1},
+        {1}
+     }
+   }
+    ,KOBOLD = {
+      {
+        {7,3},
+        {14,4,1},
+        {18,5,1,2},
+        {1}
+     },{
+        {5,1,2},
+        {10,1,2,1},
+        {10,1,2,2,1},
+        {1}
+     }
+   }
+    ,TROLL = {
+      {
+        {3,5,1},
+        {3,5,1,1},
+        {3,5,1,2,1},
+        {1}
+     },{
+        {5,1,1},
+        {5,1,2,1},
+        {5,2,2,1,1},
+        {1}
+     }
+   }
+    ,GOLEM = {
+      {
+        {2},
+        {4},
+        {4,1},
+        {1}
+     },{
+        {4},
+        {4,1},
+        {4,2,1},
+        {1}
+     }
+   }
+    ,SATYR = {
+      {
+        {6},
+        {6,1},
+        {6,2,1},
+        {1}
+     },{
+        {6,2},
+        {6,2,1},
+        {6,2,1,1},
+        {1}
+     }
+   }
+    ,CENTAUR = {
+      {
+        {4},
+        {4,1},
+        {4,1,1},
+        {1}
+     },{
+        {4,1},
+        {4,1,1},
+        {4,1,2,1},
+        {1}
+     }
+   }
+    ,DRAGON = {
+      {
+        {2,1},
+        {2,1,1},
+        {3,2,1,1},
+        {1}
+     },{
+        {2,1,1},
+        {2,2,1,1},
+        {2,2,1,2,1},
+        {1}
+     }
+   }
+    ,ZOMBIE = {
+      {
+        {8,3},
+        {8,3,5},
+        {8,3,5,2},
+        {1}
+     },{
+        {8,3,5},
+        {8,3,5,2},
+        {8,3,5,2,1},
+        {1}
+     }
+   }
+}
+
 WAVES_TO_COMPLETE = {}
 CURRENT_WAVE_TYPE = nil
 WAVE_NUMBER = 0
@@ -165,6 +405,11 @@ end
 
 -- Game Lost
 function TheLastStand:GameLost()
+  local boss = BossAI:GetCurrentBoss()
+  if(boss~=nil)then
+    -- Boss round, boss won. Make it announce it's victory
+    SoundController:Villain_Victory(boss)
+  end
   GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
   TheLastStand:GameEnd()
 end
@@ -210,13 +455,7 @@ function TheLastStand:WaveEnded()
     EmitAnnouncerSoundForTeam("ui.npe_objective_complete", DOTA_TEAM_GOODGUYS)
 
     -- Pay out the heroes
-    local i=0
-    local xp = (((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE)*1.45)/2)*MULTIPLIER
-    local bounty = ((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE)/2)*MULTIPLIER
-    for i=1,#HERO_TARGETS do
-      HERO_TARGETS[i]:AddExperience(xp, DOTA_ModifyGold_Unspecified, false, true)
-      HERO_TARGETS[i]:SetGold(HERO_TARGETS[i]:GetGold()+bounty, true)
-    end
+    TheLastStand:GiftGoldAndXP()
   else
     -- Here we put first round only things
   end
@@ -231,7 +470,7 @@ function TheLastStand:WaveEnded()
       callback = function()
         TheLastStand:WaveStart()
       end
-    })
+   })
 end 
 
 function TheLastStand:WaveStart()
@@ -256,6 +495,9 @@ function TheLastStand:WaveStart()
     TheLastStand:CreateWave(UnitList, UnitCount)
   else
     -- Generate a boss wave
+    --local UnitList = 
+    --local UnitCount = 
+    --TheLastStand:CalculateWaveBounty(UnitCount,(WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE))
   end
 end
 
@@ -542,6 +784,32 @@ function TheLastStand:CreateWaveUnitAtPlace(unit_name, position, owner, team, is
   return unit
 end
 
+-- Creates a boss unit for the wave and initiates their AI
+function TheLastStand:CreateBoss(UnitTypesListed, UnitCountsListed)
+  local point = ATTACK_POINT[RandomInt(1,SPAWN_COUNT)]
+  -- Create boss
+  local unit = CreateUnitByName(UnitTypesListed[1], point, true, nil, nil, DOTA_TEAM_BADGUYS)
+  -- Boss announces start
+  SoundController:Villain_BattleStart(unit)
+  -- Upgrade boss
+   TheLastStand:UpgradeBoss(unit)
+  -- Start the AI
+  BossAI:InitBossAI(unit)
+  -- Order boss to attack towards the ancient
+  ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = true})
+end 
+
+-- Gift the heroes gold and xp
+function TheLastStand:GiftGoldAndXP()
+  local i=0
+  local xp = (((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE)*1.45)/2)*MULTIPLIER
+  local bounty = ((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE)/2)*MULTIPLIER
+  for i=1,#HERO_TARGETS do
+    HERO_TARGETS[i]:AddExperience(xp, DOTA_ModifyGold_Unspecified, false, true)
+    HERO_TARGETS[i]:SetGold(HERO_TARGETS[i]:GetGold()+bounty, true)
+  end
+end
+
 -- Upgrade a single creep based on the multiplier and fixes their abilities
 function TheLastStand:UpgradeCreep(unit, give_bounty)
   DebugPrint("[TLS] Upgrading creep")
@@ -598,7 +866,7 @@ function TheLastStand:UpgradeCreep(unit, give_bounty)
 end
 
 -- Upgrades the boss
-function TheLastStand:UpgradeBoss(boss, give_bounty)
+function TheLastStand:UpgradeBoss(boss)
   -- Get the values
   local modelscale = boss:GetModeScale()
   local acquisitionrange = 1800
@@ -606,33 +874,19 @@ function TheLastStand:UpgradeBoss(boss, give_bounty)
   local str = boss:GetStrength()
   local agi = boss:GetAgility()
   local int = boss:GetIntellect()
-  local bxp = 0
-  local bg = 0
-  if(give_bounty)then
-    bxp = (WAVE_BOUNTY*1.45)/2  -- This controls gold and xp per wave
-    bg = (WAVE_BOUNTY)/2 -- This controls gold and xp per wave
-  end
   -- Affect the values
   modelscale = modelscale*2
   range=range*2
-  bxp=bxp*MULTIPLIER
-  bg=bg*MULTIPLIER
-  int=int*MULTIPLIER
-  int=int*MULTIPLIER
-  agi=agi*MULTIPLIER
-  str=str*MULTIPLIER
-  -- Set unit details
-  if(unit:HasFlyMovementCapability())then
-    local ms = unit:GetBaseMoveSpeed()
-    ms=RandomInt(ms-5,ms+5)
-    unit:SetBaseMoveSpeed(ms)
-  end
+  int=int*(MULTIPLIER+(#HERO_TARGETS/5*CURRENT_LEVEL))
+  agi=agi*(MULTIPLIER+(#HERO_TARGETS/5*CURRENT_LEVEL))
+  str=str*(MULTIPLIER+(#HERO_TARGETS/5*CURRENT_LEVEL))
+  -- Set the values
   boss:SetModelScale(modelscale)
   boss:SetAcquisitionRange(acquisitionrange)
   boss:SetAttackRange(range)
-  boss:SetDeathXP(math.floor(bxp))
-  boss:SetMaximumGoldBounty(math.floor(bg))
-  boss:SetMinimumGoldBounty(math.floor(bg))
+  boss:SetDeathXP(0)
+  boss:SetMaximumGoldBounty(0)
+  boss:SetMinimumGoldBounty(0)
   boss:SetStrength(str)
   boss:SetAgility(agi)
   boss:SetIntellect(int)
@@ -640,729 +894,29 @@ function TheLastStand:UpgradeBoss(boss, give_bounty)
   boss:CalculateStatBonus()
 end
 
+function TheLastStand:ParseWaveVar(var, wavetype)
+  -- Villains
+  if(wavetype == "Radiant") then return var.RADIANT end
+  if(wavetype == "Dire") then return var.DIRE end
+  if(wavetype == "Kobold") then return var.KOBOLD end
+  if(wavetype == "Troll") then return var.TROLL end
+  if(wavetype == "Golem") then return var.GOLEM end
+  if(wavetype == "Satyr") then return var.SATYR end
+  if(wavetype == "Centaur") then return var.CENTAUR end
+  if(wavetype == "Dragon") then return var.DRAGON end
+  if(wavetype == "Zombie") then return var.ZOMBIE end
+end
+
+
 -- Fetch the list of valid units that can be spawned
 function TheLastStand:ReturnList(ttype, wave, round)
-  local list = {}
-
- -- WAVE_TYPES = {"Radiant" = 1,"Dire" = 2,"Kobold" = 3,"Troll" = 4,"Golem" = 5,"Satyr" = 6,"Centaur" = 7,"Dragon" = 8,"Zombie" = 9"}
- DebugPrint("[TLS] TTYPE - "..ttype)
- if(ttype==WAVE_TYPES[1])then
-  DebugPrint("[TLS] Radiant Wave Type: "..WAVE_TYPES[1])
-  if(round==1) then
-    if(wave == 1) then
-      list = {"npc_dota_creep_goodguys_melee",
-        "npc_dota_creep_goodguys_ranged"}
-    elseif(wave == 2) then
-      list = {"npc_dota_creep_goodguys_melee", 
-        "npc_dota_creep_goodguys_ranged",
-        "npc_dota_goodguys_siege"}
-    elseif(wave == 3) then
-      list = {"npc_dota_creep_goodguys_melee", 
-        "npc_dota_creep_goodguys_ranged",
-        "npc_dota_goodguys_siege",  
-        "npc_dota_creep_goodguys_melee_upgraded"}
-    elseif(wave == 4) then
-      -- list = boss 1
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {"npc_dota_creep_goodguys_melee_upgraded", 
-        "npc_dota_creep_goodguys_ranged_upgraded"}
-    elseif(wave == 2) then
-      list = {"npc_dota_creep_goodguys_melee_upgraded", 
-        "npc_dota_creep_goodguys_ranged_upgraded", 
-        "npc_dota_goodguys_siege"}
-    elseif(wave == 3) then
-      list = {"npc_dota_creep_goodguys_melee_upgraded", 
-        "npc_dota_creep_goodguys_ranged_upgraded", 
-        "npc_dota_goodguys_siege",
-        "npc_dota_creep_goodguys_melee_upgraded_mega"}
-    elseif(wave == 4) then
-      -- list = boss 2
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[2])then
-  DebugPrint("[TLS] Dire Wave Type: "..WAVE_TYPES[2])
-  if(round==1) then
-    if(wave == 1) then
-      list = {"npc_dota_creep_badguys_melee",
-        "npc_dota_creep_badguys_ranged"}
-    elseif(wave == 2) then
-      list = {"npc_dota_creep_badguys_melee", 
-        "npc_dota_creep_badguys_ranged",
-        "npc_dota_badguys_siege"}
-    elseif(wave == 3) then
-      list = {"npc_dota_creep_badguys_melee", 
-        "npc_dota_creep_badguys_ranged",
-        "npc_dota_badguys_siege",  
-        "npc_dota_creep_badguys_melee_upgraded"}
-    elseif(wave == 4) then
-      -- list = boss 1
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {"npc_dota_creep_badguys_melee_upgraded", 
-        "npc_dota_creep_badguys_ranged_upgraded"}
-    elseif(wave == 2) then
-      list = {"npc_dota_creep_badguys_melee_upgraded", 
-        "npc_dota_creep_badguys_ranged_upgraded", 
-        "npc_dota_badguys_siege"}
-    elseif(wave == 3) then
-      list = {"npc_dota_creep_badguys_melee_upgraded", 
-        "npc_dota_creep_badguys_ranged_upgraded", 
-        "npc_dota_badguys_siege",
-        "npc_dota_creep_badguys_melee_upgraded_mega"}
-    elseif(wave == 4) then
-      -- list = boss 2
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[3])then
-  DebugPrint("[TLS] Kobold Wave Type: "..WAVE_TYPES[3])
-  if(round==1) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_kobold",
-        "npc_dota_neutral_kobold_tunneler"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_kobold",
-        "npc_dota_neutral_kobold_tunneler", 
-        "npc_dota_neutral_kobold_taskmaster"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_kobold",
-        "npc_dota_neutral_kobold_tunneler", 
-        "npc_dota_neutral_kobold_taskmaster", 
-        "npc_dota_neutral_gnoll_assassin"}
-    elseif(wave == 4) then
-      -- list = boss 1
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_kobold_tunneler", 
-        "npc_dota_neutral_kobold_taskmaster",
-        "npc_dota_neutral_gnoll_assassin"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_kobold_tunneler", 
-        "npc_dota_neutral_kobold_taskmaster", 
-        "npc_dota_neutral_gnoll_assassin", 
-        "npc_dota_neutral_polar_furbolg_champion"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_kobold_tunneler", 
-        "npc_dota_neutral_kobold_taskmaster", 
-        "npc_dota_neutral_gnoll_assassin",
-        "npc_dota_neutral_polar_furbolg_champion", 
-        "npc_dota_neutral_polar_furbolg_ursa_warrior"}
-    elseif(wave == 4) then
-      -- list = boss 2
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[4])then
-  DebugPrint("[TLS] Troll Wave Type: "..WAVE_TYPES[4])
-  if(round==1) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_dark_troll",
-        "npc_dota_neutral_forest_troll_berserker",
-        "npc_dota_neutral_forest_troll_high_priest"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_berserker",
-        "npc_dota_neutral_forest_troll_high_priest", 
-        "npc_dota_neutral_ogre_mauler"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_berserker",
-        "npc_dota_neutral_forest_troll_high_priest", 
-        "npc_dota_neutral_ogre_mauler", 
-        "npc_dota_neutral_ogre_magi"}
-    elseif(wave == 4) then
-      -- list = boss 1
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_high_priest",
-        "npc_dota_neutral_ogre_mauler"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_high_priest", 
-        "npc_dota_neutral_ogre_mauler", 
-        "npc_dota_neutral_ogre_magi"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_dark_troll", 
-        "npc_dota_neutral_forest_troll_high_priest", 
-        "npc_dota_neutral_ogre_mauler",
-        "npc_dota_neutral_ogre_magi", 
-        "npc_dota_neutral_dark_troll_warlord"}
-    elseif(wave == 4) then
-      -- list = boss 2
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[5])then
-  DebugPrint("[TLS] Golem Wave Type: "..WAVE_TYPES[5])
-  if(round==1) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_mud_golem"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_mud_golem"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_mud_golem",
-        "npc_dota_neutral_rock_golem"}
-    elseif(wave == 4) then
-      -- list = boss 1
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_mud_golem"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_mud_golem",
-        "npc_dota_neutral_rock_golem"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_mud_golem",
-        "npc_dota_neutral_rock_golem", 
-        "npc_dota_neutral_granite_golem"}
-    elseif(wave == 4) then
-      -- list = boss 2
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[6])then
-  DebugPrint("[TLS] Satyr Wave Type: "..WAVE_TYPES[6])
-  if(round==1) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_satyr_trickster"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_satyr_trickster", 
-        "npc_dota_neutral_satyr_soulstealer"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_satyr_trickster", 
-        "npc_dota_neutral_satyr_soulstealer", 
-        "npc_dota_neutral_satyr_hellcaller"}
-    elseif(wave == 4) then
-      -- list = boss 1
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_satyr_trickster", 
-        "npc_dota_neutral_satyr_soulstealer"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_satyr_trickster", 
-        "npc_dota_neutral_satyr_soulstealer", 
-        "npc_dota_neutral_satyr_hellcaller"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_satyr_trickster", 
-        "npc_dota_neutral_satyr_soulstealer", 
-        "npc_dota_neutral_satyr_hellcaller", 
-        "mark_illusions"}
-    elseif(wave == 4) then
-      -- list = boss 2
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[7])then
-  DebugPrint("[TLS] Centaur Wave Type: "..WAVE_TYPES[7])
-  if(round==1) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_centaur_outrunner"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_centaur_outrunner", 
-        "npc_dota_neutral_centaur_khan"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_centaur_outrunner", 
-        "npc_dota_neutral_centaur_khan", 
-        "npc_dota_neutral_prowler_acolyte"}
-    elseif(wave == 4) then
-      -- list = boss 1
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_centaur_outrunner", 
-        "npc_dota_neutral_centaur_khan"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_centaur_outrunner", 
-        "npc_dota_neutral_centaur_khan", 
-        "npc_dota_neutral_prowler_acolyte"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_centaur_outrunner", 
-        "npc_dota_neutral_centaur_khan", 
-        "npc_dota_neutral_prowler_acolyte",
-        "npc_dota_neutral_prowler_shaman"}
-    elseif(wave == 4) then
-      -- list = boss 2
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[8])then
-  DebugPrint("[TLS] Dragon Wave Type: "..WAVE_TYPES[8])
-  if(round==1) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_harpy_scout", 
-        "npc_dota_neutral_harpy_storm"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_harpy_scout", 
-        "npc_dota_neutral_harpy_storm", 
-        "npc_dota_neutral_jungle_stalker"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_harpy_scout", 
-        "npc_dota_neutral_harpy_storm", 
-        "npc_dota_neutral_jungle_stalker", 
-        "npc_dota_neutral_elder_jungle_stalker"}
-    elseif(wave == 4) then
-      -- list = boss 1
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {"npc_dota_neutral_harpy_storm", 
-        "npc_dota_neutral_jungle_stalker", 
-        "npc_dota_neutral_elder_jungle_stalker"}
-    elseif(wave == 2) then
-      list = {"npc_dota_neutral_harpy_storm", 
-        "npc_dota_neutral_jungle_stalker", 
-        "npc_dota_neutral_elder_jungle_stalker", 
-        "npc_dota_neutral_black_drake"}
-    elseif(wave == 3) then
-      list = {"npc_dota_neutral_harpy_storm", 
-        "npc_dota_neutral_jungle_stalker", 
-        "npc_dota_neutral_elder_jungle_stalker", 
-        "npc_dota_neutral_black_drake",
-        "npc_dota_neutral_black_dragon"}
-    elseif(wave == 4) then
-      -- list = boss 2
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[9])then
-  DebugPrint("[TLS] Zombie Wave Type: "..WAVE_TYPES[9])
-  if(round==1) then
-    if(wave == 1) then
-      list = {"npc_dota_unit_undying_zombie", 
-        "npc_dota_unit_undying_zombie_torso"}
-    elseif(wave == 2) then
-      list = {"npc_dota_unit_undying_zombie", 
-        "npc_dota_unit_undying_zombie_torso", 
-        "npc_dota_dark_troll_warlord_skeleton_warrior"}
-    elseif(wave == 3) then
-      list = {"npc_dota_unit_undying_zombie", 
-        "npc_dota_unit_undying_zombie_torso", 
-        "npc_dota_dark_troll_warlord_skeleton_warrior", 
-        "npc_dota_neutral_fel_beast"}
-    elseif(wave == 4) then
-      -- list = boss 1
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {"npc_dota_unit_undying_zombie", 
-        "npc_dota_unit_undying_zombie_torso", 
-        "npc_dota_dark_troll_warlord_skeleton_warrior"}
-    elseif(wave == 2) then
-      list = {"npc_dota_unit_undying_zombie", 
-        "npc_dota_unit_undying_zombie_torso", 
-        "npc_dota_dark_troll_warlord_skeleton_warrior", 
-        "npc_dota_neutral_fel_beast"}
-    elseif(wave == 3) then
-      list = {"npc_dota_unit_undying_zombie", 
-        "npc_dota_unit_undying_zombie_torso", 
-        "npc_dota_dark_troll_warlord_skeleton_warrior", 
-        "npc_dota_neutral_fel_beast",
-        "npc_dota_neutral_ghost"}
-    elseif(wave == 4) then
-      -- list = boss 2
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
+  local list = TheLastStand:ParseWaveVar(SPECIFIC_WAVE_TYPE, ttype)[round][wave]
   return list
 end
 
 -- Fetch the amount of units that can be spawned
 function TheLastStand:ReturnUnitCount(ttype, wave, round)
-  local list = {}
-
- -- WAVE_TYPES = {"Radiant" = 1,"Dire" = 2,"Kobold" = 3,"Troll" = 4,"Golem" = 5,"Satyr" = 6,"Centaur" = 7,"Dragon" = 8,"Zombie" = 9"}
-
- if(ttype==WAVE_TYPES[1] or ttype==WAVE_TYPES[2])then -- Radiant/Dire
-  if(round==1) then
-    if(wave == 1) then
-      list = {8,
-        2}
-    elseif(wave == 2) then
-      list = {8, 
-        3,
-        1}
-    elseif(wave == 3) then
-      list = {8, 
-        3,
-        1,  
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {4, 
-        2}
-    elseif(wave == 2) then
-      list = {5, 
-        3, 
-        1}
-    elseif(wave == 3) then
-      list = {5, 
-        3, 
-        1,
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[3])then -- Kobold
-  if(round==1) then
-    if(wave == 1) then
-      list = {7,
-        3}
-    elseif(wave == 2) then
-      list = {14,
-        4, 
-        1}
-    elseif(wave == 3) then
-      list = {18,
-        5, 
-        1, 
-        2}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {5, 
-        1,
-        2}
-    elseif(wave == 2) then
-      list = {10, 
-        1, 
-        2, 
-        1}
-    elseif(wave == 3) then
-      list = {10, 
-        1, 
-        2,
-        2, 
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[4])then -- Troll
-  if(round==1) then
-    if(wave == 1) then
-      list = {3,
-        5,
-        1}
-    elseif(wave == 2) then
-      list = {3, 
-        5,
-        1, 
-        1}
-    elseif(wave == 3) then
-      list = {3, 
-        5,
-        1, 
-        2, 
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {5, 
-        1,
-        1}
-    elseif(wave == 2) then
-      list = {5, 
-        1, 
-        2, 
-        1}
-    elseif(wave == 3) then
-      list = {5, 
-        2, 
-        2,
-        1, 
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[5])then -- Golem
-  if(round==1) then
-    if(wave == 1) then
-      list = {2}
-    elseif(wave == 2) then
-      list = {4}
-    elseif(wave == 3) then
-      list = {4, 
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {4}
-    elseif(wave == 2) then
-      list = {4, 
-        1}
-    elseif(wave == 3) then
-      list = {4, 
-        2, 
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[6])then -- Satyr
-  if(round==1) then
-    if(wave == 1) then
-      list = {6}
-    elseif(wave == 2) then
-      list = {6, 
-        1}
-    elseif(wave == 3) then
-      list = {6, 
-        2, 
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {6, 
-        2}
-    elseif(wave == 2) then
-      list = {6, 
-        2, 
-        1}
-    elseif(wave == 3) then
-      list = {6, 
-        2, 
-        1, 
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[7])then -- Centaur
-  if(round==1) then
-    if(wave == 1) then
-      list = {4}
-    elseif(wave == 2) then
-      list = {4, 
-        1}
-    elseif(wave == 3) then
-      list = {4, 
-        1, 
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {4, 
-        1}
-    elseif(wave == 2) then
-      list = {4, 
-        1, 
-        1}
-    elseif(wave == 3) then
-      list = {4, 
-        1, 
-        2,
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[8])then -- Dragon
-  if(round==1) then
-    if(wave == 1) then
-      list = {2, 
-        1}
-    elseif(wave == 2) then
-      list = {2, 
-        1, 
-        1}
-    elseif(wave == 3) then
-      list = {3, 
-        2, 
-        1, 
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {2, 
-        1, 
-        1}
-    elseif(wave == 2) then
-      list = {2, 
-        2, 
-        1, 
-        1}
-    elseif(wave == 3) then
-      list = {2, 
-        2, 
-        1, 
-        2,
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
- if(ttype==WAVE_TYPES[9])then -- Zombie
-  if(round==1) then
-    if(wave == 1) then
-      list = {8, 
-        3}
-    elseif(wave == 2) then
-      list = {8, 
-        3, 
-        5}
-    elseif(wave == 3) then
-      list = {8, 
-        3, 
-        5, 
-        2}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  elseif (round==2) then
-    if(wave == 1) then
-      list = {8, 
-        3, 
-        5}
-    elseif(wave == 2) then
-      list = {8, 
-        3, 
-        5, 
-        2}
-    elseif(wave == 3) then
-      list = {8, 
-        3, 
-        5, 
-        2,
-        1}
-    elseif(wave == 4) then
-      list = {1}
-    else
-      --something went wrong
-    end
-  else
-    -- Something went wrong
-  end
- end
+  local list =  TheLastStand:ParseWaveVar(SPECIFIC_WAVE_COUNT, ttype)[round][wave]
   return list
 end
 

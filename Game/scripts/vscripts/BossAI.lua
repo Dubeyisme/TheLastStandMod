@@ -1,5 +1,22 @@
 -- This contains a number of useful AI fetchers, sorters, and modes for the specialised AI packages to use
 
+BOSSAI_CURRENT_TARGET = nil
+BOSSAI_CURRENT_BOSS = nil
+BOSSAI_CURENT_MODE = 0
+BOSSAI_PLAYER_DAMAGE_TRACKER = {}
+BOSSAI_CURRENT_AI_TICK_TIMER = 1
+
+--BOSSAI_CURRENT_STATE = 
+
+BOSSAI_AI_STATE = {
+	ATTACKING = 1, -- When the boss has a set target to attack
+	CASTING = 2, -- When the boss has decided to use an ability
+	FLEEING = 3, -- When the boss has decided to flee from a strong attacker
+	HUNTING = 4 -- When the boss does not like any of the current targets and requires a new one
+}
+
+BOSSAI_ABILITY_COOLDOWN = {0,0,0,0,0}
+
 -- Create an instance of this class
 if BossAI == nil then
     DebugPrint( '[TLS] creating Boss AI' )
@@ -9,7 +26,7 @@ end
 -----------------------------------------------------------------------------------------
 -- Special AI data for each individual boss
 -----------------------------------------------------------------------------------------
--- require('special_boss_ai/TreantProtector')
+ require('special_boss_ai/TreantProtector')
 -- require('special_boss_ai/LoneDruid')
 -- require('special_boss_ai/DarkWillow')
 -- require('special_boss_ai/Doom')
@@ -27,6 +44,116 @@ end
 -- require('special_boss_ai/Jakiro')
 -- require('special_boss_ai/Undying')
 -- require('special_boss_ai/Necrophos')
+
+-----------------------------------------------------------------------------------------
+-- Initialisation of the AI
+-----------------------------------------------------------------------------------------
+
+function BossAI:GetCurrentBoss() return BOSSAI_CURRENT_BOSS end
+function BossAI:GetCurrentAbilityCooldowns() return BOSSAI_ABILITY_COOLDOWN end
+
+
+-- Initialise the Boss' AI
+function BossAI:InitBossAI(boss)
+	-- Init damage tracker
+	BossAI:InitDamageTracker()
+	-- Init current mode
+	BOSSAI_CURENT_MODE = 0
+end
+
+-- Reinitialises the damage tracker, setting it up for the next round
+function BossAI:InitDamageTracker()
+	local playerlist = TheLastStand:GetPlayerTargets()
+	BOSSAI_PLAYER_DAMAGE_TRACKER = {}
+	local i = 0
+	for i=1,#playerlist do
+		table.insert(BOSSAI_PLAYER_DAMAGE_TRACKER,0)
+	end
+	for i=1,#playerlist do
+		BOSSAI_PLAYER_DAMAGE_TRACKER[playerlist[i]] = 0
+	end
+end
+
+-----------------------------------------------------------------------------------------
+-- Boss Every Tick
+-----------------------------------------------------------------------------------------
+
+function BossAI:EveryTick()
+	-- Check if the boss is alive
+	if(true) then
+		-- Boss is alive
+	else
+		-- Boss has died, end the round has therefore ended
+	end
+	-- Check if the wave has ended
+	if(true) then
+		-- Check which mode we are in
+		if(BOSSAI_CURENT_MODE==1) then
+			-- Check if HP has dipped below 75%
+			if(BOSSAI_CURRENT_BOSS:GetHealth()/BOSSAI_CURRENT_BOSS:GetMaxHealth()<0.75) then
+				BOSSAI_CURENT_MODE = 2
+			end
+		else 
+			if (BOSSAI_CURENT_MODE==2) then
+				-- Check if HP has dipped below 25%
+				if(BOSSAI_CURRENT_BOSS:GetHealth()/BOSSAI_CURRENT_BOSS:GetMaxHealth()<0.25) then
+					BOSSAI_CURENT_MODE = 3
+				end
+			else 
+				if(BOSSAI_CURENT_MODE == 3) then
+					-- We are in mode 3, no change.
+				end
+			end
+		end
+		-- Adjust the aggro to stop caring about those not attacking
+		BossAI:AdjustAggro()
+		-- Lower Cooldowns
+		local i = 0
+		for i=1,#BOSSAI_ABILITY_COOLDOWN do
+			if(BOSSAI_ABILITY_COOLDOWN[i]>0) then
+				BOSSAI_ABILITY_COOLDOWN = BOSSAI_ABILITY_COOLDOWN -1
+			end
+		end
+		Timers:CreateTimer({
+	        endTime = 1,
+	      callback = function()
+	        BossAI:EveryTick()
+	      end
+	    })	
+	else
+		--BOSSAI_CURRENT_BOSS
+		-- Reset current boss to nothing
+		BOSSAI_CURRENT_BOSS = nil
+	end
+end
+
+-----------------------------------------------------------------------------------------
+-- Boss Reaction Functions
+-----------------------------------------------------------------------------------------
+
+-- Boss took damage
+function BossAI:BossHurt(boss, attacker, damage)
+	-- Increment the damage tracker
+	BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner()] = BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner()] + damage
+	DebugPrint(BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner():GetPlayerID()])
+
+	-- Is there something else we need to do in reaction to taking damage?
+end
+
+-- Adjust current aggro every AI tick
+function BossAI:AdjustAggro()
+	-- Increment aggro for the current target to reduce likely hood of switching targets
+	BOSSAI_PLAYER_DAMAGE_TRACKER[BOSSAI_CURRENT_TARGET:GetOwner():GetPlayerID()] = BOSSAI_PLAYER_DAMAGE_TRACKER[BOSSAI_CURRENT_TARGET:GetOwner():GetPlayerID()] + 5
+	local i = 0
+	-- Reduce aggro for all players
+	for i=1,#BOSSAI_PLAYER_DAMAGE_TRACKER do
+		BOSSAI_PLAYER_DAMAGE_TRACKER[i] = BOSSAI_PLAYER_DAMAGE_TRACKER[i] - math.ceil(BOSSAI_PLAYER_DAMAGE_TRACKER[i]/60)
+		if(BOSSAI_PLAYER_DAMAGE_TRACKER[i]<0) then
+			BOSSAI_PLAYER_DAMAGE_TRACKER[i] = 0
+		end
+	end
+end
+
 
 -----------------------------------------------------------------------------------------
 -- Attack AI Functions

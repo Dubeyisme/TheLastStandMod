@@ -45,7 +45,10 @@ function GameMode:OnEntityHurt(keys)
       damagingAbility = EntIndexToHScript( keys.entindex_inflictor )
     end
 
-    -- Might put boss code stuff here
+    -- If this is a boss round, check boss reaction
+    if(TheLastStand:GetCurrentWave()==4) then
+        BossAI:BossHurt(TheLastStand:GetWaveContents()[1], entCause, damagebits)
+    end
 
   end
 end
@@ -61,8 +64,8 @@ function GameMode:OnPlayerKilled(keys)
     -- Send the function off to the hero handlers
     HeroStuff:InitiateReviveCircle(hero)
     -- If this is a boss round, check if the boss needs to mention this
-    if(false) then
-
+    if(TheLastStand:GetCurrentWave()==4) then
+      SoundController:Villain_HeroKilled(TheLastStand:GetWaveContents()[1])
     end
   else
     -- Something went wrong
