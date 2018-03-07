@@ -4,6 +4,257 @@
 {
   "Version"   "1"
 
+  
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Boss Abilities
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	//=================================================================================================================
+	// Treant Protector: Silence
+	//=================================================================================================================
+	"treant_ability_silence"
+	{
+		 // General
+		//-------------------------------------------------------------------------------------
+		"ID"					"7001"	
+		"BaseClass"             "ability_datadriven"
+		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"SpellDispellableType"	"SPELL_DISPELLABLE_YES"
+
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"		"soundevents/game_sounds_heroes/game_sounds_drowranger.vsndevts"		
+			"particle"		"particles/units/heroes/hero_silencer/silencer_global_silence.vpcf"		
+		}
+		
+		// Stats
+		//-------------------------------------------------------------------------------------
+		"AbilityCastRange" "1500"   // This will  also show a circle when hovering over the spell
+		"AbilityCastPoint" "0.01"   // Cast animation time
+		"AbilityCooldown"				"16 13 10 7 4"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"5"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Special
+		//-------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type" "FIELD_INTEGER"
+				"duration" "1.0 2.0 3.0 4.0 5.0"
+			}	
+			"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+		}
+
+		// Data Driven
+		//-------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"ActOnTargets"
+			{
+				"Target" "TARGET"
+				"Action"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_treant_silence_datadriven"
+						"Target"	"TARGET"
+					}
+	
+					"FireSound"
+					{
+						"EffectName"	"Hero_DrowRanger.Silence"
+						"Target"		"TARGET"
+					}	
+				}		
+			 }
+		 }
+		 
+		 "Modifiers"
+		{
+			"modifier_treant_silence_datadriven"
+			{
+				"IsDebuff"	"1"
+				"Duration"	"%duration"
+				"IsPurgable"	"1"
+				"EffectName"	"particles/generic_gameplay/generic_silence.vpcf"
+				"EffectAttachType"	"follow_overhead"			
+	
+	
+				"States"
+				{
+					"MODIFIER_STATE_SILENCED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}	
+	}
+
+  
+  //=================================================================================================================
+	// Treant Protector: Overgrowth
+	//=================================================================================================================
+	"treant_overgrowth"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"ID"							"5437"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"		
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilitySound"					"Hero_Treant.Overgrowth.Cast"
+
+		"AbilityCastPoint"				"0.5 0.5 0.5 0.5 0.5"
+		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_5"
+
+		"FightRecapLevel"				"2"
+
+		"HasScepterUpgrade"				"1"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"15"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"1.5, 2.25 3.0 3.75 4.5"
+			}
+			
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"800"
+			}	
+			
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"eyes_radius"					"800"
+			}				
+		}
+	}
+  
+  	
+	//=================================================================================================================
+	// Treant Protector: Leech Seed
+	//=================================================================================================================
+	"treant_leech_seed"
+	{
+		"ID"					"5435"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"	
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
+		"AbilitySound"					"Hero_Treant.LeechSeed.Cast"
+
+		"AbilityCastRange"				"350"
+		"AbilityCastPoint"				"0.5 0.5 0.5 0.5 0.5"
+		"FightRecapLevel"				"1"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"16 13 10 7 4"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"damage_interval"				"0.75"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"leech_damage"					"15 30 45 60 75"
+			}		
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"movement_slow"					"-16 -20 -24 -28 -32"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"500"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"4.5"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"projectile_speed"				"400"
+			}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	}
+  
+	
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Dummy Abilities and Containers
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  
   "containers_lua_targeting"
   {
     // General
@@ -289,9 +540,10 @@
      
     }
   
-  //-----------
-  // Override Abilities
-  //-----------
+  
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Hero Abilities and Overrides
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
   // Regular abilities
   

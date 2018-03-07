@@ -33,15 +33,8 @@ function HeroStuff:InitiateReviveCircle(hero)
 	HEROSTUFF_HERO_INDEX = HEROSTUFF_HERO_INDEX + 1
 	local HEROSTUFF_HERO_INDEX = HEROSTUFF_HERO_INDEX
 	local i = 0
-	local ability = nil
 	local dummy = CreateUnitByName("npc_dummy_unit", hero:GetOrigin(), false, hero, hero, DOTA_TEAM_GOODGUYS)
-	-- Fix abilities
-	  for i=0,6 do
-	    ability = dummy:GetAbilityByIndex(i)
-	    if(ability~=nil)then
-	      ability:SetLevel(1)
-	    end
-	  end
+	GameMode:FixDummy(dummy)
 	-- Set the hero to respawn on the spot
 	hero:SetRespawnPosition(hero:GetOrigin())
 	-- Create the circle

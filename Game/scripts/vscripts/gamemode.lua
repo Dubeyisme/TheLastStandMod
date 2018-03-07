@@ -1,7 +1,6 @@
 -- This is the primary barebones gamemode script and should be used to assist in initializing your game mode
 TLS_VERSION = "1.00"
 
-
 -- This is only for testing, disable before release
 CHEATS = true
 if(CHEATS) then DebugPrint( '[TLS] CHEATS ARE ACTIVE' ) end
@@ -52,6 +51,16 @@ require('settings')
 -- events.lua is where you can specify the actions to be taken when any event occurs and is one of the core barebones files.
 require('events')
 
+function GameMode:FixDummy(dummy)
+  local ability = nil
+  -- Fix abilities
+    for i=0,6 do
+      ability = dummy:GetAbilityByIndex(i)
+      if(ability~=nil)then
+        ability:SetLevel(1)
+      end
+    end
+end
 
 -- Parse text and implement test code
 function GameMode:ParseText(text,pid)
@@ -77,6 +86,29 @@ function GameMode:ParseText(text,pid)
     else
      hero:Kill(nil, hero)
     end
+  end
+  if(ParsedText[1]=="ability") then
+    -- Create a dummy, give it the ability, then make it use it on the hero
+    local dummy = CreateUnitByName("npc_dummy_unit", hero:GetOrigin(), true, nil, nil, DOTA_TEAM_BADGUYS)
+    local dummy_ability = dummy:AddAbility("treant_ability_silence")
+    GameMode:FixDummy(dummy)
+    if(ParsedText[2]~=nil) then
+      local intint = math.min(ParsedText[2]+0,5)
+      dummy_ability:SetLevel(math.max(intint,1))
+    end
+    -- Issue order
+    ExecuteOrderFromTable({ UnitIndex = dummy:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_TARGET,TargetIndex = hero:entindex(), AbilityIndex = dummy_ability:entindex(), Queue = true})
+    -- Remove unit in a short while
+    Timers:CreateTimer({
+        endTime = 2,
+      callback = function()
+        dummy:Kill(nil, dummy)
+      end
+    })
+  end
+  if(ParsedText[1]=="boss")then
+    MULTIPLIER = math.abs(MULTIPLIER)+MULTIPLIER_INCREMENT*3
+    TheLastStand:CreateBoss({"npc_dota_hero_treant"}, {1})
   end
   if(ParsedText[1]=="hp") then hero:SetHealth(hero:GetMaxHealth()) end
   if(ParsedText[1]=="mp") then hero:SetMana(hero:GetMaxMana()) end
@@ -162,23 +194,25 @@ function GameMode:OnHeroInGame(hero)
   local i = 0
   local ability = nil
   -- Add this player's hero to the list of possible boss targets
-  TheLastStand:AddHeroTargets(hero)
-  DebugPrint(GetTeamName(hero:GetTeamNumber()))
-  DebugPrint("[UPDATE] Added a player and hero")
+  if(TheLastStand:GetGameHasStarded()==false)then
+    TheLastStand:AddHeroTargets(hero)
+    DebugPrint(GetTeamName(hero:GetTeamNumber()))
+    DebugPrint("[UPDATE] Added a player and hero")
 
-  -- Some heros spawn with abilities levelled incorrectly, fix this
-  for i=0,23 do
-    ability = hero:GetAbilityByIndex(i)
-    if(ability~=nil)then
-      ability:SetLevel(0)
+    -- Some heros spawn with abilities levelled incorrectly, fix this
+    for i=0,23 do
+      ability = hero:GetAbilityByIndex(i)
+      if(ability~=nil)then
+        ability:SetLevel(0)
+      end
     end
-  end
 
-  if(hero:GetUnitName()=="npc_dota_hero_riki") then
-    for i=0,hero:GetModifierCount() do
-      local s = hero:GetModifierNameByIndex(i)
-      DebugPrint("Modifier "..s.." removed")
-      hero:RemoveModifierByName(s)  
+    if(hero:GetUnitName()=="npc_dota_hero_riki") then
+      for i=0,hero:GetModifierCount() do
+        local s = hero:GetModifierNameByIndex(i)
+        DebugPrint("Modifier "..s.." removed")
+        hero:RemoveModifierByName(s)  
+      end
     end
   end
 

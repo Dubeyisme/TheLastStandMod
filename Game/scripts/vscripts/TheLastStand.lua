@@ -54,16 +54,17 @@ BOSS_POINT = nil
 BOSS_RADIUS = 0
 
 WAVE_TYPES = {
-  "Radiant",  -- 1
-  "Dire",     -- 2
-  "Kobold",   -- 3
-  "Troll",    -- 4
-  "Golem",    -- 5
-  "Satyr",    -- 6
-  "Centaur",  -- 7
-  "Dragon",   -- 8
-  "Zombie"    -- 9
+  RADIANT = 1,  
+  DIRE = 2,     
+  KOBOLD = 3,   
+  TROLL = 4,    
+  GOLEM = 5,    
+  SATYR = 6,    
+  CENTAUR = 7,
+  DRAGON = 8,
+  ZOMBIE = 9 
 }
+
 TOTAL_WAVE_TYPES = #WAVE_TYPES
 
 SPECIFIC_WAVE_TYPE = {
@@ -72,7 +73,7 @@ SPECIFIC_WAVE_TYPE = {
         {"npc_dota_creep_goodguys_melee","npc_dota_creep_goodguys_ranged"},
         {"npc_dota_creep_goodguys_melee", "npc_dota_creep_goodguys_ranged","npc_dota_goodguys_siege"},
         {"npc_dota_creep_goodguys_melee", "npc_dota_creep_goodguys_ranged","npc_dota_goodguys_siege",  "npc_dota_creep_goodguys_melee_upgraded"},
-        {"npc_dota_hero_treant"}
+        {"villain_treant"}
      },{
         {"npc_dota_creep_goodguys_melee_upgraded", "npc_dota_creep_goodguys_ranged_upgraded"},
         {"npc_dota_creep_goodguys_melee_upgraded", "npc_dota_creep_goodguys_ranged_upgraded", "npc_dota_goodguys_siege"},
@@ -319,6 +320,8 @@ NEXT_ROUND = 1 -- Stores the next round number
 CURRENT_WAVE = 0 -- Stores the current wave number [Boss waves are 4]
 NEXT_WAVE = 1  -- Stores the next wave number [Boss waves are 4]
 MULTIPLIER = -0.6 -- Will be 1 at game start
+MULTIPLIER_INCREMENT = 0.5 -- Increment the multiplier by this much base
+BOSS_MULTIPLIER = 0
 WAVE_DEFAULT_BOUNTY = 150 -- This is half as much gold as each wave should be worth from level 1
 WAVE_BOUNTY_INCREASE = 75 -- This is half as much XP it should increase per wave in a round before multipliers
 WAVE_BOUNTY = 0 -- This is how much the wave will be worth
@@ -344,7 +347,7 @@ RANGED_ABILITIES = {}
 DEFENCE_ABILITIES = {}
 DebugPrint( '[TLS] Done initialising Mode' )
 
-
+BOSS_CONTROLLER = nil
 
 DebugPrint( '[TLS] Setting up WOODLAND' )
 -- Map specific point initialisation
@@ -380,11 +383,40 @@ if GetMapName() == "woodland" then
 end
 DebugPrint( '[TLS] Done setting up WOODLAND' )
 
+
 -- Starts the game
 function TheLastStand:GameStart()
-  TheLastStand:IncrementRound()
-  TheLastStand:WaveEnded()
+  --TheLastStand:IncrementRound()
+  --TheLastStand:WaveEnded()
   GAME_HAS_STARTED = true
+  math.randomseed(TheLastStand:GetSeed())
+  TheLastStand:AddVillainController()
+end
+
+-- Adds a computer player
+function TheLastStand:AddVillainController()
+  -- Close off remaining slots for the good guys
+  GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_GOODGUYS, PLAYER_COUNT)
+  -- Open a slot for the badguy
+  GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_BADGUYS, 1)
+  Tutorial:AddBot("","","Overseer's Pet",false)
+  DebugPrint(PLAYER_COUNT)
+  BOSS_CONTROLLER = PlayerResource:GetPlayer(PLAYER_COUNT)
+  local event_data = {
+  userid=PlayerResource:GetSteamID(PLAYER_COUNT),
+  oldname=PlayerResource:GetPlayerName(PLAYER_COUNT),
+  newname="Overseer"}
+  DebugPrintTable(event_data)
+  CustomGameEventManager:Send_ServerToAllClients("player_changename",event_data)
+end
+
+-- Fetches the Random seed
+function TheLastStand:GetSeed()
+  local s=GetSystemTime()
+  local p="(%d+):(%d+):(%d+)"
+  local hour,min,sec=s:match(p)
+  local int = tonumber(hour..min..sec)
+  return int
 end
 
 -- End the game
@@ -431,7 +463,7 @@ function TheLastStand:GetPlayerCount() return PLAYER_COUNT end
 function TheLastStand:GetHeroTargets() return HERO_TARGETS end
 function TheLastStand:GetPlayerTargets() return PLAYERS end
 function TheLastStand:GetUnitsLeft() return UNITS_LEFT end
-function TheLastStand:GetGameHasStarded() return GAME_HAST_STARTED end
+function TheLastStand:GetGameHasStarded() return GAME_HAS_STARTED end
 function TheLastStand:GetWaveTypes() return WAVE_TYPES end
 function TheLastStand:GetTotalWaveTypes() return TOTAL_WAVE_TYPES end
 function TheLastStand:GetFinalPoint() return FINAL_POINT end
@@ -439,9 +471,9 @@ function TheLastStand:GetBossPoint() return BOSS_POINT end
 function TheLastStand:GetBossRadius() return BOSS_RADIUS end
 
 -- Setters
-function TheLastStand:SetPlayerCount(count) PLAYER_COUNT = count end
-function TheLastStand:AddHeroTargets(hero) table.insert(HERO_TARGETS,hero) end
-function TheLastStand:AddPlayerTargets(playerID) table.insert(PLAYERS,playerID) end
+function TheLastStand:SetPlayerCount(count) DebugPrint("[Player Count] Player count set") PLAYER_COUNT = count end
+function TheLastStand:AddHeroTargets(hero) DebugPrint("[Hero Targets] Hero Added") table.insert(HERO_TARGETS,hero) end
+function TheLastStand:AddPlayerTargets(playerID) DebugPrint("[Player Targets] Player Added") table.insert(PLAYERS,playerID) end
 function TheLastStand:SetWaveContentsAttacking(content, i) WAVE_CONTENTS_ATTACKING[i] = content end
 
 
@@ -516,7 +548,7 @@ end
 -- Sort out the next set of waves
 function TheLastStand:IncrementRound()
   CURRENT_ROUND = NEXT_ROUND
-  MULTIPLIER=MULTIPLIER+0.5
+  MULTIPLIER=MULTIPLIER+MULTIPLIER_INCREMENT
   NEXT_ROUND=NEXT_ROUND+1
   -- If they survive through all available rounds, loop back around to 1
   if(NEXT_ROUND==3)then
@@ -525,7 +557,7 @@ function TheLastStand:IncrementRound()
   -- We just incremented to Round 1, increment level
   if(CURRENT_ROUND==1)then
     CURRENT_LEVEL=CURRENT_LEVEL+1 -- Mark how many times they've survived through the set - this is a multiplier for score
-    MULTIPLIER=MULTIPLIER+1.0
+    MULTIPLIER=MULTIPLIER+MULTIPLIER_INCREMENT+MULTIPLIER_INCREMENT
   end
   -- Sort out the waves to complete
   WAVES_TO_COMPLETE = {}
@@ -557,7 +589,7 @@ end
 
 function TheLastStand:IncrementWaveType()
   CURRENT_WAVE = NEXT_WAVE
-  MULTIPLIER=MULTIPLIER+0.1
+  MULTIPLIER=MULTIPLIER+MULTIPLIER_INCREMENT/5
   NEXT_WAVE=NEXT_WAVE+1
   if(NEXT_WAVE==4)then -- Should be 5 for bosses, skipping atm
     NEXT_WAVE = 1
@@ -623,25 +655,25 @@ end
 -- For announcing the waves
 function TheLastStand:TypeToText(ttype,round)
   if(round==1) then
-    if(ttype == "Radiant") then return "Radiant" end
-    if(ttype == "Dire") then return "Dire" end
-    if(ttype == "Kobold") then return "Kobold" end
-    if(ttype == "Troll") then return "Troll" end
-    if(ttype == "Golem") then return "Golem" end
-    if(ttype == "Satyr") then return "Satyr" end
-    if(ttype == "Centaur") then return "Centaur" end
-    if(ttype == "Dragon") then return "Dragon" end
-    if(ttype == "Zombie") then return "Zombie" end
+    if(ttype == WAVE_TYPES.RADIANT) then return "Radiant" end
+    if(ttype == WAVE_TYPES.DIRE) then return "Dire" end
+    if(ttype == WAVE_TYPES.KOBOLD) then return "Kobold" end
+    if(ttype == WAVE_TYPES.TROLL) then return "Troll" end
+    if(ttype == WAVE_TYPES.GOLEM) then return "Golem" end
+    if(ttype == WAVE_TYPES.SATYR) then return "Satyr" end
+    if(ttype == WAVE_TYPES.CENTAUR) then return "Centaur" end
+    if(ttype == WAVE_TYPES.DRAGON) then return "Dragon" end
+    if(ttype == WAVE_TYPES.ZOMBIE) then return "Zombie" end
   elseif(round==2) then
-    if(ttype == "Radiant") then return "Radiant" end
-    if(ttype == "Dire") then return "Dire" end
-    if(ttype == "Kobold") then return "Kobold" end
-    if(ttype == "Troll") then return "Troll" end
-    if(ttype == "Golem") then return "Golem" end
-    if(ttype == "Satyr") then return "Satyr" end
-    if(ttype == "Centaur") then return "Centaur" end
-    if(ttype == "Dragon") then return "Dragon" end
-    if(ttype == "Zombie") then return "Zombie" end
+    if(ttype == WAVE_TYPES.RADIANT) then return "Radiant" end
+    if(ttype == WAVE_TYPES.DIRE) then return "Dire" end
+    if(ttype == WAVE_TYPES.KOBOLD) then return "Kobold" end
+    if(ttype == WAVE_TYPES.TROLL) then return "Troll" end
+    if(ttype == WAVE_TYPES.GOLEM) then return "Golem" end
+    if(ttype == WAVE_TYPES.SATYR) then return "Satyr" end
+    if(ttype == WAVE_TYPES.CENTAUR) then return "Centaur" end
+    if(ttype == WAVE_TYPES.DRAGON) then return "Dragon" end
+    if(ttype == WAVE_TYPES.ZOMBIE) then return "Zombie" end
   end    
   return ""
 end
@@ -649,25 +681,25 @@ end
 -- For announcing the boss battles
 function TheLastStand:BossIntro(ttype,round)
   if(round==1) then
-    if(ttype == "Radiant") then return "Treant Protector" end
-    if(ttype == "Dire") then return "Dark Willow" end
-    if(ttype == "Kobold") then return "Meepo" end
-    if(ttype == "Troll") then return "Huskar" end
-    if(ttype == "Golem") then return "Earth Spirit" end
-    if(ttype == "Satyr") then return "Shadow Fiend" end
-    if(ttype == "Centaur") then return "Centaur" end
-    if(ttype == "Dragon") then return "Skywrath" end
-    if(ttype == "Zombie") then return "Undying" end
+    if(ttype == WAVE_TYPES.RADIANT) then return "Treant Protector" end
+    if(ttype == WAVE_TYPES.DIRE) then return "Dark Willow" end
+    if(ttype == WAVE_TYPES.KOBOLD) then return "Meepo" end
+    if(ttype == WAVE_TYPES.TROLL) then return "Huskar" end
+    if(ttype == WAVE_TYPES.GOLEM) then return "Earth Spirit" end
+    if(ttype == WAVE_TYPES.SATYR) then return "Shadow Fiend" end
+    if(ttype == WAVE_TYPES.CENTAUR) then return "Centaur" end
+    if(ttype == WAVE_TYPES.DRAGON) then return "Skywrath" end
+    if(ttype == WAVE_TYPES.ZOMBIE) then return "Undying" end
   elseif(round==2) then
-    if(ttype == "Radiant") then return "Lone Druid" end
-    if(ttype == "Dire") then return "Doom" end
-    if(ttype == "Kobold") then return "Ursa" end
-    if(ttype == "Troll") then return "Witch Doctor" end
-    if(ttype == "Golem") then return "Elder Titan" end
-    if(ttype == "Satyr") then return "Shadow Demon" end
-    if(ttype == "Centaur") then return "Underlord" end
-    if(ttype == "Dragon") then return "Jakiro" end
-    if(ttype == "Zombie") then return "Necrophos" end
+    if(ttype == WAVE_TYPES.RADIANT) then return "Lone Druid" end
+    if(ttype == WAVE_TYPES.DIRE) then return "Doom" end
+    if(ttype == WAVE_TYPES.KOBOLD) then return "Ursa" end
+    if(ttype == WAVE_TYPES.TROLL) then return "Witch Doctor" end
+    if(ttype == WAVE_TYPES.GOLEM) then return "Elder Titan" end
+    if(ttype == WAVE_TYPES.SATYR) then return "Shadow Demon" end
+    if(ttype == WAVE_TYPES.CENTAUR) then return "Underlord" end
+    if(ttype == WAVE_TYPES.DRAGON) then return "Jakiro" end
+    if(ttype == WAVE_TYPES.ZOMBIE) then return "Necrophos" end
   end    
   return ""
 end
@@ -704,12 +736,12 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
     for i,j in pairs(UnitTypesListed)do
       for k=1, UnitCountsListed[i] do
         if(UnitTypesListed[i] ~= "mark_illusions") then
-          unit = TheLastStand:CreateWaveUnitAtPlace(UnitTypesListed[i], SPAWN_POINT[point[h]], nil, DOTA_TEAM_BADGUYS, false, true)
+          unit = TheLastStand:CreateWaveUnitAtPlace(UnitTypesListed[i], SPAWN_POINT[point[h]], BOSS_CONTROLLER, DOTA_TEAM_BADGUYS, false, true)
         else
           -- Create illusion and modify it to match a hero
           local target = HERO_TARGETS[h]
           local ability_slot
-          unit = CreateUnitByName(target:GetName(), SPAWN_POINT[point[h]], true, nil, nil, DOTA_TEAM_BADGUYS)
+          unit = CreateUnitByName(target:GetName(), SPAWN_POINT[point[h]], true, BOSS_CONTROLLER, BOSS_CONTROLLER, DOTA_TEAM_BADGUYS)
           for i = 1, target:GetLevel() - 1 do
             unit:HeroLevelUp(false)
           end
@@ -788,15 +820,13 @@ end
 function TheLastStand:CreateBoss(UnitTypesListed, UnitCountsListed)
   local point = ATTACK_POINT[RandomInt(1,SPAWN_COUNT)]
   -- Create boss
-  local unit = CreateUnitByName(UnitTypesListed[1], point, true, nil, nil, DOTA_TEAM_BADGUYS)
+  local unit = CreateUnitByName(UnitTypesListed[1], point, true, BOSS_CONTROLLER, BOSS_CONTROLLER, DOTA_TEAM_BADGUYS)
   -- Boss announces start
   SoundController:Villain_BattleStart(unit)
   -- Upgrade boss
    TheLastStand:UpgradeBoss(unit)
   -- Start the AI
   BossAI:InitBossAI(unit)
-  -- Order boss to attack towards the ancient
-  ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = true})
 end 
 
 -- Gift the heroes gold and xp
@@ -867,44 +897,50 @@ end
 
 -- Upgrades the boss
 function TheLastStand:UpgradeBoss(boss)
+  -- Set the new boss multiplier
+  local hero_target_num = #HERO_TARGETS/5
+  BOSS_MULTIPLIER = (MULTIPLIER/5)+hero_target_num
   -- Get the values
-  local modelscale = boss:GetModeScale()
+  local modelscale = boss:GetModelScale()
   local acquisitionrange = 1800
-  local range = boss:GetAttackRange(boss)
-  local str = boss:GetStrength()
-  local agi = boss:GetAgility()
-  local int = boss:GetIntellect()
+    local str = boss:GetBaseStrength()
+  local agi = boss:GetBaseAgility()
+  local int = boss:GetBaseIntellect()
   -- Affect the values
-  modelscale = modelscale*2
-  range=range*2
-  int=int*(MULTIPLIER+(#HERO_TARGETS/5*CURRENT_LEVEL))
-  agi=agi*(MULTIPLIER+(#HERO_TARGETS/5*CURRENT_LEVEL))
-  str=str*(MULTIPLIER+(#HERO_TARGETS/5*CURRENT_LEVEL))
+  modelscale = modelscale*BOSS_MULTIPLIER
+  DebugPrint("MULTIPLIER")
+  DebugPrint(MULTIPLIER)
+  DebugPrint("BOSS_MULTIPLIER")
+  DebugPrint(BOSS_MULTIPLIER)
+  DebugPrint("CURRENT_LEVEL")
+  DebugPrint(CURRENT_LEVEL)
+  int=int*BOSS_MULTIPLIER*2*hero_target_num
+  agi=agi*BOSS_MULTIPLIER*2*hero_target_num
+  str=str*BOSS_MULTIPLIER*2*hero_target_num
   -- Set the values
   boss:SetModelScale(modelscale)
   boss:SetAcquisitionRange(acquisitionrange)
-  boss:SetAttackRange(range)
   boss:SetDeathXP(0)
   boss:SetMaximumGoldBounty(0)
   boss:SetMinimumGoldBounty(0)
-  boss:SetStrength(str)
-  boss:SetAgility(agi)
-  boss:SetIntellect(int)
+  boss:SetBaseStrength(str)
+  boss:SetBaseAgility(agi)
+  boss:SetBaseIntellect(int)
   -- Recalculate health, armour, etc based on gains
   boss:CalculateStatBonus()
 end
 
 function TheLastStand:ParseWaveVar(var, wavetype)
   -- Villains
-  if(wavetype == "Radiant") then return var.RADIANT end
-  if(wavetype == "Dire") then return var.DIRE end
-  if(wavetype == "Kobold") then return var.KOBOLD end
-  if(wavetype == "Troll") then return var.TROLL end
-  if(wavetype == "Golem") then return var.GOLEM end
-  if(wavetype == "Satyr") then return var.SATYR end
-  if(wavetype == "Centaur") then return var.CENTAUR end
-  if(wavetype == "Dragon") then return var.DRAGON end
-  if(wavetype == "Zombie") then return var.ZOMBIE end
+  if(wavetype == WAVE_TYPES.RADIANT) then return var.RADIANT end
+  if(wavetype == WAVE_TYPES.DIRE) then return var.DIRE end
+  if(wavetype == WAVE_TYPES.KOBOLD) then return var.KOBOLD end
+  if(wavetype == WAVE_TYPES.TROLL) then return var.TROLL end
+  if(wavetype == WAVE_TYPES.GOLEM) then return var.GOLEM end
+  if(wavetype == WAVE_TYPES.SATYR) then return var.SATYR end
+  if(wavetype == WAVE_TYPES.CENTAUR) then return var.CENTAUR end
+  if(wavetype == WAVE_TYPES.DRAGON) then return var.DRAGON end
+  if(wavetype == WAVE_TYPES.ZOMBIE) then return var.ZOMBIE end
 end
 
 

@@ -5,8 +5,4 @@
 	{
 		"MaxPlayers"		"5"
 	}
-	"playground"
-	{
-		"MaxPlayers"		"5"
-	}
 }

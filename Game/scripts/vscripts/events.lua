@@ -30,10 +30,11 @@ end
 -- An entity somewhere has been hurt.  This event fires very often with many units so don't do too many expensive
 -- operations here
 function GameMode:OnEntityHurt(keys)
-  -- DebugPrint("[TLS] Entity Hurt")
+  --DebugPrint("[TLS] Entity Hurt")
   --DebugPrintTable(keys)
 
-  local damagebits = keys.damagebits -- This might always be 0 and therefore useless
+  local damage = keys.damage
+  --DebugPrint(damage)
   if keys.entindex_attacker ~= nil and keys.entindex_killed ~= nil then
     local entCause = EntIndexToHScript(keys.entindex_attacker)
     local entVictim = EntIndexToHScript(keys.entindex_killed)
@@ -47,19 +48,29 @@ function GameMode:OnEntityHurt(keys)
 
     -- If this is a boss round, check boss reaction
     if(TheLastStand:GetCurrentWave()==4) then
-        BossAI:BossHurt(TheLastStand:GetWaveContents()[1], entCause, damagebits)
+        BossAI:BossHurt(TheLastStand:GetWaveContents()[1], entCause, damage)
     end
 
   end
 end
 
--- Revive function caller
+-- When a HUMAN player dies, call this
 function GameMode:OnPlayerKilled(keys)
   DebugPrint("[TLS] OnPlayerKilled")
   DebugPrintTable(keys)
   local plyID = keys.PlayerID
   local hero = nil
-  if plyID ~= nil then
+  local playertargets = TheLastStand:GetPlayerTargets()
+  --Can continue?
+  local i = 0
+  local continue = false
+  for i=1,#playertargets do
+    if(playertargets[i]==plyID)then
+      continue = true
+      break
+    end
+  end
+  if continue then
     hero = PlayerResource:GetPlayer(plyID):GetAssignedHero()
     -- Send the function off to the hero handlers
     HeroStuff:InitiateReviveCircle(hero)
@@ -121,8 +132,6 @@ function GameMode:OnAbilityUsed(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local abilityname = keys.abilityname
-
-  BossAI:EnemyHeroStartCast(player:GetAssignedHero())
   -- All custom spells must go under the above function
 end
 
@@ -266,7 +275,7 @@ function GameMode:PlayerConnect(keys)
   DebugPrint('[TLS] PlayerConnect')
   DebugPrintTable(keys)
   local playerID = keys.index+1
-  if(GameMode:CheckPlayers(playerID)) then
+  if(GameMode:CheckPlayers(playerID))and(TheLastStand:GetGameHasStarded()==false) then
     DebugPrint("Adding Player")
     TheLastStand:AddPlayerTargets(playerID)
     TheLastStand:SetPlayerCount(TheLastStand:GetPlayerCount()+1)
@@ -295,7 +304,7 @@ function GameMode:OnConnectFull(keys)
   
   -- The Player ID of the joining player
   local playerID = ply:GetPlayerID()
-  if(GameMode:CheckPlayers(playerID)) then
+  if(GameMode:CheckPlayers(playerID))and(TheLastStand:GetGameHasStarded()==false) then
     DebugPrint("Adding Player")
     TheLastStand:AddPlayerTargets(playerID)
     TheLastStand:SetPlayerCount(TheLastStand:GetPlayerCount()+1)
@@ -334,6 +343,10 @@ function GameMode:OnAbilityCastBegins(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local abilityName = keys.abilityname
+
+  if(player~=BOSS_CONTROLLER)then
+    BossAI:EnemyHeroStartCast(player:GetAssignedHero())
+  end
 end
 
 -- This function is called whenever any player sends a chat message to team or All

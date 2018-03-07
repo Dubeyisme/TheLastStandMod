@@ -176,73 +176,175 @@
 	
 	"npc_dota_hero_treant"
 	{
+		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"1800"
+		"AttackAcquisitionRange"	"1800"
+		"MovementSpeed"		"270"
+		
+		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"MovementSpeed"		"350"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 	}
 	
 	"npc_dota_hero_lone_druid"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_dark_willow"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_doom_bringer"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_elder_titan"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_earth_spirit"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_huskar"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_witch_doctor"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_meepo"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_ursa"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_nevermore"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_shadow_demon"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_centaur"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_abyssal_underlord"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_skywrath_mage"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_jakiro"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_undying"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 	
 	"npc_dota_hero_necrolyte"
 	{
+		// Abilities
+		
+		// Stats
+		
 	}
 }

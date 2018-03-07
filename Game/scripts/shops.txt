@@ -35,6 +35,7 @@
     "item"    "item_ring_of_protection"
     "item"    "item_quelling_blade"
     "item"    "item_orb_of_venom"
+	"item"	  "item_blight_stone"
     "item"    "item_stout_shield"
     "item"    "item_blades_of_attack"
     "item"    "item_chainmail"

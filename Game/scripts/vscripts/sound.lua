@@ -365,11 +365,16 @@ end
 
 -- Make this hero announce he killed the villain if he has a specific line for doing so
 function SoundController:Hero_VillainKilled(hero,villain)
-  local villain_repose = SoundController:ParseVar(SOUND_HERO_KILLED_BOSS_RESPONSE, villain)
-  local response = SoundController:ParseVar(villain_repose, hero)
-  if(response~=nil)then
-    EmitAnnouncerSoundForTeam(response[1], DOTA_TEAM_GOODGUYS)
-  end
+  Timers:CreateTimer({
+          endTime = 3,
+        callback = function()
+          local villain_repose = SoundController:ParseVar(SOUND_HERO_KILLED_BOSS_RESPONSE, villain)
+          local response = SoundController:ParseVar(villain_repose, hero)
+          if(response~=nil)then
+            EmitAnnouncerSoundForTeam(response[1], DOTA_TEAM_GOODGUYS)
+          end
+        end
+      })  
 end
 
 -- Make this hero say thanks for being revived
@@ -426,36 +431,40 @@ end
 
 -- Takes a variable and a hero or villain and parses which item was needed from the variable
 function SoundController:ParseVar(var, unit)
+  --DebugPrint(unit:GetName())
+  --DebugPrint(unit:GetUnitLabel())
+  local name = unit:GetName()
+  if(name=="npc_dota_hero")then name = unit:GetUnitLabel() end
   -- Heroes
-  if(unit:GetName() == "npc_dota_hero_riki") then return var.OMN end
-  if(unit:GetName() == "npc_dota_hero_pangolier") then return var.PNG end
-  if(unit:GetName() == "npc_dota_hero_sniper") then return var.SNI end
-  if(unit:GetName() == "npc_dota_hero_techies") then return var.TEC end
-  if(unit:GetName() == "npc_dota_hero_lina") then return var.LIN end
-  if(unit:GetName() == "npc_dota_hero_furion") then return var.FUR end
-  if(unit:GetName() == "npc_dota_hero_winter_wyvern") then return var.WWY end
-  if(unit:GetName() == "npc_dota_hero_kunkka") then return var.KUN end
-  if(unit:GetName() == "npc_dota_hero_beastmaster") then return var.BMA end
-  if(unit:GetName() == "npc_dota_hero_omniknight") then return var.OMN end
+  if(name == "npc_dota_hero_riki") then return var.OMN end
+  if(name == "npc_dota_hero_pangolier") then return var.PNG end
+  if(name == "npc_dota_hero_sniper") then return var.SNI end
+  if(name == "npc_dota_hero_techies") then return var.TEC end
+  if(name == "npc_dota_hero_lina") then return var.LIN end
+  if(name == "npc_dota_hero_furion") then return var.FUR end
+  if(name == "npc_dota_hero_winter_wyvern") then return var.WWY end
+  if(name == "npc_dota_hero_kunkka") then return var.KUN end
+  if(name == "npc_dota_hero_beastmaster") then return var.BMA end
+  if(name == "npc_dota_hero_omniknight") then return var.OMN end
   -- Villains
-  if(unit:GetName() == "npc_dota_hero_treant") then return var.TRN end
-  if(unit:GetName() == "npc_dota_hero_lone_druid") then return var.LON end
-  if(unit:GetName() == "npc_dota_hero_dark_willow") then return var.DKW end
-  if(unit:GetName() == "npc_dota_hero_doom_bringer") then return var.DOM end
-  if(unit:GetName() == "npc_dota_hero_earth_spirit") then return var.EAS end
-  if(unit:GetName() == "npc_dota_hero_elder_titan") then return var.ELT end
-  if(unit:GetName() == "npc_dota_hero_nevermore") then return var.NEV end
-  if(unit:GetName() == "npc_dota_hero_shadow_demon") then return var.SHD end
-  if(unit:GetName() == "npc_dota_hero_huskar") then return var.HUS end
-  if(unit:GetName() == "npc_dota_hero_witch_doctor") then return var.WDO end
-  if(unit:GetName() == "npc_dota_hero_meepo") then return var.MEE end
-  if(unit:GetName() == "npc_dota_hero_ursa") then return var.URS end
-  if(unit:GetName() == "npc_dota_hero_centaur") then return var.CEN end
-  if(unit:GetName() == "npc_dota_hero_abyssal_underlord") then return var.ABY end
-  if(unit:GetName() == "npc_dota_hero_skywrath_mage") then return var.SKY end
-  if(unit:GetName() == "npc_dota_hero_jakiro") then return var.JAK end
-  if(unit:GetName() == "npc_dota_hero_undying") then return var.UND end
-  if(unit:GetName() == "npc_dota_hero_necrolyte") then return var.NEC end
+  if(name == "npc_dota_hero_treant") then return var.TRN end
+  if(name == "npc_dota_hero_lone_druid") then return var.LON end
+  if(name == "npc_dota_hero_dark_willow") then return var.DKW end
+  if(name == "npc_dota_hero_doom_bringer") then return var.DOM end
+  if(name == "npc_dota_hero_earth_spirit") then return var.EAS end
+  if(name == "npc_dota_hero_elder_titan") then return var.ELT end
+  if(name == "npc_dota_hero_nevermore") then return var.NEV end
+  if(name == "npc_dota_hero_shadow_demon") then return var.SHD end
+  if(name == "npc_dota_hero_huskar") then return var.HUS end
+  if(name == "npc_dota_hero_witch_doctor") then return var.WDO end
+  if(name == "npc_dota_hero_meepo") then return var.MEE end
+  if(name == "npc_dota_hero_ursa") then return var.URS end
+  if(name == "npc_dota_hero_centaur") then return var.CEN end
+  if(name == "npc_dota_hero_abyssal_underlord") then return var.ABY end
+  if(name == "npc_dota_hero_skywrath_mage") then return var.SKY end
+  if(name == "npc_dota_hero_jakiro") then return var.JAK end
+  if(name == "npc_dota_hero_undying") then return var.UND end
+  if(name == "npc_dota_hero_necrolyte") then return var.NEC end
 end
 
 -- Precache all the sounds, called from addon_game_mode during precache
