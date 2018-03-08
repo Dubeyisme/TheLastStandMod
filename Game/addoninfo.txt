@@ -1,8 +1,10 @@
 "AddonInfo"
 {
 	"TeamCount"		"2"
-	"template_map"
+	"maps"      "woodland"
+	"IsPlayable"  "1"
+	"woodland"
 	{
-		"MaxPlayers"		"5"
+		"MaxPlayers"		"6"
 	}
 }

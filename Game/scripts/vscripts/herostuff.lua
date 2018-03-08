@@ -18,10 +18,11 @@ HEROSTUFF_HERO_INDEX = 0
 
 -- 
 function HeroStuff:InitiateReviveCircle(hero)
+	--DebugPrint("Initiate Revive Circle")
 	-- Init the circle data
 	HEROSTUFF_HEROES_BEING_REVIVED = HEROSTUFF_HEROES_BEING_REVIVED + 1
 	-- Check if the number of heroes needing to be revived is equal to the number of heroes in the game
-	DebugPrint("Dead Hero to Alive Heroes")
+	--DebugPrint("Dead Hero to Alive Heroes")
 	DebugPrint(HEROSTUFF_HEROES_BEING_REVIVED)
 	DebugPrint(TheLastStand:GetPlayerCount())
 	DebugPrint(#TheLastStand:GetPlayerTargets())
@@ -56,16 +57,16 @@ end
 
 -- This is called to check if the hero is being revived and is recalled ever point until it is no longer needed
 function HeroStuff:CircleCheckIfHeroReviving(HEROSTUFF_HERO_INDEX)
+	--DebugPrint("Circle Check If Hero Reviving")
 	local i = 0
 	local hero_num = -1
 	for i=1,#HEROSTUFF_CIRCLE_DATA do
 		if(HEROSTUFF_CIRCLE_DATA[i].INDEX == HEROSTUFF_HERO_INDEX) then hero_num=i break end
 	end
 	local point = HEROSTUFF_CIRCLE_DATA[hero_num].POINT
-	--DebugPrint("Circle Check If Hero Reviving: Point")
 	--DebugPrint(point)
 	-- Check if someone is in range
-	local heroes = BossAI:TargetsInRange(point,HEROSTUFF_CIRCLE_RADIUS) -- Uses BossAi as it contains the helper functions
+	local heroes = BossAI:TargetsInRange(point,HEROSTUFF_CIRCLE_RADIUS,TheLastStand:GetHeroTargets()) -- Uses BossAi as it contains the helper functions
 	if(#heroes>0)then
 		HEROSTUFF_CIRCLE_DATA[hero_num].REVIVING = true
 	end
@@ -90,6 +91,7 @@ end
 
 -- Runs whilst timing the revival process
 function HeroStuff:CircleTimerRunning(HEROSTUFF_HERO_INDEX)
+	--DebugPrint("Circle Timer Running")
 	local i = 0
 	local hero_num = -1
 	for i=1,#HEROSTUFF_CIRCLE_DATA do
@@ -98,7 +100,7 @@ function HeroStuff:CircleTimerRunning(HEROSTUFF_HERO_INDEX)
 	local point = HEROSTUFF_CIRCLE_DATA[hero_num].POINT
 	-- Check if someone is in range
 	HEROSTUFF_CIRCLE_DATA[hero_num].REVIVING = false
-	local heroes = BossAI:TargetsInRange(point,HEROSTUFF_CIRCLE_RADIUS) -- Uses BossAi as it contains the helper functions
+	local heroes = BossAI:TargetsInRange(point,HEROSTUFF_CIRCLE_RADIUS,TheLastStand:GetHeroTargets()) -- Uses BossAi as it contains the helper functions
 	if(#heroes>0)then
 		HEROSTUFF_CIRCLE_DATA[hero_num].REVIVING = true
 	end

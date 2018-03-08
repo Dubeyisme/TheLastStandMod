@@ -200,8 +200,7 @@
 		// Stats
 		"AttackDamageMin"		"5"
 		"AttackDamageMax"		"5"
-		"MovementSpeed"		"350"
-		"AttributePrimary"		"DOTA_ATTRIBUTE_STRENGTH"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"25"
 		"AttributeStrengthGain"		"3.600000"
 		"AttributeBaseAgility"		"15"

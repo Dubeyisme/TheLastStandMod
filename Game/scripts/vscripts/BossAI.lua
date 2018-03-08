@@ -110,6 +110,7 @@ function BossAI:BossParser(switch)
 	end
 	-- This switch handles the cleanup of the boss
 	if(switch == BOSSAI_SWITCH.CLEANUP) then
+		if(name == "npc_dota_hero_treant") then BossAI:TreantCleanup() end
 	end
 	-- This switch handles the reaction to a hero using an ability
 	if(switch == BOSSAI_SWITCH.REACTION) then
@@ -128,7 +129,9 @@ function BossAI:GetCurrentBoss() return BOSSAI_CURRENT_BOSS end
 -- Initialise the Boss' AI
 function BossAI:InitBossAI(boss)
 	-- Clear boss data
-	BOSSAI_DATA = {}
+	BOSSAI_DATA = {
+		EFFECT={}
+	}
 	-- Set new Boss
 	BOSSAI_CURRENT_BOSS = boss
 	-- Choose boss event
@@ -272,7 +275,7 @@ function BossAI:AdjustAggro()
 	-- Debugging variables
 	local s = "Current Aggro "
 	-- Increase or Decrease aggro based on personality
-	local herotargets = TheLastStand:GetHeroTargets()
+	local herotargets = TheLastStand:GetAliveHeroTargets() 
 	local boss = BOSSAI_CURRENT_BOSS
 	local closest_player = BossAI:NearestTarget(boss:GetOrigin(),herotargets):GetOwner():GetPlayerID()
 	local furthest_player = BossAI:FurthestTarget(boss:GetOrigin(),herotargets):GetOwner():GetPlayerID()
@@ -291,13 +294,13 @@ function BossAI:AdjustAggro()
 	
 	-- Personality factors
 	if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.VINDICTIVE)then -- Increase aggro for lowest health
-		local targets_health = BossAI:GetTargetsHP(herotargets)
-		temp1 = 10000
+		local targets_health = BossAI:GetTargetsHPPercent(herotargets)
+		temp1 = 1000
 		temp2 = 0
 		-- Work out which i is the one we want
-		for i=1,#herotargets do
-			if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false) then -- Make sure we can even see or attack this target
-				if(targets_health[i]<temp1)then
+		for i=1,#targets_health do
+			if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsAlive()) then -- Make sure we can even see or attack this target
+				if(targets_health[i]<temp1)and(herotargets[i]:IsAlive())then
 					temp1 = targets_health[i]
 					temp2 = i
 				end
@@ -315,9 +318,9 @@ function BossAI:AdjustAggro()
 			targets_armour[i] = targets_armour[i]+targets_magic[i]
 		end
 		-- Work out which i is the one we want
-		for i=1,#herotargets do
-			if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false) then -- Make sure we can even see or attack this target
-				if(targets_armour[i]>temp1)then
+		for i=1,#targets_armour do
+			if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsAlive()) then -- Make sure we can even see or attack this target
+				if(targets_armour[i]>temp1)and(herotargets[i]:IsAlive())then
 					temp1 = targets_armour[i]
 					temp2 = i
 				end
@@ -338,9 +341,9 @@ function BossAI:AdjustAggro()
 		temp1 = 0
 		temp2 = 0
 		-- Work out which i is the one we want
-		for i=1,#herotargets do
-			if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false) then -- Make sure we can even see or attack this target
-				if(wealth_of_targets[i]>temp1)then
+		for i=1,#wealth_of_targets do
+			if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsAlive()) then -- Make sure we can even see or attack this target
+				if(wealth_of_targets[i]>temp1)and(herotargets[i]:IsAlive())then
 					temp1 = wealth_of_targets[i]
 					temp2 = i
 				end
@@ -377,16 +380,22 @@ end
 function BossAI:ChooseNewTarget()
 	-- See who is causing the most aggro and select them
 	local i =0
-	local temp1 = 0
-	local temp2 = 0
+	local aggrolevel = 0
+	local aggroindex = -1
 	local herotargets = TheLastStand:GetHeroTargets()
 	for i=1,#BOSSAI_PLAYER_DAMAGE_TRACKER do
-		if(BOSSAI_PLAYER_DAMAGE_TRACKER[i]>temp1) then
-			temp2 = i
-			temp1 = BOSSAI_PLAYER_DAMAGE_TRACKER[i]
+		if(BOSSAI_PLAYER_DAMAGE_TRACKER[i]>aggrolevel) then
+			aggroindex = i
+			aggrolevel = BOSSAI_PLAYER_DAMAGE_TRACKER[i]
 		end
 	end
-	BOSSAI_CURRENT_TARGET = herotargets[temp2]
+	if(aggroindex==-1)then
+		-- we were unsuccessful
+		BOSSAI_CURRENT_TARGET = nil
+		BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.NOTHING
+	else
+		BOSSAI_CURRENT_TARGET = herotargets[aggroindex]
+	end
 end
 
 
@@ -470,70 +479,88 @@ end
 	function BossAI:NearestTarget(boss_unit_point, herotargets)
 		--DebugPrint("NearestTarget")
 		local i=0
+		local heroes = herotargets
 		local targetposlist = {}
 		local returndist = 10000
+		local herolist = {}
 		local targetdistlist = {}
 		local pointi = -1
 		-- Fetch the positions of each enemy hero
-		for i=1,#herotargets do
-			--DebugPrint(herotargets[i]:GetOrigin())
-			table.insert(targetposlist,herotargets[i]:GetOrigin())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive())then
+				table.insert(targetposlist,heroes[i]:GetOrigin())
+				table.insert(herolist,heroes[i])
+			end
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
 		--DebugPrint("Calculating")
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(returndist>targetdistlist[i])and(herotargets[i]:IsAlive())then
+			if(returndist>targetdistlist[i])and(herolist[i]:IsAlive())then
 				--DebugPrint(targetdistlist[i])
 				returndist = targetdistlist[i]
 				pointi = i
 			end
 		end
-		return herotargets[pointi]
+		return herolist[pointi]
 	end
 
 	-- Returns the furthest enemy hero handle
 	function BossAI:FurthestTarget(boss_unit_point, herotargets)
 		local i=0
+		local heroes = herotargets
 		local targetposlist = {}
 		local returndist = 0
+		local herolist = {}
 		local targetdistlist = {}
 		local pointi = -1
 		-- Fetch the positions of each enemy hero
-		for i=1,#herotargets do
-			table.insert(targetposlist,herotargets[i]:GetOrigin())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive())then
+				table.insert(targetposlist,heroes[i]:GetOrigin())
+				table.insert(herolist,heroes[i])
+			end
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(returndist<targetdistlist[i])and(herotargets[i]:IsAlive())then
+			if(returndist<targetdistlist[i])and(herolist[i]:IsAlive())then
 				returndist = targetdistlist[i]
 				pointi = i
 			end
 		end
-		return herotargets[pointi]
+		return herolist[pointi]
 	end
 
 	-- Returns a list of enemy hero handles that are closer than dist
 	function BossAI:TargetsInRange(boss_unit_point,rangedist, herotargets)
 		--DebugPrint("Targets In Range: Point")
 		--DebugPrint(boss_unit_point)
+		local heroes = herotargets
 		local i=0
 		local targetposlist = {}
+		local herolist = {}
 		local targetdistlist = {}
 		local returnlist = {}
 		-- Fetch the positions of each enemy hero
-		for i=1,#herotargets do
-			table.insert(targetposlist,herotargets[i]:GetOrigin())
+		--DebugPrint(#heroes)
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive())then
+				--DebugPrint(heroes[i]:GetName())
+				table.insert(targetposlist,heroes[i]:GetOrigin())
+				table.insert(herolist,heroes[i])
+			end
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(rangedist>=targetdistlist[i])and(herotargets[i]:IsAlive())then
-				table.insert(returnlist,herotargets[i])
+			if(rangedist>=targetdistlist[i])and(herolist[i]:IsAlive())then
+				--DebugPrint(herolist[i]:GetName())
+				--DebugPrint("Target in range")
+				table.insert(returnlist,herolist[i])
 			end
 		end
 		return returnlist
@@ -542,19 +569,24 @@ end
 	-- Returns a list of enemy hero handles that are further than dist
 	function BossAI:TargetsOutOfRange(boss_unit_point,rangedist,herotargets)
 		local i=0
+		local heroes = herotargets
 		local targetposlist = {}
+		local herolist = {}
 		local targetdistlist = {}
 		local returnlist = {}
 		-- Fetch the positions of each enemy hero
-		for i=1,#herotargets do
-			table.insert(targetposlist,herotargets[i]:GetOrigin())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive())then
+				table.insert(targetposlist,heroes[i]:GetOrigin())
+				table.insert(herolist,heroes[i])
+			end
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(rangedist<targetdistlist[i])and(herotargets[i]:IsAlive())then
-				table.insert(returnlist,herotargets[i])
+			if(rangedist<targetdistlist[i])and(herolist[i]:IsAlive())then
+				table.insert(returnlist,herolist[i])
 			end
 		end
 		return returnlist
@@ -583,10 +615,11 @@ end
 	-- Returns a list of key pairs with the ID and the HP of the remaining heroes.
 	function BossAI:GetTargetsHP(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetHealth())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetHealth())
 			end
 		end
 		return returnlist
@@ -595,10 +628,11 @@ end
 	-- Returns a list of key pairs with the ID and the HP Percentage of the remaining heroes.
 	function BossAI:GetTargetsHPPercent(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetHealth()/herotargets[i]:GetMaxHealth())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetHealth()/heroes[i]:GetMaxHealth())
 			end
 		end
 		return returnlist
@@ -607,10 +641,11 @@ end
 	-- Returns a list of key pairs with the ID and the MP of the remaining heroes.
 	function BossAI:GetTargetsMP(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetMana())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetMana())
 			end
 		end
 		return returnlist
@@ -619,10 +654,11 @@ end
 	-- Returns a list of key pairs with the ID and the HP Percentage of the remaining heroes.
 	function BossAI:GetTargetsMPPercent(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetMana()/herotargets[i]:GetMaxMana())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetMana()/heroes[i]:GetMaxMana())
 			end
 		end
 		return returnlist
@@ -631,10 +667,11 @@ end
 	-- Returns a list of key pairs with the ID and the move speed of the remaining heroes.
 	function BossAI:GetTargetsMoveSpeed(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetIdealSpeed())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetIdealSpeed())
 			end
 		end
 		return returnlist
@@ -643,10 +680,11 @@ end
 	-- Returns a list of key pairs with the ID and the attack ranges of the remaining heroes.
 	function BossAI:GetTargetsAttackRange(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetBaseAttackRange())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetBaseAttackRange())
 			end
 		end
 		return returnlist
@@ -655,10 +693,11 @@ end
 	-- Returns a list of key pairs with the ID and the physical resistance of the remaining heroes.
 	function BossAI:GetTargetsArmor(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetPhysicalArmorValue())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetPhysicalArmorValue())
 			end
 		end
 		return returnlist
@@ -667,10 +706,11 @@ end
 	-- Returns a list of key pairs with the ID and the magical resistance of the remaining heroes.
 	function BossAI:GetTargetsMagicResist(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetMagicalArmorValue())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetMagicalArmorValue())
 			end
 		end
 		return returnlist
@@ -679,10 +719,11 @@ end
 	-- Returns a list of key pairs with the ID and the primary attributes of the remaining heroes.
 	function BossAI:GetTargetsPrimaryAttribute(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetPrimaryAttribute())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetPrimaryAttribute())
 			end
 		end
 		return returnlist
@@ -691,10 +732,11 @@ end
 	-- Returns a list of key pairs with the ID and the current banked gold of the remaining heroes.
 	function BossAI:GetTargetsGold(herotargets)
 		local returnlist = {}
+		local heroes = herotargets
 		local i = 0
-		for i=1,#herotargets do
-			if(herotargets[i]:IsAlive()) then
-				table.insert(returnlist,herotargets[i]:GetGold())
+		for i=1,#heroes do
+			if(heroes[i]:IsAlive()) then
+				table.insert(returnlist,heroes[i]:GetGold())
 			end
 		end
 		return returnlist

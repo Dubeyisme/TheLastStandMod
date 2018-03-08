@@ -19,6 +19,7 @@
 		//-------------------------------------------------------------------------------------
 		"ID"					"7001"	
 		"BaseClass"             "ability_datadriven"
+		"AbilityTextureName" 	"Treant_Silence_icon"
 		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -36,7 +37,7 @@
 		//-------------------------------------------------------------------------------------
 		"AbilityCastRange" "1500"   // This will  also show a circle when hovering over the spell
 		"AbilityCastPoint" "0.01"   // Cast animation time
-		"AbilityCooldown"				"16 13 10 7 4"
+		"AbilityCooldown"				"5"
 		
 		// Time		
 		//-------------------------------------------------------------------------------------------------------------
@@ -78,6 +79,13 @@
 						"EffectName"	"Hero_DrowRanger.Silence"
 						"Target"		"TARGET"
 					}	
+					
+					"AttachEffect"
+					{
+						"EffectName"	"particles/units/heroes/hero_treant/treant_overgrowth_vine_glow_trail.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target" "TARGET"
+					}
 				}		
 			 }
 		 }
@@ -105,11 +113,13 @@
   //=================================================================================================================
 	// Treant Protector: Overgrowth
 	//=================================================================================================================
-	"treant_overgrowth"
+	"newtreant_overgrowth"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
-		"ID"							"5437"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"ID"							"7002"//"5437"//														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"             "ability_datadriven"
+		"AbilityTextureName" 	"Overgrowth_icon"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"	
@@ -154,15 +164,65 @@
 				"eyes_radius"					"800"
 			}				
 		}
+
+		// Data Driven
+		//-------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"ActOnTargets"
+			{
+				"Target"
+					{
+						"Center" "CASTER"
+						"Radius" "%radius"
+						"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
+						"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+					}
+				"Action"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"modifier_treant_overgrowth"
+						"Target"	"TARGET"
+					}
+				}		
+			 }
+			"AttachEffect"
+			{
+				"EffectName"	"particles/units/heroes/hero_treant/treant_overgrowth_cast.vpcf"
+				"EffectAttachType"	"follow_origin"
+				"Target" "CASTER"
+			}
+		 }
+		 
+		 "Modifiers"
+		{
+			"modifier_treant_overgrowth"
+			{
+				"IsDebuff"	"1"
+				"Duration"	"%duration"
+				"IsPurgable"	"1"
+				"EffectName"	"particles/units/heroes/hero_treant/treant_overgrowth_vines.vpcf"
+				"EffectAttachType"	"follow_origin"			
+	
+	
+				"States"
+				{
+					"MODIFIER_STATE_ROOTED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}	
 	}
   
   	
 	//=================================================================================================================
 	// Treant Protector: Leech Seed
 	//=================================================================================================================
-	"treant_leech_seed"
+	"newtreant_leech_seed"
 	{
-		"ID"					"5435"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"ID"					"7003"//"5435"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"BaseClass"             "ability_datadriven"
+		"AbilityTextureName" 	"Leech_Seed_icon"
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"	
@@ -177,7 +237,7 @@
 		
 		// Time		
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCooldown"				"16 13 10 7 4"
+		"AbilityCooldown"				"19 16 13 10 7"
 
 		// Cost
 		//-------------------------------------------------------------------------------------------------------------
@@ -195,7 +255,7 @@
 			"02"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"leech_damage"					"15 30 45 60 75"
+				"leech_damage"					"30 40 50 60 70"
 			}		
 			"03"
 			{
@@ -210,15 +270,101 @@
 			"05"
 			{
 				"var_type"						"FIELD_FLOAT"
-				"duration"						"4.5"
+				"duration"						"5.25"
 			}
 			"06"
 			{
 				"var_type"						"FIELD_INTEGER"
 				"projectile_speed"				"400"
 			}
+			"07"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"leech_heal"					"15 20 25 30 35"
+			}	
 		}
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+		
+		 // Data Driven
+		//-------------------------------------------------------------------------------------
+		"OnSpellStart"
+		{
+			"ActOnTargets"
+			{
+				"Target" "TARGET"
+				"Action"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"newmodifier_leech_seed"
+						"Target"	"TARGET"
+					}
+
+					"FireSound"
+					{
+						"EffectName"	"Hero_Treant.LeechSeed.Target"
+						"Target"		"TARGET"
+					}	
+				}		
+			 }
+		}
+		
+		"Modifiers"
+		{
+			"newmodifier_leech_seed"
+			{
+				"Duration" "%duration"
+				"IsDebuff"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%movement_slow"
+				}
+				"ThinkInterval" "%damage_interval"
+				"OnIntervalThink"
+				{
+					"Damage"
+					{
+						"Type" "DAMAGE_TYPE_MAGICAL"
+						"Damage" "%leech_damage"
+						"Target"    "TARGET"
+					}
+					
+					"Heal"
+					{
+						"HealAmount" "%leech_heal"
+						"Target"    "CASTER"
+					}
+
+					"FireSound"
+					{
+						"EffectName"	"Hero_Treant.LeechSeed.Tick"
+						"Target"		"TARGET"
+					}	
+					
+					"AttachEffect"
+					{
+						"EffectName"	"particles/units/heroes/hero_treant/treant_leech_seed_projectile_heal_explode.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target" "CASTER"
+					}
+					"AttachEffect"
+					{
+						"EffectName"	"particles/units/heroes/hero_treant/treant_leech_seed_damage_glow.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target" "TARGET"
+					}
+				}
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"	"particles/units/heroes/hero_treant/treant_leech_seed.vpcf"
+						"EffectAttachType"	"follow_origin"
+						"Target" "TARGET"
+					}
+				}
+			 }
+		}
 	}
   
 	

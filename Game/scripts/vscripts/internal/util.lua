@@ -25,6 +25,17 @@ function DebugPrintTable(...)
   end
 end
 
+function DebugPrintTable(...)
+  local spew = Convars:GetInt('barebones_spew') or -1
+  if spew == -1 and BAREBONES_DEBUG_SPEW then
+    spew = 1
+  end
+
+  if spew == 1 then
+    PrintTable(...)
+  end
+end
+
 function PrintTable(t, indent, done)
   --print ( string.format ('PrintTable type %s', type(keys)) )
   if type(t) ~= "table" then return end
@@ -62,7 +73,6 @@ function PrintTable(t, indent, done)
     end
   end
 end
-
 -- Colors
 COLOR_NONE = '\x06'
 COLOR_GRAY = '\x06'

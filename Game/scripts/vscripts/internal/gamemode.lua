@@ -147,7 +147,6 @@ mode = nil
 
 -- This function is called as the first player loads and sets up the GameMode parameters
 function GameMode:_CaptureGameMode()
-  DebugPrint('[TLS] Capture game mode!\n\n')
   if mode == nil then
     -- Set GameMode parameters
     mode = GameRules:GetGameModeEntity()        

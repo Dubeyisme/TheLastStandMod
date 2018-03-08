@@ -65,6 +65,8 @@ function GameMode:OnPlayerKilled(keys)
   local i = 0
   local continue = false
   for i=1,#playertargets do
+    DebugPrint(playertargets[i])
+    DebugPrint(plyID)
     if(playertargets[i]==plyID)then
       continue = true
       break
@@ -274,7 +276,7 @@ end
 function GameMode:PlayerConnect(keys)
   DebugPrint('[TLS] PlayerConnect')
   DebugPrintTable(keys)
-  local playerID = keys.index+1
+  local playerID = keys.index
   if(GameMode:CheckPlayers(playerID))and(TheLastStand:GetGameHasStarded()==false) then
     DebugPrint("Adding Player")
     TheLastStand:AddPlayerTargets(playerID)

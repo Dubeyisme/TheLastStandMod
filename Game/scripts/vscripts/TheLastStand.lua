@@ -407,6 +407,7 @@ function TheLastStand:AddVillainController()
   oldname=PlayerResource:GetPlayerName(PLAYER_COUNT),
   newname="Overseer"}
   DebugPrintTable(event_data)
+  --SendToServerConsole("")
   CustomGameEventManager:Send_ServerToAllClients("player_changename",event_data)
 end
 
@@ -461,6 +462,14 @@ function TheLastStand:GetWaveContentsAttacking() return WAVE_CONTENTS_ATTACKING 
 function TheLastStand:GetMultiplier() return MULTIPLIER end
 function TheLastStand:GetPlayerCount() return PLAYER_COUNT end
 function TheLastStand:GetHeroTargets() return HERO_TARGETS end
+function TheLastStand:GetAliveHeroTargets() 
+  local targets = {}
+  local i = 0
+  for i=1,#HERO_TARGETS do
+    table.insert(targets,HERO_TARGETS[i])
+  end
+  return targets
+end
 function TheLastStand:GetPlayerTargets() return PLAYERS end
 function TheLastStand:GetUnitsLeft() return UNITS_LEFT end
 function TheLastStand:GetGameHasStarded() return GAME_HAS_STARTED end
@@ -473,7 +482,7 @@ function TheLastStand:GetBossRadius() return BOSS_RADIUS end
 -- Setters
 function TheLastStand:SetPlayerCount(count) DebugPrint("[Player Count] Player count set") PLAYER_COUNT = count end
 function TheLastStand:AddHeroTargets(hero) DebugPrint("[Hero Targets] Hero Added") table.insert(HERO_TARGETS,hero) end
-function TheLastStand:AddPlayerTargets(playerID) DebugPrint("[Player Targets] Player Added") table.insert(PLAYERS,playerID) end
+function TheLastStand:AddPlayerTargets(playerID) DebugPrint("[Player Targets] Player "..tostring(playerID).." Added") table.insert(PLAYERS,playerID) end
 function TheLastStand:SetWaveContentsAttacking(content, i) WAVE_CONTENTS_ATTACKING[i] = content end
 
 
@@ -901,6 +910,7 @@ function TheLastStand:UpgradeBoss(boss)
   local hero_target_num = #HERO_TARGETS/5
   BOSS_MULTIPLIER = (MULTIPLIER/5)+hero_target_num
   -- Get the values
+  local basehp = boss:GetBaseMaxHealth()
   local modelscale = boss:GetModelScale()
   local acquisitionrange = 1800
     local str = boss:GetBaseStrength()
@@ -916,18 +926,22 @@ function TheLastStand:UpgradeBoss(boss)
   DebugPrint(CURRENT_LEVEL)
   int=int*BOSS_MULTIPLIER*2*hero_target_num
   agi=agi*BOSS_MULTIPLIER*2*hero_target_num
-  str=str*BOSS_MULTIPLIER*2*hero_target_num
+  str=str*BOSS_MULTIPLIER*5*hero_target_num
+  basehp=(basehp*BOSS_MULTIPLIER*2*hero_target_num)+str*20
+  DebugPrint(basehp)
   -- Set the values
-  boss:SetModelScale(modelscale)
-  boss:SetAcquisitionRange(acquisitionrange)
-  boss:SetDeathXP(0)
-  boss:SetMaximumGoldBounty(0)
-  boss:SetMinimumGoldBounty(0)
   boss:SetBaseStrength(str)
   boss:SetBaseAgility(agi)
   boss:SetBaseIntellect(int)
   -- Recalculate health, armour, etc based on gains
   boss:CalculateStatBonus()
+  boss:SetModelScale(modelscale)
+  boss:SetAcquisitionRange(acquisitionrange)
+  boss:SetDeathXP(0)
+  boss:SetMaximumGoldBounty(0)
+  boss:SetMinimumGoldBounty(0)
+  --boss:SetBaseMaxHealth(basehp)
+  --boss:SetHealth(basehp)
 end
 
 function TheLastStand:ParseWaveVar(var, wavetype)
