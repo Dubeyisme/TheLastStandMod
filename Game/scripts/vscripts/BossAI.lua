@@ -5,9 +5,11 @@ BOSSAI_REACTION_TARGET = nil
 BOSSAI_CURRENT_BOSS = nil
 BOSSAI_CURENT_MODE = 0
 BOSSAI_PLAYER_DAMAGE_TRACKER = {}
-BOSSAI_CURRENT_AI_TICK_TIMER = 1
+BOSSAI_CURRENT_AI_TICK_TIMER = 2
 BOSSAI_DATA = {}
 BOSSAI_LEVEL = 1
+BOSSAI_FLEE_POINT = nil
+BOSSAI_SEARCH_SUCCESS = false
 
 BOSSAI_SWITCH = { -- This is used to control the parser
 	MODE = 1,
@@ -23,7 +25,8 @@ BOSSAI_AI_STATE = {
 	ATTACKING = 1, -- When the boss has a set target to attack
 	CASTING = 2, -- When the boss has decided to use an ability
 	FLEEING = 3, -- When the boss has decided to flee from a strong attacker
-	HUNTING = 4 -- When the boss does not like any of the current targets and requires a new one
+	HUNTING = 4, -- When the boss does not like any of the current targets and requires a new one
+	SPECIAL = 5 -- When the boss is doing something being controlled by a specific AI effect.
 }
 
 BOSSAI_CURRENT_PERSONALITY = nil
@@ -34,7 +37,8 @@ BOSSAI_PERSONALITY = {
 	HONOURABLE = 2, -- Boss will want to go after the target with the highest health, and resistance
 	OPPORTUNIST = 3, -- Boss will want to go after the closest target
 	STUBBORN = 4, -- Boss will want to go after his current target
-	GREEDY = 5 -- Only meepo uses this. Goes after hero with most gold.
+	GREEDY = 5, -- Only meepo uses this. Goes after hero with most gold.
+	RANDOM = 6 -- Boss will randomly pick a target to boost aggro for, but only when hunting
 }
 
 BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.NOTHING
@@ -140,6 +144,8 @@ function BossAI:InitBossAI(boss)
 	BOSSAI_LEVEL = TheLastStand:GetPlayerCount()
 	-- Setup boss
 	BossAI:BossParser(BOSSAI_SWITCH.SETUP)
+	-- Init current target
+	BOSSAI_CURRENT_TARGET = nil
 	-- Init damage tracker
 	BossAI:InitDamageTracker()
 	-- Init current mode
@@ -174,24 +180,30 @@ function BossAI:EveryTick()
 		boss_alive = true
 		-- Work out what to do with the state if we've stopped, finished casting, or are fleeing
 		if(BOSSAI_CURRENT_STATE==BOSSAI_AI_STATE.FLEEING)then
-			--Check if health is over 25, if it is then stop fleeing
+			-- Do we have a flee point?
+			if(BOSSAI_FLEE_POINT==nil)then
+				-- Pick a flee point
+				local fleepointlist1 = TheLastStand:GetSpawnPoints()
+				BOSSAI_FLEE_POINT = fleepointlist1[RandomInt(1,#fleepointlist1)]
+			end
+			--Check if health is over .25, if it is then stop fleeing
 			if(boss:GetHealth()/boss:GetMaxHealth()>0.25) then
 				BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.NOTHING
+				BOSSAI_FLEE_POINT = nil -- Remove the last used flee point
 				ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_STOP, Queue = false})
 			end
 		end
 		if(BOSSAI_CURRENT_STATE==BOSSAI_AI_STATE.CASTING)then
 			--We're casting, are we still doing it?
 			if(boss:IsChanneling()==false)then
-				-- We've stopped casting, let's start attacking
+				-- We've stopped casting, mark that we're doing nothing
 				BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.NOTHING
 				ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_STOP, Queue = false})
 			end
 		end
-		-- Are we doing nothing? Then go attack the ancient
+		-- Are we doing nothing? Then go hunting
 		if(BOSSAI_CURRENT_STATE==BOSSAI_AI_STATE.NOTHING)then
 			BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.HUNTING
-  			ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = TheLastStand:GetFinalPoint(), Queue = true})
 		end
 	else
 		boss_alive = false
@@ -229,10 +241,37 @@ function BossAI:EveryTick()
 		BossAI:AdjustAggro()
 		-- Choose target
 		BossAI:ChooseNewTarget()
-		-- Check ability logic
-		BossAI:BossParser(BOSSAI_SWITCH.ABILITY)
+		-- Check ability logic if not silenced
+		if(boss:IsSilenced()==false)and(boss:IsStunned()==false)then
+			BossAI:BossParser(BOSSAI_SWITCH.ABILITY)
+		end
 		-- Check special logic
-		BossAI:BossParser(BOSSAI_SWITCH.SPECIAL)
+		if(BOSSAI_CURRENT_STATE==BOSSAI_AI_STATE.SPECIAL)then
+			BossAI:BossParser(BOSSAI_SWITCH.SPECIAL)
+		end
+		-- Check if we're still hunting
+		if(BOSSAI_CURRENT_STATE==BOSSAI_AI_STATE.HUNTING)then
+  			ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = TheLastStand:GetFinalPoint(), Queue = false})
+		end
+		-- Check if we're attacking
+		if(BOSSAI_CURRENT_STATE==BOSSAI_AI_STATE.ATTACKING)then
+			if(BOSSAI_CURRENT_TARGET~=nil)then -- Order a target attack
+				ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET, TargetIndex  = BOSSAI_CURRENT_TARGET:entindex(), Queue = false})
+			else -- Order a generic attack
+  				ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = TheLastStand:GetFinalPoint(), Queue = false})
+			end
+		end
+		-- Check if we're fleeing
+		if(BOSSAI_CURRENT_STATE==BOSSAI_AI_STATE.FLEEING)then
+			-- Bravely run away towards our flee point
+			if(BossAI:TargetDistance(BOSSAI_FLEE_POINT, boss:GetOrigin())<300)then -- Are we near our flee point?
+				-- Pick a new flee point
+				local fleepointlist2 = TheLastStand:GetSpawnPoints()
+				BOSSAI_FLEE_POINT = fleepointlist2[RandomInt(1,#fleepointlist2)]
+  			end
+  			-- Get closer!
+  			ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_MOVE_TO_POSITION, Position = BOSSAI_FLEE_POINT, Queue = false})
+		end
 		-- Recall this function next tick
 		Timers:CreateTimer({
 	        endTime = 1,
@@ -241,6 +280,8 @@ function BossAI:EveryTick()
 	      end
 	    })	
 	else
+		-- Note that the boss wave has ended
+		TheLastStand:SetIsBossWave(false)
 		-- Wait a moment for talking to happen, then end the round
 		Timers:CreateTimer({
 	        endTime = 3,
@@ -264,7 +305,7 @@ end
 -- Boss took damage
 function BossAI:BossHurt(boss, attacker, damage)
 	-- Increment the damage tracker
-	BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner()] = BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner()] + damage
+	BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner():GetPlayerID()] = BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner():GetPlayerID()] + damage
 	--DebugPrint(BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner():GetPlayerID()])
 
 	-- Is there something else we need to do in reaction to taking damage?
@@ -274,95 +315,124 @@ end
 function BossAI:AdjustAggro()
 	-- Debugging variables
 	local s = "Current Aggro "
+	local s2 = "Current Aggro "
+	local debughero = TheLastStand:GetHeroTargets()
 	-- Increase or Decrease aggro based on personality
-	local herotargets = TheLastStand:GetAliveHeroTargets() 
+	local herotargets = TheLastStand:GetFilterHeroTargets(true,true,true,true) -- Filter out alive,invis,invuln,outofgame
 	local boss = BOSSAI_CURRENT_BOSS
-	local closest_player = BossAI:NearestTarget(boss:GetOrigin(),herotargets):GetOwner():GetPlayerID()
-	local furthest_player = BossAI:FurthestTarget(boss:GetOrigin(),herotargets):GetOwner():GetPlayerID()
+	local closest_hero = BossAI:NearestTarget(boss:GetOrigin(),herotargets)
+	local furthest_hero = BossAI:FurthestTarget(boss:GetOrigin(),herotargets)
+	local closest_player,furthest_player = nil
 	local target = nil
+	local i = 0
+	local selectionfilter = 0
+	local selectednumber = 0
+	BOSSAI_SEARCH_SUCCESS = true
 	-- Increment aggro for the current target to reduce likely hood of switching targets
 	if(BOSSAI_CURRENT_TARGET~=nil)then
+		--DebugPrint(BOSSAI_CURRENT_TARGET:GetName())
 		BOSSAI_PLAYER_DAMAGE_TRACKER[BOSSAI_CURRENT_TARGET:GetOwner():GetPlayerID()] = BOSSAI_PLAYER_DAMAGE_TRACKER[BOSSAI_CURRENT_TARGET:GetOwner():GetPlayerID()] + 5
 	end
-	local i = 0
-	local temp1 = 0
-	local temp2 = 0
-	-- Increase aggro for the closest target
-	BOSSAI_PLAYER_DAMAGE_TRACKER[closest_player] = BOSSAI_PLAYER_DAMAGE_TRACKER[closest_player]+5
-	-- Decrease aggro for the furthest target
-	BOSSAI_PLAYER_DAMAGE_TRACKER[furthest_player] = BOSSAI_PLAYER_DAMAGE_TRACKER[furthest_player]-5
-	
-	-- Personality factors
-	if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.VINDICTIVE)then -- Increase aggro for lowest health
-		local targets_health = BossAI:GetTargetsHPPercent(herotargets)
-		temp1 = 1000
-		temp2 = 0
-		-- Work out which i is the one we want
-		for i=1,#targets_health do
-			if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsAlive()) then -- Make sure we can even see or attack this target
-				if(targets_health[i]<temp1)and(herotargets[i]:IsAlive())then
-					temp1 = targets_health[i]
-					temp2 = i
-				end
-			end
+	-- Try and fetch the closest hero and player
+	if(closest_hero~=nil)then 
+		if(closest_hero:GetOwner()~=nil) then
+			closest_player = closest_hero:GetOwner():GetPlayerID() 
 		end
-		BOSSAI_PLAYER_DAMAGE_TRACKER[temp2] = BOSSAI_PLAYER_DAMAGE_TRACKER[temp2]+5
 	end
-	if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.HONOURABLE)then -- Increase aggro for most resistance
-		local targets_armour = BossAI:GetTargetsArmor(herotargets)
-		local targets_magic = BossAI:GetTargetsMagicResist(herotargets)
-		temp1 = 0
-		temp2 = 0
-		-- Merge the values
-		for i=1,#targets_armour do
-			targets_armour[i] = targets_armour[i]+targets_magic[i]
+	if(furthest_hero~=nil)then 
+		if(furthest_hero:GetOwner()~=nil) then
+			furthest_player = furthest_hero:GetOwner():GetPlayerID() 
 		end
-		-- Work out which i is the one we want
-		for i=1,#targets_armour do
-			if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsAlive()) then -- Make sure we can even see or attack this target
-				if(targets_armour[i]>temp1)and(herotargets[i]:IsAlive())then
-					temp1 = targets_armour[i]
-					temp2 = i
-				end
-			end
-		end
-		BOSSAI_PLAYER_DAMAGE_TRACKER[temp2] = BOSSAI_PLAYER_DAMAGE_TRACKER[temp2]+5
 	end
-	if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.OPPORTUNIST)then -- Increase aggro for the closest target
+	-- If we got them, proceed
+	if(closest_player~=nil)and(furthest_player~=nil)then
+		-- Increase aggro for the closest target
 		BOSSAI_PLAYER_DAMAGE_TRACKER[closest_player] = BOSSAI_PLAYER_DAMAGE_TRACKER[closest_player]+5
-	end
-	if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.STUBBORN)then -- Increase aggro for current target if we have one
-		if(BOSSAI_CURRENT_TARGET~=nil)then
-			BOSSAI_PLAYER_DAMAGE_TRACKER[BOSSAI_CURRENT_TARGET:GetOwner():GetPlayerID()] = BOSSAI_PLAYER_DAMAGE_TRACKER[BOSSAI_CURRENT_TARGET:GetOwner():GetPlayerID()] + 5
-		end
-	end
-	if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.GREEDY)then -- Increase aggro for richest target
-		local wealth_of_targets = BossAI:GetTargetsGold(herotargets)
-		temp1 = 0
-		temp2 = 0
-		-- Work out which i is the one we want
-		for i=1,#wealth_of_targets do
-			if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsAlive()) then -- Make sure we can even see or attack this target
-				if(wealth_of_targets[i]>temp1)and(herotargets[i]:IsAlive())then
-					temp1 = wealth_of_targets[i]
-					temp2 = i
+		-- Decrease aggro for the furthest target
+		BOSSAI_PLAYER_DAMAGE_TRACKER[furthest_player] = BOSSAI_PLAYER_DAMAGE_TRACKER[furthest_player]-5
+		
+		-- Personality factors
+		if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.VINDICTIVE)then -- Increase aggro for lowest health
+			local targets_health = BossAI:GetTargetsHPPercent(herotargets)
+			selectionfilter = 1000
+			selectednumber = 0
+			-- Work out which i is the one we want
+			for i=1,#targets_health do
+				if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsAlive()) then -- Make sure we can even see or attack this target
+					if(targets_health[i]<selectionfilter)and(herotargets[i]:IsAlive())then -- This runs asynchronosly, make sure hero hasn't died between frames.
+						selectionfilter = targets_health[i]
+						selectednumber = i
+					end
 				end
 			end
+			BOSSAI_PLAYER_DAMAGE_TRACKER[selectednumber] = BOSSAI_PLAYER_DAMAGE_TRACKER[selectednumber]+5
 		end
-		BOSSAI_PLAYER_DAMAGE_TRACKER[temp2] = BOSSAI_PLAYER_DAMAGE_TRACKER[temp2]+5
+		if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.HONOURABLE)then -- Increase aggro for most resistance
+			local targets_armour = BossAI:GetTargetsArmor(herotargets)
+			local targets_magic = BossAI:GetTargetsMagicResist(herotargets)
+			selectionfilter = 0
+			selectednumber = 0
+			-- Merge the values
+			for i=1,#targets_armour do
+				targets_armour[i] = targets_armour[i]+targets_magic[i]
+			end
+			-- Work out which i is the one we want
+			for i=1,#targets_armour do
+				if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsAlive()) then -- Make sure we can even see or attack this target
+					if(targets_armour[i]>selectionfilter)and(herotargets[i]:IsAlive())then -- This runs asynchronosly, make sure hero hasn't died between frames.
+						selectionfilter = targets_armour[i]
+						selectednumber = i
+					end
+				end
+			end
+			BOSSAI_PLAYER_DAMAGE_TRACKER[selectednumber] = BOSSAI_PLAYER_DAMAGE_TRACKER[selectednumber]+5
+		end
+		if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.OPPORTUNIST)then -- Increase aggro for the closest target
+			BOSSAI_PLAYER_DAMAGE_TRACKER[closest_player] = BOSSAI_PLAYER_DAMAGE_TRACKER[closest_player]+5
+		end
+		if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.STUBBORN)then -- Increase aggro for current target if we have one
+			if(BOSSAI_CURRENT_TARGET~=nil)then
+				BOSSAI_PLAYER_DAMAGE_TRACKER[BOSSAI_CURRENT_TARGET:GetOwner():GetPlayerID()] = BOSSAI_PLAYER_DAMAGE_TRACKER[BOSSAI_CURRENT_TARGET:GetOwner():GetPlayerID()] + 5
+			end
+		end
+		if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.GREEDY)then -- Increase aggro for richest target
+			local wealth_of_targets = BossAI:GetTargetsGold(herotargets)
+			selectionfilter = 0
+			selectednumber = 0
+			-- Work out which i is the one we want
+			for i=1,#wealth_of_targets do
+				if(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsAlive()) then -- Make sure we can even see or attack this target
+					if(wealth_of_targets[i]>selectionfilter)and(herotargets[i]:IsAlive())then -- This runs asynchronosly, make sure hero hasn't died between frames.
+						selectionfilter = wealth_of_targets[i]
+						selectednumber = i
+					end
+				end
+			end
+			BOSSAI_PLAYER_DAMAGE_TRACKER[selectednumber] = BOSSAI_PLAYER_DAMAGE_TRACKER[selectednumber]+5
+		end
+		if(BOSSAI_CURRENT_PERSONALITY==BOSSAI_PERSONALITY.RANDOM)then -- Increase aggro randomly if we're hunting. Gives a massive boost to ensure the target is random
+			if(BOSSAI_CURRENT_STATE==BOSSAI_AI_STATE.HUNTING)then
+				selectednumber=RandomInt(1,#herotargets)
+				BOSSAI_PLAYER_DAMAGE_TRACKER[selectednumber] = BOSSAI_PLAYER_DAMAGE_TRACKER[selectednumber]+100
+			end
+		end
+	else
+		-- We couldn't find any players
+		BOSSAI_SEARCH_SUCCESS = false
 	end
-
 
 	-- Reduce aggro for all players
 	for i=1,#BOSSAI_PLAYER_DAMAGE_TRACKER do
-		BOSSAI_PLAYER_DAMAGE_TRACKER[i] = BOSSAI_PLAYER_DAMAGE_TRACKER[i] - math.ceil(BOSSAI_PLAYER_DAMAGE_TRACKER[i]/60)
+		BOSSAI_PLAYER_DAMAGE_TRACKER[i] = math.ceil(BOSSAI_PLAYER_DAMAGE_TRACKER[i] - math.ceil(BOSSAI_PLAYER_DAMAGE_TRACKER[i]/10))
 		if(BOSSAI_PLAYER_DAMAGE_TRACKER[i]<0) then
 			BOSSAI_PLAYER_DAMAGE_TRACKER[i] = 0
 		end
 		-- Add current aggro
-		s=s.." | "..tostring(BOSSAI_PLAYER_DAMAGE_TRACKER[i])
+		s2 = s2.." | "..string.gsub(debughero[i]:GetName(),"npc_dota_hero_","")
+		s=s.." |        "..tostring(BOSSAI_PLAYER_DAMAGE_TRACKER[i])
 	end
-	--DebugPrint(s)
+	DebugPrint(s2)
+	DebugPrint(s)
 end
 
 -- Triggered when an enemy hero starts to cast a spell
@@ -379,22 +449,29 @@ end
 
 function BossAI:ChooseNewTarget()
 	-- See who is causing the most aggro and select them
-	local i =0
-	local aggrolevel = 0
-	local aggroindex = -1
-	local herotargets = TheLastStand:GetHeroTargets()
-	for i=1,#BOSSAI_PLAYER_DAMAGE_TRACKER do
-		if(BOSSAI_PLAYER_DAMAGE_TRACKER[i]>aggrolevel) then
-			aggroindex = i
-			aggrolevel = BOSSAI_PLAYER_DAMAGE_TRACKER[i]
+	if(BOSSAI_SEARCH_SUCCESS)then
+		local i =0
+		local aggrolevel = -1
+		local aggroindex = -1
+		local herotargets = TheLastStand:GetHeroTargets()
+		for i=1,#BOSSAI_PLAYER_DAMAGE_TRACKER do
+			if(BOSSAI_PLAYER_DAMAGE_TRACKER[i]>aggrolevel)and(herotargets[i]:IsAlive())and(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsOutOfGame()==false) then
+				aggroindex = i
+				aggrolevel = BOSSAI_PLAYER_DAMAGE_TRACKER[i]
+			end
 		end
-	end
-	if(aggroindex==-1)then
+		if(aggroindex==-1)then
+			-- we were unsuccessful
+			BOSSAI_CURRENT_TARGET = nil
+			BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.HUNTING
+		else
+			BOSSAI_CURRENT_TARGET = herotargets[aggroindex]
+			BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.ATTACKING
+		end
+	else
 		-- we were unsuccessful
 		BOSSAI_CURRENT_TARGET = nil
-		BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.NOTHING
-	else
-		BOSSAI_CURRENT_TARGET = herotargets[aggroindex]
+		BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.HUNTING
 	end
 end
 
@@ -487,17 +564,15 @@ end
 		local pointi = -1
 		-- Fetch the positions of each enemy hero
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive())then
-				table.insert(targetposlist,heroes[i]:GetOrigin())
-				table.insert(herolist,heroes[i])
-			end
+			table.insert(targetposlist,heroes[i]:GetOrigin())
+			table.insert(herolist,heroes[i])
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
 		--DebugPrint("Calculating")
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(returndist>targetdistlist[i])and(herolist[i]:IsAlive())then
+			if(returndist>targetdistlist[i])then
 				--DebugPrint(targetdistlist[i])
 				returndist = targetdistlist[i]
 				pointi = i
@@ -517,16 +592,14 @@ end
 		local pointi = -1
 		-- Fetch the positions of each enemy hero
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive())then
-				table.insert(targetposlist,heroes[i]:GetOrigin())
-				table.insert(herolist,heroes[i])
-			end
+			table.insert(targetposlist,heroes[i]:GetOrigin())
+			table.insert(herolist,heroes[i])
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(returndist<targetdistlist[i])and(herolist[i]:IsAlive())then
+			if(returndist<targetdistlist[i])then
 				returndist = targetdistlist[i]
 				pointi = i
 			end
@@ -547,19 +620,14 @@ end
 		-- Fetch the positions of each enemy hero
 		--DebugPrint(#heroes)
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive())then
-				--DebugPrint(heroes[i]:GetName())
-				table.insert(targetposlist,heroes[i]:GetOrigin())
-				table.insert(herolist,heroes[i])
-			end
+			table.insert(targetposlist,heroes[i]:GetOrigin())
+			table.insert(herolist,heroes[i])
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(rangedist>=targetdistlist[i])and(herolist[i]:IsAlive())then
-				--DebugPrint(herolist[i]:GetName())
-				--DebugPrint("Target in range")
+			if(targetdistlist[i]<rangedist)then
 				table.insert(returnlist,herolist[i])
 			end
 		end
@@ -576,16 +644,14 @@ end
 		local returnlist = {}
 		-- Fetch the positions of each enemy hero
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive())then
-				table.insert(targetposlist,heroes[i]:GetOrigin())
-				table.insert(herolist,heroes[i])
-			end
+			table.insert(targetposlist,heroes[i]:GetOrigin())
+			table.insert(herolist,heroes[i])
 		end
 		-- Fetch the distance between each enemy hero
 		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(rangedist<targetdistlist[i])and(herolist[i]:IsAlive())then
+			if(targetdistlist[i]>rangedist)then
 				table.insert(returnlist,herolist[i])
 			end
 		end
@@ -618,9 +684,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetHealth())
-			end
+			table.insert(returnlist,heroes[i]:GetHealth())
 		end
 		return returnlist
 	end
@@ -631,9 +695,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetHealth()/heroes[i]:GetMaxHealth())
-			end
+			table.insert(returnlist,heroes[i]:GetHealth()/heroes[i]:GetMaxHealth())
 		end
 		return returnlist
 	end
@@ -644,9 +706,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetMana())
-			end
+			table.insert(returnlist,heroes[i]:GetMana())
 		end
 		return returnlist
 	end
@@ -657,9 +717,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetMana()/heroes[i]:GetMaxMana())
-			end
+			table.insert(returnlist,heroes[i]:GetMana()/heroes[i]:GetMaxMana())
 		end
 		return returnlist
 	end
@@ -670,9 +728,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetIdealSpeed())
-			end
+			table.insert(returnlist,heroes[i]:GetIdealSpeed())
 		end
 		return returnlist
 	end
@@ -683,9 +739,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetBaseAttackRange())
-			end
+			table.insert(returnlist,heroes[i]:GetBaseAttackRange())
 		end
 		return returnlist
 	end
@@ -696,9 +750,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetPhysicalArmorValue())
-			end
+			table.insert(returnlist,heroes[i]:GetPhysicalArmorValue())
 		end
 		return returnlist
 	end
@@ -709,9 +761,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetMagicalArmorValue())
-			end
+			table.insert(returnlist,heroes[i]:GetMagicalArmorValue())
 		end
 		return returnlist
 	end
@@ -722,9 +772,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetPrimaryAttribute())
-			end
+			table.insert(returnlist,heroes[i]:GetPrimaryAttribute())
 		end
 		return returnlist
 	end
@@ -735,9 +783,7 @@ end
 		local heroes = herotargets
 		local i = 0
 		for i=1,#heroes do
-			if(heroes[i]:IsAlive()) then
-				table.insert(returnlist,heroes[i]:GetGold())
-			end
+			table.insert(returnlist,heroes[i]:GetGold())
 		end
 		return returnlist
 	end

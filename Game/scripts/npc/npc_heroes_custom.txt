@@ -5,6 +5,9 @@
 	
   "npc_dota_hero_sniper"
   {
+		"Role"						"Carry,Nuker,Support"
+		"Rolelevels"				"3,2,1"
+		"Complexity"			"1"
 		"Ability1"					"sniper_shrapnel"					// Ability 1
 		"Ability2"					"rattletrap_rocket_flare"					// Ability 2
 		"Ability3"					"gyrocopter_flak_cannon"					// Ability 3
@@ -18,6 +21,9 @@
   
   "npc_dota_hero_riki"
   {
+		"Role"						"Carry,Escape,Disabler,Support"
+		"Rolelevels"				"1,3,1,2"
+		"Complexity"			"3"
 		"Ability1"		"riki_smoke_screen"
 		"Ability2"		"riki_blink_strike"
 		"Ability3"		"antimage_blink"
@@ -31,6 +37,9 @@
   
   "npc_dota_hero_pangolier"
 	{
+		"Role"						"Carry,Escape,Initiator,Disabler,Nuker,Support"
+		"Rolelevels"				"3,1,1,1,1,1"
+		"Complexity"			"2"
 		"Ability1"					"pangolier_swashbuckle"
 		"Ability2"					"pangolier_shield_crash"
 		"Ability3"					"phantom_assassin_stifling_dagger"
@@ -44,6 +53,9 @@
 	
 	"npc_dota_hero_techies"
 	{
+		"Role"						"Disabler,Nuker,Support"
+		"Rolelevels"				"2,3,1"
+		"Complexity"			"1"
 		"Ability1"		"techies_land_mines"
 		"Ability2"		"techies_stasis_trap"
 		"Ability3"		"techies_suicide"
@@ -62,6 +74,9 @@
 	
 	"npc_dota_hero_lina"
 	{
+		"Role"						"Carry,Disabler,Nuker"
+		"Rolelevels"				"3,2,3"
+		"Complexity"			"1"
 		"Ability1"		"lina_dragon_slave"
 		"Ability2"		"lina_light_strike_array"
 		"Ability3"		"phoenix_fire_spirits"
@@ -81,6 +96,9 @@
 	
 	"npc_dota_hero_furion"
 	{
+		"Role"						"Escape,Nuker,Support,Pusher"
+		"Rolelevels"				"2,2,2,1"
+		"Complexity"			"2"
 		"Ability1"		"furion_sprout"
 		"Ability2"		"treant_living_armor"
 		"Ability3"		"furion_force_of_nature"
@@ -99,6 +117,9 @@
 	
 	"npc_dota_hero_winter_wyvern"
 	{
+		"Role"						"Carry,Durable,Disabler,Nuker,Support"
+		"Rolelevels"				"1,1,1,2,3"
+		"Complexity"			"1"
 		"Ability1"		"winter_wyvern_arctic_burn"
 		"Ability2"		"winter_wyvern_splinter_blast"
 		"Ability3"		"winter_wyvern_cold_embrace"
@@ -117,6 +138,9 @@
 	
 	"npc_dota_hero_omniknight"
 	{
+		"Role"						"Durable,Nuker,Support"
+		"Rolelevels"				"3,1,3"
+		"Complexity"			"1"
 		"Ability1"		"omniknight_purification"
 		"Ability2"		"omniknight_repel"
 		"Ability3"		"chen_test_of_faith"
@@ -135,6 +159,9 @@
 	
 	"npc_dota_hero_beastmaster"
 	{
+		"Role"						"Carry,Durable,Nuker,Support,Pusher"
+		"Rolelevels"				"2,1,1,1,3"
+		"Complexity"			"2"
 		"Ability1"		"beastmaster_wild_axes"
 		"Ability2"		"beastmaster_call_of_the_wild"
 		"Ability3"		"lycan_summon_wolves"
@@ -153,6 +180,9 @@
 	
 	"npc_dota_hero_kunkka"
 	{
+		"Role"						"Carry,Escape,Disabler,Nuker,Support"
+		"Rolelevels"				"1,1,1,3,1"
+		"Complexity"			"3"
 		"Ability1"		"kunkka_torrent"
 		"Ability2"		"tidehunter_gush"
 		"Ability3"		"naga_siren_rip_tide"

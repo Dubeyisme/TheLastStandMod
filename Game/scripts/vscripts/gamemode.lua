@@ -115,19 +115,27 @@ function GameMode:ParseText(text,pid)
   if(ParsedText[1]=="gold") then PlayerResource:SetGold(pid,PlayerResource:GetGold(pid)+(ParsedText[2]),true) end
   if(ParsedText[1]=="bots") then TheLastStand:SetPlayerCount(5) end
   if(ParsedText[1]=="lvl") then 
-    local lvl = hero:GetLevel()
-    if(lvl<ParsedText[2]+0) then
-      for i=lvl,ParsedText[2]-1 do
-        hero:HeroLevelUp(false)
+    local heroes = TheLastStand:GetHeroTargets()
+    local k = 0
+    for k=1,#heroes do
+      local lvl = heroes[k]:GetLevel()+1
+      if(lvl<ParsedText[2]+0) then
+        for i=lvl,ParsedText[2] do
+          heroes[k]:HeroLevelUp(false)
+        end
+        heroes[k]:HeroLevelUp(true)
       end
-      hero:HeroLevelUp(true)
     end
   end
   if(ParsedText[1]=="refresh") then
-    local ability = nil
-    for i=0,hero:GetAbilityCount()-1 do
-      ability = hero:GetAbilityByIndex(i)
-      if(ability ~= nil) then ability:EndCooldown() end
+    local heroes = TheLastStand:GetHeroTargets()
+    local k = 0
+    for k=1,#heroes do
+      local ability = nil
+      for i=0,heroes[k]:GetAbilityCount()-1 do
+        ability = heroes[k]:GetAbilityByIndex(i)
+        if(ability ~= nil) then ability:EndCooldown() end
+      end
     end
   end
 end
@@ -197,7 +205,7 @@ function GameMode:OnHeroInGame(hero)
   if(TheLastStand:GetGameHasStarded()==false)then
     TheLastStand:AddHeroTargets(hero)
     DebugPrint(GetTeamName(hero:GetTeamNumber()))
-    DebugPrint("[UPDATE] Added a player and hero")
+    DebugPrint("[UPDATE] Added a player and hero: "..hero:GetName())
 
     -- Some heros spawn with abilities levelled incorrectly, fix this
     for i=0,23 do
@@ -206,13 +214,31 @@ function GameMode:OnHeroInGame(hero)
         ability:SetLevel(0)
       end
     end
-
-    if(hero:GetUnitName()=="npc_dota_hero_riki") then
+    -- Strip all misplaced modifiers
+    if(hero:GetUnitName()=="npc_dota_hero_riki")
+      or(hero:GetUnitName()=="npc_dota_hero_pangolier")
+      or(hero:GetUnitName()=="npc_dota_hero_sniper")
+      or(hero:GetUnitName()=="npc_dota_hero_techies")
+      or(hero:GetUnitName()=="npc_dota_hero_lina")
+      or(hero:GetUnitName()=="npc_dota_hero_furion")
+      or(hero:GetUnitName()=="npc_dota_hero_winter_wyvern")
+      or(hero:GetUnitName()=="npc_dota_hero_kunkka")
+      or(hero:GetUnitName()=="npc_dota_hero_beastmaster")
+      or(hero:GetUnitName()=="npc_dota_hero_omniknight")
+      then
       for i=0,hero:GetModifierCount() do
         local s = hero:GetModifierNameByIndex(i)
         DebugPrint("Modifier "..s.." removed")
         hero:RemoveModifierByName(s)  
       end
+    end
+  end
+
+  -- Level up abilities for heroes
+  for i=0,4 do
+    ability = hero:GetAbilityByIndex(i)
+    if(ability~=nil)then
+      ability:SetLevel(1)
     end
   end
 

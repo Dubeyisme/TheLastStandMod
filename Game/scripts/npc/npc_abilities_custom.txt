@@ -20,6 +20,7 @@
 		"ID"					"7001"	
 		"BaseClass"             "ability_datadriven"
 		"AbilityTextureName" 	"Treant_Silence_icon"
+		"MaxLevel"					"5"
 		"AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam" "DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
@@ -109,41 +110,12 @@
 		}	
 	}
 
-  
-  //=================================================================================================================
-	// Treant Protector: Overgrowth
-	//=================================================================================================================
-	"newtreant_overgrowth"
+	"treant_overgrowth"
 	{
-		// General
-		//-------------------------------------------------------------------------------------------------------------
-		"ID"							"7002"//"5437"//														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-		"BaseClass"             "ability_datadriven"
-		"AbilityTextureName" 	"Overgrowth_icon"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"
-		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"	
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"		
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"AbilitySound"					"Hero_Treant.Overgrowth.Cast"
-
+		"MaxLevel"					"5"
 		"AbilityCastPoint"				"0.5 0.5 0.5 0.5 0.5"
-		"AbilityCastAnimation"			"ACT_DOTA_CAST_ABILITY_5"
-
-		"FightRecapLevel"				"2"
-
-		"HasScepterUpgrade"				"1"
-		
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"15"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
 		{
 			"01"
@@ -155,117 +127,37 @@
 			"02"
 			{
 				"var_type"						"FIELD_INTEGER"
-				"radius"						"800"
+				"radius"						"500"
+				"LinkedSpecialBonus"			"special_bonus_unique_treant_5"
 			}	
 			
 			"03"
 			{
 				"var_type"						"FIELD_INTEGER"
 				"eyes_radius"					"800"
+				"LinkedSpecialBonus"			"special_bonus_unique_treant_5"
 			}				
 		}
-
-		// Data Driven
-		//-------------------------------------------------------------------------------------
-		"OnSpellStart"
-		{
-			"ActOnTargets"
-			{
-				"Target"
-					{
-						"Center" "CASTER"
-						"Radius" "%radius"
-						"Teams" "DOTA_UNIT_TARGET_TEAM_ENEMY"
-						"Types" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-					}
-				"Action"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"modifier_treant_overgrowth"
-						"Target"	"TARGET"
-					}
-				}		
-			 }
-			"AttachEffect"
-			{
-				"EffectName"	"particles/units/heroes/hero_treant/treant_overgrowth_cast.vpcf"
-				"EffectAttachType"	"follow_origin"
-				"Target" "CASTER"
-			}
-		 }
-		 
-		 "Modifiers"
-		{
-			"modifier_treant_overgrowth"
-			{
-				"IsDebuff"	"1"
-				"Duration"	"%duration"
-				"IsPurgable"	"1"
-				"EffectName"	"particles/units/heroes/hero_treant/treant_overgrowth_vines.vpcf"
-				"EffectAttachType"	"follow_origin"			
-	
-	
-				"States"
-				{
-					"MODIFIER_STATE_ROOTED"	"MODIFIER_STATE_VALUE_ENABLED"
-				}
-			}
-		}	
 	}
-  
   	
-	//=================================================================================================================
-	// Treant Protector: Leech Seed
-	//=================================================================================================================
-	"newtreant_leech_seed"
+	"treant_leech_seed"
 	{
-		"ID"					"7003"//"5435"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-		"BaseClass"             "ability_datadriven"
-		"AbilityTextureName" 	"Leech_Seed_icon"
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"	
-		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
-		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
-		"SpellDispellableType"			"SPELL_DISPELLABLE_YES"
-		"AbilitySound"					"Hero_Treant.LeechSeed.Cast"
-
-		"AbilityCastRange"				"350"
+		"MaxLevel"					"5"
 		"AbilityCastPoint"				"0.5 0.5 0.5 0.5 0.5"
-		"FightRecapLevel"				"1"
-		
-		// Time		
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityCooldown"				"19 16 13 10 7"
-
-		// Cost
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilityManaCost"				"0"
-
-		// Special
-		//-------------------------------------------------------------------------------------------------------------
 		"AbilitySpecial"
 		{
-			"01"
-			{
-				"var_type"						"FIELD_FLOAT"
-				"damage_interval"				"0.75"
-			}
 			"02"
 			{
 				"var_type"						"FIELD_INTEGER"
 				"leech_damage"					"30 40 50 60 70"
+				"LinkedSpecialBonus"			"special_bonus_unique_treant_2"
 			}		
 			"03"
 			{
 				"var_type"						"FIELD_INTEGER"
 				"movement_slow"					"-16 -20 -24 -28 -32"
-			}
-			"04"
-			{
-				"var_type"						"FIELD_INTEGER"
-				"radius"						"500"
 			}
 			"05"
 			{
@@ -277,96 +169,9 @@
 				"var_type"						"FIELD_INTEGER"
 				"projectile_speed"				"400"
 			}
-			"07"
-			{
-				"var_type"						"FIELD_INTEGER"
-				"leech_heal"					"15 20 25 30 35"
-			}	
 		}
-		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
-		
-		 // Data Driven
-		//-------------------------------------------------------------------------------------
-		"OnSpellStart"
-		{
-			"ActOnTargets"
-			{
-				"Target" "TARGET"
-				"Action"
-				{
-					"ApplyModifier"
-					{
-						"ModifierName"	"newmodifier_leech_seed"
-						"Target"	"TARGET"
-					}
-
-					"FireSound"
-					{
-						"EffectName"	"Hero_Treant.LeechSeed.Target"
-						"Target"		"TARGET"
-					}	
-				}		
-			 }
-		}
-		
-		"Modifiers"
-		{
-			"newmodifier_leech_seed"
-			{
-				"Duration" "%duration"
-				"IsDebuff"	"1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%movement_slow"
-				}
-				"ThinkInterval" "%damage_interval"
-				"OnIntervalThink"
-				{
-					"Damage"
-					{
-						"Type" "DAMAGE_TYPE_MAGICAL"
-						"Damage" "%leech_damage"
-						"Target"    "TARGET"
-					}
-					
-					"Heal"
-					{
-						"HealAmount" "%leech_heal"
-						"Target"    "CASTER"
-					}
-
-					"FireSound"
-					{
-						"EffectName"	"Hero_Treant.LeechSeed.Tick"
-						"Target"		"TARGET"
-					}	
-					
-					"AttachEffect"
-					{
-						"EffectName"	"particles/units/heroes/hero_treant/treant_leech_seed_projectile_heal_explode.vpcf"
-						"EffectAttachType"	"follow_origin"
-						"Target" "CASTER"
-					}
-					"AttachEffect"
-					{
-						"EffectName"	"particles/units/heroes/hero_treant/treant_leech_seed_damage_glow.vpcf"
-						"EffectAttachType"	"follow_origin"
-						"Target" "TARGET"
-					}
-				}
-				"OnCreated"
-				{
-					"AttachEffect"
-					{
-						"EffectName"	"particles/units/heroes/hero_treant/treant_leech_seed.vpcf"
-						"EffectAttachType"	"follow_origin"
-						"Target" "TARGET"
-					}
-				}
-			 }
-		}
+	
 	}
-  
 	
   
   
@@ -690,26 +495,7 @@
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Hero Abilities and Overrides
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-  // Regular abilities
-  
-  "riki_tricks_of_the_trade"
-	{
-		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_ALL"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NO_INVIS"
-	}
-  
-  "sniper_assassinate"
-	{
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL | DOTA_UNIT_TARGET_BASIC"
-	}
-	
-	"sniper_shrapnel"
-	{
-	
-	}
-  
+   
   // Talents
   "special_bonus_unique_clockwerk_2"// Rocket Flare
 	{
@@ -1074,5 +860,1099 @@
 		}
 	}
 	
+	// Abilities Modified
+  // Riki
+  "riki_smoke_screen"
+	{
+		"MaxLevel"						"5"
+		"AbilityCastPoint"				"0.4 0.4 0.4 0.4 0.4"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"225 250 275 300 325"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"miss_rate"					"20 40 50 60 70"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"movement_speed_reduction"	"5 10 15 20 25"
+			}
+		}
+	}
+	"riki_blink_strike"
+	{
+		"MaxLevel"						"5"
+		"AbilityCooldown"				"8 7 6 5 4"
+		"AbilityManaCost"				"15"
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage"				"40 55 70 85 100"
+			}
+		}
+	}
+	"antimage_blink"
+	{
+		"MaxLevel"						"5"
+		"AbilityCastPoint"				"0.4 0.4 0.4 0.4 0.4"
+		"AbilityCooldown"				"18 15 12 9 6"
+		"AbilityManaCost"				"15"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blink_range"			"850 925 1000 1075 1150"
+				"LinkedSpecialBonus"		"special_bonus_unique_antimage_3"
+			}
+		}
+	}
+	"abaddon_frostmourne"
+	{
+		"MaxLevel"						"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"debuff_duration"				"5.5"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"slow_pct"						"4 8 12 16 20"
+				"LinkedSpecialBonus"	"special_bonus_unique_abaddon_3"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"attack_slow_tooltip"			"4 8 12 16 20"
+				"LinkedSpecialBonus"	"special_bonus_unique_abaddon_3"
+			}
+			"06"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"attack_speed"					"5 10 20 30 40"
+			}
+		}
+	}
+	"riki_permanent_invisibility"
+	{
+		"MaxLevel"						"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"damage_multiplier"				"0.2 0.4 0.6 0.8 1.0"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"backstab_angle"				"105 105 105 105 105"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"fade_time"					"0.0 0.0 0.0 0.0 0.0"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"fade_delay"				"7 6 5 4 3"
+			}
+		}
+	}
+  "riki_tricks_of_the_trade"
+	{
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_ALL"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_NO_INVIS"
+	}
+	// Sniper
+	"sniper_shrapnel"
+	{
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityDamage"					"6 12 24 36 48"
+		"AbilityManaCost"				"40 60 80 100 120"
+		"MaxLevel"						"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_movement_speed"	"-7 -15 -20 -25 -30"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"shrapnel_damage"		"7 15 35 55 75"
+				"LinkedSpecialBonus"	"special_bonus_unique_sniper_1"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"2.0 2.0 2.0 2.0 2.0"
+			}
+		}
+	}
+	"rattletrap_rocket_flare"
+	{
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"22.0 20.0 18.0 16.0 14.0"
+		"AbilityManaCost"				"30 35 40 45 50"
+		"AbilityDamage"					"40 80 120 160 200"
+		"MaxLevel"						"5"
+		"AbilitySpecial"
+		{
+			"02"
+			{	
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"10.0 10.0 10.0 10.0 10.0"
+			}
+		}
+	}
+	"gyrocopter_flak_cannon"
+	{
+		"AbilityCastPoint"				"0 0 0 0 0"
+		"AbilityCooldown"				"30 30 30 30 30"
+		"AbilityManaCost"				"50 50 50 50 50"
+		"AbilityDuration"				"15 15 15 15 15"
+		"MaxLevel"						"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"1250"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"max_attacks"					"2 3 4 5 6"
+				"LinkedSpecialBonus"			"special_bonus_unique_gyrocopter_2"
+			}
+		}
+	}
+	"sniper_headshot"
+	{
+		"MaxLevel"						"5"
+		"AbilityDamage"					"7 15 40 65 90"
+	}
+	"sniper_take_aim"
+	{
+		"AbilitySpecial"
+		{
+		"MaxLevel"						"5"
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_attack_range"			"50 100 200 300 400"
+			}
+		}
+	}
+  "sniper_assassinate"
+	{
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_ALL | DOTA_UNIT_TARGET_BASIC"
+	}
+	//Pangolier
+	"pangolier_swashbuckle"
+	{
+		"MaxLevel"						"5"
+		"AbilityCooldown"				"24 20 16 12 8"
+		"AbilityManaCost"				"60 70 80 90 100"
+		"AbilitySpecial"
+		{
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"6 24 42 60 78"
+				"LinkedSpecialBonus"	"special_bonus_unique_pangolier_3"
+				"CalculateSpellDamageTooltip"	"0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"attack_interval"		"0.1 0.1 0.1 0.1 0.1"
+			}
+		}
+	}
+	"pangolier_shield_crash"
+	{
+		"MaxLevel"						"5"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+		"AbilityManaCost"				"70 90 100 110 120"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"37 75 150 225 300"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hero_stacks"			"6 9 12 15 18"
+			}
+		}
+	}
+	"phantom_assassin_stifling_dagger"
+	{
+		"MaxLevel"						"5"
+		"AbilityCastRange"				"300 525 750 975 1200"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityDuration"				"0.5 1 2 3 4"
+		"AbilityManaCost"				"35 30 25 20 15"
+		"AbilitySpecial"
+		{
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"0.5 1 2 3 4"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_factor"			"-90 -75 -60 -45 -30"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_factor_tooltip"	"10 25 40 55 70"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tooltip_range"			"300 525 750 975 1200"
+			}
+		}
+	}
+	"troll_warlord_fervor"
+	{
+		"MaxLevel"						"5"
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_speed"			"7 15 20 25 30"
+			}
+		}
+	}
+	"pangolier_heartpiercer"
+	{
+		"MaxLevel"					"5"
+		"duration"				"1 2 3 4 5"
+		"slow_pct"			"-30 -35 -40 -45 -50"
+	}
+	//Techies
+	"techies_land_mines"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+		"AbilityManaCost"				"90 110 130 150 170"
+		"AbilitySpecial"
+		{
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"100 200 400 600 800"
+			}
+		}
+	}
+	"techies_stasis_trap"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"24.0 20.0 16.0 13.0 10.0"
+		"AbilityManaCost"				"50 80 110 140 160"
+		"AbilitySpecial"
+		{
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"stun_duration"				"1 2 3 4 5"
+			}
+		}
+	}
+	"techies_suicide"
+	{
+		"MaxLevel"					"5"
+		"AbilityManaCost"				"75 100 125 150 175"
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"200 300 400 500 600"
+				"LinkedSpecialBonus"		"special_bonus_unique_techies"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"silence_duration"			"3 4 5 6 7"
+			} 
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"hp_cost"			"15"
+			}
+		}
+	}
+	"batrider_flamebreak"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.2 0.2 0.2 0.2 0.2"
+		"AbilityManaCost"				"100 110 120 130 140"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"15 25 30 35 40"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_duration"		"3 4 5 6 7"
+				"CalculateSpellDamageTooltip"	"0"
+				"LinkedSpecialBonus"	"special_bonus_unique_batrider_3"
+			}			
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_total_tooltip"		"50 100 150 210 280"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"collision_radius"		"100 100 100 100 100"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"0.5 0.5 0.5 0.5 0.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed"					"900 900 900 900 900"
+			}
+			"09"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"knockback_height"		"100 100 100 100 100"
+			}
+			"10"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"knockback_duration"	"0.25 0.25 0.25 0.25 0.25"
+			}			
+		}
+	}
+	"jakiro_liquid_fire"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"25 20 15 10 5"
+		"AbilityDuration"				"5.0 5.0 5.0 5.0 5.0"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_attack_speed_pct" 		"-20 -30 -40 -50 -60"
+				"LinkedSpecialBonus"	"special_bonus_unique_jakiro_4"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"8 12 16 20 24"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tooltip_duration"			"5 5 5 5 5"
+			}
+		}		
+	}
+	//Lina
+	"lina_dragon_slave"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.45 0.45 0.45 0.45 0.45"
+		"AbilityDuration"				"0.6875 0.6875 0.6875 0.6875 0.6875"
+		"AbilityDamage"					"40 85 160 235 310"
+		"AbilityManaCost"				"85 100 115 130 145"
+	}
+	"lina_light_strike_array"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.45 0.45 0.45 0.45 0.45"
+		"AbilityCooldown"				"7.0 7.0 7.0 7.0 7.0"
+		"AbilityDuration"				"1.3 1.6 1.9 2.2 2.5"
+		"AbilityManaCost"				"90 100 110 120 130"
+		"AbilitySpecial"
+		{		
+			"03"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"light_strike_array_stun_duration"	"1.3 1.6 1.9 2.2 2.5"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"light_strike_array_damage"	"40 80 120 160 200"
+				"LinkedSpecialBonus"		"special_bonus_unique_lina_3"
+			}
+		}
+	}
+	"phoenix_fire_spirits"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.01 0.01 0.01 0.01 0.01"
+		"AbilityCooldown"				"50 45 40 35 30"
+		"AbilityManaCost"				"70 80 90 100 110"
+		"AbilitySpecial"
+		{
+			"03"
+			{	
+				"var_type"			"FIELD_INTEGER"
+				"spirit_speed"		"900 900 900 900 900"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"175 175 175 175 175"
+			}
+			"06"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"attackspeed_slow"	"-60 -80 -100 -120 -140"
+			}
+			"07"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage_per_second"				"2 10 30 50 70"
+				"LinkedSpecialBonus"	"special_bonus_unique_phoenix_3"
+			}
+		}
+	}
+	"batrider_firefly"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+		"AbilityCooldown"				"40.0 40.0 40.0 40.0 40.0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"		"2 10 30 50 70"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"200 200 200 200 200"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"18.0 18.0 18.0 18.0 18.0"
+				"LinkedSpecialBonus"	"special_bonus_unique_batrider_1"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"tick_interval"			"0.5 0.5 0.5 0.5 0.5"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tree_radius"			"100 100 100 100 100"
+			}
+		}
+	}
+	"lina_fiery_soul"
+	{
+		"MaxLevel"					"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"fiery_soul_attack_speed_bonus"	"25 40 55 70 85"
+				"LinkedSpecialBonus"			"special_bonus_unique_lina_2"				
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"fiery_soul_move_speed_bonus"	"4 5 6 7 8"
+				"LinkedSpecialBonus"			"special_bonus_unique_lina_2"
+				"LinkedSpecialBonusField"		"value2"
+			}
+		}
+	}
+	//Furion
+	"furion_sprout"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"550 625 700 775 850"
+		"AbilityCooldown"				"12 11 10 9 8"
+		"AbilityManaCost"				"50 70 90 110 130"
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"2 3 4 5 6"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cast_range_tooltip"				"550 625 700 775 850"
+			}
+		}
+	}
+	"treant_living_armor"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.5 0.5 0.5 0.5 0.5"
+		"AbilityCooldown"				"36 30 24 18 12"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage_count"		"3 4 5 6 7"
+				"LinkedSpecialBonus"	"special_bonus_unique_treant"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"health_regen"		"1 4 7 10 13"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage_block"		"10 20 40 60 80"
+			}
+
+		}
+	}
+	"furion_force_of_nature"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.5 0.5 0.5 0.5 0.5"
+		"AbilityCooldown"				"37 37 37 37 37"
+		"AbilityManaCost"				"120 130 140 150 160"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"area_of_effect"		"75 150 225 300 375"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_treants"			"1 2 3 4 5"
+				"LinkedSpecialBonus"	"special_bonus_unique_furion_2"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"60 60 60 60 60"
+			}
+		}
+	}
+	"furion_teleportation"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"5 4 3 2 1"
+		"AbilityCooldown"				"60 50 40 30 20"
+		"AbilityManaCost"				"50 50 50 50 50"
+	}
+	"treant_natures_guise"
+	{
+		"MaxLevel"					"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"fade_time"					"8 7 6 5 3"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_move_speed"			"5 10 18 26 34"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"bash_duration"				"0.2 0.4 1.0 1.6 2.2"
+				"LinkedSpecialBonus"		"special_bonus_unique_treant_4"
+			}
+		}
+	}
+	//Winter Wyvern
+	"winter_wyvern_arctic_burn"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+		"AbilityCooldown"				"60.0 50.0 40.0 30.0 20.0"
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_range_bonus"	"175 275 375 475 575"
+			}			
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"percent_damage"		"5 6 7 8 9"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"move_slow"				"18 22 28 34 40"
+				"LinkedSpecialBonus"	"special_bonus_unique_winter_wyvern_1"
+			}
+		}
+	}
+	"winter_wyvern_splinter_blast"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityDamage"					"60 100 180 260 340"
+		"AbilityManaCost"				"110 120 130 140 150"
+	}
+	"winter_wyvern_cold_embrace"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"27 24 21 18 15"
+		"AbilityManaCost"				"75 75 75 75 75"
+		"AbilitySpecial"
+		{
+			"03"
+			{	
+				"var_type"			"FIELD_FLOAT"
+				"heal_percentage"	"2.0 3.0 4.0 5.0 6.0"
+			}
+		}
+	}
+	"lich_frost_armor"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.4 0.4 0.4 0.4 0.4"
+		"AbilityCooldown"				"5.0 5.0 5.0 5.0 5.0"
+		"AbilityDuration"				"40.0 40.0 40.0 40.0 40.0"
+		"AbilityManaCost"				"50 50 50 50 50"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"armor_bonus"			"1 3 5 7 9"
+			}		
+			"02"
+			{
+				"var_type"								"FIELD_INTEGER"
+				"building_armor_bonus_tooltip"			"1 3 5 7 9"
+			}		
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"2.0 2.0 2.0 2.0 2.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_movement_speed"	"-4 -8 -16 -24 -32"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"slow_attack_speed"		"-4 -8 -16 -24 -32"
+			}		
+		}
+	}
+	"crystal_maiden_brilliance_aura"
+	{
+		"MaxLevel"					"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"mana_regen"		"0.6 0.8 1.0 1.2 1.4"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"mana_regen_self"	"0.8 1 2 3 4"
+			}
+		}
+	}
+	//Omniknight
+	"omniknight_purification"
+	{
+		"MaxLevel"					"5"
+		"AbilityManaCost"				"70 85 100 115 130"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal"					"45 90 160 230 300"
+				"LinkedSpecialBonus"	"special_bonus_unique_omniknight_1"
+			}
+		}
+	}
+	"omniknight_repel"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"34 30 26 22 18"
+		"AbilityManaCost"				"50 50 50 50 50"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"3 4 5 6 7"
+				"LinkedSpecialBonus"	"special_bonus_unique_omniknight_3"
+			}
+		}
+	}
+	"chen_test_of_faith"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCastRange"				"600 600 600 600 600"
+		"AbilityManaCost"				"40 60 80 100 120"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_min"			"25 50 100 150 200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_max"			"50 100 200 300 400"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_min"			"12 25 50 75 100"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"heal_max"			"25 50 100 150 200"
+			}
+		}
+	}
+	"keeper_of_the_light_chakra_magic"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"900 900 900 900 900"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"18 17 16 15 14"
+		"AbilityManaCost"				"12 25 35 45 55"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_restore"			"25 75 150 225 300"
+				"LinkedSpecialBonus"	"special_bonus_unique_keeper_of_the_light_2"
+			}			
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"cooldown_reduction"	"2 3 4 5 6"
+			}
+		}
+	}
+	"omniknight_degen_aura"
+	{
+		"MaxLevel"					"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"speed_bonus"			"-2 -10 -18 -26 -34"
+				"LinkedSpecialBonus"	"special_bonus_unique_omniknight_2"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_bonus_tooltip"	"-2 -10 -18 -26 -34"
+				"LinkedSpecialBonus"	"special_bonus_unique_omniknight_2"
+			}
+		}
+	}
+	//Beastmaster
+	"beastmaster_wild_axes"
+	{
+		"MaxLevel"					"5"
+		"AbilitySpecial"
+		{
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"axe_damage"				"15 30 60 90 120"
+				"LinkedSpecialBonus"		"special_bonus_unique_beastmaster"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_amp"				"4 6 8 10 12"
+			}
+		}
+	}
+	"beastmaster_call_of_the_wild"
+	{
+		"MaxLevel"					"5"
+		"AbilityManaCost"				"50 60 70 80"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"duration"				"60 60 60 60 60"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"boar_hp_tooltip"				"200 275 350 425 550"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"boar_damage_tooltip"				"8 16 24 32 40"
+				"LinkedSpecialBonus"	"special_bonus_unique_beastmaster_2"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"boar_moveslow_tooltip"				"10 10 20 30 40"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"boar_poison_duration_tooltip"	"3.0"
+			}
+		}
+	}
+	"lycan_summon_wolves"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"30.0 30.0 30.0 30.0 30.0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"wolf_index"				"1 2 3 4 5"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"wolf_duration"				"-1 -1 -1 -1 -1"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"wolf_bat"					"1.3 1.25 1.2 1.15 1.1"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"wolf_damage"				"9 18 29 37 46"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"wolf_hp"					"160 200 240 280 320"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tooltip_wolf_count"			"2 2 2 2 2"
+				"LinkedSpecialBonus"	"special_bonus_unique_lycan_2"
+			}
+		}
+	}
+	"lycan_feral_impulse"
+	{
+		"MaxLevel"					"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"900 900 900 900 900"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_damage"			"5 15 26 37 48"
+				"LinkedSpecialBonus"	"special_bonus_unique_lycan_4"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_hp_regen"		"1 2 4 6 8"
+				"LinkedSpecialBonus"	"special_bonus_unique_lycan_3"
+			}
+
+		}
+	}
+	"beastmaster_inner_beast"
+	{
+		"MaxLevel"					"5"
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bonus_attack_speed"	"5 15 25 35 45"
+				"LinkedSpecialBonus"		"special_bonus_unique_beastmaster_4"
+			}
+		}
+	}
+	//Kunkka
+	"kunkka_torrent"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"18 16 14 12 10"
+		"AbilityManaCost"				"80 90 100 110 120"
+		"AbilitySpecial"
+		{
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"slow_duration"				"1.0 1.75 2.5 3.25 4.0"
+			}
+			"05"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"delay"						"1.6 1.6 1.6 1.6 1.6"
+			}
+			"06"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"torrent_damage"			"25 75 150 225 300"
+				"LinkedSpecialBonus"		"special_bonus_unique_kunkka_2"
+			}
+		}		
+	}
+	"tidehunter_gush"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityDuration"				"4.0 4.0 4.0 4.0 4.0"
+		"AbilityManaCost"				"80 90 100 110 120"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"gush_damage"		"70 110 160 210 260"
+				"LinkedSpecialBonus"	"special_bonus_unique_tidehunter_2"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"movement_speed"	"-40 -40 -40 -40 -40"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"negative_armor"		"2 3 4 5 6"
+				"LinkedSpecialBonus"	"special_bonus_unique_tidehunter"
+			}
+		}
+	}
+	"naga_siren_rip_tide"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0 0 0 0 0"
+		"AbilityManaCost"				"70 80 90 100 110"
+		"AbilityDamage"					"80 120 160 200 240"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"armor_reduction"			"-1 -2 -3 -4 -5"
+				"LinkedSpecialBonus"		"special_bonus_unique_naga_siren_3"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"8.0 8.0 8.0 8.0 8.0"
+			}
+		}
+	}
+	"kunkka_tidebringer"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"16.0 13.0 10.0 7.0 4.0"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0 0.0"
+		"AbilitySpecial"
+		{			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cleave_ending_width"			"450 500 550 600 650"
+			}			
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cleave_distance"			"500 650 800 950 1100"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_bonus"				"0 25 50 75 100"
+			}
+		}
+	}
+	"kunkka_x_marks_the_spot"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"200 400 600 800 1000"
+		"AbilityCastPoint"				"0.4 0.4 0.4 0.4 0.4"
+		"AbilityCooldown"				"32 26 20 14 8"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"16.0"
+			}	
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"tooltip_range"				"200 400 600 800 1000"
+			}
+		}
+	}
 }
 

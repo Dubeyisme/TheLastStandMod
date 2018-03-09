@@ -1,7 +1,7 @@
 -- Treant protector extends BOSS AI file
 TREANT_ABILITY1 = "treant_ability_silence"
-TREANT_ABILITY2 = "newtreant_leech_seed"
-TREANT_ABILITY3 = "newtreant_overgrowth"
+TREANT_ABILITY2 = "treant_leech_seed"
+TREANT_ABILITY3 = "treant_overgrowth"
 
 -- Treant has three main abilities to be used in combat. 
 	-- The first is the ability to silence other players as they attempt to use abilities.
@@ -22,7 +22,7 @@ function BossAI:TreantInit()
 	ability = boss:AddAbility(TREANT_ABILITY3)
 	ability:SetLevel(BOSSAI_LEVEL)
 	-- Set personality
-	BOSSAI_CURRENT_PERSONALITY = BOSSAI_PERSONALITY.VINDICTIVE
+	BOSSAI_CURRENT_PERSONALITY = BOSSAI_PERSONALITY.OPPORTUNIST
 end
 
 -- Cleanup the boss
@@ -42,19 +42,16 @@ function BossAI:TreantAbilityLogic()
 	local target = BOSSAI_CURRENT_TARGET
 	local ability = boss:FindAbilityByName(TREANT_ABILITY2)
 	-- Check if we can use Leech Seed
-	if(ability:IsCooldownReady())then
-		-- Check if they're within range or exist
-		if(target~=nil)then
-			if(BossAI:TargetDistance(target:GetOrigin(), boss:GetOrigin())<350)then
-				BossAI:TreantLeechSeed(target)
-			end
+	if(ability:IsCooldownReady())and(target~=nil)then
+		-- Check if they're within range
+		if(BossAI:TargetDistance(target:GetOrigin(), boss:GetOrigin())<350)then
+			BossAI:TreantLeechSeed(target)
 		end
-	end
-	local ability = boss:FindAbilityByName(TREANT_ABILITY3)
-	-- Check if we can use Overgrowth
-	if(ability:IsCooldownReady())then
-		-- Check if they're within range or exist
-		if(target~=nil)then
+	else
+		ability = boss:FindAbilityByName(TREANT_ABILITY3)
+		-- Check if we can use Overgrowth
+		if(ability:IsCooldownReady())and(target~=nil)then
+			-- Check if they're within range
 			if(BossAI:TargetDistance(target:GetOrigin(), boss:GetOrigin())<400)then
 				BossAI:TreantRoot()
 			end
@@ -67,8 +64,8 @@ function BossAI:TreantModeChange()
 	local boss = BOSSAI_CURRENT_BOSS
 	-- Increase regeneration of Treant
 	if(mode==3) then
-		boss:SetBaseHealthRegen(boss:GetHealthRegen()+(4)*BOSSAI_LEVEL)
-		boss:SetPhysicalArmorBaseValue(boss:GetPhysicalArmorBaseValue()+(4)*BOSSAI_LEVEL)
+		boss:SetBaseHealthRegen(boss:GetHealthRegen()+(1.75)*BOSSAI_LEVEL*TheLastStand:GetMultiplier())
+		boss:SetPhysicalArmorBaseValue(boss:GetPhysicalArmorBaseValue()+(0.6)*BOSSAI_LEVEL*TheLastStand:GetMultiplier())
 		local effect = ParticleManager:CreateParticle("particles/units/heroes/hero_treant/treant_livingarmor.vpcf",PATTACH_ABSORIGIN_FOLLOW,boss)
 		table.insert(BOSSAI_DATA.EFFECT,effect)
 	end
@@ -78,7 +75,7 @@ function BossAI:TreantHeroCastAbility()
 	-- Are we even able to use it?
 	local boss = BOSSAI_CURRENT_BOSS
 	local ability = boss:FindAbilityByName(TREANT_ABILITY1)
-	if(ability:IsCooldownReady())then
+	if(ability:IsCooldownReady())and(BOSSAI_REACTION_TARGET:IsInvisible()==false)and(BOSSAI_REACTION_TARGET:IsInvulnerable()==false)and(BOSSAI_REACTION_TARGET:IsAlive())then
 		DebugPrint("Hero in range?")
 		local targetpos = BOSSAI_REACTION_TARGET:GetOrigin()
 		local bosspos = BOSSAI_CURRENT_BOSS:GetOrigin()

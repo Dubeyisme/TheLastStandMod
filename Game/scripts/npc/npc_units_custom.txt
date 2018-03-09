@@ -2492,6 +2492,41 @@
 		"MagicalResistance"			"10"			// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
+		"AttackDamageMin"			"8"		// Damage range min.
+		"AttackDamageMax"			"8"		// Damage range max.	
+		"AttackRate"				"1.25"		// Speed of attack.
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"26"		// Gold earned min.
+		"BountyGoldMax"				"38"		// Gold earned max.
+		// Movement
+		//----------------------------------------------------------------
+		"MovementSpeed"				"350"		// Speed.
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"200"		// Base health.
+		"StatusHealthRegen"			"1.5"		// Health regeneration rate.
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+	}
+	
+	"npc_dota_beastmaster_boar_2"
+	{
+		"Level"						"2"
+		"Ability1"					"beastmaster_boar_poison"			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"1"			// Physical protection.
+		"MagicalResistance"			"10"			// Magical protection.
+		// Attack
+		//----------------------------------------------------------------
 		"AttackDamageMin"			"16"		// Damage range min.
 		"AttackDamageMax"			"16"		// Damage range max.	
 		"AttackRate"				"1.25"		// Speed of attack.
@@ -2513,7 +2548,7 @@
 		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
 	}
 	
-	"npc_dota_beastmaster_boar_2"
+	"npc_dota_beastmaster_boar_3"
 	{
 		"Level"						"2"
 		"Ability1"					"beastmaster_boar_poison"			// Ability 1.
@@ -2548,7 +2583,7 @@
 		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
 	}
 	
-	"npc_dota_beastmaster_boar_3"
+	"npc_dota_beastmaster_boar_4"
 	{
 		"Level"						"2"
 		"Ability1"					"beastmaster_boar_poison"			// Ability 1.
@@ -2583,7 +2618,7 @@
 		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
 	}
 	
-	"npc_dota_beastmaster_boar_4"
+	"npc_dota_beastmaster_boar_5"
 	{
 		"Level"						"2"
 		"Ability1"					"beastmaster_boar_poison"			// Ability 1.
@@ -2632,6 +2667,43 @@
 		"MagicalResistance"				"80"		// Magical protection.
 		// Attack
 		//----------------------------------------------------------------
+		"AttackDamageMin"			"7"		// Damage range min.
+		"AttackDamageMax"			"10"		// Damage range max.	
+		"AttackRate"				"1.3"		// Speed of attack.
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"21"		// Gold earned min.
+		"BountyGoldMax"				"21"		// Gold earned max.
+		// Movement
+		//----------------------------------------------------------------
+		"MovementSpeed"				"400"		// Speed.
+		"MovementTurnRate"			"0.5"		// Turning rate.
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"160"		// Base health.
+		"StatusHealthRegen"			"0.5"		// Health regeneration rate.
+		"StatusMana"				"0"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.	
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
+	}
+	
+	"npc_dota_lycan_wolf2"
+	{
+		"Level"						"2"
+		"Ability1"					""			// Ability 1.
+		"Ability2"					""			// Ability 2.
+		"Ability3"					""			// Ability 3.
+		"Ability4"					""			// Ability 4.
+		"Ability5"					""			// Ability 5.
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"1"			// Physical protection.
+		"MagicalResistance"				"80"		// Magical protection.
+		// Attack
+		//----------------------------------------------------------------
 		"AttackDamageMin"			"15"		// Damage range min.
 		"AttackDamageMax"			"19"		// Damage range max.	
 		"AttackRate"				"1.2"		// Speed of attack.
@@ -2655,7 +2727,7 @@
 		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
 	}
 	
-	"npc_dota_lycan_wolf2"
+	"npc_dota_lycan_wolf3"
 	{
 		"Level"						"2"
 		"Ability1"					""			// Ability 1.
@@ -2692,7 +2764,7 @@
 		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
 	}
 	
-	"npc_dota_lycan_wolf3"
+	"npc_dota_lycan_wolf4"
 	{
 		"Level"						"2"
 		"Ability1"					"lycan_summon_wolves_critical_strike"			// Ability 1.
@@ -2729,7 +2801,7 @@
 		"TeamName"					"DOTA_TEAM_GOODGUYS"			// Team name.
 	}
 	
-	"npc_dota_lycan_wolf4"
+	"npc_dota_lycan_wolf5"
 	{
 		"Level"						"2"
 		"Ability1"					"lycan_summon_wolves_critical_strike"			// Ability 1.

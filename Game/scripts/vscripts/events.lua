@@ -2,7 +2,7 @@
 
 -- Cleanup a player when they leave
 function GameMode:OnDisconnect(keys)
-  DebugPrint('[TLS] Player Disconnected ' .. tostring(keys.userid))
+  --DebugPrint('[TLS] Player Disconnected ' .. tostring(keys.userid))
   --DebugPrintTable(keys)
 
   local name = keys.name
@@ -13,7 +13,7 @@ end
 
 -- The overall game state has changed
 function GameMode:OnGameRulesStateChange(keys)
-  DebugPrint("[TLS] GameRules State Changed")
+  --DebugPrint("[TLS] GameRules State Changed")
   --DebugPrintTable(keys)
 
   local newState = GameRules:State_Get()
@@ -21,7 +21,7 @@ end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
 function GameMode:OnNPCSpawned(keys)
-  DebugPrint("[TLS] NPC Spawned")
+  --DebugPrint("[TLS] NPC Spawned")
   --DebugPrintTable(keys)
 
   local npc = EntIndexToHScript(keys.entindex)
@@ -47,7 +47,7 @@ function GameMode:OnEntityHurt(keys)
     end
 
     -- If this is a boss round, check boss reaction
-    if(TheLastStand:GetCurrentWave()==4) then
+    if(TheLastStand:IsBossWave())and(BossAI:GetCurrentBoss()~=nil) then
         BossAI:BossHurt(TheLastStand:GetWaveContents()[1], entCause, damage)
     end
 
@@ -56,8 +56,8 @@ end
 
 -- When a HUMAN player dies, call this
 function GameMode:OnPlayerKilled(keys)
-  DebugPrint("[TLS] OnPlayerKilled")
-  DebugPrintTable(keys)
+  --DebugPrint("[TLS] OnPlayerKilled")
+  --DebugPrintTable(keys)
   local plyID = keys.PlayerID
   local hero = nil
   local playertargets = TheLastStand:GetPlayerTargets()
@@ -65,8 +65,8 @@ function GameMode:OnPlayerKilled(keys)
   local i = 0
   local continue = false
   for i=1,#playertargets do
-    DebugPrint(playertargets[i])
-    DebugPrint(plyID)
+    --DebugPrint(playertargets[i])
+    --DebugPrint(plyID)
     if(playertargets[i]==plyID)then
       continue = true
       break
@@ -88,7 +88,7 @@ end
 
 -- An item was picked up off the ground
 function GameMode:OnItemPickedUp(keys)
-  DebugPrint( '[TLS] OnItemPickedUp' )
+  --DebugPrint( '[TLS] OnItemPickedUp' )
   --DebugPrintTable(keys)
 
   local unitEntity = nil
@@ -106,13 +106,13 @@ end
 -- A player has reconnected to the game.  This function can be used to repaint Player-based particles or change
 -- state as necessary
 function GameMode:OnPlayerReconnect(keys)
-  DebugPrint( '[TLS] OnPlayerReconnect' )
+  --DebugPrint( '[TLS] OnPlayerReconnect' )
   --DebugPrintTable(keys) 
 end
 
 -- An item was purchased by a player
 function GameMode:OnItemPurchased( keys )
-  DebugPrint( '[TLS] OnItemPurchased' )
+  --DebugPrint( '[TLS] OnItemPurchased' )
   --DebugPrintTable(keys)
 
   -- The playerID of the hero who is buying something
@@ -129,7 +129,7 @@ end
 
 -- An ability was used by a player
 function GameMode:OnAbilityUsed(keys)
-  DebugPrint('[TLS] AbilityUsed')
+ -- DebugPrint('[TLS] AbilityUsed')
   --DebugPrintTable(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
@@ -139,7 +139,7 @@ end
 
 -- A non-player entity (necro-book, chen creep, etc) used an ability
 function GameMode:OnNonPlayerUsedAbility(keys)
-  DebugPrint('[TLS] OnNonPlayerUsedAbility')
+ -- DebugPrint('[TLS] OnNonPlayerUsedAbility')
   --DebugPrintTable(keys)
 
   local abilityname=  keys.abilityname
@@ -147,7 +147,7 @@ end
 
 -- A player changed their name
 function GameMode:OnPlayerChangedName(keys)
- DebugPrint('[TLS] OnPlayerChangedName')
+ --DebugPrint('[TLS] OnPlayerChangedName')
   --DebugPrintTable(keys)
 
   local newName = keys.newname
@@ -156,26 +156,17 @@ end
 
 -- A player leveled up an ability
 function GameMode:OnPlayerLearnedAbility( keys)
-  DebugPrint('[TLS] OnPlayerLearnedAbility')
+  --DebugPrint('[TLS] OnPlayerLearnedAbility')
   --DebugPrintTable(keys)
 
   local player = EntIndexToHScript(keys.player)
   local hero = player:GetAssignedHero()
   local abilityname = keys.abilityname
-
-  if(abilityname=="sniper_shrapnel")then
-    hero:AddNewModifier(nil,nil,"modifier_sniper_shrapnel_charge_counter",nil)
-  end
-  if(abilityname=="treant_natures_guise")then
-    DebugPrint("Adding modifier")
-    hero:AddNewModifier(nil,nil,"modifier_treant_natures_guise",{attribute = MODIFIER_ATTRIBUTE_PERMANENT})
-    DebugPrint("Done adding")
-  end
 end
 
 -- A channelled ability finished by either completing or being interrupted
 function GameMode:OnAbilityChannelFinished(keys)
-  DebugPrint('[TLS] OnAbilityChannelFinished')
+ -- DebugPrint('[TLS] OnAbilityChannelFinished')
   --DebugPrintTable(keys)
 
   local abilityname = keys.abilityname
@@ -184,7 +175,7 @@ end
 
 -- A player leveled up
 function GameMode:OnPlayerLevelUp(keys)
-  DebugPrint('[TLS] OnPlayerLevelUp')
+  --DebugPrint('[TLS] OnPlayerLevelUp')
   --DebugPrintTable(keys)
 
   local player = EntIndexToHScript(keys.player)
@@ -193,7 +184,7 @@ end
 
 -- A player last hit a creep, a tower, or a hero
 function GameMode:OnLastHit(keys)
-  DebugPrint('[TLS] OnLastHit')
+  --DebugPrint('[TLS] OnLastHit')
   --DebugPrintTable(keys)
 
   local isFirstBlood = keys.FirstBlood == 1
@@ -205,7 +196,7 @@ end
 
 -- A tree was cut down by tango, quelling blade, etc
 function GameMode:OnTreeCut(keys)
-  DebugPrint('[TLS] OnTreeCut')
+  --DebugPrint('[TLS] OnTreeCut')
   --DebugPrintTable(keys)
 
   local treeX = keys.tree_x
@@ -214,7 +205,7 @@ end
 
 -- A player took damage from a tower
 function GameMode:OnPlayerTakeTowerDamage(keys)
-  DebugPrint('[TLS] OnPlayerTakeTowerDamage')
+  --DebugPrint('[TLS] OnPlayerTakeTowerDamage')
   --DebugPrintTable(keys)
 
   local player = PlayerResource:GetPlayer(keys.PlayerID)
@@ -223,7 +214,7 @@ end
 
 -- A player picked a hero
 function GameMode:OnPlayerPickHero(keys)
-  DebugPrint('[TLS] OnPlayerPickHero')
+ --DebugPrint('[TLS] OnPlayerPickHero')
   --DebugPrintTable(keys)
 
   local heroClass = keys.hero
@@ -233,7 +224,7 @@ end
 
 -- A player killed another player in a multi-team context
 function GameMode:OnTeamKillCredit(keys)
-  DebugPrint('[TLS] OnTeamKillCredit')
+  --DebugPrint('[TLS] OnTeamKillCredit')
   --DebugPrintTable(keys)
 
   local killerPlayer = PlayerResource:GetPlayer(keys.killer_userid)
@@ -244,7 +235,7 @@ end
 
 -- An entity died
 function GameMode:OnEntityKilled( keys )
-  DebugPrint( '[TLS] OnEntityKilled Called' )
+  --DebugPrint( '[TLS] OnEntityKilled Called' )
   --DebugPrintTable( keys )
   
 
@@ -323,7 +314,7 @@ end
 
 -- This function is called whenever an item is combined to create a new item
 function GameMode:OnItemCombined(keys)
-  DebugPrint('[TLS] OnItemCombined')
+  --DebugPrint('[TLS] OnItemCombined')
   --DebugPrintTable(keys)
 
   -- The playerID of the hero who is buying something
@@ -346,7 +337,7 @@ function GameMode:OnAbilityCastBegins(keys)
   local player = PlayerResource:GetPlayer(keys.PlayerID)
   local abilityName = keys.abilityname
 
-  if(player~=BOSS_CONTROLLER)then
+  if(player~=BOSS_CONTROLLER)and(TheLastStand:IsBossWave())and(BossAI:GetCurrentBoss()~=nil)then
     BossAI:EnemyHeroStartCast(player:GetAssignedHero())
   end
 end

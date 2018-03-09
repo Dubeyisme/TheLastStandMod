@@ -53,6 +53,8 @@ HERO_POINT = nil
 BOSS_POINT = nil
 BOSS_RADIUS = 0
 
+IS_BOSS_WAVE = false
+
 WAVE_TYPES = {
   RADIANT = 1,  
   DIRE = 2,     
@@ -65,7 +67,19 @@ WAVE_TYPES = {
   ZOMBIE = 9 
 }
 
-TOTAL_WAVE_TYPES = #WAVE_TYPES
+WAVE_TYPES_TEXT_PARSE = {
+  "RADIANT",  
+  "DIRE",     
+  "KOBOLD",   
+  "TROLL",    
+  "GOLEM",    
+  "SATYR",    
+  "CENTAUR",
+  "DRAGON",
+  "ZOMBIE"
+}
+
+TOTAL_WAVE_TYPES = #WAVE_TYPES_TEXT_PARSE
 
 SPECIFIC_WAVE_TYPE = {
   RADIANT = {
@@ -73,7 +87,7 @@ SPECIFIC_WAVE_TYPE = {
         {"npc_dota_creep_goodguys_melee","npc_dota_creep_goodguys_ranged"},
         {"npc_dota_creep_goodguys_melee", "npc_dota_creep_goodguys_ranged","npc_dota_goodguys_siege"},
         {"npc_dota_creep_goodguys_melee", "npc_dota_creep_goodguys_ranged","npc_dota_goodguys_siege",  "npc_dota_creep_goodguys_melee_upgraded"},
-        {"villain_treant"}
+        {"npc_dota_hero_treant"}
      },{
         {"npc_dota_creep_goodguys_melee_upgraded", "npc_dota_creep_goodguys_ranged_upgraded"},
         {"npc_dota_creep_goodguys_melee_upgraded", "npc_dota_creep_goodguys_ranged_upgraded", "npc_dota_goodguys_siege"},
@@ -322,8 +336,8 @@ NEXT_WAVE = 1  -- Stores the next wave number [Boss waves are 4]
 MULTIPLIER = -0.6 -- Will be 1 at game start
 MULTIPLIER_INCREMENT = 0.5 -- Increment the multiplier by this much base
 BOSS_MULTIPLIER = 0
-WAVE_DEFAULT_BOUNTY = 150 -- This is half as much gold as each wave should be worth from level 1
-WAVE_BOUNTY_INCREASE = 75 -- This is half as much XP it should increase per wave in a round before multipliers
+WAVE_DEFAULT_BOUNTY = 300 -- This is as much gold as each wave should be worth from level 1
+WAVE_BOUNTY_INCREASE = 50 -- This is as much XP it should increase per wave in a round before multipliers
 WAVE_BOUNTY = 0 -- This is how much the wave will be worth
 WAVE_CONTENTS = {}
 WAVE_CONTENTS_ATTACKING = {}
@@ -454,6 +468,8 @@ function TheLastStand:GameWon()
 end
 
 -- Getters
+function TheLastStand:IsBossWave() return IS_BOSS_WAVE end
+function TheLastStand:GetSpawnPoints() return SPAWN_POINT end
 function TheLastStand:GetCurrentWave() return CURRENT_WAVE end
 function TheLastStand:GetCurrentRound() return CURRENT_ROUND end
 function TheLastStand:GetCurrentLevel() return CURRENT_LEVEL end
@@ -462,12 +478,20 @@ function TheLastStand:GetWaveContentsAttacking() return WAVE_CONTENTS_ATTACKING 
 function TheLastStand:GetMultiplier() return MULTIPLIER end
 function TheLastStand:GetPlayerCount() return PLAYER_COUNT end
 function TheLastStand:GetHeroTargets() return HERO_TARGETS end
-function TheLastStand:GetAliveHeroTargets() 
+function TheLastStand:GetFilterHeroTargets(alive,invis,invuln,outofgame) --Filter out heroes
+  --DebugPrintTable("HERO_TARGETS")
   local targets = {}
   local i = 0
+  local addtolist = false
   for i=1,#HERO_TARGETS do
-    table.insert(targets,HERO_TARGETS[i])
+    addtolist = true
+    if(alive)then addtolist=HERO_TARGETS[i]:IsAlive() end -- Filter out dead heroes?
+    if(invis)then if(HERO_TARGETS[i]:IsInvisible())then addtolist=false end end -- Filter our invisible heroes?
+    if(invuln)then if(HERO_TARGETS[i]:IsInvulnerable())then addtolist=false end end -- Filter out invulnerable heroes?
+    if(outofgame)then if(HERO_TARGETS[i]:IsOutOfGame())then addtolist=false end end -- Filter out missing heroes?
+    if(addtolist)then table.insert(targets,HERO_TARGETS[i]) end
   end
+  --DebugPrintTable("RETURNING HERO_TARGETS")
   return targets
 end
 function TheLastStand:GetPlayerTargets() return PLAYERS end
@@ -480,6 +504,7 @@ function TheLastStand:GetBossPoint() return BOSS_POINT end
 function TheLastStand:GetBossRadius() return BOSS_RADIUS end
 
 -- Setters
+function TheLastStand:SetIsBossWave(bool) IS_BOSS_WAVE=bool end
 function TheLastStand:SetPlayerCount(count) DebugPrint("[Player Count] Player count set") PLAYER_COUNT = count end
 function TheLastStand:AddHeroTargets(hero) DebugPrint("[Hero Targets] Hero Added") table.insert(HERO_TARGETS,hero) end
 function TheLastStand:AddPlayerTargets(playerID) DebugPrint("[Player Targets] Player "..tostring(playerID).." Added") table.insert(PLAYERS,playerID) end
@@ -518,6 +543,7 @@ function TheLastStand:WaveStart()
   -- Generate a new wave
   DebugPrint("[TLS] Current Multiplier : "..tostring(MULTIPLIER))
   -- Announce that a wave has begun through text
+  CURRENT_WAVE_TYPE = WAVE_TYPES.RADIANT
   local text_array = TheLastStand:AnnounceWaveText(CURRENT_WAVE, CURRENT_ROUND, CURRENT_LEVEL, CURRENT_WAVE_TYPE) -- [1] is the wave number, [2] is the type
   Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text=text_array[1], duration=WAVE_INTRO_DURATION, style=STYLE_WAVE_NUM_INTRO})
   Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text=text_array[2], duration=WAVE_INTRO_DURATION, style=STYLE_WAVE_TYPE_INTRO})
@@ -525,20 +551,16 @@ function TheLastStand:WaveStart()
   EmitAnnouncerSoundForTeam("ui.npe_objective_given", DOTA_TEAM_GOODGUYS)
   -- Launch Hero Speaker
   SoundController:Hero_WaveStart(HERO_TARGETS)
+  local UnitList = TheLastStand:ReturnList(CURRENT_WAVE_TYPE, CURRENT_WAVE, CURRENT_ROUND) -- List of valid types for wave 2
+  local UnitCount = TheLastStand:ReturnUnitCount(CURRENT_WAVE_TYPE, CURRENT_WAVE, CURRENT_ROUND) -- List of the amount per type for wave 2
+  TheLastStand:CalculateWaveBounty(UnitCount,(WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE))
   -- Generate wave
-  if(CURRENT_WAVE~=4) then
+  if(IS_BOSS_WAVE==false) then
     -- Generate a non-boss wave for waves 1, 2, and 3
-    local UnitList = TheLastStand:ReturnList(CURRENT_WAVE_TYPE, CURRENT_WAVE, CURRENT_ROUND) -- List of valid types for wave 2
-    local UnitCount = TheLastStand:ReturnUnitCount(CURRENT_WAVE_TYPE, CURRENT_WAVE, CURRENT_ROUND) -- List of the amount per type for wave 2
-    -- Work out the bounty and XP for the waves using the default bounty and increase per wave
-    TheLastStand:CalculateWaveBounty(UnitCount,(WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE))
-    -- Create wave
     TheLastStand:CreateWave(UnitList, UnitCount)
   else
     -- Generate a boss wave
-    --local UnitList = 
-    --local UnitCount = 
-    --TheLastStand:CalculateWaveBounty(UnitCount,(WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE))
+    TheLastStand:CreateBoss(UnitList, UnitCount)
   end
 end
 
@@ -556,6 +578,7 @@ end
 
 -- Sort out the next set of waves
 function TheLastStand:IncrementRound()
+  DebugPrint("Increment Round")
   CURRENT_ROUND = NEXT_ROUND
   MULTIPLIER=MULTIPLIER+MULTIPLIER_INCREMENT
   NEXT_ROUND=NEXT_ROUND+1
@@ -574,11 +597,14 @@ function TheLastStand:IncrementRound()
   local g, h, i = 0
   local random_array = {}
   -- Fill Waves_To_Complete twice with each wave type and a random array
+  --DebugPrint("Create Wave Types: "..tostring(TOTAL_WAVE_TYPES))
   for i=1, TOTAL_WAVE_TYPES do
-    table.insert(WAVES_TO_COMPLETE, WAVE_TYPES[i])
+    --DebugPrint(i)
+    table.insert(WAVES_TO_COMPLETE, i)
     table.insert(random_array,RandomInt(1,100))
   end
   -- Randomise the order of waves to be completed
+  --DebugPrint("Sort Wave Types")
   local temp = 0
   for g = 1, TOTAL_WAVE_TYPES-1 do
     for h = 2, TOTAL_WAVE_TYPES do
@@ -587,6 +613,7 @@ function TheLastStand:IncrementRound()
         random_array[g] = random_array[h]
         random_array[h] = temp
         temp = WAVES_TO_COMPLETE[g]
+        --DebugPrint(WAVES_TO_COMPLETE[g])
         WAVES_TO_COMPLETE[g] = WAVES_TO_COMPLETE[h]
         WAVES_TO_COMPLETE[h] = temp
       end
@@ -600,7 +627,13 @@ function TheLastStand:IncrementWaveType()
   CURRENT_WAVE = NEXT_WAVE
   MULTIPLIER=MULTIPLIER+MULTIPLIER_INCREMENT/5
   NEXT_WAVE=NEXT_WAVE+1
-  if(NEXT_WAVE==4)then -- Should be 5 for bosses, skipping atm
+  -- Control when the next boss wave appears
+  if(CURRENT_WAVE==4)then
+    IS_BOSS_WAVE=true
+  else
+    IS_BOSS_WAVE=false -- Double check variable, making certain it is false
+  end
+  if(NEXT_WAVE==5)then -- Should be 5 for bosses, skipping atm
     NEXT_WAVE = 1
   end
   -- If we've reached the end of a wave, better select the next wave
@@ -620,7 +653,7 @@ function TheLastStand:AnnounceWaveText(wave, round, level, ttype)
   local text = ""
   local wave_type_text = ""
   local wave_intro_text = ""
-  if(wave==4)then
+  if(IS_BOSS_WAVE)then
      -- This is a boss wave, record boss number
      BOSS_WAVE_COUNTER = BOSS_WAVE_COUNTER + 1
     wave_type_text = "Boss Round "..TheLastStand:NumToText(BOSS_WAVE_COUNTER).."."
@@ -720,6 +753,7 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
   local point = {}
   local ability = nil
   local random_array = {}
+  IS_BOSS_WAVE = false
   DebugPrint("[TLS] Creating a "..CURRENT_WAVE_TYPE.." wave #"..tostring(CURRENT_WAVE))
   -- Randomise the spawn points to be used
   for h = 1, SPAWN_COUNT do
@@ -796,10 +830,10 @@ function TheLastStand:RemoveFromWaveContent(unit)
       table.remove(WAVE_CONTENTS,i)
       table.remove(WAVE_CONTENTS_ATTACKING,i)
       UNITS_LEFT=UNITS_LEFT-1
-      DebugPrint("[TLS] Unit removed from wave - Left:"..tostring(UNITS_LEFT))
+      --DebugPrint("[TLS] Unit removed from wave - Left:"..tostring(UNITS_LEFT))
       if(UNITS_LEFT==0) then
         -- The round must be over
-      DebugPrint("[TLS] Wave ended")
+      --DebugPrint("[TLS] Wave ended")
       TheLastStand:WaveEnded()
 
       end
@@ -828,10 +862,15 @@ end
 -- Creates a boss unit for the wave and initiates their AI
 function TheLastStand:CreateBoss(UnitTypesListed, UnitCountsListed)
   local point = ATTACK_POINT[RandomInt(1,SPAWN_COUNT)]
+  IS_BOSS_WAVE = true-- Just in case we missed setting this to true (probably created via cheats)
   -- Create boss
   local unit = CreateUnitByName(UnitTypesListed[1], point, true, BOSS_CONTROLLER, BOSS_CONTROLLER, DOTA_TEAM_BADGUYS)
   -- Boss announces start
   SoundController:Villain_BattleStart(unit)
+  -- Boss added to wave contents
+  UNITS_LEFT=UNITS_LEFT+1
+  table.insert(WAVE_CONTENTS,unit)
+  table.insert(WAVE_CONTENTS_ATTACKING,false)
   -- Upgrade boss
    TheLastStand:UpgradeBoss(unit)
   -- Start the AI
@@ -841,17 +880,17 @@ end
 -- Gift the heroes gold and xp
 function TheLastStand:GiftGoldAndXP()
   local i=0
-  local xp = (((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE)*1.45)/2)*MULTIPLIER
-  local bounty = ((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE)/2)*MULTIPLIER
+  local xp = (((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE)*1.15))*MULTIPLIER
+  local bounty = ((WAVE_DEFAULT_BOUNTY+WAVE_BOUNTY_INCREASE*CURRENT_WAVE))*MULTIPLIER
   for i=1,#HERO_TARGETS do
-    HERO_TARGETS[i]:AddExperience(xp, DOTA_ModifyGold_Unspecified, false, true)
-    HERO_TARGETS[i]:SetGold(HERO_TARGETS[i]:GetGold()+bounty, true)
+    HERO_TARGETS[i]:AddExperience(xp, DOTA_ModifyXP_Unspecified, false, true)
+    PlayerResource:ModifyGold(PLAYERS[i],bounty,true,DOTA_ModifyGold_Unspecified)
   end
 end
 
 -- Upgrade a single creep based on the multiplier and fixes their abilities
 function TheLastStand:UpgradeCreep(unit, give_bounty)
-  DebugPrint("[TLS] Upgrading creep")
+  --DebugPrint("[TLS] Upgrading creep")
   -- Get unit details
   local ability = nil
   local i = 0
@@ -865,8 +904,9 @@ function TheLastStand:UpgradeCreep(unit, give_bounty)
   local bxp = 0
   local bg = 0
   if(give_bounty)then
-    bxp = (WAVE_BOUNTY*1.45)/2  -- This controls gold and xp per wave
-    bg = (WAVE_BOUNTY)/2 -- This controls gold and xp per wave
+    -- Removed the final impartation in case I wish to add it in again
+    --bxp = (WAVE_BOUNTY*1.45)/2  -- This controls gold and xp per wave
+    --bg = (WAVE_BOUNTY)/2 -- This controls gold and xp per wave
   end
   -- Change unit values based on level multiplier
   hp=math.floor(hp*MULTIPLIER)
@@ -908,7 +948,7 @@ end
 function TheLastStand:UpgradeBoss(boss)
   -- Set the new boss multiplier
   local hero_target_num = #HERO_TARGETS/5
-  BOSS_MULTIPLIER = (MULTIPLIER/5)+hero_target_num
+  BOSS_MULTIPLIER = MULTIPLIER+hero_target_num
   -- Get the values
   local basehp = boss:GetBaseMaxHealth()
   local modelscale = boss:GetModelScale()
@@ -917,7 +957,7 @@ function TheLastStand:UpgradeBoss(boss)
   local agi = boss:GetBaseAgility()
   local int = boss:GetBaseIntellect()
   -- Affect the values
-  modelscale = modelscale*BOSS_MULTIPLIER
+  modelscale = modelscale+BOSS_MULTIPLIER/10
   DebugPrint("MULTIPLIER")
   DebugPrint(MULTIPLIER)
   DebugPrint("BOSS_MULTIPLIER")
@@ -926,7 +966,7 @@ function TheLastStand:UpgradeBoss(boss)
   DebugPrint(CURRENT_LEVEL)
   int=int*BOSS_MULTIPLIER*2*hero_target_num
   agi=agi*BOSS_MULTIPLIER*2*hero_target_num
-  str=str*BOSS_MULTIPLIER*5*hero_target_num
+  str=str*BOSS_MULTIPLIER*5*(hero_target_num+1)
   basehp=(basehp*BOSS_MULTIPLIER*2*hero_target_num)+str*20
   DebugPrint(basehp)
   -- Set the values
