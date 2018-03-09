@@ -451,11 +451,12 @@ function BossAI:ChooseNewTarget()
 	-- See who is causing the most aggro and select them
 	if(BOSSAI_SEARCH_SUCCESS)then
 		local i =0
+		local boss = BOSSAI_CURRENT_BOSS
 		local aggrolevel = -1
 		local aggroindex = -1
 		local herotargets = TheLastStand:GetHeroTargets()
 		for i=1,#BOSSAI_PLAYER_DAMAGE_TRACKER do
-			if(BOSSAI_PLAYER_DAMAGE_TRACKER[i]>aggrolevel)and(herotargets[i]:IsAlive())and(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsOutOfGame()==false) then
+			if(BOSSAI_PLAYER_DAMAGE_TRACKER[i]>aggrolevel)and(herotargets[i]:IsAlive())and(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsOutOfGame()==false)and(boss:CanEntityBeSeenByMyTeam(herotargets)) then
 				aggroindex = i
 				aggrolevel = BOSSAI_PLAYER_DAMAGE_TRACKER[i]
 			end

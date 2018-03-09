@@ -346,7 +346,6 @@ PLAYERS = {}
 PLAYER_COUNT = 0
 UNITS_LEFT = 0
 FINAL_ENTITY = nil
---FOW_BADGUYS = nil
 
 -- Formatting for text
 WAVE_OUTRO_DURATION = 5
@@ -386,7 +385,6 @@ if GetMapName() == "woodland" then
 
   -- Attack move to this point via the initial objective
   FINAL_POINT = Vector(-1600, -2176, 128)
-  --FOW_BADGUYS = AddFOWViewer(DOTA_TEAM_GOODGUYS,FINAL_POINT,72000,360,false)
 
   -- Hero convene point for special events
   HERO_POINT = Vector(-2432, -4160,  256)
@@ -397,11 +395,13 @@ if GetMapName() == "woodland" then
 end
 DebugPrint( '[TLS] Done setting up WOODLAND' )
 
+  --FOW_BADGUYS = CreateUnitByName("npc_dummy_unit_vision",FINAL_POINT,false,BOSS_CONTROLLER,BOSS_CONTROLLER,DOTA_TEAM_BADGUYS)
+  --FOW_BADGUYS:FindAbilityByName("dummy_unit"):SetLevel(1)
 
 -- Starts the game
 function TheLastStand:GameStart()
-  --TheLastStand:IncrementRound()
-  --TheLastStand:WaveEnded()
+  TheLastStand:IncrementRound()
+  TheLastStand:WaveEnded()
   GAME_HAS_STARTED = true
   math.randomseed(TheLastStand:GetSeed())
   TheLastStand:AddVillainController()
