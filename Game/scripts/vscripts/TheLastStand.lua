@@ -478,7 +478,7 @@ function TheLastStand:GetWaveContentsAttacking() return WAVE_CONTENTS_ATTACKING 
 function TheLastStand:GetMultiplier() return MULTIPLIER end
 function TheLastStand:GetPlayerCount() return PLAYER_COUNT end
 function TheLastStand:GetHeroTargets() return HERO_TARGETS end
-function TheLastStand:GetFilterHeroTargets(alive,invis,invuln,outofgame) --Filter out heroes
+function TheLastStand:GetFilterHeroTargets(alive,invis,invuln,outofgame,canbeseen,canbeseencaster) --Filter out heroes
   --DebugPrintTable("HERO_TARGETS")
   local targets = {}
   local i = 0
@@ -486,9 +486,10 @@ function TheLastStand:GetFilterHeroTargets(alive,invis,invuln,outofgame) --Filte
   for i=1,#HERO_TARGETS do
     addtolist = true
     if(alive)then addtolist=HERO_TARGETS[i]:IsAlive() end -- Filter out dead heroes?
-    if(invis)then if(HERO_TARGETS[i]:IsInvisible())then addtolist=false end end -- Filter our invisible heroes?
-    if(invuln)then if(HERO_TARGETS[i]:IsInvulnerable())then addtolist=false end end -- Filter out invulnerable heroes?
-    if(outofgame)then if(HERO_TARGETS[i]:IsOutOfGame())then addtolist=false end end -- Filter out missing heroes?
+    if(invis)and(addtolist)then if(HERO_TARGETS[i]:IsInvisible())then addtolist=false end end -- Filter our invisible heroes?
+    if(invuln)and(addtolist)then if(HERO_TARGETS[i]:IsInvulnerable())then addtolist=false end end -- Filter out invulnerable heroes?
+    if(outofgame)and(addtolist)then if(HERO_TARGETS[i]:IsOutOfGame())then addtolist=false end end -- Filter out missing heroes?
+    if(canbeseen)and(addtolist)then if(canbeseencaster:CanEntityBeSeenByMyTeam(HERO_TARGETS[i])==false) then addtolist=false end end
     if(addtolist)then table.insert(targets,HERO_TARGETS[i]) end
   end
   --DebugPrintTable("RETURNING HERO_TARGETS")

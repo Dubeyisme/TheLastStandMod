@@ -5,9 +5,9 @@
 	
   "npc_dota_hero_sniper"
   {
-		"Role"						"Carry,Nuker,Support"
+		"Role"						"Carry,Support,LaneSupport"
 		"Rolelevels"				"3,2,1"
-		"Complexity"			"1"
+		"Complexity"				"1"
 		"Ability1"					"sniper_shrapnel"					// Ability 1
 		"Ability2"					"rattletrap_rocket_flare"					// Ability 2
 		"Ability3"					"gyrocopter_flak_cannon"					// Ability 3
@@ -21,8 +21,8 @@
   
   "npc_dota_hero_riki"
   {
-		"Role"						"Carry,Escape,Disabler,Support"
-		"Rolelevels"				"1,3,1,2"
+		"Role"						"Escape,Disabler,Jungler,LaneSupport"
+		"Rolelevels"				"3,1,3,3"
 		"Complexity"			"3"
 		"Ability1"		"riki_smoke_screen"
 		"Ability2"		"riki_blink_strike"
@@ -37,7 +37,7 @@
   
   "npc_dota_hero_pangolier"
 	{
-		"Role"						"Carry,Escape,Initiator,Disabler,Nuker,Support"
+		"Role"						"Carry,Escape,Initiator,Disabler,Support,LaneSupport"
 		"Rolelevels"				"3,1,1,1,1,1"
 		"Complexity"			"2"
 		"Ability1"					"pangolier_swashbuckle"
@@ -53,8 +53,8 @@
 	
 	"npc_dota_hero_techies"
 	{
-		"Role"						"Disabler,Nuker,Support"
-		"Rolelevels"				"2,3,1"
+		"Role"						"Disabler,Support,Escape,LaneSupport,Pusher"
+		"Rolelevels"				"3,3,1,1,2"
 		"Complexity"			"1"
 		"Ability1"		"techies_land_mines"
 		"Ability2"		"techies_stasis_trap"
@@ -74,8 +74,8 @@
 	
 	"npc_dota_hero_lina"
 	{
-		"Role"						"Carry,Disabler,Nuker"
-		"Rolelevels"				"3,2,3"
+		"Role"						"Carry,Disabler,Support,Jungler"
+		"Rolelevels"				"3,2,3,1"
 		"Complexity"			"1"
 		"Ability1"		"lina_dragon_slave"
 		"Ability2"		"lina_light_strike_array"
@@ -96,8 +96,8 @@
 	
 	"npc_dota_hero_furion"
 	{
-		"Role"						"Escape,Nuker,Support,Pusher"
-		"Rolelevels"				"2,2,2,1"
+		"Role"						"Escape,Nuker,Support,Pusher,Jungler,LaneSupport"
+		"Rolelevels"				"2,2,1,1,3,1"
 		"Complexity"			"2"
 		"Ability1"		"furion_sprout"
 		"Ability2"		"treant_living_armor"
@@ -117,8 +117,8 @@
 	
 	"npc_dota_hero_winter_wyvern"
 	{
-		"Role"						"Carry,Durable,Disabler,Nuker,Support"
-		"Rolelevels"				"1,1,1,2,3"
+		"Role"						"Carry,Disabler,Nuker,Support,Mobility,LaneSupport"
+		"Rolelevels"				"1,1,2,2,1,3"
 		"Complexity"			"1"
 		"Ability1"		"winter_wyvern_arctic_burn"
 		"Ability2"		"winter_wyvern_splinter_blast"
@@ -138,8 +138,8 @@
 	
 	"npc_dota_hero_omniknight"
 	{
-		"Role"						"Durable,Nuker,Support"
-		"Rolelevels"				"3,1,3"
+		"Role"						"Durable,Nuker,Support,LaneSupport"
+		"Rolelevels"				"3,3,1,3"
 		"Complexity"			"1"
 		"Ability1"		"omniknight_purification"
 		"Ability2"		"omniknight_repel"
@@ -159,8 +159,8 @@
 	
 	"npc_dota_hero_beastmaster"
 	{
-		"Role"						"Carry,Durable,Nuker,Support,Pusher"
-		"Rolelevels"				"2,1,1,1,3"
+		"Role"						"Carry,Support,Durable,LaneSupport,Pusher"
+		"Rolelevels"				"1,2,1,1,3"
 		"Complexity"			"2"
 		"Ability1"		"beastmaster_wild_axes"
 		"Ability2"		"beastmaster_call_of_the_wild"
@@ -180,8 +180,8 @@
 	
 	"npc_dota_hero_kunkka"
 	{
-		"Role"						"Carry,Escape,Disabler,Nuker,Support"
-		"Rolelevels"				"1,1,1,3,1"
+		"Role"						"Carry,Support,Disabler,LaneSupport,Escape"
+		"Rolelevels"				"1,3,1,3,1"
 		"Complexity"			"3"
 		"Ability1"		"kunkka_torrent"
 		"Ability2"		"tidehunter_gush"
@@ -200,6 +200,69 @@
 		"Ability16"		"special_bonus_unique_naga_siren_3"
 		"Ability17"		"special_bonus_unique_kunkka_4"
 	}
+  
+  "npc_dota_hero_dragon_knight"
+  {
+		"Role"						"Support,Disabler,Durable,Initiator"
+		"Rolelevels"				"2,1,3,2"
+		"Complexity"			"1"
+		"Ability1"		"dragon_knight_breathe_fire"
+		"Ability2"		"dragon_knight_dragon_tail"
+		"Ability3"		"ember_spirit_flame_guard"
+		"Ability4"		"dragon_knight_dragon_blood"
+		"Ability5"		"legion_commander_moment_of_courage" // 
+		"Ability6"		"dragon_knight_elder_dragon_form"
+		"Ability10"		"special_bonus_unique_ember_spirit_1" // 
+		"Ability11"		"special_bonus_unique_dragon_knight_3" // 
+		"Ability12"		"special_bonus_unique_dragon_knight_2"
+		"Ability13"		"special_bonus_hp_300"
+		"Ability14"		"special_bonus_unique_ember_spirit_3"
+		"Ability15"		"special_bonus_unique_dragon_knight"
+		"Ability16"		"special_bonus_strength_40"
+		"Ability17"		"special_bonus_unique_legion_commander_3" //
+  }
+  
+  "npc_dota_hero_windrunner"
+  {
+		"Role"						"Carry,Support,Disabler,Jungler,Durable,Escape"
+		"Rolelevels"				"2,3,1,2,2,2"
+		"Complexity"			"1"
+		"Ability1"		"windrunner_shackleshot"
+		"Ability2"		"windrunner_powershot"
+		"Ability3"		"windrunner_windrun"
+		"Ability4"		"medusa_split_shot"
+		"Ability5"		"medusa_mana_shield"
+		"Ability6"		"windrunner_focusfire"
+		"Ability10"		"special_bonus_mp_regen_175"
+		"Ability11"		"special_bonus_unique_windranger_2"
+		"Ability12"		"special_bonus_unique_windranger_3"
+		"Ability13"		"special_bonus_unique_medusa_2"
+		"Ability14"		"special_bonus_unique_windranger_6"
+		"Ability15"		"special_bonus_unique_windranger"
+		"Ability16"		"special_bonus_unique_windranger_4"
+		"Ability17"		"special_bonus_unique_medusa_4"
+  }
+  
+  "npc_dota_hero_arc_warden"
+  {
+		"Role"						"Carry,Support,LaneSupport,Pusher"
+		"Rolelevels"				"1,1,3,2"
+		"Complexity"			"1"
+		"Ability1"		"arc_warden_flux"
+		"Ability2"		"arc_warden_magnetic_field"
+		"Ability3"		"arc_warden_spark_wraith"
+		"Ability4"		"razor_unstable_current"
+		"Ability5"		"visage_gravekeepers_cloak"
+		"Ability6"		"arc_warden_tempest_double"
+		"Ability10"		"special_bonus_cooldown_reduction_8"
+		"Ability11"		"special_bonus_unique_razor_3"
+		"Ability12"		"special_bonus_hp_350"
+		"Ability13"		"special_bonus_unique_arc_warden_2"
+		"Ability14"		"special_bonus_unique_arc_warden_3"
+		"Ability15"		"special_bonus_unique_razor_4"
+		"Ability16"		"special_bonus_unique_visage_5"
+		"Ability17"		"special_bonus_unique_arc_warden"
+  }
 	
 	
 	// ------------------------------------------------------------------------------ Villains -------------------------------------------

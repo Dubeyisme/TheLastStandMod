@@ -74,6 +74,7 @@ function Precache( context )
   PrecacheUnitByNameAsync("npc_dota_hero_crystal_maiden", context)
   PrecacheUnitByNameAsync("npc_dota_hero_keeper_of_the_light", context)
   PrecacheUnitByNameAsync("npc_dota_hero_lich", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_gyrocopter", context)
   PrecacheUnitByNameAsync("npc_dota_hero_naga_siren", context)
   PrecacheUnitByNameAsync("npc_dota_hero_troll_warlord", context)
   PrecacheUnitByNameAsync("npc_dota_hero_visage", context)
@@ -82,6 +83,10 @@ function Precache( context )
   PrecacheUnitByNameAsync("npc_dota_hero_phoenix", context)
   PrecacheUnitByNameAsync("npc_dota_hero_lycan", context)
   PrecacheUnitByNameAsync("npc_dota_hero_gyrocopter", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_ember_spirit", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_razor", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_medusa", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_legion_commander", context)
 
 -- Precache the creeps
 

@@ -16,7 +16,10 @@ SOUND_HERO_REVIVED_RESPONSE = {
 	WWY = {"winter_wyvern_winwyv_thanks_03","winter_wyvern_winwyv_thanks_02"},
 	KUN = {"kunkka_kunk_respawn_01","kunkka_kunk_thanks_03"},
 	BMA = {"beastmaster_beas_thanks_02","beastmaster_beas_thanks_01"},
-	OMN = {"omniknight_omni_thanks_02","omniknight_omni_respawn_04"}
+	OMN = {"omniknight_omni_thanks_02","omniknight_omni_respawn_04"},
+  DKN = {"dragon_knight_drag_thanks_01","dragon_knight_drag_thanks_03"},
+  WDR = {"windrunner_wind_thanks_03","windrunner_wind_thanks_02"},
+  ARC = {"arc_warden_arcwar_thanks_02","arc_warden_arcwar_thanks_01"}
  }
 
 -- Hero might say at the start of round
@@ -30,30 +33,36 @@ SOUND_HERO_WAVE_START_RESPONSE = {
     WWY = {"winter_wyvern_winwyv_rare_01", "winter_wyvern_winwyv_respawn_03", "winter_wyvern_winwyv_rival_01"},
     KUN = {"kunkka_kunk_rare_01", "kunkka_kunk_rare_02", "kunkka_kunk_cast_03"},
     BMA = {"omniknight_omni_cast_01", "omniknight_omni_cast_02", "omniknight_omni_respawn_07"},
-    OMN = {"beastmaster_beas_respawn_09", "beastmaster_beas_cast_02", "beastmaster_beas_cast_05"}
+    OMN = {"beastmaster_beas_respawn_09", "beastmaster_beas_cast_02", "beastmaster_beas_cast_05"},
+    DKN = {"dragon_knight_drag_battlebegins_01","dragon_knight_drag_attack_10","dragon_knight_drag_attack_06"},
+    WDR = {"windrunner_wind_battlebegins_01","windrunner_wind_spawn_03","windrunner_wind_rare_02"},
+    ARC = {"arc_warden_arcwar_battlebegins_01","arc_warden_arcwar_spawn_06","arc_warden_arcwar_spawn_03"}
 }
 
 -- Responses after killing a villain
 SOUND_HERO_KILLED_BOSS_RESPONSE = {
-  TRN = {
+  TRN = { -- Treant
   	PNG = "pangolin_pangolin_rival_196",
   	LIN = "lina_lina_rival_01",
-  	FUR = "furion_furi_rival_01"
+  	FUR = "furion_furi_rival_01",
+    ARC = "arc_warden_arcwar_kill_22"
 
   },
-  LON = {
+  LON = { -- Lone Druid
   	PNG = "pangolin_pangolin_rival_99",
   	FUR = "furion_furi_kill_10",
-  	WWY = "winter_wyvern_winwyv_rival_17"
+  	WWY = "winter_wyvern_winwyv_rival_17",
+    DKN = "dragon_knight_drag_kill_06",
+    WDR = "windrunner_wind_lasthit_02"
 
   },
-  DKW = {
+  DKW = { -- Dark Willow
   	PNG = "pangolin_pangolin_rival_40",
   	SNI = "sniper_snip_ability_assass_05",
   	TEC = "techies_tech_rival_13"
 
   },
-  DOM = {
+  DOM = { -- Doom
   	PNG = "pangolin_pangolin_rival_150",
   	LIN = "lina_lina_rival_16",
   	TEC = "techies_tech_rival_11",
@@ -61,81 +70,93 @@ SOUND_HERO_KILLED_BOSS_RESPONSE = {
   	OMN = "omniknight_omni_rival_03"
 
   },
-  EAS = {
+  EAS = { -- Earth Spirit
   	PNG = "pangolin_pangolin_rival_55",
   	SNI = "sniper_snip_kill_06"
 
   },
-  ELT = {
+  ELT = { -- Elder Titan
   	PNG = "pangolin_pangolin_rival_59",
   	LIN = "lina_lina_rival_18",
-  	FUR = "furion_furi_kill_11"
+  	FUR = "furion_furi_kill_11",
+    WDR = "windrunner_wind_kill_10",
+    ARC = "arc_warden_arcwar_rival_03"
 
   },
-  NEV = {
+  NEV = { -- Nevermore
   	PNG = "pangolin_pangolin_rival_202",
   	SNI = "sniper_snip_kill_01",
   	KUN = "kunkka_kunk_rival_31",
   	OMN = "omniknight_omni_rival_11"
 
   },
-  SHD = {
+  SHD = { -- Shadow Demon
   	PNG = "pangolin_pangolin_rival_139",
-  	KUN = "kunkka_kunk_rival_32"
+  	KUN = "kunkka_kunk_rival_32",
+    DKN = "dragon_knight_drag_kill_02",
+    ARC = "arc_warden_arcwar_kill_15"
 
   }, 
-  HUS = {
+  HUS = { -- Huskar
   	PNG = "pangolin_pangolin_rival_74",
-  	SNI = "sniper_snip_kill_arrow_06"
+  	SNI = "sniper_snip_kill_arrow_06",
+    ARC = "arc_warden_arcwar_rival_14"
 
   },
-  WDO = {
+  WDO = { -- Witch Doctor
   	PNG = "pangolin_pangolin_rival_197",
   	LIN = "lina_lina_rival_12"
 
   },
-  MEE = {
+  MEE = { -- Meepo
   	PNG = "pangolin_pangolin_rival_110",
   	TEC = "techies_tech_kill_02",
   	WWY = "winter_wyvern_winwyv_kill_10"
 
   },
-  URS = {
+  URS = { -- Ursa
   	PNG = "pangolin_pangolin_rival_205",
   	SNI = "sniper_snip_kill_08",
-  	BMA = "beastmaster_beas_kill_03"
+  	BMA = "beastmaster_beas_kill_03",
+    WDR = "windrunner_wind_rival_08",
+    ARC = "arc_warden_arcwar_rival_21"
 
   },
-  CEN = {
+  CEN = { -- Centaur
   	PNG = "pangolin_pangolin_rival_29",
-  	SNI = "sniper_snip_kill_blade_03"
+  	SNI = "sniper_snip_kill_blade_03",
+    DKN = "dragon_knight_drag_kill_01"
 
   },
-  ABY = {
+  ABY = { -- Underlord
   	PNG = "pangolin_pangolin_rival_201",
   	FUR = "furion_furi_kill_12",
-  	OMN = "omniknight_omni_kill_10"
+  	OMN = "omniknight_omni_kill_10",
+    ARC = "arc_warden_arcwar_rival_06"
 
   },
-  SKY = {
+  SKY = { -- Skywrath
   	PNG = "pangolin_pangolin_rival_222",
   	LIN = "lina_lina_rival_20",
   	TEC = "techies_tech_kill_03",
   	KUN = "kunkka_kunk_kill_06"
   },
-  JAK = {
+  JAK = { -- Jakiro
   	PNG = "pangolin_pangolin_rival_51",
   	LIN = "lina_lina_rival_04",
-  	WWY = "winter_wyvern_winwyv_rival_10"
-
+  	WWY = "winter_wyvern_winwyv_rival_10",
+    DKN = "dragon_knight_drag_jakiro_01",
+    WDR = "windrunner_wind_rare_04"
   },
-  UND = {
+  UND = { -- Undying
   	RIK = "riki_riki_kill_14",
   	PNG = "pangolin_pangolin_rival_204",
   	KUN = "kunkka_kunk_kill_01",
-  	BMA = "beastmaster_beas_kill_07"
+  	BMA = "beastmaster_beas_kill_07",
+    DKN = "dragon_knight_dragon_lasthit_02",
+    WDR = "windrunner_wind_kill_09"
   },
-  NEC = {
+  NEC = { -- Necrophos
   	RIK = "riki_riki_kill_12",
   	PNG = "pangolin_pangolin_rival_210",
   	FUR = "furion_furi_kill_08",
@@ -434,7 +455,7 @@ function SoundController:ParseVar(var, unit)
   --DebugPrint(unit:GetName())
   --DebugPrint(unit:GetUnitLabel())
   local name = unit:GetName()
-  if(name=="npc_dota_hero")then name = unit:GetUnitLabel() end
+  if(name=="npc_dota_hero")then name = unit:GetUnitLabel() end -- Ensure we actually get a real name
   -- Heroes
   if(name == "npc_dota_hero_riki") then return var.OMN end
   if(name == "npc_dota_hero_pangolier") then return var.PNG end
@@ -446,6 +467,9 @@ function SoundController:ParseVar(var, unit)
   if(name == "npc_dota_hero_kunkka") then return var.KUN end
   if(name == "npc_dota_hero_beastmaster") then return var.BMA end
   if(name == "npc_dota_hero_omniknight") then return var.OMN end
+  if(name == "npc_dota_hero_dragon_knight") then return var.DKN end
+  if(name == "npc_dota_hero_windrunner") then return var.WDR end 
+  if(name == "npc_dota_hero_arc_warden") then return var.ARC end 
   -- Villains
   if(name == "npc_dota_hero_treant") then return var.TRN end
   if(name == "npc_dota_hero_lone_druid") then return var.LON end
@@ -482,280 +506,361 @@ function SoundController:PrecacheSounds( context )
   --------------------------------------------------------------------------------------------------------------------------
   -- Rikimaru
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/riki/riki_cast_01.vsnd", context) -- riki_riki_cast_01
-  PrecacheResource("soundfile", "sounds/vo/riki/riki_cast_02.vsnd", context) -- riki_riki_cast_02
-  PrecacheResource("soundfile", "sounds/vo/riki/riki_cast_04.vsnd", context) -- riki_riki_cast_04
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/riki/riki_cast_01.vsnd", context) -- riki_riki_cast_01
+    PrecacheResource("soundfile", "sounds/vo/riki/riki_cast_02.vsnd", context) -- riki_riki_cast_02
+    PrecacheResource("soundfile", "sounds/vo/riki/riki_cast_04.vsnd", context) -- riki_riki_cast_04
 
-  -- Revived
-  PrecacheResource("soundfile", "sounds/vo/riki/riki_thanks_01.vsnd", context) -- riki_riki_thanks_01
-  PrecacheResource("soundfile", "sounds/vo/riki/riki_thanks_02.vsnd", context) -- riki_riki_thanks_02
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/riki/riki_thanks_01.vsnd", context) -- riki_riki_thanks_01
+    PrecacheResource("soundfile", "sounds/vo/riki/riki_thanks_02.vsnd", context) -- riki_riki_thanks_02
 
-  -- Kill Necrophos
-  PrecacheResource("soundfile", "sounds/vo/riki/riki_kill_12.vsnd", context) -- riki_riki_kill_12
+    -- Kill Necrophos
+    PrecacheResource("soundfile", "sounds/vo/riki/riki_kill_12.vsnd", context) -- riki_riki_kill_12
 
-  -- Kill Undying
-  PrecacheResource("soundfile", "sounds/vo/riki/riki_kill_14.vsnd", context) -- riki_riki_kill_14
+    -- Kill Undying
+    PrecacheResource("soundfile", "sounds/vo/riki/riki_kill_14.vsnd", context) -- riki_riki_kill_14
   --------------------------------------------------------------------------------------------------------------------------
   -- Pangolier
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_cast_02.vsnd", context) -- pangolin_pangolin_cast_02
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_cast_03.vsnd", context) -- pangolin_pangolin_cast_03
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_144.vsnd", context) -- pangolin_pangolin_rival_144
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_cast_02.vsnd", context) -- pangolin_pangolin_cast_02
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_cast_03.vsnd", context) -- pangolin_pangolin_cast_03
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_144.vsnd", context) -- pangolin_pangolin_rival_144
 
-  -- Revived
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_respawn_05.vsnd", context) -- pangolin_pangolin_respawn_05
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_thanks_01.vsnd", context) -- pangolin_pangolin_thanks_01
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_respawn_05.vsnd", context) -- pangolin_pangolin_respawn_05
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_thanks_01.vsnd", context) -- pangolin_pangolin_thanks_01
 
-  -- Kill Skywrath
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_222.vsnd", context) -- pangolin_pangolin_rival_222
+    -- Kill Skywrath
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_222.vsnd", context) -- pangolin_pangolin_rival_222
 
-  -- Kill Earth Spirit
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_55.vsnd", context) -- pangolin_pangolin_rival_55
+    -- Kill Earth Spirit
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_55.vsnd", context) -- pangolin_pangolin_rival_55
 
-  -- Kill Elder Titan
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_59.vsnd", context) -- pangolin_pangolin_rival_59
+    -- Kill Elder Titan
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_59.vsnd", context) -- pangolin_pangolin_rival_59
 
-  -- Kill Doom
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_150.vsnd", context) -- pangolin_pangolin_rival_150
+    -- Kill Doom
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_150.vsnd", context) -- pangolin_pangolin_rival_150
 
-  -- Kill Jakiro
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_51.vsnd", context) -- pangolin_pangolin_rival_51
+    -- Kill Jakiro
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_51.vsnd", context) -- pangolin_pangolin_rival_51
 
-  -- Kill Dark Willow
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_40.vsnd", context) -- pangolin_pangolin_rival_40
+    -- Kill Dark Willow
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_40.vsnd", context) -- pangolin_pangolin_rival_40
 
-  -- Kill Centaur
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_29.vsnd", context) -- pangolin_pangolin_rival_29
+    -- Kill Centaur
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_29.vsnd", context) -- pangolin_pangolin_rival_29
 
-  -- Kill Huskar
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_74.vsnd", context) -- pangolin_pangolin_rival_74
+    -- Kill Huskar
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_74.vsnd", context) -- pangolin_pangolin_rival_74
 
-  -- Kill Lone Druid
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_99.vsnd", context) -- pangolin_pangolin_rival_99
+    -- Kill Lone Druid
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_99.vsnd", context) -- pangolin_pangolin_rival_99
 
-  -- Kill Necrophos
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_210.vsnd", context) -- pangolin_pangolin_rival_210
+    -- Kill Necrophos
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_210.vsnd", context) -- pangolin_pangolin_rival_210
 
-  -- Kill Meepo
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_110.vsnd", context) -- pangolin_pangolin_rival_110
+    -- Kill Meepo
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_110.vsnd", context) -- pangolin_pangolin_rival_110
 
-  -- Kill Shadow Fiend
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_202.vsnd", context) -- pangolin_pangolin_rival_202
+    -- Kill Shadow Fiend
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_202.vsnd", context) -- pangolin_pangolin_rival_202
 
-  -- Kill Shadow Demon
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_139.vsnd", context) -- pangolin_pangolin_rival_139
+    -- Kill Shadow Demon
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_139.vsnd", context) -- pangolin_pangolin_rival_139
 
-  -- Kill Treant
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_196.vsnd", context) -- pangolin_pangolin_rival_196
+    -- Kill Treant
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_196.vsnd", context) -- pangolin_pangolin_rival_196
 
-  -- Kill Underlord
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_201.vsnd", context) -- pangolin_pangolin_rival_201
+    -- Kill Underlord
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_201.vsnd", context) -- pangolin_pangolin_rival_201
 
-  -- Kill Undying
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_204.vsnd", context) -- pangolin_pangolin_rival_204
+    -- Kill Undying
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_204.vsnd", context) -- pangolin_pangolin_rival_204
 
-  -- Kill Ursa
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_205.vsnd", context) --pangolin_pangolin_rival_205
+    -- Kill Ursa
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_205.vsnd", context) --pangolin_pangolin_rival_205
 
-  -- Kill Witchdoctor
-  PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_197.vsnd", context) -- pangolin_pangolin_rival_197
+    -- Kill Witchdoctor
+    PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_197.vsnd", context) -- pangolin_pangolin_rival_197
   --------------------------------------------------------------------------------------------------------------------------
   -- Sniper
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_cast_01.vsnd", context) -- sniper_snip_cast_01
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_cast_02.vsnd", context) -- sniper_snip_cast_02
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_respawn_04.vsnd", context) -- sniper_snip_respawn_04
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_cast_01.vsnd", context) -- sniper_snip_cast_01
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_cast_02.vsnd", context) -- sniper_snip_cast_02
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_respawn_04.vsnd", context) -- sniper_snip_respawn_04
 
-  -- Revived
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_thanks_01.vsnd", context) -- sniper_snip_thanks_01
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_thanks_02.vsnd", context) -- sniper_snip_thanks_02
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_thanks_01.vsnd", context) -- sniper_snip_thanks_01
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_thanks_02.vsnd", context) -- sniper_snip_thanks_02
 
-  -- Kill Centaur
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_blade_03.vsnd", context) -- sniper_snip_kill_blade_03
+    -- Kill Centaur
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_blade_03.vsnd", context) -- sniper_snip_kill_blade_03
 
-  -- Kill Huskar
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_arrow_06.vsnd", context) -- sniper_snip_kill_arrow_06
+    -- Kill Huskar
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_arrow_06.vsnd", context) -- sniper_snip_kill_arrow_06
 
-  -- Kill Dark Willow
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_ability_assass_05.vsnd", context) -- sniper_snip_ability_assass_05
+    -- Kill Dark Willow
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_ability_assass_05.vsnd", context) -- sniper_snip_ability_assass_05
 
-  -- Kill Earth Spirit
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_06.vsnd", context) -- sniper_snip_kill_06
+    -- Kill Earth Spirit
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_06.vsnd", context) -- sniper_snip_kill_06
 
-  -- Kill Shadow Fiend
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_01.vsnd", context) -- sniper_snip_kill_01
+    -- Kill Shadow Fiend
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_01.vsnd", context) -- sniper_snip_kill_01
 
-  -- Kill Ursa
-  PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_08.vsnd", context) -- sniper_snip_kill_08
+    -- Kill Ursa
+    PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_08.vsnd", context) -- sniper_snip_kill_08
   --------------------------------------------------------------------------------------------------------------------------
   -- Lina
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/announcer_dlc_lina/announcer_followup_neg_progress_04.vsnd", context) -- announcer_dlc_lina_announcer_followup_neg_progress_04
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_cast_01.vsnd", context) -- lina_lina_cast_01
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_drop_medium_01.vsnd", context) -- lina_lina_drop_medium_01
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/announcer_dlc_lina/announcer_followup_neg_progress_04.vsnd", context) -- announcer_dlc_lina_announcer_followup_neg_progress_04
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_cast_01.vsnd", context) -- lina_lina_cast_01
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_drop_medium_01.vsnd", context) -- lina_lina_drop_medium_01
 
-  -- Revived
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_respawn_02.vsnd", context) -- lina_lina_respawn_02
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_thanks_03.vsnd", context) -- lina_lina_thanks_03
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_respawn_02.vsnd", context) -- lina_lina_respawn_02
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_thanks_03.vsnd", context) -- lina_lina_thanks_03
 
-  -- Kill treant
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_01.vsnd", context) -- lina_lina_rival_01
+    -- Kill treant
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_01.vsnd", context) -- lina_lina_rival_01
 
-  -- Kill Jakiro
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_04.vsnd", context) -- lina_lina_rival_04
+    -- Kill Jakiro
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_04.vsnd", context) -- lina_lina_rival_04
 
-  -- Kill Doom
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_16.vsnd", context) -- lina_lina_rival_16
+    -- Kill Doom
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_16.vsnd", context) -- lina_lina_rival_16
 
-  -- Kill Skywrath
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_20.vsnd", context) -- lina_lina_rival_20
+    -- Kill Skywrath
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_20.vsnd", context) -- lina_lina_rival_20
 
-  -- Kill Witchdoctor
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_12.vsnd", context) -- lina_lina_rival_12
+    -- Kill Witchdoctor
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_12.vsnd", context) -- lina_lina_rival_12
 
-  -- Kill Elder Titan
-  PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_18.vsnd", context) -- lina_lina_rival_18
+    -- Kill Elder Titan
+    PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_18.vsnd", context) -- lina_lina_rival_18
   --------------------------------------------------------------------------------------------------------------------------
   -- Furion
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_cast_01.vsnd", context) -- furion_furi_cast_01
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_cast_03.vsnd", context) -- furion_furi_cast_03
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_03.vsnd", context) -- furion_furi_kill_03
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_cast_01.vsnd", context) -- furion_furi_cast_01
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_cast_03.vsnd", context) -- furion_furi_cast_03
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_03.vsnd", context) -- furion_furi_kill_03
 
-  -- Revived
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_thanks_01.vsnd", context) -- furion_furi_thanks_01
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_thanks_02.vsnd", context) -- furion_furi_thanks_02
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_thanks_01.vsnd", context) -- furion_furi_thanks_01
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_thanks_02.vsnd", context) -- furion_furi_thanks_02
 
-  -- Kill treant
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_rival_01.vsnd", context) -- furion_furi_rival_01
+    -- Kill treant
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_rival_01.vsnd", context) -- furion_furi_rival_01
 
-  -- Kill Necrophos
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_08.vsnd", context) -- furion_furi_kill_08
+    -- Kill Necrophos
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_08.vsnd", context) -- furion_furi_kill_08
 
-  -- Kill Lone Druid
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_10.vsnd", context) -- furion_furi_kill_10
+    -- Kill Lone Druid
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_10.vsnd", context) -- furion_furi_kill_10
 
-  -- Kill Elder Titan
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_11.vsnd", context) -- furion_furi_kill_11
+    -- Kill Elder Titan
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_11.vsnd", context) -- furion_furi_kill_11
 
-  -- Kill Underlord
-  PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_12.vsnd", context) -- furion_furi_kill_12
+    -- Kill Underlord
+    PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_12.vsnd", context) -- furion_furi_kill_12
   --------------------------------------------------------------------------------------------------------------------------
   -- Techies
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/techies/tech_ally_03.vsnd", context) -- techies_tech_ally_03
-  PrecacheResource("soundfile", "sounds/vo/techies/tech_cast_02.vsnd", context) -- techies_tech_cast_02
-  PrecacheResource("soundfile", "sounds/vo/techies/tech_fastressuicide_01.vsnd", context) -- techies_tech_fastressuicide_01
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/techies/tech_ally_03.vsnd", context) -- techies_tech_ally_03
+    PrecacheResource("soundfile", "sounds/vo/techies/tech_cast_02.vsnd", context) -- techies_tech_cast_02
+    PrecacheResource("soundfile", "sounds/vo/techies/tech_fastressuicide_01.vsnd", context) -- techies_tech_fastressuicide_01
 
-  --Revived
-  PrecacheResource("soundfile", "sounds/vo/techies/tech_respawn_11.vsnd", context) -- techies_tech_respawn_11
-  PrecacheResource("soundfile", "sounds/vo/techies/tech_thanks_03.vsnd", context) -- techies_noba_tech_thanks_03
+    --Revived
+    PrecacheResource("soundfile", "sounds/vo/techies/tech_respawn_11.vsnd", context) -- techies_tech_respawn_11
+    PrecacheResource("soundfile", "sounds/vo/techies/tech_thanks_03.vsnd", context) -- techies_noba_tech_thanks_03
 
-  -- Kill Doom
-  PrecacheResource("soundfile", "sounds/vo/techies/tech_rival_11.vsnd", context) -- techies_tech_rival_11
+    -- Kill Doom
+    PrecacheResource("soundfile", "sounds/vo/techies/tech_rival_11.vsnd", context) -- techies_tech_rival_11
 
-  -- Kill Darkwillow
-  PrecacheResource("soundfile", "sounds/vo/techies/tech_rival_13.vsnd", context) -- techies_tech_rival_13
+    -- Kill Darkwillow
+    PrecacheResource("soundfile", "sounds/vo/techies/tech_rival_13.vsnd", context) -- techies_tech_rival_13
 
-  -- Kill Meepo
-  PrecacheResource("soundfile", "sounds/vo/techies/tech_kill_02.vsnd", context) -- techies_tech_kill_02
+    -- Kill Meepo
+    PrecacheResource("soundfile", "sounds/vo/techies/tech_kill_02.vsnd", context) -- techies_tech_kill_02
 
-  -- Kill Skywrath
-  PrecacheResource("soundfile", "sounds/vo/techies/tech_kill_03.vsnd", context) -- techies_tech_kill_03
+    -- Kill Skywrath
+    PrecacheResource("soundfile", "sounds/vo/techies/tech_kill_03.vsnd", context) -- techies_tech_kill_03
   --------------------------------------------------------------------------------------------------------------------------
   -- Winter Wyvern
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rare_01.vsnd", context) -- winter_wyvern_winwyv_rare_01
-  PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_respawn_03.vsnd", context) -- winter_wyvern_winwyv_respawn_03
-  PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_01.vsnd", context) -- winter_wyvern_winwyv_rival_01
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rare_01.vsnd", context) -- winter_wyvern_winwyv_rare_01
+    PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_respawn_03.vsnd", context) -- winter_wyvern_winwyv_respawn_03
+    PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_01.vsnd", context) -- winter_wyvern_winwyv_rival_01
 
-  -- Revived
-  PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_thanks_03.vsnd", context) -- winter_wyvern_winwyv_thanks_03
-  PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_thanks_02.vsnd", context) --winter_wyvern_winwyv_thanks_02
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_thanks_03.vsnd", context) -- winter_wyvern_winwyv_thanks_03
+    PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_thanks_02.vsnd", context) --winter_wyvern_winwyv_thanks_02
 
-  -- Kill Lone Druid
-  PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_17.vsnd", context) -- winter_wyvern_winwyv_rival_17
+    -- Kill Lone Druid
+    PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_17.vsnd", context) -- winter_wyvern_winwyv_rival_17
 
-  -- Kill Jakiro
-  PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_10.vsnd", context) -- winter_wyvern_winwyv_rival_10
+    -- Kill Jakiro
+    PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rival_10.vsnd", context) -- winter_wyvern_winwyv_rival_10
 
-  -- Kill Meepo
-  PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_kill_10.vsnd", context) -- winter_wyvern_winwyv_kill_10
+    -- Kill Meepo
+    PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_kill_10.vsnd", context) -- winter_wyvern_winwyv_kill_10
   --------------------------------------------------------------------------------------------------------------------------
   -- Kunkka
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rare_01.vsnd", context) -- kunkka_kunk_rare_01
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rare_02.vsnd", context) -- kunkka_kunk_rare_02
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_cast_03.vsnd", context) -- kunkka_kunk_cast_03
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rare_01.vsnd", context) -- kunkka_kunk_rare_01
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rare_02.vsnd", context) -- kunkka_kunk_rare_02
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_cast_03.vsnd", context) -- kunkka_kunk_cast_03
 
-  -- Revived
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_respawn_01.vsnd", context) -- kunkka_kunk_respawn_01
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_thanks_03.vsnd", context) -- kunkka_kunk_thanks_03
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_respawn_01.vsnd", context) -- kunkka_kunk_respawn_01
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_thanks_03.vsnd", context) -- kunkka_kunk_thanks_03
 
-  -- Kill Doom
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_30.vsnd", context) -- kunkka_kunk_rival_30
+    -- Kill Doom
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_30.vsnd", context) -- kunkka_kunk_rival_30
 
-  -- Kill Shadow Fiend
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_31.vsnd", context) -- kunkka_kunk_rival_31
+    -- Kill Shadow Fiend
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_31.vsnd", context) -- kunkka_kunk_rival_31
 
-  -- Kill Shadow Demon
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_32.vsnd", context) -- kunkka_kunk_rival_32
+    -- Kill Shadow Demon
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rival_32.vsnd", context) -- kunkka_kunk_rival_32
 
-  -- Kill Skywrath
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_kill_06.vsnd", context) -- kunkka_kunk_kill_06
+    -- Kill Skywrath
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_kill_06.vsnd", context) -- kunkka_kunk_kill_06
 
-  -- Kill Undying
-  PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_kill_01.vsnd", context) -- kunkka_kunk_kill_01
+    -- Kill Undying
+    PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_kill_01.vsnd", context) -- kunkka_kunk_kill_01
   --------------------------------------------------------------------------------------------------------------------------
   -- Omniknight
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/omniknight/omni_cast_01.vsnd", context) -- omniknight_omni_cast_01
-  PrecacheResource("soundfile", "sounds/vo/omniknight/omni_cast_02.vsnd", context) -- omniknight_omni_cast_02
-  PrecacheResource("soundfile", "sounds/vo/omniknight/omni_respawn_07.vsnd", context) -- omniknight_omni_respawn_07
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/omniknight/omni_cast_01.vsnd", context) -- omniknight_omni_cast_01
+    PrecacheResource("soundfile", "sounds/vo/omniknight/omni_cast_02.vsnd", context) -- omniknight_omni_cast_02
+    PrecacheResource("soundfile", "sounds/vo/omniknight/omni_respawn_07.vsnd", context) -- omniknight_omni_respawn_07
 
-  -- Revived
-  PrecacheResource("soundfile", "sounds/vo/omniknight/omni_thanks_02.vsnd", context) -- omniknight_omni_thanks_02
-  PrecacheResource("soundfile", "sounds/vo/omniknight/omni_respawn_04.vsnd", context) -- omniknight_omni_respawn_04
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/omniknight/omni_thanks_02.vsnd", context) -- omniknight_omni_thanks_02
+    PrecacheResource("soundfile", "sounds/vo/omniknight/omni_respawn_04.vsnd", context) -- omniknight_omni_respawn_04
 
-  -- Kill Doom
-  PrecacheResource("soundfile", "sounds/vo/omniknight/omni_rival_03.vsnd", context) -- omniknight_omni_rival_03
+    -- Kill Doom
+    PrecacheResource("soundfile", "sounds/vo/omniknight/omni_rival_03.vsnd", context) -- omniknight_omni_rival_03
 
-  -- Kill Shadow Fiend
-  PrecacheResource("soundfile", "sounds/vo/omniknight/omni_rival_11.vsnd", context) -- omniknight_omni_rival_11
+    -- Kill Shadow Fiend
+    PrecacheResource("soundfile", "sounds/vo/omniknight/omni_rival_11.vsnd", context) -- omniknight_omni_rival_11
 
-  -- Kill Underlord
-  PrecacheResource("soundfile", "sounds/vo/omniknight/omni_kill_10.vsnd", context) -- omniknight_omni_kill_10
+    -- Kill Underlord
+    PrecacheResource("soundfile", "sounds/vo/omniknight/omni_kill_10.vsnd", context) -- omniknight_omni_kill_10
 
-  -- Kill Necrophos
-  PrecacheResource("soundfile", "sounds/vo/omniknight/omni_kill_02.vsnd", context) -- omniknight_omni_kill_02
+    -- Kill Necrophos
+    PrecacheResource("soundfile", "sounds/vo/omniknight/omni_kill_02.vsnd", context) -- omniknight_omni_kill_02
   --------------------------------------------------------------------------------------------------------------------------
   -- Beastmaster
   --------------------------------------------------------------------------------------------------------------------------
-  -- Start of Wave
-  PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_respawn_09.vsnd", context) -- beastmaster_beas_respawn_09
-  PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_cast_02.vsnd", context) -- beastmaster_beas_cast_02
-  PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_cast_05.vsnd", context) -- beastmaster_beas_cast_05
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_respawn_09.vsnd", context) -- beastmaster_beas_respawn_09
+    PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_cast_02.vsnd", context) -- beastmaster_beas_cast_02
+    PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_cast_05.vsnd", context) -- beastmaster_beas_cast_05
 
-  -- Revived
-  PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_thanks_02.vsnd", context) -- beastmaster_beas_thanks_02
-  PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_thanks_01.vsnd", context) -- beastmaster_beas_thanks_01
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_thanks_02.vsnd", context) -- beastmaster_beas_thanks_02
+    PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_thanks_01.vsnd", context) -- beastmaster_beas_thanks_01
 
-  -- Kill Ursa
-  PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_kill_03.vsnd", context) -- beastmaster_beas_kill_03
+    -- Kill Ursa
+    PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_kill_03.vsnd", context) -- beastmaster_beas_kill_03
 
-  -- Kill Undying
-  PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_kill_07.vsnd", context) -- beastmaster_beas_kill_07
+    -- Kill Undying
+    PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_kill_07.vsnd", context) -- beastmaster_beas_kill_07
+  --------------------------------------------------------------------------------------------------------------------------
+  -- Dragon Knight
+  --------------------------------------------------------------------------------------------------------------------------
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_battlebegins_01.vsnd", context) -- dragon_knight_drag_battlebegins_01
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_attack_10.vsnd", context) -- dragon_knight_drag_attack_10
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_attack_06.vsnd", context) -- dragon_knight_drag_attack_06
 
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_thanks_01.vsnd", context) -- dragon_knight_drag_thanks_01
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_thanks_03.vsnd", context) -- dragon_knight_drag_thanks_03
 
+    -- Kill Jakiro
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_jakiro_01.vsnd", context) -- dragon_knight_drag_jakiro_01
+
+    -- Kill Shadow Demon
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_kill_02.vsnd", context) -- dragon_knight_drag_kill_02
+
+    -- Kill Centaur
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_kill_01.vsnd", context) -- dragon_knight_drag_kill_01
+
+    -- Kill Lone Druid
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_kill_06.vsnd", context) -- dragon_knight_drag_kill_06
+
+    -- Kill Undying
+    PrecacheResource("soundfile", "sounds/vo/dragon_knight/dragon_lasthit_02.vsnd", context) -- dragon_knight_dragon_lasthit_02
+  --------------------------------------------------------------------------------------------------------------------------
+  -- Windranger
+  --------------------------------------------------------------------------------------------------------------------------
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_battlebegins_01.vsnd", context) -- windrunner_wind_battlebegins_01
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_spawn_03.vsnd", context) -- windrunner_wind_spawn_03
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_rare_02.vsnd", context) -- windrunner_wind_rare_02
+
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_thanks_03.vsnd", context) -- windrunner_wind_thanks_03
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_thanks_02.vsnd", context) -- windrunner_wind_thanks_02
+
+    -- Kill Ursa
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_rival_08.vsnd", context) -- windrunner_wind_rival_08
+
+    -- Kill Jakiro
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_rare_04.vsnd", context) -- windrunner_wind_rare_04
+
+    -- Kill Elder Titan
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_kill_10.vsnd", context) -- windrunner_wind_kill_10
+
+    -- Kill Lone Druid
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_lasthit_02.vsnd", context) -- windrunner_wind_lasthit_02
+
+    -- Kill Undying
+    PrecacheResource("soundfile", "sounds/vo/windrunner/wind_kill_09.vsnd", context) -- windrunner_wind_kill_09
+    --------------------------------------------------------------------------------------------------------------------------
+  -- Arc Warden
+  --------------------------------------------------------------------------------------------------------------------------
+    -- Start of Wave
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_battlebegins_01.vsnd", context) -- arc_warden_arcwar_battlebegins_01
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_spawn_06.vsnd", context) -- arc_warden_arcwar_spawn_06
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_spawn_03.vsnd", context) -- arc_warden_arcwar_spawn_03
+
+    -- Revived
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_thanks_01.vsnd", context) -- arc_warden_arcwar_thanks_01
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_thanks_02.vsnd", context) -- arc_warden_arcwar_thanks_02
+
+    -- Kill Ursa
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_rival_21.vsnd", context) -- arc_warden_arcwar_rival_21
+
+    -- Kill Underlord
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_rival_06.vsnd", context) -- arc_warden_arcwar_rival_06
+
+    -- Kill Shadow Demon
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_kill_15.vsnd", context) -- arc_warden_arcwar_kill_15
+
+    -- Kill Elder Titan
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_rival_03.vsnd", context) -- arc_warden_arcwar_rival_03
+
+    -- Kill Huskar
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_rival_14.vsnd", context) -- arc_warden_arcwar_rival_14
+
+    -- Kill Treant
+    PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_kill_22.vsnd", context) -- arc_warden_arcwar_kill_22
+
+---------------------------------------------------------------------------------------------------------------------------
   -- Boss Responses
 
   --------------------------------------------------------------------------------------------------------------------------

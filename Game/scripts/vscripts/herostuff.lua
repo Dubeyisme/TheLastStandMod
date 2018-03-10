@@ -66,7 +66,7 @@ function HeroStuff:CircleCheckIfHeroReviving(HEROSTUFF_HERO_INDEX)
 	local point = HEROSTUFF_CIRCLE_DATA[hero_num].POINT
 	--DebugPrint(point)
 	-- Check if someone is in range
-	local heroes = BossAI:TargetsInRange(point,HEROSTUFF_CIRCLE_RADIUS,TheLastStand:GetFilterHeroTargets(true,false,false,true)) -- Uses BossAi as it contains the helper functions
+	local heroes = BossAI:TargetsInRange(point,HEROSTUFF_CIRCLE_RADIUS,TheLastStand:GetFilterHeroTargets(true,false,false,true,false,nil)) -- Uses BossAi as it contains the helper functions
 	if(#heroes>0)then
 		HEROSTUFF_CIRCLE_DATA[hero_num].REVIVING = true
 	end
@@ -100,7 +100,7 @@ function HeroStuff:CircleTimerRunning(HEROSTUFF_HERO_INDEX)
 	local point = HEROSTUFF_CIRCLE_DATA[hero_num].POINT
 	-- Check if someone is in range
 	HEROSTUFF_CIRCLE_DATA[hero_num].REVIVING = false
-	local heroes = BossAI:TargetsInRange(point,HEROSTUFF_CIRCLE_RADIUS,TheLastStand:GetFilterHeroTargets(true,false,false,true)) -- Uses BossAi as it contains the helper functions
+	local heroes = BossAI:TargetsInRange(point,HEROSTUFF_CIRCLE_RADIUS,TheLastStand:GetFilterHeroTargets(true,false,false,true,false,nil)) -- Uses BossAi as it contains the helper functions
 	if(#heroes>0)then
 		HEROSTUFF_CIRCLE_DATA[hero_num].REVIVING = true
 	end

@@ -225,6 +225,9 @@ function GameMode:OnHeroInGame(hero)
       or(hero:GetUnitName()=="npc_dota_hero_kunkka")
       or(hero:GetUnitName()=="npc_dota_hero_beastmaster")
       or(hero:GetUnitName()=="npc_dota_hero_omniknight")
+      or(hero:GetUnitName()=="npc_dota_hero_dragon_knight")
+      or(hero:GetUnitName()=="npc_dota_hero_windrunner")
+      or(hero:GetUnitName()=="npc_dota_hero_arc_warden")
       then
       for i=0,hero:GetModifierCount() do
         local s = hero:GetModifierNameByIndex(i)

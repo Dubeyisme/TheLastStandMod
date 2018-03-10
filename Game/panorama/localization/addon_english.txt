@@ -16,5 +16,32 @@
 	"DOTA_Custom7"    								"Olive Snake"
 	"DOTA_Custom8"    								"Purple Horse"
 	
-	"addonname"										"Barebones"
+	"addonname"										"The Last Stand"
+
+	"DOTA_HeroRole_Carry"		"Single"
+	"DOTA_HeroRole_Support"		"AoE"
+	"DOTA_HeroRole_Nuker"		"Healer"
+	"DOTA_HeroRole_Disabler"	"Disabler"
+	"DOTA_HeroRole_Jungler"		"Mobility"
+	"DOTA_HeroRole_Durable"		"Tank"
+	"DOTA_HeroRole_Escape"		"Escape"
+	"DOTA_HeroRole_LaneSupport"	"Utility"
+	"DOTA_HeroRole_Pusher"		"Summoner"
+	"DOTA_HeroRole_Initiator"	"Initiator"
+
+	"DOTA_HeroComplexity"		"Complexity"
+	"DOTA_HeroComplexity_Description_1"		"This hero can easily survive waves on their own."
+	"DOTA_HeroComplexity_Description_2"		"This hero requires a moderate degree of skill, coordination, and timing to survive waves."
+	"DOTA_HeroComplexity_Description_3"		"This hero requires a high degree of skill, coordination, and timing to survive waves."
+
+	"DOTA_HeroRole_Description_Carry"		"This hero is very good at taking down large solo targets."
+	"DOTA_HeroRole_Description_Support"		"This hero is very good at destroying large numbers of minions."
+	"DOTA_HeroRole_Description_Nuker"		"This hero can heal allies and themselves."
+	"DOTA_HeroRole_Description_Disabler"	"This hero has a strong disable that can stun or root the enemy."
+	"DOTA_HeroRole_Description_Jungler"		"This hero is highly mobile and can get around the map easily."
+	"DOTA_HeroRole_Description_Durable"		"This hero can take a hit or tank for the team."
+	"DOTA_HeroRole_Description_Escape"		"This hero can escape tricky situations."
+	"DOTA_HeroRole_Description_LaneSupport"	"This hero possesses skills that can aid the team in other ways."
+	"DOTA_HeroRole_Description_Pusher"		"This hero relies on summoning other units to fight."
+	"DOTA_HeroRole_Description_Initiator"	"This hero is good at charging into the fight first."
 }

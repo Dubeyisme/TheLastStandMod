@@ -318,8 +318,8 @@ function BossAI:AdjustAggro()
 	local s2 = "Current Aggro "
 	local debughero = TheLastStand:GetHeroTargets()
 	-- Increase or Decrease aggro based on personality
-	local herotargets = TheLastStand:GetFilterHeroTargets(true,true,true,true) -- Filter out alive,invis,invuln,outofgame
 	local boss = BOSSAI_CURRENT_BOSS
+	local herotargets = TheLastStand:GetFilterHeroTargets(true,true,true,true,true,boss) -- Filter out alive,invis,invuln,outofgame
 	local closest_hero = BossAI:NearestTarget(boss:GetOrigin(),herotargets)
 	local furthest_hero = BossAI:FurthestTarget(boss:GetOrigin(),herotargets)
 	local closest_player,furthest_player = nil
@@ -454,23 +454,29 @@ function BossAI:ChooseNewTarget()
 		local boss = BOSSAI_CURRENT_BOSS
 		local aggrolevel = -1
 		local aggroindex = -1
-		local herotargets = TheLastStand:GetHeroTargets()
-		for i=1,#BOSSAI_PLAYER_DAMAGE_TRACKER do
-			if(BOSSAI_PLAYER_DAMAGE_TRACKER[i]>aggrolevel)and(herotargets[i]:IsAlive())and(herotargets[i]:IsInvisible()==false)and(herotargets[i]:IsInvulnerable()==false)and(herotargets[i]:IsOutOfGame()==false)and(boss:CanEntityBeSeenByMyTeam(herotargets)) then
+		local id = -1
+		local herotargets = TheLastStand:GetFilterHeroTargets(true,true,true,true,true,boss)
+		DebugPrint("Number of Targets: "..tostring(#herotargets))
+		for i=1,#herotargets do
+			id = herotargets[i]:GetOwner():GetPlayerID()
+			if(BOSSAI_PLAYER_DAMAGE_TRACKER[id]>aggrolevel)then
 				aggroindex = i
-				aggrolevel = BOSSAI_PLAYER_DAMAGE_TRACKER[i]
+				aggrolevel = BOSSAI_PLAYER_DAMAGE_TRACKER[id]
 			end
 		end
 		if(aggroindex==-1)then
 			-- we were unsuccessful
+			DebugPrint("No target exists")
 			BOSSAI_CURRENT_TARGET = nil
 			BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.HUNTING
 		else
+			DebugPrint("Target found "..herotargets[aggroindex]:GetName())
 			BOSSAI_CURRENT_TARGET = herotargets[aggroindex]
 			BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.ATTACKING
 		end
 	else
 		-- we were unsuccessful
+		DebugPrint("Can't find target")
 		BOSSAI_CURRENT_TARGET = nil
 		BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.HUNTING
 	end
