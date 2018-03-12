@@ -11,7 +11,7 @@
 	
 	
 	//=================================================================================================================
-	// Treant Protector: Silence
+	// Treant Protector
 	//=================================================================================================================
 	"treant_ability_silence"
 	{
@@ -174,12 +174,118 @@
 	}
 	
   
+	//=================================================================================================================
+	// Dark Willow
+	//=================================================================================================================
+	"dark_willow_shadow_realm"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"12 12 12 12 12"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"duration"						"50"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage"						"40 120 200 280 360"
+				"LinkedSpecialBonus"			"special_bonus_unique_dark_willow_1"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"attack_range_bonus"			"1200"
+			}
+			"04"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"max_damage_duration"			"3"
+				"CalculateSpellDamageTooltip"	"0"
+			}
+		}
+	
+	}
   
+	"dark_willow_cursed_crown"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"14"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"1.5 2 2.5 3 3.5"
+			}
+		}
+	}
   
-  
-  
-  
-  
+	"dark_willow_bramble_maze"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"17 14 11 8 5"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"latch_duration"		"0.5 1 1.5 2 2.5"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"latch_damage"		"50 100 150 200 250"
+			}
+		}
+	}
+	
+	"dark_willow_bedlam"
+	{
+		"MaxLevel"					"5"
+
+		"AbilityCooldown"				"20 20 20 20 20"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_damage"			"75 75 75 75 75"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_radius"			"300"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"attack_targets"			"1 1 2 2 3"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"roaming_radius"			"400 500 600 700 800"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"roaming_seconds_per_rotation"				"1.5 1.75 2.0 2.25 2.5"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"roaming_duration"		"20.0"
+			}
+		}
+	}
   
   
   
@@ -1064,22 +1170,6 @@
 			}
 		}
 	}
-	"rattletrap_rocket_flare"
-	{
-		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
-		"AbilityCooldown"				"22.0 20.0 18.0 16.0 14.0"
-		"AbilityManaCost"				"30 35 40 45 50"
-		"AbilityDamage"					"40 80 120 160 200"
-		"MaxLevel"						"5"
-		"AbilitySpecial"
-		{
-			"02"
-			{	
-				"var_type"			"FIELD_FLOAT"
-				"duration"			"10.0 10.0 10.0 10.0 10.0"
-			}
-		}
-	}
 	"gyrocopter_flak_cannon"
 	{
 		"AbilityCastPoint"				"0 0 0 0 0"
@@ -1099,6 +1189,42 @@
 				"var_type"						"FIELD_INTEGER"
 				"max_attacks"					"2 3 4 5 6"
 				"LinkedSpecialBonus"			"special_bonus_unique_gyrocopter_2"
+			}
+		}
+	}
+	"tinker_heat_seeking_missile"
+	{
+		"MaxLevel"						"5"
+		"HasScepterUpgrade"			"0"
+		"AbilityCooldown"				"25.0 25.0 25.0 25.0 25.0"
+		"AbilityCastPoint"				"0 0 0 0 0"
+		"AbilityManaCost"				"70 80 100 120 140"
+		"AbilitySpecial"
+		{ 
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage"			"50 125 200 275 350"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"2500 2500 2500 2500 2500"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"targets"			"1 1 1 1 1"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"speed"				"700"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"targets_scepter"	"0 0 0 0 0"
 			}
 		}
 	}
@@ -2345,5 +2471,127 @@
 		}
 	}
 	
+	//Clockwork
+	
+	"tinker_laser"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"22 20 18 16 14"
+		"AbilityManaCost"				"90 110 130 150 170"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"miss_rate"				"100 100 100 100 100"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration_hero"			"2.5 3 3.5 4 4.5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration_creep"		"6.0 6.0 6.0 6.0 6.0"
+			}	
+			"04"	
+			{
+				"var_type"				"FIELD_INTEGER"
+				"laser_damage"			"40 80 160 240 320"
+				"LinkedSpecialBonus"	"special_bonus_unique_tinker"
+			}	
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_4"
+	}
+	
+	"rattletrap_power_cogs"
+	{
+		"MaxLevel"					"5"
+		"AbilityManaCost"				"40 50 60 70 80"
+		"AbilitySpecial"
+		{
+			"01"
+			{	
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"4.0 5.0 6.0 7.0 8.0"
+			}
+			"02"
+			{	
+				"var_type"			"FIELD_INTEGER"
+				"drain_amount"		"40 80 120 160 200"
+			}
+		}
+	}
+	
+	"rattletrap_battery_assault"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"36.0 32.0 28.0 24.0 20.0"
+		"AbilityDamage"					"5 20 45 70 95"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"275 275 275 275 275"
+			}
+			"02"
+			{	
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"10.5 10.5 10.5 10.5 10.5"
+			}
+			"03"
+			{	
+				"var_type"			"FIELD_FLOAT"
+				"interval"			"0.7 0.7 0.7 0.7 0.7"
+				"LinkedSpecialBonus"		"special_bonus_unique_clockwerk"
+			}
+		}
+	}
+	
+	"rattletrap_rocket_flare"
+	{
+		"MaxLevel"						"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"22.0 20.0 18.0 16.0 14.0"
+		"AbilityManaCost"				"30 35 40 45 50"
+		"AbilityDamage"					"40 80 120 160 200"
+		"AbilitySpecial"
+		{
+			"02"
+			{	
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"10.0 10.0 10.0 10.0 10.0"
+			}
+		}
+	}
+	
+	
+	
+	"newdragon_knight_dragon_blood"
+	{
+		"MaxLevel"					"5"
+		"ID"						"7002"
+		"AbilityTextureName" 			"Reactive_Armor_icon"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_health_regen"			"2 4 6 8 10"
+				"LinkedSpecialBonus"			"special_bonus_unique_dragon_knight"
+				"LinkedSpecialBonusOperation"	"SPECIAL_BONUS_MULTIPLY"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"bonus_armor"					"0 3 6 9 12"
+				"LinkedSpecialBonus"			"special_bonus_unique_dragon_knight"
+				"LinkedSpecialBonusOperation"	"SPECIAL_BONUS_MULTIPLY"
+			}
+		}		
+	}
 }
 

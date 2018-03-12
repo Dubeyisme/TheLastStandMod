@@ -478,18 +478,18 @@ function TheLastStand:GetWaveContentsAttacking() return WAVE_CONTENTS_ATTACKING 
 function TheLastStand:GetMultiplier() return MULTIPLIER end
 function TheLastStand:GetPlayerCount() return PLAYER_COUNT end
 function TheLastStand:GetHeroTargets() return HERO_TARGETS end
-function TheLastStand:GetFilterHeroTargets(alive,invis,invuln,outofgame,canbeseen,canbeseencaster) --Filter out heroes
+function TheLastStand:GetFilterHeroTargets(_alive,_invis,_invuln,_outofgame,_canbeseen,_canbeseencaster) --Filter out heroes
   --DebugPrintTable("HERO_TARGETS")
   local targets = {}
   local i = 0
   local addtolist = false
   for i=1,#HERO_TARGETS do
     addtolist = true
-    if(alive)then addtolist=HERO_TARGETS[i]:IsAlive() end -- Filter out dead heroes?
-    if(invis)and(addtolist)then if(HERO_TARGETS[i]:IsInvisible())then addtolist=false end end -- Filter our invisible heroes?
-    if(invuln)and(addtolist)then if(HERO_TARGETS[i]:IsInvulnerable())then addtolist=false end end -- Filter out invulnerable heroes?
-    if(outofgame)and(addtolist)then if(HERO_TARGETS[i]:IsOutOfGame())then addtolist=false end end -- Filter out missing heroes?
-    if(canbeseen)and(addtolist)then if(canbeseencaster:CanEntityBeSeenByMyTeam(HERO_TARGETS[i])==false) then addtolist=false end end
+    if(_alive)then addtolist=HERO_TARGETS[i]:IsAlive() end -- Filter out dead heroes?
+    if(_invis)and(addtolist)then if(HERO_TARGETS[i]:IsInvisible())then addtolist=false end end -- Filter our invisible heroes?
+    if(_invuln)and(addtolist)then if(HERO_TARGETS[i]:IsInvulnerable())then addtolist=false end end -- Filter out invulnerable heroes?
+    if(_outofgame)and(addtolist)then if(HERO_TARGETS[i]:IsOutOfGame())then addtolist=false end end -- Filter out missing heroes?
+    if(_canbeseen)and(addtolist)then if(_canbeseencaster:CanEntityBeSeenByMyTeam(HERO_TARGETS[i])==false) then addtolist=false end end
     if(addtolist)then table.insert(targets,HERO_TARGETS[i]) end
   end
   --DebugPrintTable("RETURNING HERO_TARGETS")
@@ -505,11 +505,11 @@ function TheLastStand:GetBossPoint() return BOSS_POINT end
 function TheLastStand:GetBossRadius() return BOSS_RADIUS end
 
 -- Setters
-function TheLastStand:SetIsBossWave(bool) IS_BOSS_WAVE=bool end
-function TheLastStand:SetPlayerCount(count) DebugPrint("[Player Count] Player count set") PLAYER_COUNT = count end
-function TheLastStand:AddHeroTargets(hero) DebugPrint("[Hero Targets] Hero Added") table.insert(HERO_TARGETS,hero) end
-function TheLastStand:AddPlayerTargets(playerID) DebugPrint("[Player Targets] Player "..tostring(playerID).." Added") table.insert(PLAYERS,playerID) end
-function TheLastStand:SetWaveContentsAttacking(content, i) WAVE_CONTENTS_ATTACKING[i] = content end
+function TheLastStand:SetIsBossWave(_bool) IS_BOSS_WAVE=_bool end
+function TheLastStand:SetPlayerCount(_count) DebugPrint("[Player Count] Player count set") PLAYER_COUNT = _count end
+function TheLastStand:AddHeroTargets(_hero) DebugPrint("[Hero Targets] Hero Added") table.insert(HERO_TARGETS,_hero) end
+function TheLastStand:AddPlayerTargets(_playerID) DebugPrint("[Player Targets] Player "..tostring(_playerID).." Added") table.insert(PLAYERS,_playerID) end
+function TheLastStand:SetWaveContentsAttacking(_content, _i) WAVE_CONTENTS_ATTACKING[_i] = _content end
 
 
 -- This is where we catch and prep for everything after each wave
@@ -544,7 +544,7 @@ function TheLastStand:WaveStart()
   -- Generate a new wave
   DebugPrint("[TLS] Current Multiplier : "..tostring(MULTIPLIER))
   -- Announce that a wave has begun through text
-  CURRENT_WAVE_TYPE = WAVE_TYPES.RADIANT
+  CURRENT_WAVE_TYPE = WAVE_TYPES.DIRE
   local text_array = TheLastStand:AnnounceWaveText(CURRENT_WAVE, CURRENT_ROUND, CURRENT_LEVEL, CURRENT_WAVE_TYPE) -- [1] is the wave number, [2] is the type
   Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text=text_array[1], duration=WAVE_INTRO_DURATION, style=STYLE_WAVE_NUM_INTRO})
   Notifications:TopToTeam(DOTA_TEAM_GOODGUYS,{text=text_array[2], duration=WAVE_INTRO_DURATION, style=STYLE_WAVE_TYPE_INTRO})
@@ -566,15 +566,15 @@ function TheLastStand:WaveStart()
 end
 
 -- This calculates how much each creep should be worth in the wave based on the goal per round
-function TheLastStand:CalculateWaveBounty(UnitCount,goal)
+function TheLastStand:CalculateWaveBounty(_UnitCount,_goal)
   local bounty = 0
   local num = 0
   local i
-  for i=1,#UnitCount do
-    num = num + UnitCount[i]
+  for i=1,#_UnitCount do
+    num = num + _UnitCount[i]
   end
-  WAVE_BOUNTY = math.floor(goal/num)
-  DebugPrint("Difference: "..tostring((WAVE_BOUNTY*num)-goal))
+  WAVE_BOUNTY = math.floor(_goal/num)
+  DebugPrint("Difference: "..tostring((WAVE_BOUNTY*num)-_goal))
 end
 
 -- Sort out the next set of waves
@@ -650,7 +650,7 @@ function TheLastStand:IncrementWaveType()
 end
 
 -- Creates the text to be displayed on screen and returns the text and intro in a table
-function TheLastStand:AnnounceWaveText(wave, round, level, ttype)
+function TheLastStand:AnnounceWaveText(_wave, _round, _level, _ttype)
   local text = ""
   local wave_type_text = ""
   local wave_intro_text = ""
@@ -658,32 +658,32 @@ function TheLastStand:AnnounceWaveText(wave, round, level, ttype)
      -- This is a boss wave, record boss number
      BOSS_WAVE_COUNTER = BOSS_WAVE_COUNTER + 1
     wave_type_text = "Boss Round "..TheLastStand:NumToText(BOSS_WAVE_COUNTER).."."
-    wave_intro_text = TheLastStand:BossIntro(ttype,round)
+    wave_intro_text = TheLastStand:BossIntro(_ttype,_round)
   else
      -- This is a nonboss wave, record wave number
     NORMAL_WAVE_COUNTER = NORMAL_WAVE_COUNTER + 1
-     DebugPrint(tostring(level)..":"..tostring(round)..":"..tostring(wave))
+     DebugPrint(tostring(_level)..":"..tostring(_round)..":"..tostring(_wave))
     wave_type_text = "Wave "..TheLastStand:NumToText(NORMAL_WAVE_COUNTER).."."
-    wave_intro_text = TheLastStand:TypeToText(ttype,round)
+    wave_intro_text = TheLastStand:TypeToText(_ttype,_round)
   end
   return {wave_type_text,wave_intro_text}
 end
 
 -- Takes an integer and returns the actual word: Cannot handle integers higher than 99. Current game max is 54
-function TheLastStand:NumToText(num)
-  if(num<10) then
+function TheLastStand:NumToText(_num)
+  if(_num<10) then
     -- This is only a single number, easy
-    return NUM_WORD_DIGITS[num]
+    return NUM_WORD_DIGITS[_num]
   else
     -- This isn't a single number, a bit trickier
-    if(num<20) then
+    if(_num<20) then
       -- Still simple, return a teen
-      return NUM_WORD_TEENS[num-9]
+      return NUM_WORD_TEENS[_num-9]
     else
         -- number is higher than 19 so composite number time
-      if(num<100) then
-        local tens = tonumber(tostring(num):sub(0,1))-1
-        local digit = tonumber(tostring(num):sub(2))
+      if(_num<100) then
+        local tens = tonumber(tostring(_num):sub(0,1))-1
+        local digit = tonumber(tostring(_num):sub(2))
         DebugPrint("Ten: "..tens.." Unit:"..digit)
         if(digit == 0) then
           return NUM_WORD_TENS[tens] -- number ends in 0
@@ -696,59 +696,59 @@ function TheLastStand:NumToText(num)
 end
 
 -- For announcing the waves
-function TheLastStand:TypeToText(ttype,round)
-  if(round==1) then
-    if(ttype == WAVE_TYPES.RADIANT) then return "Radiant" end
-    if(ttype == WAVE_TYPES.DIRE) then return "Dire" end
-    if(ttype == WAVE_TYPES.KOBOLD) then return "Kobold" end
-    if(ttype == WAVE_TYPES.TROLL) then return "Troll" end
-    if(ttype == WAVE_TYPES.GOLEM) then return "Golem" end
-    if(ttype == WAVE_TYPES.SATYR) then return "Satyr" end
-    if(ttype == WAVE_TYPES.CENTAUR) then return "Centaur" end
-    if(ttype == WAVE_TYPES.DRAGON) then return "Dragon" end
-    if(ttype == WAVE_TYPES.ZOMBIE) then return "Zombie" end
-  elseif(round==2) then
-    if(ttype == WAVE_TYPES.RADIANT) then return "Radiant" end
-    if(ttype == WAVE_TYPES.DIRE) then return "Dire" end
-    if(ttype == WAVE_TYPES.KOBOLD) then return "Kobold" end
-    if(ttype == WAVE_TYPES.TROLL) then return "Troll" end
-    if(ttype == WAVE_TYPES.GOLEM) then return "Golem" end
-    if(ttype == WAVE_TYPES.SATYR) then return "Satyr" end
-    if(ttype == WAVE_TYPES.CENTAUR) then return "Centaur" end
-    if(ttype == WAVE_TYPES.DRAGON) then return "Dragon" end
-    if(ttype == WAVE_TYPES.ZOMBIE) then return "Zombie" end
+function TheLastStand:TypeToText(_ttype,_round)
+  if(_round==1) then
+    if(_ttype == WAVE_TYPES.RADIANT) then return "Radiant" end
+    if(_ttype == WAVE_TYPES.DIRE) then return "Dire" end
+    if(_ttype == WAVE_TYPES.KOBOLD) then return "Kobold" end
+    if(_ttype == WAVE_TYPES.TROLL) then return "Troll" end
+    if(_ttype == WAVE_TYPES.GOLEM) then return "Golem" end
+    if(_ttype == WAVE_TYPES.SATYR) then return "Satyr" end
+    if(_ttype == WAVE_TYPES.CENTAUR) then return "Centaur" end
+    if(_ttype == WAVE_TYPES.DRAGON) then return "Dragon" end
+    if(_ttype == WAVE_TYPES.ZOMBIE) then return "Zombie" end
+  elseif(_round==2) then
+    if(_ttype == WAVE_TYPES.RADIANT) then return "Radiant" end
+    if(_ttype == WAVE_TYPES.DIRE) then return "Dire" end
+    if(_ttype == WAVE_TYPES.KOBOLD) then return "Kobold" end
+    if(_ttype == WAVE_TYPES.TROLL) then return "Troll" end
+    if(_ttype == WAVE_TYPES.GOLEM) then return "Golem" end
+    if(_ttype == WAVE_TYPES.SATYR) then return "Satyr" end
+    if(_ttype == WAVE_TYPES.CENTAUR) then return "Centaur" end
+    if(_ttype == WAVE_TYPES.DRAGON) then return "Dragon" end
+    if(_ttype == WAVE_TYPES.ZOMBIE) then return "Zombie" end
   end    
   return ""
 end
 
 -- For announcing the boss battles
-function TheLastStand:BossIntro(ttype,round)
-  if(round==1) then
-    if(ttype == WAVE_TYPES.RADIANT) then return "Treant Protector" end
-    if(ttype == WAVE_TYPES.DIRE) then return "Dark Willow" end
-    if(ttype == WAVE_TYPES.KOBOLD) then return "Meepo" end
-    if(ttype == WAVE_TYPES.TROLL) then return "Huskar" end
-    if(ttype == WAVE_TYPES.GOLEM) then return "Earth Spirit" end
-    if(ttype == WAVE_TYPES.SATYR) then return "Shadow Fiend" end
-    if(ttype == WAVE_TYPES.CENTAUR) then return "Centaur" end
-    if(ttype == WAVE_TYPES.DRAGON) then return "Skywrath" end
-    if(ttype == WAVE_TYPES.ZOMBIE) then return "Undying" end
-  elseif(round==2) then
-    if(ttype == WAVE_TYPES.RADIANT) then return "Lone Druid" end
-    if(ttype == WAVE_TYPES.DIRE) then return "Doom" end
-    if(ttype == WAVE_TYPES.KOBOLD) then return "Ursa" end
-    if(ttype == WAVE_TYPES.TROLL) then return "Witch Doctor" end
-    if(ttype == WAVE_TYPES.GOLEM) then return "Elder Titan" end
-    if(ttype == WAVE_TYPES.SATYR) then return "Shadow Demon" end
-    if(ttype == WAVE_TYPES.CENTAUR) then return "Underlord" end
-    if(ttype == WAVE_TYPES.DRAGON) then return "Jakiro" end
-    if(ttype == WAVE_TYPES.ZOMBIE) then return "Necrophos" end
+function TheLastStand:BossIntro(_ttype,_round)
+  if(_round==1) then
+    if(_ttype == WAVE_TYPES.RADIANT) then return "Treant Protector" end
+    if(_ttype == WAVE_TYPES.DIRE) then return "Dark Willow" end
+    if(_ttype == WAVE_TYPES.KOBOLD) then return "Meepo" end
+    if(_ttype == WAVE_TYPES.TROLL) then return "Huskar" end
+    if(_ttype == WAVE_TYPES.GOLEM) then return "Earth Spirit" end
+    if(_ttype == WAVE_TYPES.SATYR) then return "Shadow Fiend" end
+    if(_ttype == WAVE_TYPES.CENTAUR) then return "Centaur" end
+    if(_ttype == WAVE_TYPES.DRAGON) then return "Skywrath" end
+    if(_ttype == WAVE_TYPES.ZOMBIE) then return "Undying" end
+  elseif(_round==2) then
+    if(_ttype == WAVE_TYPES.RADIANT) then return "Lone Druid" end
+    if(_ttype == WAVE_TYPES.DIRE) then return "Doom" end
+    if(_ttype == WAVE_TYPES.KOBOLD) then return "Ursa" end
+    if(_ttype == WAVE_TYPES.TROLL) then return "Witch Doctor" end
+    if(_ttype == WAVE_TYPES.GOLEM) then return "Elder Titan" end
+    if(_ttype == WAVE_TYPES.SATYR) then return "Shadow Demon" end
+    if(_ttype == WAVE_TYPES.CENTAUR) then return "Underlord" end
+    if(_ttype == WAVE_TYPES.DRAGON) then return "Jakiro" end
+    if(_ttype == WAVE_TYPES.ZOMBIE) then return "Necrophos" end
   end    
   return ""
 end
 
 -- Creates a wave based on Unit Types Listed and Unit Counts Listed per unit type, then orders them to move to the attack point
-function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
+function TheLastStand:CreateWave(_UnitTypesListed, _UnitCountsListed)
   local g,h,i,j,k,l = nil
   local unit = nil
   local point = {}
@@ -777,10 +777,10 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
   end
   -- Spawn a wave for each player
   for h = 1, PLAYER_COUNT do
-    for i,j in pairs(UnitTypesListed)do
-      for k=1, UnitCountsListed[i] do
-        if(UnitTypesListed[i] ~= "mark_illusions") then
-          unit = TheLastStand:CreateWaveUnitAtPlace(UnitTypesListed[i], SPAWN_POINT[point[h]], BOSS_CONTROLLER, DOTA_TEAM_BADGUYS, false, true)
+    for i,j in pairs(_UnitTypesListed)do
+      for k=1, _UnitCountsListed[i] do
+        if(_UnitTypesListed[i] ~= "mark_illusions") then
+          unit = TheLastStand:CreateWaveUnitAtPlace(_UnitTypesListed[i], SPAWN_POINT[point[h]], BOSS_CONTROLLER, DOTA_TEAM_BADGUYS, false, true)
         else
           -- Create illusion and modify it to match a hero
           local target = HERO_TARGETS[h]
@@ -824,10 +824,10 @@ function TheLastStand:CreateWave(UnitTypesListed, UnitCountsListed)
 end
 
 -- Takes a unit and removes it from the wave. If it was not in the wave, returns false.
-function TheLastStand:RemoveFromWaveContent(unit)
+function TheLastStand:RemoveFromWaveContent(_unit)
   local i,j = 0
   for i,j in pairs(WAVE_CONTENTS) do
-    if(j==unit)then
+    if(j==_unit)then
       table.remove(WAVE_CONTENTS,i)
       table.remove(WAVE_CONTENTS_ATTACKING,i)
       UNITS_LEFT=UNITS_LEFT-1
@@ -846,26 +846,26 @@ function TheLastStand:RemoveFromWaveContent(unit)
 end
 
 -- Creates a unit for the wave and may give it attack orders or a bounty if desired
-function TheLastStand:CreateWaveUnitAtPlace(unit_name, position, owner, team, issue_orders, give_bounty)
+function TheLastStand:CreateWaveUnitAtPlace(_unit_name, _position, _owner, _team, _issue_orders, _give_bounty)
   local unit = nil
-  unit = CreateUnitByName(unit_name, position, true, owner, owner, team)
+  unit = CreateUnitByName(_unit_name, _position, true, _owner, _owner, _team)
   unit.disable_autoattack = 0
-  if(issue_orders)then
+  if(_issue_orders)then
     ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = FINAL_POINT, Queue = true})
   end
   UNITS_LEFT=UNITS_LEFT+1
-  TheLastStand:UpgradeCreep(unit, give_bounty)
+  TheLastStand:UpgradeCreep(unit, _give_bounty)
   table.insert(WAVE_CONTENTS,unit)
   table.insert(WAVE_CONTENTS_ATTACKING,false)
   return unit
 end
 
 -- Creates a boss unit for the wave and initiates their AI
-function TheLastStand:CreateBoss(UnitTypesListed, UnitCountsListed)
+function TheLastStand:CreateBoss(_UnitTypesListed, _UnitCountsListed)
   local point = ATTACK_POINT[RandomInt(1,SPAWN_COUNT)]
   IS_BOSS_WAVE = true-- Just in case we missed setting this to true (probably created via cheats)
   -- Create boss
-  local unit = CreateUnitByName(UnitTypesListed[1], point, true, BOSS_CONTROLLER, BOSS_CONTROLLER, DOTA_TEAM_BADGUYS)
+  local unit = CreateUnitByName(_UnitTypesListed[1], point, true, BOSS_CONTROLLER, BOSS_CONTROLLER, DOTA_TEAM_BADGUYS)
   -- Boss announces start
   SoundController:Villain_BattleStart(unit)
   -- Boss added to wave contents
@@ -890,21 +890,21 @@ function TheLastStand:GiftGoldAndXP()
 end
 
 -- Upgrade a single creep based on the multiplier and fixes their abilities
-function TheLastStand:UpgradeCreep(unit, give_bounty)
+function TheLastStand:UpgradeCreep(_unit, _give_bounty)
   --DebugPrint("[TLS] Upgrading creep")
   -- Get unit details
   local ability = nil
   local i = 0
-  local hp = unit:GetMaxHealth()
-  local hr = unit:GetHealthRegen()
-  local mr = unit:GetManaRegen()
-  local arm = unit:GetPhysicalArmorBaseValue()
-  local mag = unit:GetBaseMagicalResistanceValue()
-  local admin = unit:GetBaseDamageMin()
-  local admax = unit:GetBaseDamageMax()
+  local hp = _unit:GetMaxHealth()
+  local hr = _unit:GetHealthRegen()
+  local mr = _unit:GetManaRegen()
+  local arm = _unit:GetPhysicalArmorBaseValue()
+  local mag = _unit:GetBaseMagicalResistanceValue()
+  local admin = _unit:GetBaseDamageMin()
+  local admax = _unit:GetBaseDamageMax()
   local bxp = 0
   local bg = 0
-  if(give_bounty)then
+  if(_give_bounty)then
     -- Removed the final impartation in case I wish to add it in again
     --bxp = (WAVE_BOUNTY*1.45)/2  -- This controls gold and xp per wave
     --bg = (WAVE_BOUNTY)/2 -- This controls gold and xp per wave
@@ -920,25 +920,25 @@ function TheLastStand:UpgradeCreep(unit, give_bounty)
   bxp=math.floor(bxp*MULTIPLIER)
   bg=math.floor(bg*MULTIPLIER)
   -- Set unit details
-  if(unit:HasFlyMovementCapability())then
-    local ms = unit:GetBaseMoveSpeed()
+  if(_unit:HasFlyMovementCapability())then
+    local ms = _unit:GetBaseMoveSpeed()
     ms=RandomInt(ms-10,ms+10)
-    unit:SetBaseMoveSpeed(ms)
+    _unit:SetBaseMoveSpeed(ms)
   end
-  unit:SetMaxHealth(hp)
-  unit:SetHealth(hp)
-  unit:SetBaseHealthRegen(hr)
-  unit:SetBaseManaRegen(mr)
-  unit:SetPhysicalArmorBaseValue(arm)
-  unit:SetBaseMagicalResistanceValue(mag)
-  unit:SetBaseDamageMin(admin)
-  unit:SetBaseDamageMax(admax)
-  unit:SetDeathXP(bxp)
-  unit:SetMaximumGoldBounty(bg)
-  unit:SetMinimumGoldBounty(bg)
+  _unit:SetMaxHealth(hp)
+  _unit:SetHealth(hp)
+  _unit:SetBaseHealthRegen(hr)
+  _unit:SetBaseManaRegen(mr)
+  _unit:SetPhysicalArmorBaseValue(arm)
+  _unit:SetBaseMagicalResistanceValue(mag)
+  _unit:SetBaseDamageMin(admin)
+  _unit:SetBaseDamageMax(admax)
+  _unit:SetDeathXP(bxp)
+  _unit:SetMaximumGoldBounty(bg)
+  _unit:SetMinimumGoldBounty(bg)
   -- Fix abilities
   for i=0,6 do
-    ability = unit:GetAbilityByIndex(i)
+    ability = _unit:GetAbilityByIndex(i)
     if(ability~=nil)then
       ability:SetLevel(1)
     end
@@ -946,17 +946,17 @@ function TheLastStand:UpgradeCreep(unit, give_bounty)
 end
 
 -- Upgrades the boss
-function TheLastStand:UpgradeBoss(boss)
+function TheLastStand:UpgradeBoss(_boss)
   -- Set the new boss multiplier
   local hero_target_num = #HERO_TARGETS/5
   BOSS_MULTIPLIER = MULTIPLIER+hero_target_num
   -- Get the values
-  local basehp = boss:GetBaseMaxHealth()
-  local modelscale = boss:GetModelScale()
+  --local basehp = _boss:GetBaseMaxHealth()
+  local modelscale = _boss:GetModelScale()
   local acquisitionrange = 1800
-    local str = boss:GetBaseStrength()
-  local agi = boss:GetBaseAgility()
-  local int = boss:GetBaseIntellect()
+    local str = _boss:GetBaseStrength()
+  local agi = _boss:GetBaseAgility()
+  local int = _boss:GetBaseIntellect()
   -- Affect the values
   modelscale = modelscale+BOSS_MULTIPLIER/10
   DebugPrint("MULTIPLIER")
@@ -967,47 +967,47 @@ function TheLastStand:UpgradeBoss(boss)
   DebugPrint(CURRENT_LEVEL)
   int=int*BOSS_MULTIPLIER*2*hero_target_num
   agi=agi*BOSS_MULTIPLIER*2*hero_target_num
-  str=str*BOSS_MULTIPLIER*5*(hero_target_num+1)
-  basehp=(basehp*BOSS_MULTIPLIER*2*hero_target_num)+str*20
+  str=str*BOSS_MULTIPLIER*3*(hero_target_num+1)
+  --basehp=(basehp*BOSS_MULTIPLIER*2*hero_target_num)+str*20
   DebugPrint(basehp)
   -- Set the values
-  boss:SetBaseStrength(str)
-  boss:SetBaseAgility(agi)
-  boss:SetBaseIntellect(int)
+  _boss:SetBaseStrength(str)
+  _boss:SetBaseAgility(agi)
+  _boss:SetBaseIntellect(int)
   -- Recalculate health, armour, etc based on gains
-  boss:CalculateStatBonus()
-  boss:SetModelScale(modelscale)
-  boss:SetAcquisitionRange(acquisitionrange)
-  boss:SetDeathXP(0)
-  boss:SetMaximumGoldBounty(0)
-  boss:SetMinimumGoldBounty(0)
-  --boss:SetBaseMaxHealth(basehp)
-  --boss:SetHealth(basehp)
+  _boss:CalculateStatBonus()
+  _boss:SetModelScale(modelscale)
+  _boss:SetAcquisitionRange(acquisitionrange)
+  _boss:SetDeathXP(0)
+  _boss:SetMaximumGoldBounty(0)
+  _boss:SetMinimumGoldBounty(0)
+  --_boss:SetBaseMaxHealth(basehp)
+  --_boss:SetHealth(basehp)
 end
 
-function TheLastStand:ParseWaveVar(var, wavetype)
+function TheLastStand:ParseWaveVar(_var, _wavetype)
   -- Villains
-  if(wavetype == WAVE_TYPES.RADIANT) then return var.RADIANT end
-  if(wavetype == WAVE_TYPES.DIRE) then return var.DIRE end
-  if(wavetype == WAVE_TYPES.KOBOLD) then return var.KOBOLD end
-  if(wavetype == WAVE_TYPES.TROLL) then return var.TROLL end
-  if(wavetype == WAVE_TYPES.GOLEM) then return var.GOLEM end
-  if(wavetype == WAVE_TYPES.SATYR) then return var.SATYR end
-  if(wavetype == WAVE_TYPES.CENTAUR) then return var.CENTAUR end
-  if(wavetype == WAVE_TYPES.DRAGON) then return var.DRAGON end
-  if(wavetype == WAVE_TYPES.ZOMBIE) then return var.ZOMBIE end
+  if(_wavetype == WAVE_TYPES.RADIANT) then return _var.RADIANT end
+  if(_wavetype == WAVE_TYPES.DIRE) then return _var.DIRE end
+  if(_wavetype == WAVE_TYPES.KOBOLD) then return _var.KOBOLD end
+  if(_wavetype == WAVE_TYPES.TROLL) then return _var.TROLL end
+  if(_wavetype == WAVE_TYPES.GOLEM) then return _var.GOLEM end
+  if(_wavetype == WAVE_TYPES.SATYR) then return _var.SATYR end
+  if(_wavetype == WAVE_TYPES.CENTAUR) then return _var.CENTAUR end
+  if(_wavetype == WAVE_TYPES.DRAGON) then return _var.DRAGON end
+  if(_wavetype == WAVE_TYPES.ZOMBIE) then return _var.ZOMBIE end
 end
 
 
 -- Fetch the list of valid units that can be spawned
-function TheLastStand:ReturnList(ttype, wave, round)
-  local list = TheLastStand:ParseWaveVar(SPECIFIC_WAVE_TYPE, ttype)[round][wave]
+function TheLastStand:ReturnList(_ttype, _wave, _round)
+  local list = TheLastStand:ParseWaveVar(SPECIFIC_WAVE_TYPE, _ttype)[_round][_wave]
   return list
 end
 
 -- Fetch the amount of units that can be spawned
-function TheLastStand:ReturnUnitCount(ttype, wave, round)
-  local list =  TheLastStand:ParseWaveVar(SPECIFIC_WAVE_COUNT, ttype)[round][wave]
+function TheLastStand:ReturnUnitCount(_ttype, _wave, _round)
+  local list =  TheLastStand:ParseWaveVar(SPECIFIC_WAVE_COUNT, _ttype)[_round][_wave]
   return list
 end
 

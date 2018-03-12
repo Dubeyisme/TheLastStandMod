@@ -5,7 +5,7 @@ require('gamemode')
 -- Main game sound file
 require('sound')
 
-function Precache( context )
+function Precache( _context )
 --[[
   This function is used to precache resources/units/items/abilities that will be needed
   for sure in your game and that will not be precached by hero selection.  When a hero
@@ -16,15 +16,15 @@ function Precache( context )
   See GameMode:PostLoadPrecache() in gamemode.lua for more information
   ]]
 
-  SoundController:PrecacheSounds(context)
+  SoundController:PrecacheSounds(_context)
 
   DebugPrint("[TLS] Performing pre-load precache")
 
   -- Ressurrection Resources
-  PrecacheResource("particle","particles/econ/events/fall_major_2016/teleport_start_fm06_outerring.vpcf",context) -- Circle
+  PrecacheResource("particle","particles/econ/events/fall_major_2016/teleport_start_fm06_outerring.vpcf",_context) -- Circle
 
-  PrecacheResource("particle", "particles/items_fx/aegis_respawn.vpcf", context) -- Respawn
-  PrecacheResource("soundfile","sounds/music/dsadowski_01/stingers/respawn.vsnd",context) -- dsadowski_01.stinger.respawn
+  PrecacheResource("particle", "particles/items_fx/aegis_respawn.vpcf", _context) -- Respawn
+  PrecacheResource("soundfile","sounds/music/dsadowski_01/stingers/respawn.vsnd",_context) -- dsadowski_01.stinger.respawn
 
 
 
@@ -35,124 +35,125 @@ function Precache( context )
   -- These are loaded Asynchronously as they will not appear for a good few minutes and so can afford the wait time
 
   -- Radiant
-  PrecacheUnitByNameAsync("npc_dota_hero_treant", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_lone_druid", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_treant", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_lone_druid", _context)
   -- Dire
-  PrecacheUnitByNameAsync("npc_dota_hero_dark_willow", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_doom_bringer", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_dark_willow", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_doom_bringer", _context)
   -- Golem
-  PrecacheUnitByNameAsync("npc_dota_hero_earth_spirit", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_elder_titan", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_earth_spirit", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_elder_titan", _context)
   -- Satyr
-  PrecacheUnitByNameAsync("npc_dota_hero_nevermore", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_shadow_demon", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_nevermore", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_shadow_demon", _context)
   -- Troll
-  PrecacheUnitByNameAsync("npc_dota_hero_huskar", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_witch_doctor", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_huskar", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_witch_doctor", _context)
   -- Kobold
-  PrecacheUnitByNameAsync("npc_dota_hero_meepo", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_ursa", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_meepo", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_ursa", _context)
   -- Centaur
-  PrecacheUnitByNameAsync("npc_dota_hero_centaur", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_abyssal_underlord", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_centaur", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_abyssal_underlord", _context)
   -- Dragon
-  PrecacheUnitByNameAsync("npc_dota_hero_skywrath_mage", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_jakiro", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_skywrath_mage", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_jakiro", _context)
   -- Zombie
-  PrecacheUnitByNameAsync("npc_dota_hero_undying", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_necrolyte", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_undying", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_necrolyte", _context)
 
 
   -- Hero Abilities used by heroes
 
   -- These are loaded Asynchronously as we are only using ability sounds and effects and these will not be needed immediately after selection
 
-  PrecacheUnitByNameAsync("npc_dota_hero_abaddon", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_batrider", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_antimage", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_chen", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_crystal_maiden", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_keeper_of_the_light", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_lich", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_gyrocopter", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_naga_siren", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_troll_warlord", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_visage", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_phantom_assassin", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_tidehunter", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_phoenix", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_lycan", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_gyrocopter", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_ember_spirit", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_razor", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_medusa", context)
-  PrecacheUnitByNameAsync("npc_dota_hero_legion_commander", context)
+  PrecacheUnitByNameAsync("npc_dota_hero_abaddon", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_batrider", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_antimage", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_chen", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_crystal_maiden", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_keeper_of_the_light", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_lich", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_gyrocopter", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_naga_siren", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_troll_warlord", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_visage", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_phantom_assassin", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_tidehunter", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_phoenix", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_lycan", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_gyrocopter", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_ember_spirit", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_razor", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_medusa", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_legion_commander", _context)
+  PrecacheUnitByNameAsync("npc_dota_hero_tinker", _context)
 
 -- Precache the creeps
 
 -- Radiant
-PrecacheUnitByNameAsync("npc_dota_creep_goodguys_melee", context)
-PrecacheUnitByNameAsync("npc_dota_creep_goodguys_ranged", context)
-PrecacheUnitByNameAsync("npc_dota_goodguys_siege", context)
-PrecacheUnitByNameAsync("npc_dota_creep_goodguys_melee_upgraded", context)
-PrecacheUnitByNameAsync("npc_dota_creep_goodguys_ranged_upgraded", context)
-PrecacheUnitByNameAsync("npc_dota_creep_goodguys_melee_upgraded_mega", context)
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_melee", _context)
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_ranged", _context)
+PrecacheUnitByNameAsync("npc_dota_goodguys_siege", _context)
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_melee_upgraded", _context)
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_ranged_upgraded", _context)
+PrecacheUnitByNameAsync("npc_dota_creep_goodguys_melee_upgraded_mega", _context)
 
 -- Dire
-PrecacheUnitByNameAsync("npc_dota_creep_badguys_melee", context)
-PrecacheUnitByNameAsync("npc_dota_creep_badguys_ranged", context)
-PrecacheUnitByNameAsync("npc_dota_badguys_siege", context)
-PrecacheUnitByNameAsync("npc_dota_creep_badguys_melee_upgraded", context)
-PrecacheUnitByNameAsync("npc_dota_creep_badguys_ranged_upgraded", context)
-PrecacheUnitByNameAsync("npc_dota_creep_badguys_melee_upgraded_mega", context)
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_melee", _context)
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_ranged", _context)
+PrecacheUnitByNameAsync("npc_dota_badguys_siege", _context)
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_melee_upgraded", _context)
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_ranged_upgraded", _context)
+PrecacheUnitByNameAsync("npc_dota_creep_badguys_melee_upgraded_mega", _context)
 
 -- Kobold
-PrecacheUnitByNameAsync("npc_dota_neutral_kobold", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_kobold_tunneler", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_kobold_taskmaster", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_gnoll_assassin", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_polar_furbolg_champion", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_polar_furbolg_ursa_warrior", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_kobold", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_kobold_tunneler", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_kobold_taskmaster", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_gnoll_assassin", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_polar_furbolg_champion", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_polar_furbolg_ursa_warrior", _context)
 
 -- Troll
-PrecacheUnitByNameAsync("npc_dota_neutral_dark_troll", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_forest_troll_berserker", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_forest_troll_high_priest", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_ogre_mauler", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_ogre_magi", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_dark_troll_warlord", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_dark_troll", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_forest_troll_berserker", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_forest_troll_high_priest", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_ogre_mauler", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_ogre_magi", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_dark_troll_warlord", _context)
 
 -- Golem
-PrecacheUnitByNameAsync("npc_dota_neutral_mud_golem_split", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_mud_golem", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_rock_golem", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_granite_golem", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_mud_golem_split", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_mud_golem", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_rock_golem", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_granite_golem", _context)
 
 -- Satyr
-PrecacheUnitByNameAsync("npc_dota_neutral_satyr_trickster", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_satyr_soulstealer", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_satyr_hellcaller", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_satyr_trickster", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_satyr_soulstealer", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_satyr_hellcaller", _context)
 
 -- Centaur
-PrecacheUnitByNameAsync("npc_dota_neutral_centaur_outrunner", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_centaur_khan", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_prowler_acolyte", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_prowler_shaman", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_centaur_outrunner", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_centaur_khan", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_prowler_acolyte", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_prowler_shaman", _context)
 
 -- Dragon
-PrecacheUnitByNameAsync("npc_dota_neutral_harpy_scout", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_harpy_storm", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_jungle_stalker", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_elder_jungle_stalker", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_black_drake", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_black_dragon", context)
+PrecacheUnitByNameAsync("npc_dota_neutral_harpy_scout", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_harpy_storm", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_jungle_stalker", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_elder_jungle_stalker", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_black_drake", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_black_dragon", _context)
 
 -- Zombie
-PrecacheUnitByNameAsync("npc_dota_unit_undying_zombie", context)
-PrecacheUnitByNameAsync("npc_dota_unit_undying_zombie_torso", context)
-PrecacheUnitByNameAsync("npc_dota_dark_troll_warlord_skeleton_warrior", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_fel_beast", context)
-PrecacheUnitByNameAsync("npc_dota_neutral_ghost", context)
+PrecacheUnitByNameAsync("npc_dota_unit_undying_zombie", _context)
+PrecacheUnitByNameAsync("npc_dota_unit_undying_zombie_torso", _context)
+PrecacheUnitByNameAsync("npc_dota_dark_troll_warlord_skeleton_warrior", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_fel_beast", _context)
+PrecacheUnitByNameAsync("npc_dota_neutral_ghost", _context)
 
 
 end

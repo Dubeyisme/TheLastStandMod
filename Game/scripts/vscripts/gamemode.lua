@@ -51,11 +51,11 @@ require('settings')
 -- events.lua is where you can specify the actions to be taken when any event occurs and is one of the core barebones files.
 require('events')
 
-function GameMode:FixDummy(dummy)
+function GameMode:FixDummy(_dummy)
   local ability = nil
   -- Fix abilities
     for i=0,6 do
-      ability = dummy:GetAbilityByIndex(i)
+      ability = _dummy:GetAbilityByIndex(i)
       if(ability~=nil)then
         ability:SetLevel(1)
       end
@@ -63,14 +63,14 @@ function GameMode:FixDummy(dummy)
 end
 
 -- Parse text and implement test code
-function GameMode:ParseText(text,pid)
+function GameMode:ParseText(_text,_pid)
   local i
   local ParsedText = {}
   local temp
-  local player = PlayerResource:GetPlayer(pid)
+  local player = PlayerResource:GetPlayer(_pid)
   local hero = player:GetAssignedHero()
   DebugPrint("Processed:-: ")
-  for i in string.gmatch(text, "%S+") do
+  for i in string.gmatch(_text, "%S+") do
     table.insert(ParsedText,i)
     DebugPrint(i)
   end
@@ -107,12 +107,12 @@ function GameMode:ParseText(text,pid)
     })
   end
   if(ParsedText[1]=="boss")then
-    MULTIPLIER = math.abs(MULTIPLIER)+MULTIPLIER_INCREMENT*3
-    TheLastStand:CreateBoss({"npc_dota_hero_treant"}, {1})
+    MULTIPLIER = math.abs(MULTIPLIER)+MULTIPLIER_INCREMENT*1
+    TheLastStand:CreateBoss({"npc_dota_hero_dark_willow"}, {1})
   end
   if(ParsedText[1]=="hp") then hero:SetHealth(hero:GetMaxHealth()) end
   if(ParsedText[1]=="mp") then hero:SetMana(hero:GetMaxMana()) end
-  if(ParsedText[1]=="gold") then PlayerResource:SetGold(pid,PlayerResource:GetGold(pid)+(ParsedText[2]),true) end
+  if(ParsedText[1]=="gold") then PlayerResource:SetGold(_pid,PlayerResource:GetGold(_pid)+(ParsedText[2]),true) end
   if(ParsedText[1]=="bots") then TheLastStand:SetPlayerCount(5) end
   if(ParsedText[1]=="lvl") then 
     local heroes = TheLastStand:GetHeroTargets()
@@ -197,49 +197,50 @@ end
 
   The hero parameter is the hero entity that just spawned in
 ]]
-function GameMode:OnHeroInGame(hero)
-  DebugPrint("[TLS] Hero spawned in game for first time -- " .. hero:GetUnitName())
+function GameMode:OnHeroInGame(_hero)
+  DebugPrint("[TLS] Hero spawned in game for first time -- " .. _hero:GetUnitName())
   local i = 0
   local ability = nil
   -- Add this player's hero to the list of possible boss targets
   if(TheLastStand:GetGameHasStarded()==false)then
-    TheLastStand:AddHeroTargets(hero)
-    DebugPrint(GetTeamName(hero:GetTeamNumber()))
-    DebugPrint("[UPDATE] Added a player and hero: "..hero:GetName())
+    TheLastStand:AddHeroTargets(_hero)
+    DebugPrint(GetTeamName(_hero:GetTeamNumber()))
+    DebugPrint("[UPDATE] Added a player and hero: ".._hero:GetName())
 
     -- Some heros spawn with abilities levelled incorrectly, fix this
     for i=0,23 do
-      ability = hero:GetAbilityByIndex(i)
+      ability = _hero:GetAbilityByIndex(i)
       if(ability~=nil)then
         ability:SetLevel(0)
       end
     end
     -- Strip all misplaced modifiers
-    if(hero:GetUnitName()=="npc_dota_hero_riki")
-      or(hero:GetUnitName()=="npc_dota_hero_pangolier")
-      or(hero:GetUnitName()=="npc_dota_hero_sniper")
-      or(hero:GetUnitName()=="npc_dota_hero_techies")
-      or(hero:GetUnitName()=="npc_dota_hero_lina")
-      or(hero:GetUnitName()=="npc_dota_hero_furion")
-      or(hero:GetUnitName()=="npc_dota_hero_winter_wyvern")
-      or(hero:GetUnitName()=="npc_dota_hero_kunkka")
-      or(hero:GetUnitName()=="npc_dota_hero_beastmaster")
-      or(hero:GetUnitName()=="npc_dota_hero_omniknight")
-      or(hero:GetUnitName()=="npc_dota_hero_dragon_knight")
-      or(hero:GetUnitName()=="npc_dota_hero_windrunner")
-      or(hero:GetUnitName()=="npc_dota_hero_arc_warden")
+    if(_hero:GetUnitName()=="npc_dota_hero_riki")
+      or(_hero:GetUnitName()=="npc_dota_hero_pangolier")
+      or(_hero:GetUnitName()=="npc_dota_hero_sniper")
+      or(_hero:GetUnitName()=="npc_dota_hero_techies")
+      or(_hero:GetUnitName()=="npc_dota_hero_lina")
+      or(_hero:GetUnitName()=="npc_dota_hero_furion")
+      or(_hero:GetUnitName()=="npc_dota_hero_winter_wyvern")
+      or(_hero:GetUnitName()=="npc_dota_hero_kunkka")
+      or(_hero:GetUnitName()=="npc_dota_hero_beastmaster")
+      or(_hero:GetUnitName()=="npc_dota_hero_omniknight")
+      or(_hero:GetUnitName()=="npc_dota_hero_dragon_knight")
+      or(_hero:GetUnitName()=="npc_dota_hero_windrunner")
+      or(_hero:GetUnitName()=="npc_dota_hero_arc_warden")
+      or(_hero:GetUnitName()=="npc_dota_hero_rattletrap")
       then
-      for i=0,hero:GetModifierCount() do
-        local s = hero:GetModifierNameByIndex(i)
+      for i=0,_hero:GetModifierCount() do
+        local s = _hero:GetModifierNameByIndex(i)
         DebugPrint("Modifier "..s.." removed")
-        hero:RemoveModifierByName(s)  
+        _hero:RemoveModifierByName(s)  
       end
     end
   end
 
   -- Level up abilities for heroes
   for i=0,4 do
-    ability = hero:GetAbilityByIndex(i)
+    ability = _hero:GetAbilityByIndex(i)
     if(ability~=nil)then
       ability:SetLevel(1)
     end

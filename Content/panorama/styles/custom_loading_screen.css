@@ -11,15 +11,6 @@
     overflow: clip;
 }
 
-#TitlePanel
-{
-  horizontal-align: left;
-  vertical-align: bottom;
-  margin-bottom: 150px;
-  margin-left: 100px;
-  flow-children: right;
-}
-
 #AddonTitle
 {
   margin-bottom: -15px;
@@ -30,6 +21,13 @@
   text-shadow: 2px 2px 2px #000000;
 }
 
+.StaticImg
+{
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-size: 100% 100%;
+}
+
 .SeqImg
 {
   background-repeat: no-repeat;
@@ -37,27 +35,150 @@
   background-size: 100% 100%;
 }
 
-#CustomBg
+#CustomTLS_Text
 {
 
-  margin-top: 350px;
+  margin-top: -200px;
+  /*overflow: clip;*/
+}
+
+#CustomTLS_Bg,#CustomTLS_Sniper
+{
+
+  margin-top: 0px;
+  /*overflow: clip;*/
+}
+
+
+#CustomTLS_Kunkka
+{
+
+  margin-top: 0px;
     overflow: clip;
   pre-transform-scale2d: 1.0;
-  animation-name: gamemode_anim;
+  animation-name: gamemode_anim_Kunkka;
   animation-delay: AnimationDelay;
   animation-duration: TotalLength;
   animation-timing-function: TimingFunc;
   animation-iteration-count: IterationCount;
 }
 
-#gamemode
+#CustomTLS_Riki
 {
-  margin-left: 160px;
+
+  margin-top: 0px;
+    overflow: clip;
+  pre-transform-scale2d: 1.0;
+  animation-name: gamemode_anim_Riki;
+  animation-delay: AnimationDelay;
+  animation-duration: TotalLength;
+  animation-timing-function: TimingFunc;
+  animation-iteration-count: IterationCount;
+}
+
+#CustomTLS_RikiSmoke
+{
+
+  margin-top: 0px;
+    overflow: clip;
+  pre-transform-scale2d: 1.0;
+  animation-name: gamemode_anim_RikiSmoke;
+  animation-delay: AnimationDelay;
+  animation-duration: TotalLength;
+  animation-timing-function: TimingFunc;
+  animation-iteration-count: IterationCount;
+}
+
+#CustomTLS_Lina
+{
+
+  margin-top: 0px;
+    overflow: clip;
+  pre-transform-scale2d: 1.0;
+  animation-name: gamemode_anim_Lina;
+  animation-delay: AnimationDelay;
+  animation-duration: TotalLength;
+  animation-timing-function: TimingFunc;
+  animation-iteration-count: IterationCount;
+}
+
+
+#CustomTLS_WW
+{
+
+  margin-top: 0px;
+    overflow: clip;
+  pre-transform-scale2d: 1.0;
+  animation-name: gamemode_anim_WW;
+  animation-delay: AnimationDelay;
+  animation-duration: TotalLength;
+  animation-timing-function: TimingFunc;
+  animation-iteration-count: IterationCount;
+}
+
+#TLS_Bg,#TLS_Riki,#TLS_RikiSmoke,#TLS_WW,#TLS_Sniper,#TLS_Lina,#TLS_Kunkka,#TLS_Text
+{
+  margin-left: 0px;
   /*margin-bottom: 0px;*/
   
 }
 
-@keyframes 'gamemode_anim'
+
+@keyframes 'gamemode_anim_Kunkka'
+{
+  0%
+  {
+    transform: translateX( 0px ) translateY( 0px );
+    pre-transform-scale2d: .8;
+  }
+
+  100%
+  {
+    transform: translateX( -200px ) translateY( -100px );
+  }
+}
+@keyframes 'gamemode_anim_Riki'
+{
+  0%
+  {
+    transform: translateX( 0px ) translateY( 0px );
+    pre-transform-scale2d: .8;
+  }
+
+  100%
+  {
+    transform: translateX( -100px ) translateY( 100px );
+  }
+}
+@keyframes 'gamemode_anim_RikiSmoke'
+{
+  0%
+  {
+    transform: translateX( 0px ) translateY( 0px );
+    pre-transform-scale2d: .8;
+  }
+
+  100%
+  {
+    transform: translateX( 0px ) translateY( 200px );
+  }
+}
+
+@keyframes 'gamemode_anim_Lina'
+{
+  0%
+  {
+    transform: translateX( 0px ) translateY( 0px );
+    pre-transform-scale2d: .8;
+  }
+
+  100%
+  {
+    transform: translateX( 80px ) translateY( -100px );
+  }
+}
+  
+@keyframes 'gamemode_anim_WW'
 {
   0%
   {

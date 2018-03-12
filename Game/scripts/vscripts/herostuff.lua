@@ -17,7 +17,7 @@ HEROSTUFF_RESPAWN_PARTICLE = "particles/items_fx/aegis_respawn.vpcf"
 HEROSTUFF_HERO_INDEX = 0
 
 -- 
-function HeroStuff:InitiateReviveCircle(hero)
+function HeroStuff:InitiateReviveCircle(_hero)
 	--DebugPrint("Initiate Revive Circle")
 	-- Init the circle data
 	HEROSTUFF_HEROES_BEING_REVIVED = HEROSTUFF_HEROES_BEING_REVIVED + 1
@@ -34,10 +34,10 @@ function HeroStuff:InitiateReviveCircle(hero)
 	HEROSTUFF_HERO_INDEX = HEROSTUFF_HERO_INDEX + 1
 	local HEROSTUFF_HERO_INDEX = HEROSTUFF_HERO_INDEX
 	local i = 0
-	local dummy = CreateUnitByName("npc_dummy_unit", hero:GetOrigin(), false, hero, hero, DOTA_TEAM_GOODGUYS)
+	local dummy = CreateUnitByName("npc_dummy_unit", _hero:GetOrigin(), false, _hero, _hero, DOTA_TEAM_GOODGUYS)
 	GameMode:FixDummy(dummy)
 	-- Set the hero to respawn on the spot
-	hero:SetRespawnPosition(hero:GetOrigin())
+	_hero:SetRespawnPosition(_hero:GetOrigin())
 	-- Create the circle
 	local particle = ParticleManager:CreateParticle(HEROSTUFF_INITIAL_PARTICLE, PATTACH_ABSORIGIN, dummy)
 
@@ -45,8 +45,8 @@ function HeroStuff:InitiateReviveCircle(hero)
 	table.insert(HEROSTUFF_CIRCLE_DATA,{
 		INDEX = HEROSTUFF_HERO_INDEX,
 		DUMMY = dummy,
-		POINT = hero:GetOrigin(), 
-		HERO = hero,
+		POINT = _hero:GetOrigin(), 
+		HERO = _hero,
 		REVIVING = isbeingrevived,
 		TIME = HEROSTUFF_TIME_TO_REVIVE,
 		PARTICLE = particle
@@ -56,12 +56,12 @@ function HeroStuff:InitiateReviveCircle(hero)
 end
 
 -- This is called to check if the hero is being revived and is recalled ever point until it is no longer needed
-function HeroStuff:CircleCheckIfHeroReviving(HEROSTUFF_HERO_INDEX)
+function HeroStuff:CircleCheckIfHeroReviving(_herostuff_hero_index)
 	--DebugPrint("Circle Check If Hero Reviving")
 	local i = 0
 	local hero_num = -1
 	for i=1,#HEROSTUFF_CIRCLE_DATA do
-		if(HEROSTUFF_CIRCLE_DATA[i].INDEX == HEROSTUFF_HERO_INDEX) then hero_num=i break end
+		if(HEROSTUFF_CIRCLE_DATA[i].INDEX == _herostuff_hero_index) then hero_num=i break end
 	end
 	local point = HEROSTUFF_CIRCLE_DATA[hero_num].POINT
 	--DebugPrint(point)
@@ -90,12 +90,12 @@ function HeroStuff:CircleCheckIfHeroReviving(HEROSTUFF_HERO_INDEX)
 end
 
 -- Runs whilst timing the revival process
-function HeroStuff:CircleTimerRunning(HEROSTUFF_HERO_INDEX)
+function HeroStuff:CircleTimerRunning(_herostuff_hero_index)
 	--DebugPrint("Circle Timer Running")
 	local i = 0
 	local hero_num = -1
 	for i=1,#HEROSTUFF_CIRCLE_DATA do
-		if(HEROSTUFF_CIRCLE_DATA[i].INDEX == HEROSTUFF_HERO_INDEX) then hero_num=i break end
+		if(HEROSTUFF_CIRCLE_DATA[i].INDEX == _herostuff_hero_index) then hero_num=i break end
 	end
 	local point = HEROSTUFF_CIRCLE_DATA[hero_num].POINT
 	-- Check if someone is in range
@@ -153,9 +153,9 @@ function HeroStuff:CircleTimerRunning(HEROSTUFF_HERO_INDEX)
 end
 
 -- Graphic displaying time to revive
-function HeroStuff:DrawCircleTimer(hero_num)
-	local hero = HEROSTUFF_CIRCLE_DATA[hero_num].HERO
-	local midpoint = HEROSTUFF_CIRCLE_DATA[hero_num].POINT
+function HeroStuff:DrawCircleTimer(_hero_num)
+	local hero = HEROSTUFF_CIRCLE_DATA[_hero_num].HERO
+	local midpoint = HEROSTUFF_CIRCLE_DATA[_hero_num].POINT
 	local x = HEROSTUFF_CIRCLE_X
 	local y = HEROSTUFF_CIRCLE_Y
 	local height = HEROSTUFF_CIRCLE_HEIGHT
@@ -173,7 +173,7 @@ function HeroStuff:DrawCircleTimer(hero_num)
 		Vector(midpoint.x - x, midpoint.y - y, midpoint.z + height+1), -- pos
 		Vector(0, 255, 255), -- colour
 		255, -- alpha
-		HEROSTUFF_CIRCLE_DATA[hero_num].TIME,
+		HEROSTUFF_CIRCLE_DATA[_hero_num].TIME,
 		false,
 		HEROSTUFF_TIME_CIRCLE_DRAWN
 		)

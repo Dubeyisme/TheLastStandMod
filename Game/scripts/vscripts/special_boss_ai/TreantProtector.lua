@@ -87,7 +87,7 @@ function BossAI:TreantHeroCastAbility()
 end
 
 -- Silences a target for 5 seconds, Treant will use first ability slot for sound.
-function BossAI:TreantSilence(target)
+function BossAI:TreantSilence(_target)
 	DebugPrint("Using Silence")
 	local boss = BOSSAI_CURRENT_BOSS
 	local ability = boss:FindAbilityByName(TREANT_ABILITY1)
@@ -96,11 +96,11 @@ function BossAI:TreantSilence(target)
 	-- Let them know we're busy
 	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
 	-- Execute Ability
-	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_TARGET,TargetIndex = target:entindex(), AbilityIndex = ability:entindex(), Queue = false})
+	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_TARGET,TargetIndex = _target:entindex(), AbilityIndex = ability:entindex(), Queue = false})
 end
 
 -- Leech Seeds a target, Treant will use second ability slot for sound.
-function BossAI:TreantLeechSeed(target)
+function BossAI:TreantLeechSeed(_target)
 	local boss = BOSSAI_CURRENT_BOSS
 	local ability = boss:FindAbilityByName(TREANT_ABILITY2)
 	-- Call the sound for this ability
@@ -108,7 +108,7 @@ function BossAI:TreantLeechSeed(target)
 	-- Let them know we're busy
 	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
 	-- Execute Ability
-	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_TARGET,TargetIndex = target:entindex(), AbilityIndex = ability:entindex(), Queue = false})
+	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_TARGET,TargetIndex = _target:entindex(), AbilityIndex = ability:entindex(), Queue = false})
 end
 
 -- Roots everyone near treant for 3 seconds, Treant will use third ability slot for sound.

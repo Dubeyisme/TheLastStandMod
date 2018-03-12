@@ -54,7 +54,7 @@ end
 -----------------------------------------------------------------------------------------
 	require('special_boss_ai/TreantProtector')
 	-- require('special_boss_ai/LoneDruid')
-	-- require('special_boss_ai/DarkWillow')
+	require('special_boss_ai/DarkWillow')
 	-- require('special_boss_ai/Doom')
 	-- require('special_boss_ai/Meepo')
 	-- require('special_boss_ai/Ursa')
@@ -95,29 +95,33 @@ end
 
 
 -- This function calls individual boss events based on what the switch is
-function BossAI:BossParser(switch)
+function BossAI:BossParser(_switch)
 	local name = BOSSAI_CURRENT_BOSS:GetName()
 	-- This switch handles the mode segment
-	if(switch == BOSSAI_SWITCH.MODE) then
+	if(_switch == BOSSAI_SWITCH.MODE) then
 		if(name == "npc_dota_hero_treant") then BossAI:TreantModeChange() end
 	end
 	-- This switch handles the ability segment
-	if(switch == BOSSAI_SWITCH.ABILITY) then
+	if(_switch == BOSSAI_SWITCH.ABILITY) then
 		if(name == "npc_dota_hero_treant") then BossAI:TreantAbilityLogic() end
+		if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowAbilityLogic() end
 	end
 	-- This switch handles the special/unique segment
-	if(switch == BOSSAI_SWITCH.SPECIAL) then
+	if(_switch == BOSSAI_SWITCH.SPECIAL) then 
+		if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowSpecial() end
 	end
 	-- This switch handles the initialisation of the boss
-	if(switch == BOSSAI_SWITCH.SETUP) then
+	if(_switch == BOSSAI_SWITCH.SETUP) then
 		if(name == "npc_dota_hero_treant") then BossAI:TreantInit() end
+		if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowInit() end
 	end
 	-- This switch handles the cleanup of the boss
-	if(switch == BOSSAI_SWITCH.CLEANUP) then
+	if(_switch == BOSSAI_SWITCH.CLEANUP) then
 		if(name == "npc_dota_hero_treant") then BossAI:TreantCleanup() end
+		if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowCleanup() end
 	end
 	-- This switch handles the reaction to a hero using an ability
-	if(switch == BOSSAI_SWITCH.REACTION) then
+	if(_switch == BOSSAI_SWITCH.REACTION) then
 		if(name == "npc_dota_hero_treant") then BossAI:TreantHeroCastAbility() end
 	end
 end
@@ -131,13 +135,15 @@ function BossAI:GetCurrentBoss() return BOSSAI_CURRENT_BOSS end
 
 
 -- Initialise the Boss' AI
-function BossAI:InitBossAI(boss)
+function BossAI:InitBossAI(_boss)
 	-- Clear boss data
 	BOSSAI_DATA = {
-		EFFECT={}
+		EFFECT={},
+		MEMORY={},
+		SPECIAL={}
 	}
 	-- Set new Boss
-	BOSSAI_CURRENT_BOSS = boss
+	BOSSAI_CURRENT_BOSS = _boss
 	-- Choose boss event
 	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.NOTHING
 	-- Choose Boss Level
@@ -237,16 +243,17 @@ function BossAI:EveryTick()
 				end
 			end
 		end
-		-- Adjust the aggro to stop caring about those not attacking
-		BossAI:AdjustAggro()
-		-- Choose target
-		BossAI:ChooseNewTarget()
-		-- Check ability logic if not silenced
-		if(boss:IsSilenced()==false)and(boss:IsStunned()==false)then
-			BossAI:BossParser(BOSSAI_SWITCH.ABILITY)
-		end
-		-- Check special logic
-		if(BOSSAI_CURRENT_STATE==BOSSAI_AI_STATE.SPECIAL)then
+		-- Check that we're not doing anything special
+		if(BOSSAI_CURRENT_STATE~=BOSSAI_AI_STATE.SPECIAL)then
+			-- Adjust the aggro
+			BossAI:AdjustAggro()
+			-- Choose target
+			BossAI:ChooseNewTarget()
+			-- Check ability logic if not silenced, stunned, or in the middle of casting
+			if(boss:IsSilenced()==false)and(boss:IsStunned()==false)and(BOSSAI_CURRENT_STATE~=BOSSAI_AI_STATE.CASTING)then
+				BossAI:BossParser(BOSSAI_SWITCH.ABILITY)
+			end
+		else -- Check special logic
 			BossAI:BossParser(BOSSAI_SWITCH.SPECIAL)
 		end
 		-- Check if we're still hunting
@@ -303,9 +310,9 @@ end
 -----------------------------------------------------------------------------------------
 
 -- Boss took damage
-function BossAI:BossHurt(boss, attacker, damage)
+function BossAI:BossHurt(_boss, _attacker, _damage)
 	-- Increment the damage tracker
-	BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner():GetPlayerID()] = BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner():GetPlayerID()] + damage
+	BOSSAI_PLAYER_DAMAGE_TRACKER[_attacker:GetOwner():GetPlayerID()] = BOSSAI_PLAYER_DAMAGE_TRACKER[_attacker:GetOwner():GetPlayerID()] + _damage
 	--DebugPrint(BOSSAI_PLAYER_DAMAGE_TRACKER[attacker:GetOwner():GetPlayerID()])
 
 	-- Is there something else we need to do in reaction to taking damage?
@@ -436,10 +443,10 @@ function BossAI:AdjustAggro()
 end
 
 -- Triggered when an enemy hero starts to cast a spell
-function BossAI:EnemyHeroStartCast(hero)
+function BossAI:EnemyHeroStartCast(_hero)
 	DebugPrint("Enemy hero used ability")
 	-- Calls any BossAI functions that might react to this
-	BOSSAI_REACTION_TARGET = hero
+	BOSSAI_REACTION_TARGET = _hero
 	BossAI:BossParser(BOSSAI_SWITCH.REACTION)
 end
 
@@ -538,16 +545,16 @@ function BossAI:WakeCheckAttackPrioritySimple()
 end
 
 -- Checks if there are any enemies in range and attacks them if there are, returns false if none found
-function BossAI:AssessAggroSimple(unit)
+function BossAI:AssessAggroSimple(_unit)
 	--DebugPrint("[AI] Fetching....")
-	local enemies = FindUnitsInRadius(DOTA_TEAM_BADGUYS,unit:GetOrigin(),nil,unit:GetAcquisitionRange(),DOTA_UNIT_TARGET_TEAM_ENEMY,DOTA_UNIT_TARGET_ALL,DOTA_UNIT_TARGET_FLAG_NONE,FIND_CLOSEST,false)
+	local enemies = FindUnitsInRadius(DOTA_TEAM_BADGUYS,_unit:GetOrigin(),nil,_unit:GetAcquisitionRange(),DOTA_UNIT_TARGET_TEAM_ENEMY,DOTA_UNIT_TARGET_ALL,DOTA_UNIT_TARGET_FLAG_NONE,FIND_CLOSEST,false)
 	local target = nil
 	PrintTable(enemies)
 	if(#enemies>0)then
 		target = enemies[1]
 	end
 	if(target ~= nil)then
-    	ExecuteOrderFromTable({ UnitIndex = unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET, TargetIndex = target:entindex(), Queue = false})
+    	ExecuteOrderFromTable({ UnitIndex = _unit:entindex(), OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET, TargetIndex = target:entindex(), Queue = false})
     	return true
     else
     	return false
@@ -560,22 +567,21 @@ end
 -----------------------------------------------------------------------------------------
 
 	-- Returns the closest enemy hero handle
-	function BossAI:NearestTarget(boss_unit_point, herotargets)
+	function BossAI:NearestTarget(_boss_unit_point, _herotargets)
 		--DebugPrint("NearestTarget")
 		local i=0
-		local heroes = herotargets
 		local targetposlist = {}
 		local returndist = 10000
 		local herolist = {}
 		local targetdistlist = {}
 		local pointi = -1
 		-- Fetch the positions of each enemy hero
-		for i=1,#heroes do
-			table.insert(targetposlist,heroes[i]:GetOrigin())
-			table.insert(herolist,heroes[i])
+		for i=1,#_herotargets do
+			table.insert(targetposlist,_herotargets[i]:GetOrigin())
+			table.insert(herolist,_herotargets[i])
 		end
 		-- Fetch the distance between each enemy hero
-		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
+		targetdistlist = BossAI:TargetDistanceList(targetposlist,_boss_unit_point)
 		--DebugPrint("Calculating")
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
@@ -589,21 +595,20 @@ end
 	end
 
 	-- Returns the furthest enemy hero handle
-	function BossAI:FurthestTarget(boss_unit_point, herotargets)
+	function BossAI:FurthestTarget(_boss_unit_point, _herotargets)
 		local i=0
-		local heroes = herotargets
 		local targetposlist = {}
 		local returndist = 0
 		local herolist = {}
 		local targetdistlist = {}
 		local pointi = -1
 		-- Fetch the positions of each enemy hero
-		for i=1,#heroes do
-			table.insert(targetposlist,heroes[i]:GetOrigin())
-			table.insert(herolist,heroes[i])
+		for i=1,#_herotargets do
+			table.insert(targetposlist,_herotargets[i]:GetOrigin())
+			table.insert(herolist,_herotargets[i])
 		end
 		-- Fetch the distance between each enemy hero
-		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
+		targetdistlist = BossAI:TargetDistanceList(targetposlist,_boss_unit_point)
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
 			if(returndist<targetdistlist[i])then
@@ -615,26 +620,25 @@ end
 	end
 
 	-- Returns a list of enemy hero handles that are closer than dist
-	function BossAI:TargetsInRange(boss_unit_point,rangedist, herotargets)
+	function BossAI:TargetsInRange(_boss_unit_point,_rangedist, _herotargets)
 		--DebugPrint("Targets In Range: Point")
-		--DebugPrint(boss_unit_point)
-		local heroes = herotargets
+		--DebugPrint(_boss_unit_point)
 		local i=0
 		local targetposlist = {}
 		local herolist = {}
 		local targetdistlist = {}
 		local returnlist = {}
 		-- Fetch the positions of each enemy hero
-		--DebugPrint(#heroes)
-		for i=1,#heroes do
-			table.insert(targetposlist,heroes[i]:GetOrigin())
-			table.insert(herolist,heroes[i])
+		--DebugPrint(#_herotargets)
+		for i=1,#_herotargets do
+			table.insert(targetposlist,_herotargets[i]:GetOrigin())
+			table.insert(herolist,_herotargets[i])
 		end
 		-- Fetch the distance between each enemy hero
-		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
+		targetdistlist = BossAI:TargetDistanceList(targetposlist,_boss_unit_point)
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(targetdistlist[i]<rangedist)then
+			if(targetdistlist[i]<_rangedist)then
 				table.insert(returnlist,herolist[i])
 			end
 		end
@@ -642,23 +646,22 @@ end
 	end
 
 	-- Returns a list of enemy hero handles that are further than dist
-	function BossAI:TargetsOutOfRange(boss_unit_point,rangedist,herotargets)
+	function BossAI:TargetsOutOfRange(_boss_unit_point,_rangedist,_herotargets)
 		local i=0
-		local heroes = herotargets
 		local targetposlist = {}
 		local herolist = {}
 		local targetdistlist = {}
 		local returnlist = {}
 		-- Fetch the positions of each enemy hero
-		for i=1,#heroes do
-			table.insert(targetposlist,heroes[i]:GetOrigin())
-			table.insert(herolist,heroes[i])
+		for i=1,#_herotargets do
+			table.insert(targetposlist,_herotargets[i]:GetOrigin())
+			table.insert(herolist,_herotargets[i])
 		end
 		-- Fetch the distance between each enemy hero
-		targetdistlist = BossAI:TargetDistanceList(targetposlist,boss_unit_point)
+		targetdistlist = BossAI:TargetDistanceList(targetposlist,_boss_unit_point)
 		-- Work out which is the closest target
 		for i=1,#targetposlist do
-			if(targetdistlist[i]>rangedist)then
+			if(targetdistlist[i]>_rangedist)then
 				table.insert(returnlist,herolist[i])
 			end
 		end
@@ -666,131 +669,137 @@ end
 	end
 
 	-- Takes an array of target vectors and a starting vector and returns a list of distances
-	function BossAI:TargetDistanceList(targetposlist, startpos)
+	function BossAI:TargetDistanceList(_targetposlist, _startpos)
 		local returnlist = {}
 		local i=0
-		for i=1,#targetposlist do
-			table.insert(returnlist,BossAI:TargetDistance(targetposlist[i], startpos))
+		for i=1,#_targetposlist do
+			table.insert(returnlist,BossAI:TargetDistance(_targetposlist[i], _startpos))
 		end
 		return returnlist
 	end
 
 	-- Takes an single target vector and a starting vector and returns the distance
-	function BossAI:TargetDistance(targetpos, startpos)
-		return math.sqrt((startpos.x-targetpos.x)^2 + (startpos.y-targetpos.y)^2)
+	function BossAI:TargetDistance(_targetpos, _startpos)
+		return math.sqrt((_startpos.x-_targetpos.x)^2 + (_startpos.y-_targetpos.y)^2)
+	end
+ 
+ 	-- Fetch a point on the circumference of a circle
+	function BossAI:GetPointOnCircumference(_radius,_center)
+		local angle = math.random()*math.pi*2;
+		local x = _center.x+(_radius*math.cos(angle))
+		local y = _center.y+(_radius*math.sin(angle))
+		return Vector(x,y,_center.z)
 	end
 
+	-- Fetch a point within a circle
+	function BossAI:GetPointInCircle(_radius,_center)
+		local angle = math.random()*math.pi*2;
+		local radius = _radius*math.sqrt(math.random())
+		local x = _center.x+(radius*math.cos(angle))
+		local y = _center.y+(radius*math.sin(angle))
+		return Vector(x,y,_center.z)
+	end
 
 -----------------------------------------------------------------------------------------
 -- Fetch Hero Data
 -----------------------------------------------------------------------------------------
 	
 	-- Returns a list of key pairs with the ID and the HP of the remaining heroes.
-	function BossAI:GetTargetsHP(herotargets)
+	function BossAI:GetTargetsHP(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetHealth())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetHealth())
 		end
 		return returnlist
 	end
 
 	-- Returns a list of key pairs with the ID and the HP Percentage of the remaining heroes.
-	function BossAI:GetTargetsHPPercent(herotargets)
+	function BossAI:GetTargetsHPPercent(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetHealth()/heroes[i]:GetMaxHealth())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetHealth()/_herotargets[i]:GetMaxHealth())
 		end
 		return returnlist
 	end
 
 	-- Returns a list of key pairs with the ID and the MP of the remaining heroes.
-	function BossAI:GetTargetsMP(herotargets)
+	function BossAI:GetTargetsMP(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetMana())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetMana())
 		end
 		return returnlist
 	end
 
 	-- Returns a list of key pairs with the ID and the HP Percentage of the remaining heroes.
-	function BossAI:GetTargetsMPPercent(herotargets)
+	function BossAI:GetTargetsMPPercent(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetMana()/heroes[i]:GetMaxMana())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetMana()/_herotargets[i]:GetMaxMana())
 		end
 		return returnlist
 	end
 
 	-- Returns a list of key pairs with the ID and the move speed of the remaining heroes.
-	function BossAI:GetTargetsMoveSpeed(herotargets)
+	function BossAI:GetTargetsMoveSpeed(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetIdealSpeed())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetIdealSpeed())
 		end
 		return returnlist
 	end
 
 	-- Returns a list of key pairs with the ID and the attack ranges of the remaining heroes.
-	function BossAI:GetTargetsAttackRange(herotargets)
+	function BossAI:GetTargetsAttackRange(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetBaseAttackRange())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetBaseAttackRange())
 		end
 		return returnlist
 	end
 
 	-- Returns a list of key pairs with the ID and the physical resistance of the remaining heroes.
-	function BossAI:GetTargetsArmor(herotargets)
+	function BossAI:GetTargetsArmor(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetPhysicalArmorValue())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetPhysicalArmorValue())
 		end
 		return returnlist
 	end
 
 	-- Returns a list of key pairs with the ID and the magical resistance of the remaining heroes.
-	function BossAI:GetTargetsMagicResist(herotargets)
+	function BossAI:GetTargetsMagicResist(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetMagicalArmorValue())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetMagicalArmorValue())
 		end
 		return returnlist
 	end
 
 	-- Returns a list of key pairs with the ID and the primary attributes of the remaining heroes.
-	function BossAI:GetTargetsPrimaryAttribute(herotargets)
+	function BossAI:GetTargetsPrimaryAttribute(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetPrimaryAttribute())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetPrimaryAttribute())
 		end
 		return returnlist
 	end
 
 	-- Returns a list of key pairs with the ID and the current banked gold of the remaining heroes.
-	function BossAI:GetTargetsGold(herotargets)
+	function BossAI:GetTargetsGold(_herotargets)
 		local returnlist = {}
-		local heroes = herotargets
 		local i = 0
-		for i=1,#heroes do
-			table.insert(returnlist,heroes[i]:GetGold())
+		for i=1,#_herotargets do
+			table.insert(returnlist,_herotargets[i]:GetGold())
 		end
 		return returnlist
 	end
