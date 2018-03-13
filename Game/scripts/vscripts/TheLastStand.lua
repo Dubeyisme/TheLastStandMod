@@ -400,8 +400,8 @@ DebugPrint( '[TLS] Done setting up WOODLAND' )
 
 -- Starts the game
 function TheLastStand:GameStart()
-  TheLastStand:IncrementRound()
-  TheLastStand:WaveEnded()
+  --TheLastStand:IncrementRound()
+  --TheLastStand:WaveEnded()
   GAME_HAS_STARTED = true
   math.randomseed(TheLastStand:GetSeed())
   TheLastStand:AddVillainController()

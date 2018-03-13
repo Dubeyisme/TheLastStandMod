@@ -516,10 +516,10 @@ function SoundController:PrecacheSounds( _context )
   	PrecacheResource("soundfile","sounds/ui/npe_objective_complete.vsnd", _context) -- ui.npe_objective_complete
   	PrecacheResource("soundfile","sounds/ui/npe_objective_given.vsnd", _context) -- ui.npe_objective_given
 
-  -- Hero Revivals
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Rikimaru
-  --------------------------------------------------------------------------------------------------------------------------
+-- Hero
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Rikimaru
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/riki/riki_cast_01.vsnd", _context) -- riki_riki_cast_01
     PrecacheResource("soundfile", "sounds/vo/riki/riki_cast_02.vsnd", _context) -- riki_riki_cast_02
@@ -534,9 +534,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Undying
     PrecacheResource("soundfile", "sounds/vo/riki/riki_kill_14.vsnd", _context) -- riki_riki_kill_14
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Pangolier
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Pangolier
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_cast_02.vsnd", _context) -- pangolin_pangolin_cast_02
     PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_cast_03.vsnd", _context) -- pangolin_pangolin_cast_03
@@ -599,9 +599,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Witchdoctor
     PrecacheResource("soundfile", "sounds/vo/pangolin/pangolin_rival_197.vsnd", _context) -- pangolin_pangolin_rival_197
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Sniper
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Sniper
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/sniper/snip_cast_01.vsnd", _context) -- sniper_snip_cast_01
     PrecacheResource("soundfile", "sounds/vo/sniper/snip_cast_02.vsnd", _context) -- sniper_snip_cast_02
@@ -628,9 +628,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Ursa
     PrecacheResource("soundfile", "sounds/vo/sniper/snip_kill_08.vsnd", _context) -- sniper_snip_kill_08
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Lina
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Lina
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/announcer_dlc_lina/announcer_followup_neg_progress_04.vsnd", _context) -- announcer_dlc_lina_announcer_followup_neg_progress_04
     PrecacheResource("soundfile", "sounds/vo/lina/lina_cast_01.vsnd", _context) -- lina_lina_cast_01
@@ -657,9 +657,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Elder Titan
     PrecacheResource("soundfile", "sounds/vo/lina/lina_rival_18.vsnd", _context) -- lina_lina_rival_18
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Furion
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Furion
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/furion/furi_cast_01.vsnd", _context) -- furion_furi_cast_01
     PrecacheResource("soundfile", "sounds/vo/furion/furi_cast_03.vsnd", _context) -- furion_furi_cast_03
@@ -683,9 +683,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Underlord
     PrecacheResource("soundfile", "sounds/vo/furion/furi_kill_12.vsnd", _context) -- furion_furi_kill_12
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Techies
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Techies
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/techies/tech_ally_03.vsnd", _context) -- techies_tech_ally_03
     PrecacheResource("soundfile", "sounds/vo/techies/tech_cast_02.vsnd", _context) -- techies_tech_cast_02
@@ -706,9 +706,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Skywrath
     PrecacheResource("soundfile", "sounds/vo/techies/tech_kill_03.vsnd", _context) -- techies_tech_kill_03
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Winter Wyvern
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Winter Wyvern
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_rare_01.vsnd", _context) -- winter_wyvern_winwyv_rare_01
     PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_respawn_03.vsnd", _context) -- winter_wyvern_winwyv_respawn_03
@@ -726,9 +726,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Meepo
     PrecacheResource("soundfile", "sounds/vo/winter_wyvern/winwyv_kill_10.vsnd", _context) -- winter_wyvern_winwyv_kill_10
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Kunkka
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Kunkka
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rare_01.vsnd", _context) -- kunkka_kunk_rare_01
     PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_rare_02.vsnd", _context) -- kunkka_kunk_rare_02
@@ -752,9 +752,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Undying
     PrecacheResource("soundfile", "sounds/vo/kunkka/kunk_kill_01.vsnd", _context) -- kunkka_kunk_kill_01
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Omniknight
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Omniknight
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/omniknight/omni_cast_01.vsnd", _context) -- omniknight_omni_cast_01
     PrecacheResource("soundfile", "sounds/vo/omniknight/omni_cast_02.vsnd", _context) -- omniknight_omni_cast_02
@@ -775,9 +775,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Necrophos
     PrecacheResource("soundfile", "sounds/vo/omniknight/omni_kill_02.vsnd", _context) -- omniknight_omni_kill_02
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Beastmaster
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Beastmaster
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_respawn_09.vsnd", _context) -- beastmaster_beas_respawn_09
     PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_cast_02.vsnd", _context) -- beastmaster_beas_cast_02
@@ -792,9 +792,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Undying
     PrecacheResource("soundfile", "sounds/vo/beastmaster/beas_kill_07.vsnd", _context) -- beastmaster_beas_kill_07
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Dragon Knight
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Dragon Knight
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_battlebegins_01.vsnd", _context) -- dragon_knight_drag_battlebegins_01
     PrecacheResource("soundfile", "sounds/vo/dragon_knight/drag_attack_10.vsnd", _context) -- dragon_knight_drag_attack_10
@@ -818,9 +818,9 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Undying
     PrecacheResource("soundfile", "sounds/vo/dragon_knight/dragon_lasthit_02.vsnd", _context) -- dragon_knight_dragon_lasthit_02
-  --------------------------------------------------------------------------------------------------------------------------
-  -- Windranger
-  --------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
+    -- Windranger
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/windrunner/wind_battlebegins_01.vsnd", _context) -- windrunner_wind_battlebegins_01
     PrecacheResource("soundfile", "sounds/vo/windrunner/wind_spawn_03.vsnd", _context) -- windrunner_wind_spawn_03
@@ -845,8 +845,8 @@ function SoundController:PrecacheSounds( _context )
     -- Kill Undying
     PrecacheResource("soundfile", "sounds/vo/windrunner/wind_kill_09.vsnd", _context) -- windrunner_wind_kill_09
     --------------------------------------------------------------------------------------------------------------------------
-  -- Arc Warden
-  --------------------------------------------------------------------------------------------------------------------------
+    -- Arc Warden
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_battlebegins_01.vsnd", _context) -- arc_warden_arcwar_battlebegins_01
     PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_spawn_06.vsnd", _context) -- arc_warden_arcwar_spawn_06
@@ -873,7 +873,7 @@ function SoundController:PrecacheSounds( _context )
 
     -- Kill Treant
     PrecacheResource("soundfile", "sounds/vo/arc_warden/arcwar_kill_22.vsnd", _context) -- arc_warden_arcwar_kill_22
---------------------------------------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/windrunner/wind_battlebegins_01.vsnd", _context) -- windrunner_wind_battlebegins_01
     PrecacheResource("soundfile", "sounds/vo/windrunner/wind_spawn_03.vsnd", _context) -- windrunner_wind_spawn_03
@@ -898,8 +898,8 @@ function SoundController:PrecacheSounds( _context )
     -- Kill Undying
     PrecacheResource("soundfile", "sounds/vo/windrunner/wind_kill_09.vsnd", _context) -- windrunner_wind_kill_09
     --------------------------------------------------------------------------------------------------------------------------
-  -- Rattletrap
-  --------------------------------------------------------------------------------------------------------------------------
+    -- Rattletrap
+    --------------------------------------------------------------------------------------------------------------------------
     -- Start of Wave
     PrecacheResource("soundfile", "sounds/vo/rattletrap/ratt_respawn_09.vsnd", _context) -- rattletrap_ratt_respawn_09
     PrecacheResource("soundfile", "sounds/vo/rattletrap/ratt_respawn_03.vsnd", _context) -- rattletrap_ratt_respawn_03
@@ -922,7 +922,7 @@ function SoundController:PrecacheSounds( _context )
     PrecacheResource("soundfile", "sounds/vo/rattletrap/ratt_kill_05.vsnd", _context) -- rattletrap_ratt_kill_05
 
 ---------------------------------------------------------------------------------------------------------------------------
-  -- Boss Responses
+-- Boss Responses
 
   --------------------------------------------------------------------------------------------------------------------------
   --Treant Protector

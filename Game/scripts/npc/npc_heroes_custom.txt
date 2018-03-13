@@ -438,8 +438,8 @@
 		"MovementSpeed"		"270"
 		
 		// Stats
-		"AttackDamageMin"		"5"
-		"AttackDamageMax"		"5"
+		"AttackDamageMin"		"13"
+		"AttackDamageMax"		"7"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"75"
 		"AttributeStrengthGain"		"3.600000"
@@ -454,8 +454,39 @@
 	"npc_dota_hero_lone_druid"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
@@ -485,7 +516,7 @@
 		
 		// Stats
 		"AttackDamageMin"		"5"
-		"AttackDamageMax"		"5"
+		"AttackDamageMax"		"2"
 		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
 		"AttributeBaseStrength"		"25"
 		"AttributeStrengthGain"		"3.600000"
@@ -501,120 +532,584 @@
 	"npc_dota_hero_doom_bringer"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
 		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 	}
 	
 	"npc_dota_hero_elder_titan"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_earth_spirit"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"60"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_huskar"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"7"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_witch_doctor"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"3"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_meepo"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_ursa"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"400"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"7"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_nevermore"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"8"
+		"AttackDamageMax"		"6"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_shadow_demon"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_centaur"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_abyssal_underlord"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_skywrath_mage"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"500"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_jakiro"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"500"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_undying"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"250"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 	
 	"npc_dota_hero_necrolyte"
 	{
 		// Abilities
+		"Ability1"		""
+		"Ability2"		""
+		"Ability3"		""
+		"Ability4"		""
+		"Ability5"		""
+		"Ability6"		""
+		"Ability10"		""
+		"Ability11"		""
+		"Ability12"		""
+		"Ability13"		""
+		"Ability14"		""
+		"Ability15"		""
+		"Ability16"		""
+		"Ability17"		""
+		
+		//Immutable Stats
+		"VisionDaytimeRange"		"3200"
+		"AttackAcquisitionRange"	"3200"
+		"MovementSpeed"		"300"
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
 		
 		// Stats
+		"AttackDamageMin"		"5"
+		"AttackDamageMax"		"5"
+		"AttributePrimary"		"DOTA_ATTRIBUTE_AGILITY"
+		"AttributeBaseStrength"		"25"
+		"AttributeStrengthGain"		"3.600000"
+		"AttributeBaseAgility"		"15"
+		"AttributeAgilityGain"		"2.000000"
+		"AttributeBaseIntelligence"		"17"
+		"AttributeIntelligenceGain"		"1.800000"
+		
+		"TeamName"					"DOTA_TEAM_BADGUYS"
 		
 	}
 }

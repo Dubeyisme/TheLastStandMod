@@ -36,6 +36,10 @@ function BossAI:TreantCleanup()
 	end
 end
 
+-- Special
+function BossAI:TreantSpecial()
+end	
+
 -- This function runs for Treant Protector and handles their ability logic
 function BossAI:TreantAbilityLogic()
 	local boss = BOSSAI_CURRENT_BOSS
@@ -45,7 +49,7 @@ function BossAI:TreantAbilityLogic()
 	if(ability:IsCooldownReady())and(target~=nil)then
 		-- Check if they're within range
 		if(BossAI:TargetDistance(target:GetOrigin(), boss:GetOrigin())<350)then
-			BossAI:TreantLeechSeed(target)
+			BossAI:SingleTarget(target,TREANT_ABILITY2,2,true)
 		end
 	else
 		ability = boss:FindAbilityByName(TREANT_ABILITY3)
@@ -53,7 +57,7 @@ function BossAI:TreantAbilityLogic()
 		if(ability:IsCooldownReady())and(target~=nil)then
 			-- Check if they're within range
 			if(BossAI:TargetDistance(target:GetOrigin(), boss:GetOrigin())<400)then
-				BossAI:TreantRoot()
+				BossAI:NoTarget(TREANT_ABILITY3,3,true)
 			end
 		end
 	end
@@ -71,54 +75,16 @@ function BossAI:TreantModeChange()
 	end
 end
 
-function BossAI:TreantHeroCastAbility()
+function BossAI:TreantReaction()
 	-- Are we even able to use it?
 	local boss = BOSSAI_CURRENT_BOSS
 	local ability = boss:FindAbilityByName(TREANT_ABILITY1)
 	if(ability:IsCooldownReady())and(BOSSAI_REACTION_TARGET:IsInvisible()==false)and(BOSSAI_REACTION_TARGET:IsInvulnerable()==false)and(BOSSAI_REACTION_TARGET:IsAlive())then
 		DebugPrint("Hero in range?")
 		local targetpos = BOSSAI_REACTION_TARGET:GetOrigin()
-		local bosspos = BOSSAI_CURRENT_BOSS:GetOrigin()
-		local abilityrange = 1500
-		if(BossAI:TargetDistance(targetpos, bosspos)<abilityrange)then
-			BossAI:TreantSilence(BOSSAI_REACTION_TARGET)
+		local bosspos = boss:GetOrigin()
+		if(BossAI:TargetDistance(targetpos, bosspos)<1500)then
+			BossAI:SingleTarget(BOSSAI_REACTION_TARGET,TREANT_ABILITY1,1,true)
 		end
 	end
-end
-
--- Silences a target for 5 seconds, Treant will use first ability slot for sound.
-function BossAI:TreantSilence(_target)
-	DebugPrint("Using Silence")
-	local boss = BOSSAI_CURRENT_BOSS
-	local ability = boss:FindAbilityByName(TREANT_ABILITY1)
-	-- Call the sound for this ability
-	SoundController:Villain_AbilityUsed(boss, 1)
-	-- Let them know we're busy
-	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
-	-- Execute Ability
-	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_TARGET,TargetIndex = _target:entindex(), AbilityIndex = ability:entindex(), Queue = false})
-end
-
--- Leech Seeds a target, Treant will use second ability slot for sound.
-function BossAI:TreantLeechSeed(_target)
-	local boss = BOSSAI_CURRENT_BOSS
-	local ability = boss:FindAbilityByName(TREANT_ABILITY2)
-	-- Call the sound for this ability
-	SoundController:Villain_AbilityUsed(boss, 2)
-	-- Let them know we're busy
-	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
-	-- Execute Ability
-	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_TARGET,TargetIndex = _target:entindex(), AbilityIndex = ability:entindex(), Queue = false})
-end
-
--- Roots everyone near treant for 3 seconds, Treant will use third ability slot for sound.
-function BossAI:TreantRoot()
-	local boss = BOSSAI_CURRENT_BOSS
-	local ability = boss:FindAbilityByName(TREANT_ABILITY3)
-	-- Call the sound for this ability
-	SoundController:Villain_AbilityUsed(boss, 3)
-	-- Let them know we're busy
-	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
-	-- Execute Ability
-	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET, AbilityIndex = ability:entindex(), Queue = false})
 end

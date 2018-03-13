@@ -57,18 +57,18 @@ end
 	require('special_boss_ai/DarkWillow')
 	-- require('special_boss_ai/Doom')
 	-- require('special_boss_ai/Meepo')
-	-- require('special_boss_ai/Ursa')
-	-- require('special_boss_ai/Huskar')
-	-- require('special_boss_ai/WitchDoctor')
-	-- require('special_boss_ai/EarthSpirit')
+	require('special_boss_ai/Ursa')
+	require('special_boss_ai/Huskar')
+	require('special_boss_ai/WitchDoctor')
+	require('special_boss_ai/EarthSpirit')
 	-- require('special_boss_ai/ElderTitan')
-	-- require('special_boss_ai/Centaur')
+	require('special_boss_ai/Centaur')
 	-- require('special_boss_ai/Underlord')
 	-- require('special_boss_ai/ShadowFiend')
 	-- require('special_boss_ai/ShadowDemon')
-	-- require('special_boss_ai/Skywrath')
+	require('special_boss_ai/Skywrath')
 	-- require('special_boss_ai/Jakiro')
-	-- require('special_boss_ai/Undying')
+	require('special_boss_ai/Undying')
 	-- require('special_boss_ai/Necrophos')
 
 
@@ -98,31 +98,76 @@ end
 function BossAI:BossParser(_switch)
 	local name = BOSSAI_CURRENT_BOSS:GetName()
 	-- This switch handles the mode segment
-	if(_switch == BOSSAI_SWITCH.MODE) then
+	if(_switch == BOSSAI_SWITCH.MODE) then 
 		if(name == "npc_dota_hero_treant") then BossAI:TreantModeChange() end
+		if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowModeChange() end
+		if(name == "npc_dota_hero_earth_spirit") then BossAI:EarthSpiritModeChange() end
+		if(name == "npc_dota_hero_huskar") then BossAI:HuskarModeChange() end
+		if(name == "npc_dota_hero_centaur") then BossAI:CentaurModeChange() end
+		if(name == "npc_dota_hero_undying") then BossAI:UndyingModeChange() end
+		if(name == "npc_dota_hero_skywrath_mage") then BossAI:SkywrathModeChange() end 
+		if(name == "npc_dota_hero_witch_doctor") then BossAI:WitchDoctorModeChange() end
+		if(name == "npc_dota_hero_ursa") then BossAI:UrsaModeChange() end
 	end
 	-- This switch handles the ability segment
 	if(_switch == BOSSAI_SWITCH.ABILITY) then
 		if(name == "npc_dota_hero_treant") then BossAI:TreantAbilityLogic() end
 		if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowAbilityLogic() end
+		if(name == "npc_dota_hero_earth_spirit") then BossAI:EarthSpiritAbilityLogic() end
+		if(name == "npc_dota_hero_huskar") then BossAI:HuskarAbilityLogic() end
+		if(name == "npc_dota_hero_centaur") then BossAI:CentaurAbilityLogic() end
+		if(name == "npc_dota_hero_undying") then BossAI:UndyingAbilityLogic() end
+		if(name == "npc_dota_hero_skywrath_mage") then BossAI:SkywrathAbilityLogic() end
+		if(name == "npc_dota_hero_witch_doctor") then BossAI:WitchDoctorAbilityLogic() end
+		if(name == "npc_dota_hero_ursa") then BossAI:UrsaAbilityLogic() end
 	end
 	-- This switch handles the special/unique segment
 	if(_switch == BOSSAI_SWITCH.SPECIAL) then 
+		--if(name == "npc_dota_hero_treant") then BossAI:TreantSpecial() end
 		if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowSpecial() end
+		--if(name == "npc_dota_hero_treant") then BossAI:EarthSpiritSpecial() end
+		--if(name == "npc_dota_hero_huskar") then BossAI:HuskarSpecial() end
+		--if(name == "npc_dota_hero_centaur") then BossAI:CentaurSpecial() end
+		--if(name == "npc_dota_hero_undying") then BossAI:UndyingSpecial() end
+		--if(name == "npc_dota_hero_skywrath_mage") then BossAI:SkywrathSpecial() end
+		--if(name == "npc_dota_hero_witch_doctor") then BossAI:WitchDoctorSpecial() end
+		--if(name == "npc_dota_hero_ursa") then BossAI:UrsaSpecial() end
 	end
 	-- This switch handles the initialisation of the boss
 	if(_switch == BOSSAI_SWITCH.SETUP) then
 		if(name == "npc_dota_hero_treant") then BossAI:TreantInit() end
 		if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowInit() end
+		if(name == "npc_dota_hero_earth_spirit") then BossAI:EarthSpiritInit() end
+		if(name == "npc_dota_hero_huskar") then BossAI:HuskarInit() end
+		if(name == "npc_dota_hero_centaur") then BossAI:CentaurInit() end
+		if(name == "npc_dota_hero_undying") then BossAI:UndyingInit() end
+		if(name == "npc_dota_hero_skywrath_mage") then BossAI:SkywrathInit() end
+		if(name == "npc_dota_hero_witch_doctor") then BossAI:WitchDoctorInit() end
+		if(name == "npc_dota_hero_ursa") then BossAI:UrsaInit() end
 	end
 	-- This switch handles the cleanup of the boss
 	if(_switch == BOSSAI_SWITCH.CLEANUP) then
 		if(name == "npc_dota_hero_treant") then BossAI:TreantCleanup() end
 		if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowCleanup() end
+		--if(name == "npc_dota_hero_earth_spirit") then BossAI:EarthSpiritCleanup() end
+		--if(name == "npc_dota_hero_huskar") then BossAI:HuskarCleanup() end
+		--if(name == "npc_dota_hero_centaur") then BossAI:CentaurCleanup() end
+		--if(name == "npc_dota_hero_undying") then BossAI:UndyingCleanup() end
+		--if(name == "npc_dota_hero_skywrath_mage") then BossAI:SkywrathCleanup() end
+		--if(name == "npc_dota_hero_witch_doctor") then BossAI:WitchDoctorCleanup() end
+		--if(name == "npc_dota_hero_ursa") then BossAI:UrsaCleanup() end
 	end
 	-- This switch handles the reaction to a hero using an ability
 	if(_switch == BOSSAI_SWITCH.REACTION) then
-		if(name == "npc_dota_hero_treant") then BossAI:TreantHeroCastAbility() end
+		if(name == "npc_dota_hero_treant") then BossAI:TreantReaction() end
+		--if(name == "npc_dota_hero_dark_willow") then BossAI:DarkWillowReaction() end
+		--if(name == "npc_dota_hero_earth_spirit") then BossAI:EarthSpiritReaction() end
+		--if(name == "npc_dota_hero_huskar") then BossAI:HuskarReaction() end
+		--if(name == "npc_dota_hero_centaur") then BossAI:CentaurReaction() end
+		--if(name == "npc_dota_hero_undying") then BossAI:UndyingReaction() end
+		--if(name == "npc_dota_hero_skywrath_mage") then BossAI:SkywrathReaction() end
+		--if(name == "npc_dota_hero_witch_doctor") then BossAI:WitchDoctorReaction() end
+		if(name == "npc_dota_hero_ursa") then BossAI:UrsaReaction() end
 	end
 end
 
@@ -490,6 +535,55 @@ function BossAI:ChooseNewTarget()
 end
 
 
+-----------------------------------------------------------------------------------------
+-- Boss Basic Abilities
+-----------------------------------------------------------------------------------------
+
+-- Called to issue a single target order
+function BossAI:SingleTarget(_target,_abilitytext,_abilitynum,_speak)
+	local boss = BOSSAI_CURRENT_BOSS
+	local ability = boss:FindAbilityByName(_abilitytext)
+	if(_speak) then SoundController:Villain_AbilityUsed(boss, _abilitynum) end
+	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
+	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_TARGET,TargetIndex = _target:entindex(), AbilityIndex = ability:entindex(), Queue = false})
+end
+
+-- Called to issue a single target order, but on that targets position
+function BossAI:SingleTargetPosition(_target,_abilitytext,_abilitynum,_speak)
+	local boss = BOSSAI_CURRENT_BOSS
+	local ability = boss:FindAbilityByName(_abilitytext)
+	if(_speak) then SoundController:Villain_AbilityUsed(boss, _abilitynum) end
+	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
+	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_POSITION,Position = _target:GetOrigin(), AbilityIndex = ability:entindex(), Queue = false})
+end
+
+-- Called to issue a position based order
+function BossAI:Position(_position,_abilitytext,_abilitynum,_speak)
+	local boss = BOSSAI_CURRENT_BOSS
+	local ability = boss:FindAbilityByName(_abilitytext)
+	if(_speak) then SoundController:Villain_AbilityUsed(boss, _abilitynum) end
+	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
+	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_POSITION,Position = _position, AbilityIndex = ability:entindex(), Queue = false})
+end
+
+-- Called to issue a no target based order
+function BossAI:NoTarget(_abilitytext,_abilitynum,_speak)
+	local boss = BOSSAI_CURRENT_BOSS
+	local ability = boss:FindAbilityByName(_abilitytext)
+	if(_speak) then SoundController:Villain_AbilityUsed(boss, _abilitynum) end
+	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
+	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET, AbilityIndex = ability:entindex(), Queue = false})
+end
+
+
+-- Called to issue toggle ability order
+function BossAI:Toggle(_abilitytext,_abilitynum,_speak)
+	local boss = BOSSAI_CURRENT_BOSS
+	local ability = boss:FindAbilityByName(_abilitytext)
+	if(_speak) then SoundController:Villain_AbilityUsed(boss, _abilitynum) end
+	BOSSAI_CURRENT_STATE = BOSSAI_AI_STATE.CASTING
+	ExecuteOrderFromTable({ UnitIndex = boss:entindex(), OrderType = DOTA_UNIT_ORDER_CAST_TOGGLE, AbilityIndex = ability:entindex(), Queue = false})
+end
 
 
 -----------------------------------------------------------------------------------------

@@ -289,24 +289,828 @@
   
   
   
+	//=================================================================================================================
+	// Earth Spirit
+	//=================================================================================================================
+	"earth_spirit_boulder_smash"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"8.0"
+		"AbilityCastRange"				"300"
+		"AbilityManaCost"				"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"180"	// NOTE: This radius must match the radius for geomagnetic grip
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"rock_damage"			"50 100 150 200 250"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"stun_duration"			"0.5 1.0 1.5 2.0 2.5"
+				"LinkedSpecialBonus"	"special_bonus_unique_earth_spirit_3"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"unit_distance"			"400.0 500.0 600.0 700.0 800.0"
+			}			
+		}
+	
+	}
+	"earth_spirit_geomagnetic_grip"
+	{
+		"MaxLevel"					"5"
+		"AbilityManaCost"				"0"
+		"AbilityCastRange"				"1100"
+		"AbilitySpecial"
+		{
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"miss_duration"			"2.0 2.5 3 3.5 4"
+			}			
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"rock_damage"			"50 100 150 200 250"
+			}				
+			"06"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"pull_units_per_second"		"1000"
+			}			
+		}
+	}
+	
+	"earth_spirit_stone_caller"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"6400"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"max_charges"				"5"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"charge_restore_time"				"5.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"25.0"
+			}
+		}
+	}
+	
+	"earth_spirit_magnetize"
+	{
+		"AbilityCastRange"				"300"
+		"AbilityCooldown"				"20"
+		"AbilityManaCost"				"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cast_radius"			"3200"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_per_second"			"10 20 30 40 50"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"damage_duration"			"6.0"
+			}
+		}
+	}
+	
+	"earth_spirit_rolling_boulder"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"4.0"
+		"AbilityManaCost"				"0"
+		"AbilitySpecial"
+		{
+			"09"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"slow_duration"			"0.8 1.2 1.6 2.0 2.4"
+			}
+		}
+	}
+  
+	//=================================================================================================================
+	// Huskar
+	//=================================================================================================================
+  
+	"huskar_inner_vitality"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"12"
+		"AbilityDuration"				"8 8 8 8 8"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"attrib_bonus"			"0.06 0.08 0.10 0.12 0.14"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"hurt_attrib_bonus"		"0.22 0.3 0.38 0.46 0.54"
+			}
+			"05"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"tooltip_attrib_bonus"			"6 8 10 12 14"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tooltip_hurt_attrib_bonus"		"22 30 38 46 54"
+			}
+		}
+	}
+  
+  
+	"huskar_burning_spear"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+		"AbilityCooldown"				"0.0 0.0 0.0 0.0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"health_cost"					"15"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"burn_damage"					"5 10 15 20 25"
+			}
+		}
+	}
+  
+  
+	"huskar_berserkers_blood"
+	{
+		"MaxLevel"						"5"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"SpellDispellableType"			"SPELL_DISPELLABLE_NO"
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3"
+		"AbilityDuration"				"5.0 5.0 5.0 5.0 5.0"
+		"AbilityManaCost"				"0 0 0 0 0"
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"maximum_attack_speed"			"260 300 340 380 420"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"maximum_resistance"			"30 40 50 60 70"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"hp_threshold_max"				"10"
+			}
+		}
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
+	}
+  
+	"huskar_life_break"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"12"
+		"AbilityManaCost"				"0 0 0 0 0"	
+		"AbilityDuration"				"4 5 6 7 8"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"health_cost_percent"		"0.05 0.10 0.15 0.20 0.25"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"health_damage"				"0.05 0.10 0.15 0.20 0.25"
+			}
+			"05"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"tooltip_health_damage"				"5 10 15 20 25"
+			}
+			"06"
+			{
+				"var_type"							"FIELD_INTEGER"
+				"tooltip_health_cost_percent"		"5 10 15 20 25"
+				"CalculateSpellDamageTooltip"		"1"
+			}
+			"07"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"movespeed"					"-40 -40 -40 -40 -40"
+			}
+			"08"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"slow_durtion_tooltip"		"4 5 6 7 8"
+			}
+		}
+	}
+  
+  
+	//=================================================================================================================
+	// Centaur
+	//=================================================================================================================
+	
+	"centaur_hoof_stomp"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.5 0.5 0.5 0.5 0.5"
+		"AbilityCooldown"				"13.0 13.0 13.0 13.0 13.0"
+		"AbilityManaCost"				"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"radius"						"450"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"stun_duration"					"2.0 2.25 2.5 2.75 3.0"
+				"LinkedSpecialBonus"			"special_bonus_unique_centaur_2"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"stomp_damage"					"100 150 200 250 300"
+			}
+		}
+	}
+	
+	"centaur_double_edge"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"7.0"
+		"AbilityCastRange"				"200 200 200 200 200"
+		"AbilityCastPoint"				"0.5 0.5 0.5 0.5 0.5"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"edge_damage"					"175 250 325 400 475"
+				"LinkedSpecialBonus"			"special_bonus_unique_centaur_4"
+			}
+		}
+	}
+	
+	
+	"centaur_return"
+	{
+		"MaxLevel"					"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"return_damage"				"14 16 18 20 22"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"strength_pct"				"15 30 45 60 75"
+				"LinkedSpecialBonus"			"special_bonus_unique_centaur_3"
+				"CalculateSpellDamageTooltip"		"1"
+			}
+		}
+	
+	}
+	"centaur_stampede"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"15.0"
+		"AbilityManaCost"				"0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"duration"			"5.0"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"base_damage"		"0"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"strength_damage"	"0.25 0.5 0.75 1.0 1.25"
+				"CalculateSpellDamageTooltip"	"1"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"slow_duration"		"1.8"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"radius"			"105"
+			}
+			"06"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"slow_movement_speed"			"100"
+			}
+		}
+	}
+  
+  
+	//=================================================================================================================
+	// Undying
+	//=================================================================================================================
+	
+	"undying_decay"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"650"
+		"AbilityCastPoint"				"0.45 0.45 0.45 0.45 0.45"
+		"AbilityCooldown"				"6.0 6.0 6.0 6.0 6.0"
+		"AbilityDuration"				"30.0 30.0 30.0 30.0 30.0"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"decay_damage"					"20 50 80 110 140"
+			}			
+		}
+	}
+	
+	"undying_soul_rip"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.45 0.45 0.45 0.45 0.45"
+		"AbilityCooldown"				"6.0 6.0 6.0 6.0 6.0"
+		"AbilityManaCost"				"0 0 0 0 0"	
+		"AbilityCastRange"				"750"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage_per_unit"			"18 22 26 30 34"
+			}			
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_units"					"10 12 14 16 18"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"3200"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"tombstone_heal"			"2 4 6 8 10"
+			}
+		}
+	}
+	
+	"undying_tombstone"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"6400"
+		"AbilityCastPoint"				"0.45 0.45 0.45 0.45 0.45"
+		"AbilityCooldown"				"8 8 8 8 8"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"tombstone_health"				"8 10 12 16 20"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hits_to_destroy_tooltip"				"4 5 6 8 10"
+				"LinkedSpecialBonus"		"special_bonus_unique_undying_5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"duration"				"30.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"radius"				"1200"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_threshold"		"100 200 300 400 500"
+			}
+			"06"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"health_threshold_pct_tooltip"		"20 25 30 35 40"
+			}
+			"07"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"zombie_interval"		"4.5 4.0 3.5 3.0 2.5"
+			}
+		}
+	}
   
   
   
+	"undying_flesh_golem"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"30.0 30.0 30.0 30.0 30.0"
+		"AbilityManaCost"				"0 0 0 0 0"	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"30"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_damage_amp"			"10 15 20 25 30"
+			}		
+		}
+	
+	}
   
   
+	//=================================================================================================================
+	// Skywrath
+	//=================================================================================================================
+	"skywrath_mage_arcane_bolt"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"875"
+		"AbilityCastPoint"				"0.1 0.1 0.1 0.1"
+		"AbilityCooldown"				"5.0 4.0 3.0 2.0 1.0"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"bolt_damage"			"60 80 100 120 140"
+			}
+		}
+	}
+	
+	"skywrath_mage_concussive_shot"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+		"AbilityCastRange"				"1600"
+		"AbilityCooldown"				"18.0 16.0 14.0 12.0 10.0"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{ 
+			"03"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"speed"				"800 800 800 800 800"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage"			"70 140 210 280 350"
+			}
+			"06"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"movement_speed_pct"	"30 35 40 45 50"
+			}
+		}
+	}
+	
+	
+	"skywrath_mage_ancient_seal"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.1 0.1 0.1 0.1 0.1"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilityCooldown"				"14"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"resist_debuff"			"-30 -35 -40 -45 -50"
+				"LinkedSpecialBonus"	"special_bonus_unique_skywrath_3"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"seal_duration"			"3.0 4.0 5.0 6.0 7.0"
+			}
+		}
+	}
+	
+	"skywrath_mage_mystic_flare"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"1200"
+		"AbilityCastPoint"				"0.1 0.1 0.1 0.1 0.1"
+		"AbilityCooldown"				"60.0 40.0 20.0 10.0 5.0"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage"				"1000 1000 1000 1000 1000"
+				"LinkedSpecialBonus"	"special_bonus_unique_skywrath_5"
+			}
+		}
+	}
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+	//=================================================================================================================
+	// Witch Doctor
+	//=================================================================================================================
+	"witch_doctor_paralyzing_cask"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"700"
+		"AbilityCastPoint"				"0.35 0.35 0.35 0.35 0.35"
+		"AbilityCooldown"				"14.0 14.0 14.0 14.0 14.0"
+		"AbilityDamage"					"75 100 125 150 175"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"hero_duration"			"1.0 1.0 1.0 1.0 1.0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"creep_duration"		"5.0 5.0 5.0 5.0 5.0"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hero_damage"			"50 50 50 50 50"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounce_range"			"575 575 575 575 575"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounces"				"3 5 7 9 11"
+			}
+			"08"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"bounces_tooltip"				"2 4 6 8 10"
+				"LinkedSpecialBonus"	"special_bonus_unique_witch_doctor_3"
+			}
+		}
+	}
+	
+	"witch_doctor_voodoo_restoration"
+	{
+		"MaxLevel"					"5"
+		"AbilityCooldown"				"0.0 0.0 0.0 0.0"
+		"AbilityManaCost"				"0 0 0 0 0"	
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"mana_per_second"			"0 0 0 0 0"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"radius"					"500"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"heal"						"16 24 32 40 48"
+				"LinkedSpecialBonus"		"special_bonus_unique_witch_doctor_2"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"heal_interval"				"0.33 0.33 0.33 0.33 0.33"
+			}
+		}
+	}
+	
+	"witch_doctor_maledict"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"575"
+		"AbilityCastPoint"				"0.35 0.35 0.35 0.35 0.35"
+		"AbilityCooldown"				"20.0"
+		"AbilityDuration"				"12.0"
+		"AbilityDamage"					"7 14 21 28 35"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"03"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bonus_damage"				"16 24 32 40 48"
+			}		
+		}
+	}
+	
+	
+	"witch_doctor_death_ward"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"600"
+		"AbilityCastPoint"				"0.35 0.35 0.35 0.35 0.35"
+		"AbilityCooldown"				"22.0"
+		"AbilityChannelTime"			"8.0 8.0 8.0 8.0 8.0"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"damage"					"100 100 100 100 100"
+				"LinkedSpecialBonus"	"special_bonus_unique_witch_doctor_5"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bounces"					"0 1 2 3 4"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"bounce_radius"				"1500 1500 1500 1500"
+			}
+		}
+	}
+	
+	
+	//=================================================================================================================
+	// Ursa
+	//=================================================================================================================
+	"ursa_earthshock"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"5"
+		"AbilityDuration"				"4.0 4.0 4.0 4.0 4.0"
+		"AbilityDamage"					"90 140 190 240 290"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"shock_radius"				"385"
+				"LinkedSpecialBonus"		"special_bonus_unique_ursa_5"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"movement_slow"				"-25 -35 -45 -55 -65"
+			}
+		}
+	
+	}
+	
+	"ursa_overpower"
+	{
+		"MaxLevel"					"5"
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.3 0.3 0.3 0.3 0.3"
+		"AbilityCooldown"				"10.0 10.0 10.0 10.0 10.0"
+		"AbilityDuration"				"15.0 15.0 15.0 15.0 15.0"
+		"AbilityManaCost"				"0 0 0 0 0"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"max_attacks"				"3 4 5 6 7"
+			}
+			"02"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"attack_speed_bonus_pct"	"400 400 400 400 400"
+			}
+		}
+	}
+	
+	"ursa_fury_swipes"
+	{
+		"MaxLevel"					"5"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"bonus_reset_time"				"20"
+				"LinkedSpecialBonus"			"special_bonus_unique_ursa_4"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_FLOAT"
+				"bonus_reset_time_roshan"		"10"
+			}
+			"03"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage_per_stack"				"15 20 25 30 35"
+				"LinkedSpecialBonus"			"special_bonus_unique_ursa"
+			}
+		}
+	}
+	
+	"ursa_enrage"
+	{
+		"MaxLevel"					"6"
+		"AbilityCooldown"				"20 20 20 20 20 20"
+		"AbilityManaCost"				"0 0 0 0 0 0"
+		"AbilitySpecial"
+		{			
+			"01"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"enrage_multiplier"			"2.0 2.0 2.0 2.0 2.0 2.0"
+			}
+			"02"
+			{
+				"var_type"						"FIELD_INTEGER"
+				"damage_reduction"			"0 20 40 60 80 100"
+			}
+			"03"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"duration"					"6.0 6.0 6.0 6.0 6.0 6.0"
+				"LinkedSpecialBonus"	"special_bonus_unique_ursa_3"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"cooldown_scepter"			"12 12 12 12 12 12"
+			}
+		}
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Dummy Abilities and Containers
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

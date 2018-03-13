@@ -108,7 +108,7 @@ function GameMode:ParseText(_text,_pid)
   end
   if(ParsedText[1]=="boss")then
     MULTIPLIER = math.abs(MULTIPLIER)+MULTIPLIER_INCREMENT*1
-    TheLastStand:CreateBoss({"npc_dota_hero_dark_willow"}, {1})
+    TheLastStand:CreateBoss({"npc_dota_hero_earth_spirit"}, {1})
   end
   if(ParsedText[1]=="hp") then hero:SetHealth(hero:GetMaxHealth()) end
   if(ParsedText[1]=="mp") then hero:SetMana(hero:GetMaxMana()) end
